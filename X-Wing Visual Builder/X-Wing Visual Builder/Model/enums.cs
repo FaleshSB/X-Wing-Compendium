@@ -10,4 +10,5 @@ namespace X_Wing_Visual_Builder.Model
     enum UpgradeType { Astromech, Bomb, Cannon, Cargo, Crew, Elite, Hardpoint, Illicit, Missiles, Modification, SalvagedAstromech, System, Team, Tech, Title, Torpedoes, Turret }
     enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }
     enum Maneuver { White, Green, Red }
+    enum Ship { T70XWing, BWing }
 }
