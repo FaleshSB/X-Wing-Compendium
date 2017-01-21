@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:X_Wing_Visual_Builder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1820"
-        Source="View/Build.xaml">
+        Title="MainWindow" Height="1000" Width="1920"
+        Source="View/DisplayBuild.xaml"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
 </NavigationWindow>
