@@ -18,14 +18,17 @@ namespace X_Wing_Visual_Builder.Model
     class Build
     {
         private List<Pilot> pilots = new List<Pilot>();
+        private double canvasSize = 1920;
 
         public void AddPilot(Pilot pilot)
         {
+            pilot.AddBuild(this);
             pilots.Add(pilot);
         }
 
         public void AddUpgrade(int pilotKey, Upgrade upgrade)
         {
+            upgrade.AddBuild(this);
             pilots.ElementAt(pilotKey).AddUpgrade(upgrade);
         }
 
@@ -54,6 +57,16 @@ namespace X_Wing_Visual_Builder.Model
         public int GetNumberOfUpgrades(int pilotKey)
         {
             return pilots.ElementAt(pilotKey).GetUpgrades().Count;
+        }
+
+        public void SetCanvasSize(double canvasSize)
+        {
+            this.canvasSize = canvasSize;
+        }
+
+        public double GetCanvasSize()
+        {
+            return canvasSize;
         }
     }
 }

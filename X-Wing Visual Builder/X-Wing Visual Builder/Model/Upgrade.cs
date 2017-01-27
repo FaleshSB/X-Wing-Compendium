@@ -17,15 +17,11 @@ namespace X_Wing_Visual_Builder.Model
 {
     class Upgrade
     {
-        private UpgradeType upgradeType;
+        private Build build;
 
-        private double cardWidth;
-        private double cardHeight;
-
-        public Upgrade(double canvasArea)
+        public void AddBuild(Build build)
         {
-            cardWidth = canvasArea / 14.117647;
-            cardHeight = cardWidth * 1.544;
+            this.build = build;
         }
 
         public UpgradeCard GetUpgradeCard()
@@ -33,15 +29,10 @@ namespace X_Wing_Visual_Builder.Model
             BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Cards\\Accuracy-corrector.png"));
             UpgradeCard upgradeCard = new UpgradeCard();
             upgradeCard.Source = webImage;
-            upgradeCard.Height = cardHeight;
-            upgradeCard.Width = cardWidth;
+            upgradeCard.Height = build.GetCanvasSize() / 12.8;
+            upgradeCard.Width = build.GetCanvasSize() / 8.27586;
 
             return upgradeCard;
-        }
-
-        public double GetCardWidth()
-        {
-            return cardWidth;
         }
     }
 }

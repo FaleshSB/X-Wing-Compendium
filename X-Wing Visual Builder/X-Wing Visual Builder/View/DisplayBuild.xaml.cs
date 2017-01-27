@@ -21,12 +21,47 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class DisplayBuild : Page
     {
+        private Build build = new Build();
+
         public DisplayBuild()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            build.AddPilot(new Pilot());
+            build.AddPilot(new Pilot());
+            build.AddPilot(new Pilot());
+
+            build.AddPilot(new Pilot());
+            build.AddPilot(new Pilot());
+            build.AddPilot(new Pilot());
+
+            build.AddUpgrade(0, new Upgrade());
+            build.AddUpgrade(0, new Upgrade());
+            build.AddUpgrade(0, new Upgrade());
+            build.AddUpgrade(0, new Upgrade());
+
+            build.AddUpgrade(1, new Upgrade());
+            build.AddUpgrade(1, new Upgrade());
+            build.AddUpgrade(1, new Upgrade());
+            build.AddUpgrade(1, new Upgrade());
+
+            build.AddUpgrade(2, new Upgrade());
+            build.AddUpgrade(2, new Upgrade());
+            
+            build.AddUpgrade(3, new Upgrade());
+
+            build.AddUpgrade(4, new Upgrade());
+            build.AddUpgrade(4, new Upgrade());
+            build.AddUpgrade(4, new Upgrade());
+
+            build.AddUpgrade(5, new Upgrade());
+            build.AddUpgrade(5, new Upgrade());
+            build.AddUpgrade(5, new Upgrade());
+            build.AddUpgrade(5, new Upgrade());
+
+            build.SetCanvasSize(canvasArea.ActualWidth);
         }
-
-
+        
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             //AllignCards();
@@ -34,45 +69,42 @@ namespace X_Wing_Visual_Builder.View
             CloserTesting();
         }
 
+        private void canvasArea_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            CloserTesting();
+        }
+
+        private void PilotClicked(object sender, RoutedEventArgs e)
+        {
+            PilotCard pilotCard = (PilotCard)sender;
+            int i = pilotCard.GetPilotKey();
+        }
 
         private void CloserTesting()
         {
-            Build build = new Build();
-
-            build.AddPilot(new Pilot(canvasArea.ActualWidth));
-            build.AddPilot(new Pilot(canvasArea.ActualWidth));
-            build.AddPilot(new Pilot(canvasArea.ActualWidth));
+            build.SetCanvasSize(canvasArea.ActualWidth);
+            canvasArea.Children.Clear();
+            
 
             
-            build.AddUpgrade(0, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(0, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(0, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(0, new Upgrade(canvasArea.ActualWidth));
 
-            build.AddUpgrade(1, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(1, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(1, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(1, new Upgrade(canvasArea.ActualWidth));
-
-            build.AddUpgrade(2, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(2, new Upgrade(canvasArea.ActualWidth));
-            build.AddUpgrade(2, new Upgrade(canvasArea.ActualWidth));
-
-            int cardGap = 4;
+            int cardGap = 3;
 
             List<double[]> pilotsAndWidthRemainingInRows = CalculatePilotsAndWidthRemainingInRows(build, cardGap);
             
             int currentPilotKey = -1;
-            double currentLeftOffset = 0;
-            double spacersGap = 0;
+            double currentHeightOffset = 40;
+            double currentLeftOffset;
+            double spacersGap;
             for (int i = 0; i < pilotsAndWidthRemainingInRows.Count; i++)
             {
+                currentLeftOffset = 0;
                 spacersGap = pilotsAndWidthRemainingInRows.ElementAt(i)[1] / (pilotsAndWidthRemainingInRows.ElementAt(i)[0] + 1 );
                 for (int y = 0; y < pilotsAndWidthRemainingInRows.ElementAt(i)[0]; y++)
                 {
                     currentPilotKey++;
                     double left = currentLeftOffset + spacersGap;
-                    double height = 100;
+                    double height = currentHeightOffset + 40;
                     PilotCard pilotCard = build.GetPilotCard(currentPilotKey);
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     Canvas.SetLeft(pilotCard, left);
@@ -89,11 +121,11 @@ namespace X_Wing_Visual_Builder.View
                             UpgradeCard upgradeCard = build.GetUpgradeCard(currentPilotKey, z);
                             if (z % 2 == 0)
                             {
-                                height = 100;
+                                height = currentHeightOffset;
                             }
                             else
                             {
-                                height = +100 + upgradeCard.Height + 5;
+                                height = + currentHeightOffset + upgradeCard.Height + cardGap;
                                 currentLeftOffset += cardGap + upgradeCard.Width;
                             }
                             if(z + 1 == build.GetNumberOfUpgrades(currentPilotKey) && build.GetNumberOfUpgrades(currentPilotKey) % 2 == 1)
@@ -107,6 +139,7 @@ namespace X_Wing_Visual_Builder.View
                         }
                     }
                 }
+                currentHeightOffset += 500;
             }
         }
 
@@ -150,12 +183,6 @@ namespace X_Wing_Visual_Builder.View
             //pilotWidthAndRemainingWidth[1] = totalWidth - pilotAndUpgradesWidth;
             pilotsInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
             return pilotsInRows;
-        }
-
-        private void PilotClicked(object sender, RoutedEventArgs e)
-        {
-            PilotCard pilotCard = (PilotCard)sender;
-            int i = pilotCard.GetPilotKey();
         }
 
 

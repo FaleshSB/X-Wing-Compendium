@@ -7,8 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Build">
-    
-    <Canvas Background="Gray" Name="canvasArea" Loaded="PageLoaded">
+
+    <Canvas Background="Gray" Name="canvasArea" Loaded="PageLoaded" SizeChanged="canvasArea_SizeChanged">
         <Menu IsMainMenu="True" x:Name="menu" Height="18" Width="{Binding ElementName=canvasArea,Path=ActualWidth}">
             <MenuItem Header="File">
                 <MenuItem Header="Load" HorizontalAlignment="Left" Width="140"/>
