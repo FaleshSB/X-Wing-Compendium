@@ -29,8 +29,8 @@ namespace X_Wing_Visual_Builder.Model
             BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Cards\\Accuracy-corrector.png"));
             UpgradeCard upgradeCard = new UpgradeCard();
             upgradeCard.Source = webImage;
-            upgradeCard.Height = build.GetCanvasSize() / 12.8;
-            upgradeCard.Width = build.GetCanvasSize() / 8.27586;
+            upgradeCard.Height = Math.Round(build.GetCanvasSize() / 8.27586);
+            upgradeCard.Width = Math.Round(build.GetCanvasSize() / 12.8);
 
             return upgradeCard;
         }

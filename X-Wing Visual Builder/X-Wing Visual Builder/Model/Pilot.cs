@@ -33,8 +33,8 @@ namespace X_Wing_Visual_Builder.Model
             BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Pilots\\BlueAce.png"));
             PilotCard pilotCard = new PilotCard();
             pilotCard.Source = webImage;
-            pilotCard.Width = build.GetCanvasSize() / 6.4;
-            pilotCard.Height = build.GetCanvasSize() / 4.507;
+            pilotCard.Width = Math.Round(build.GetCanvasSize() / 6.4);
+            pilotCard.Height = Math.Round(build.GetCanvasSize() / 4.507);
 
             return pilotCard;
         }

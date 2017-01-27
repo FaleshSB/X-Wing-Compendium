@@ -58,8 +58,6 @@ namespace X_Wing_Visual_Builder.View
             build.AddUpgrade(5, new Upgrade());
             build.AddUpgrade(5, new Upgrade());
             build.AddUpgrade(5, new Upgrade());
-
-            build.SetCanvasSize(canvasArea.ActualWidth);
         }
         
         private void PageLoaded(object sender, RoutedEventArgs e)
