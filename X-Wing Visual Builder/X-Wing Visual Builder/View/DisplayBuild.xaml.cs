@@ -47,6 +47,8 @@ namespace X_Wing_Visual_Builder.View
 
             build.AddUpgrade(2, new Upgrade());
             build.AddUpgrade(2, new Upgrade());
+            build.AddUpgrade(2, new Upgrade());
+            build.AddUpgrade(2, new Upgrade());
             
             build.AddUpgrade(3, new Upgrade());
 
@@ -64,6 +66,7 @@ namespace X_Wing_Visual_Builder.View
         {
             //AllignCards();
             //Testing();
+            Upgrades upgrades = new Upgrades();
             CloserTesting();
         }
 
@@ -86,7 +89,7 @@ namespace X_Wing_Visual_Builder.View
 
             
 
-            int cardGap = 3;
+            double cardGap = Math.Round(canvasArea.ActualWidth / 640);
 
             List<double[]> pilotsAndWidthRemainingInRows = CalculatePilotsAndWidthRemainingInRows(build, cardGap);
             
@@ -141,14 +144,13 @@ namespace X_Wing_Visual_Builder.View
             }
         }
 
-        private List<double[]> CalculatePilotsAndWidthRemainingInRows(Build build, int cardGap)
+        private List<double[]> CalculatePilotsAndWidthRemainingInRows(Build build, double cardGap)
         {
-            List<double[]> pilotsInRows = new List<double[]>();
+            List<double[]> pilotsAndWidthRemainingInRows = new List<double[]>();
             double totalWidth = 0;
             int pilotsInRow = 0;
             int numberOfUpgrades = 0;
             double pilotAndUpgradesWidth = 0;
-            //double[] pilotWidthAndRemainingWidth = new double[2];
             for (int i = 0; i < build.GetNumberOfPilots(); i++)
             {
                 numberOfUpgrades = build.GetNumberOfUpgrades(i);
@@ -163,10 +165,7 @@ namespace X_Wing_Visual_Builder.View
 
                 if(pilotAndUpgradesWidth + totalWidth > (canvasArea.ActualWidth - 100))
                 {
-                    //pilotWidthAndRemainingWidth = new double[2];
-                    //pilotWidthAndRemainingWidth[0] = pilotsInRow;
-                    //pilotWidthAndRemainingWidth[1] = totalWidth - pilotAndUpgradesWidth;
-                    pilotsInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
+                    pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
                     pilotsInRow = 1;
                     totalWidth = pilotAndUpgradesWidth;
                 }
@@ -176,219 +175,8 @@ namespace X_Wing_Visual_Builder.View
                     totalWidth += pilotAndUpgradesWidth;
                 }
             }
-            //pilotWidthAndRemainingWidth = new double[2];
-            //pilotWidthAndRemainingWidth[0] = pilotsInRow;
-            //pilotWidthAndRemainingWidth[1] = totalWidth - pilotAndUpgradesWidth;
-            pilotsInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
-            return pilotsInRows;
-        }
-
-
-
-
-
-
-
-        private void Testing()
-        {/*
-            List<Pilot> pilots = new List<Pilot>();
-            Pilot pilotOne = new Pilot();
-            Pilot pilotTwo = new Pilot();
-            Pilot pilotThree = new Pilot();
-            Upgrade upgrade = new Upgrade();
-            pilotOne.AddUpgrade(new Upgrade());
-            pilotOne.AddUpgrade(new Upgrade());
-            pilotOne.AddUpgrade(new Upgrade());
-            pilotOne.AddUpgrade(new Upgrade());
-            pilotOne.AddUpgrade(new Upgrade());
-
-            pilotTwo.AddUpgrade(new Upgrade());
-            pilotTwo.AddUpgrade(new Upgrade());
-
-            pilots.Add(pilotOne);
-            pilots.Add(pilotTwo);
-            pilots.Add(pilotThree);
-
-
-            double totalWidth = 0;
-            List<Pilot> pilotsInRow = new List<Pilot>();
-            for (int i = 0; i < pilots.Count; i++)
-            {
-                totalWidth += pilots.ElementAt(i).GetPilotCardAndUpgradesWidth();
-                if(totalWidth > canvasArea.ActualWidth)
-                {
-                    totalWidth = 0;
-                    // display pilotsInRow
-                    pilotsInRow.Clear();
-                }
-                else
-                {
-                    pilotsInRow.Add(pilots.ElementAt(i));
-                }
-            }
-            if(pilotsInRow.Count > 0)
-            {
-                double totalWidthUsed = 0;
-                for (int i = 0; i < pilotsInRow.Count; i++)
-                {
-                    totalWidthUsed += pilotsInRow.ElementAt(i).GetPilotCardAndUpgradesWidth();
-                }
-                double spacersGaps = (canvasArea.ActualWidth - totalWidthUsed) / (pilotsInRow.Count * 2);
-
-                double currentLeftOffset = 0;
-                for (int i = 0; i < pilotsInRow.Count; i++)
-                {
-                    double left = currentLeftOffset + spacersGaps;
-                    double height = 100;
-                    PilotCard pilotCard = pilotsInRow.ElementAt(i).GetPilotCard();
-                    pilotCard.SetPilotKey(9);
-                    pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
-                    Canvas.SetLeft(pilotCard, left);
-                    Canvas.SetTop(pilotCard, height);
-                    canvasArea.Children.Add(pilotCard);
-
-                    for(int x = 0; x < pilotsInRow.ElementAt(i).GetUpgrades().Count; x++)
-                    {
-                        left = currentLeftOffset + spacersGaps + pilotCard.Width + 5;
-                        if(x > 1)
-                        {
-                            left += (Math.Ceiling(((double)x - 1) / 2) * (upgrade.GetCardWidth() + 5));
-                        }
-                        UpgradeCard upgradeCard = pilotsInRow.ElementAt(i).GetUpgrades().ElementAt(x).GetUpgradeCard();
-                        if (x % 2 == 0)
-                        {
-                            height = 100;
-                        }
-                        else
-                        {
-                            height = + 100 + upgradeCard.Height + 5;
-                        }
-                        
-                        
-                        Canvas.SetLeft(upgradeCard, left);
-                        Canvas.SetTop(upgradeCard, height);
-                        canvasArea.Children.Add(upgradeCard);
-                    }
-           
-
-                    currentLeftOffset += spacersGaps + pilotsInRow.ElementAt(i).GetPilotCardAndUpgradesWidth();
-                }
-            }
-
-
-
-                /*
-                double pilotOneWidth = 300 + 10 + ((pilotOne.GetUpgrades().Count * 123) + 20);
-                double pilotTwoWidth = 300 + 10 + ((pilotTwo.GetUpgrades().Count * 123) + 20);
-                double pilotThreeWidth = 300 + 10 + ((pilotThree.GetUpgrades().Count * 123) + 20);
-                double width = pilots.ElementAt(0).GetPilotCard().Width;
-                double totalUsedWidth = pilotOneWidth + pilotTwoWidth + pilotThreeWidth;
-                double freeWidth = canvasArea.ActualWidth - totalUsedWidth;
-
-                // (freeWidth / (pilots * 2)) pilotcard & upgrades (freeWidth / 6) (freeWidth / 6) pilotcard & upgrades (freeWidth / 6) (freeWidth / 6) pilotcard & upgrades (freeWidth / 6) 
-
-
-                double totalWidth = 0;
-                List<Pilot> pilotsInRow = new List<Pilot>();
-                for (int i = 0; i < pilots.Count; i++)
-                {
-                    totalWidth += pilots.ElementAt(i).GetPilotCard().Width + 40;
-                    if (pilots.ElementAt(i).GetUpgrades().Count > 0)
-                    {
-                        totalWidth += Math.Ceiling((double)pilots.ElementAt(i).GetUpgrades().Count / 2) * (pilots.ElementAt(i).GetUpgrades().ElementAt(0).GetUpgradeCard().Width + 10);
-                    }
-
-                    if(totalWidth > canvasArea.ActualWidth)
-                    {
-                        double currentWidth = 0;
-                        for (int x = 0; x < pilotsInRow.Count; x++)
-                        {
-                        }
-                    }
-                    else
-                    {
-                        pilotsInRow.Add(pilots.ElementAt(i));
-                    }
-                }*/
-        }
-
-
-
-        private void AllignCards()
-        {
-            /*
-            //Shape one = new Rectangle() { Fill = Brushes.Blue, Height = 5, Width = 5, RadiusX = 4, RadiusY = 4 };
-            //Shape two = new Rectangle() { Fill = Brushes.Blue, Height = 5, Width = 5, RadiusX = 4, RadiusY = 4 };
-            //Shape three = new Rectangle() { Fill = Brushes.Blue, Height = 5, Width = 5, RadiusX = 4, RadiusY = 4 };
-            List<Shape> pilotCards = new List<Shape>();
-            //pilotCards.Add(one);
-            //pilotCards.Add(two);
-            //pilotCards.Add(three);
-            pilotCards.Add(new System.Windows.Shapes.Rectangle() { Fill = System.Windows.Media.Brushes.Blue, Height = 45, Width = 45, RadiusX = 4, RadiusY = 4 });
-
-
-            //System.Drawing.Image image = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\Board Games\X-Wing\Pilots\BlueAce.png");
-
-            for (int i = 0; i < pilotCards.Count; i++)
-            {
-                double devidedWidth = canvasArea.ActualWidth / pilotCards.Count;
-                double devidedHeight = canvasArea.ActualHeight / pilotCards.Count;
-                double left = ((devidedWidth * i) + (devidedWidth / 2)) - (pilotCards.ElementAt(i).ActualWidth / 2);
-                double height = ((devidedHeight * i) + (devidedHeight / 2)) - (pilotCards.ElementAt(i).ActualHeight / 2);
-
-                Canvas.SetLeft(pilotCards.ElementAt(i), left);
-                Canvas.SetTop(pilotCards.ElementAt(i), height);
-                canvasArea.Children.Add(pilotCards.ElementAt(i));
-            }
-            */
-
-            List<Image> pilotCards = new List<Image>();
-
-            BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Pilots\\BlueAce.png"));
-            Image pilotCard = new Image();
-            pilotCard.Source = webImage;
-            pilotCard.Height = 426;
-            pilotCard.Width = 300;
-            pilotCards.Add(pilotCard);
-
-            webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Pilots\\BlueAce.png"));
-            pilotCard = new Image();
-            pilotCard.Source = webImage;
-            pilotCard.Height = 426;
-            pilotCard.Width = 300;
-            pilotCards.Add(pilotCard);
-
-            webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Pilots\\BlueAce.png"));
-            pilotCard = new Image();
-            pilotCard.Source = webImage;
-            pilotCard.Height = 426;
-            pilotCard.Width = 300;
-            pilotCards.Add(pilotCard);
-
-            webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Pilots\\BlueAce.png"));
-            pilotCard = new Image();
-            pilotCard.Source = webImage;
-            pilotCard.Height = 426;
-            pilotCard.Width = 300;
-            pilotCards.Add(pilotCard);
-
-
-            int pilotCardWidth = 300;
-            int pilotCardHeight = 426;
-
-            double height = 50;
-            for (int i = 0; i < pilotCards.Count; i++)
-            {
-                double devidedWidth = canvasArea.ActualWidth / pilotCards.Count;
-                double devidedHeight = canvasArea.ActualHeight / pilotCards.Count;
-                double cardWidth = pilotCards.ElementAt(i).ActualWidth;
-                double left = ((devidedWidth * i) + (devidedWidth / 2)) - (pilotCardWidth / 2);
-                
-
-                Canvas.SetLeft(pilotCards.ElementAt(i), left);
-                Canvas.SetTop(pilotCards.ElementAt(i), height);
-                canvasArea.Children.Add(pilotCards.ElementAt(i));
-            }
+            pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
+            return pilotsAndWidthRemainingInRows;
         }
     }
 }

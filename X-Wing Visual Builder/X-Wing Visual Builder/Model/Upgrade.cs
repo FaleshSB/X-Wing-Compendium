@@ -19,6 +19,25 @@ namespace X_Wing_Visual_Builder.Model
     {
         private Build build;
 
+        private string name;
+        private string type;
+        private int cost;
+        private string description;
+        private string faq;
+
+        public Upgrade()
+        {
+
+        }
+        public Upgrade(string type, int cost, string name, string description, string faq)
+        {
+            this.type = type;
+            this.cost = cost;
+            this.name = name;
+            this.description = description;
+            this.faq = faq;
+        }
+
         public void AddBuild(Build build)
         {
             this.build = build;
@@ -26,11 +45,16 @@ namespace X_Wing_Visual_Builder.Model
 
         public UpgradeCard GetUpgradeCard()
         {
-            BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Cards\\Accuracy-corrector.png"));
+            double height = build.GetCanvasSize() / 8.311688312;
+            double width = (height / 717) * 466;
+
+            //BitmapImage webImage = new BitmapImage(new Uri("D:\\Documents\\Game Stuff\\Board Games\\X-Wing\\Cards\\Accuracy-corrector.png"));
+            BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\conner-net.png"));
             UpgradeCard upgradeCard = new UpgradeCard();
             upgradeCard.Source = webImage;
-            upgradeCard.Height = Math.Round(build.GetCanvasSize() / 8.27586);
-            upgradeCard.Width = Math.Round(build.GetCanvasSize() / 12.8);
+            upgradeCard.Height = Math.Round(height);
+            upgradeCard.Width = Math.Round(width);
+            upgradeCard.UseLayoutRounding = true;
 
             return upgradeCard;
         }

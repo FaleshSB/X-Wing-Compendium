@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,6 +59,7 @@
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
+    <Compile Include="Model\Upgrades.cs" />
     <Compile Include="View\DisplayBuild.xaml.cs">
       <DependentUpon>DisplayBuild.xaml</DependentUpon>
     </Compile>
@@ -107,7 +109,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\plan.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\UpgradeDatabase.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,299 @@
+﻿1000£2£1£Determination£When you are dealt a faceup Damage card with the Pilot trait, discard it immediately without resolving its effect.££1£1£1£0£0£0£1£0£0£0£0£0
+1001£2£3£Marksmanship£ACTION: When attacking this round, you may change 1 of your focus results to a critical result and all your other focus results to hit results.££1£1£1£0£0£0£1£0£0£0£0£0
+1002£2£2£Expert Handling£ACTION: Perform a free barrel roll action. If you do not have the barrel roll action icon, receive 1 stress token.@You may then remove 1 enemy target lock from your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+1003£2£2£Swarm Tactics£At the start of the Combat phase, you may choose 1 friendly ship at Range 1.@Until the end of this phase, treat the chosen ship as if its pilot skill were equal to your pilot skill.££1£1£1£0£0£0£1£0£0£0£0£0
+1004£2£2£Squad Leader£ACTION: Choose 1 ship at Range 1-2 that has a lower pilot skill than you.@The chosen ship may immediately perform 1 free action.££1£1£1£0£1£0£1£0£0£0£0£0
+1005£2£1£Draw Their Fire£When a friendly ship at Range 1 is hit by an attack, you may suffer 1 of the uncanceled critical results instead of the target ship.££1£1£1£0£0£0£1£0£0£0£0£0
+1006£2£2£Elusiveness£When defending, you may receive 1 stress token to choose 1 attack die. The attacker must reroll that die.@If you have at least 1 stress token, you cannot use this ability.££1£1£1£0£0£0£1£0£0£0£0£0
+1007£2£1£Veteran Instincts£Increase your pilot skill value by 2.££1£1£1£0£0£0£1£0£0£0£0£0
+1008£2£4£Expose£ACTION: Until the end of the round, increase your primary weapon value by 1 and decrease your agility value by 1.££1£1£1£0£0£0£1£0£0£0£0£0
+1009£2£1£Deadeye£You may treat the "ATTACK (TARGET LOCK):" header as '"ATTACK (FOCUS):".@When an attack instructs you to spend a target lock, you may spend a focus token instead.££1£2£1£0£0£0£1£0£0£0£0£0
+1010£2£3£Push The Limit£Once per round, after you perform an action, you may perform 1 free action shown in your action bar.@Then receive 1 stress token.££1£1£1£0£0£0£1£0£0£0£0£0
+1011£2£3£Daredevil£ACTION: Execute a white (Left Turn 1) or (Right Turn 1) maneuver. Then, receive 1 stress token.@Then, if you do not have the boost action icon, roll 2 attack dice. Suffer any damage (hit) and critical damage (critical) rolled.££1£1£1£0£0£0£1£0£0£0£0£0
+1012£2£1£Adrenaline Rush£When you reveal a red maneuver, you may discard this card to treat that maneuver as a white maneuver until the end of the Activation phase.££1£1£1£0£0£0£1£0£0£0£0£0
+1013£2£4£Opportunist£When attacking, if the defender does not have any focus or evade tokens, you may receive 1 stress token to roll 1 additional attack die.@You cannot use this ability if you have any stress tokens.££1£1£1£0£0£0£1£0£0£0£0£0
+1014£2£2£Wingman£At the start of the Combat phase, remove 1 stress token from another friendly ship at Range 1.££1£1£1£0£0£0£1£0£0£0£0£0
+1015£2£2£Decoy£At the start of the Combat phase, you may choose 1 friendly ship at Range 1-2. Exchange your pilot skill with that ship's pilot skill until the end of the phase.££1£1£1£0£0£0£1£0£0£0£0£0
+1016£2£3£Predator£When attacking, you may reroll 1 attack die. If the defender's pilot skill value is "2" or lower, you may instead reroll up to 2 attack dice.££1£1£1£0£0£0£1£0£0£0£0£0
+1017£2£3£Outmaneuver£When attacking a ship inside your firing arc, if you are not inside that ship's firing arc, reduce its agility value by 1 (to a minimum of 0).££1£1£1£0£0£0£1£0£0£0£0£0
+1018£2£2£Lone Wolf£When attacking or defending, if there are no other friendly ships at Range 1-2, you may reroll 1 of your blank results.££1£1£1£0£1£0£1£0£0£0£0£0
+1019£2£2£Stay on Target£When you reveal a maneuver, you may rotate your dial to another maneuver with the same speed.@Treat your maneuver as a red maneuver.££1£1£1£0£0£0£1£0£0£0£0£0
+1020£2£2£Intimidation£When you are touching an enemy ship, reduce that ship's agility value by 1.££1£1£1£0£0£0£1£0£0£0£0£0
+1021£2£3£Ruthlessness£After you perform an attack that hits, you must choose 1 other ship at Range 1 of the defender (other than yourself). That ship suffers 1 damage.££3£1£1£0£0£0£1£0£0£0£0£0
+1022£2£2£Bodyguard£At the start of the Combat phase, you may spend a focus token to choose a friendly ship at Range 1 with a higher pilot skill than you. Increase its agility value by 1 until the end of the round.££4£1£1£0£1£0£1£0£0£0£0£0
+1023£2£1£Calculation£When attacking, you may spend a focus token to change 1 of your focus results to a critical result.££1£1£1£0£0£0£1£0£0£0£0£0
+1024£2£1£Crack Shot£When attacking a ship inside your firing arc, at the start of the “Compare Results” step, you may discard this card to cancel 1 of the defender’s evade results.££1£1£1£0£0£0£1£0£0£0£0£0
+1025£2£1£Lightning Reflexes£After you execute a white or green maneuver on your dial, you may discard this card to rotate your ship 180°. Then receive 1 stress token after the "Check Pilot Stress" step.££1£2£1£0£0£0£1£0£0£0£0£0
+1026£2£1£Wired£When attacking or defending, if you are stressed, you may reroll 1 or more of your Focus results.££1£1£1£0£0£0£1£0£0£0£0£0
+1027£2£1£Cool Hand£When you receive a stress token, you may discard this card to assign 1 focus or evade token to your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+1028£2£2£Juke£When attacking, if you have an evade token, you may change 1 of the defender's Evade results to a Focus result.££1£2£1£0£0£0£1£0£0£0£0£0
+1029£2£0£Adaptability£Increase your pilot skill value by 1.@Other Side:@Decrease your pilot skill value by 1.££1£1£1£0£0£0£1£1£0£0£0£0
+1030£2£1£Rage£ACTION: Assign 1 focus token to your ship and receive 2 stress tokens. Until the end of the round, when attacking, you may reroll up to 3 attack dice.££1£1£1£0£0£0£1£0£0£0£0£0
+1031£2£1£Attanni Mindlink£Each time you are assigned a focus or stress token, each other friendly ship with Attanni Mindlink must also be assigned the same type of token if it does not already have one.££4£1£1£0£0£0£1£0£0£0£0£0
+1032£2£1£Fearlessness£When attacking, if you are inside the defender's firing arc at Range 1 and the defender is inside your firing arc, you may add 1 hit result to your roll.££4£1£1£0£0£0£1£0£0£0£0£0
+1033£2£2£Snap Shot£After an enemy ship executes a maneuver, you may perform this attack against that ship.@ATTACK: Attack 1 ship. You cannot modify your attack dice and cannot attack again this phase.££1£1£1£1£0£0£1£0£0£0£0£0
+1034£2£0£Trick Shot£When attacking, if the attack is obstructed, you may roll 1 additional attack die.££1£1£1£0£0£0£1£0£0£0£0£0
+1035£2£4£Expertise£When attacking, if you are not stressed, you may change all of your focus results to hit results.££1£1£1£0£0£0£1£0£0£0£0£0
+1036£2£3£Swarm Leader£When performing a primary weapon attack, choose up to 2 other friendly ships that have the defender inside their firing arcs at Range 1-3. Remove 1 evade token from each chosen ship to roll 1 additional attack die for each token removed.££1£1£1£0£1£0£1£0£0£0£0£0
+2000£3£4£R2-D2£After executing a green maneuver, you may recover 1 shield (up to your shield value).££1£1£1£0£1£0£1£0£0£0£0£0
+2001£3£3£R2-F2£ACTION: Increase your agility value by 1 until the end of this game round.££1£1£1£0£1£0£1£0£0£0£0£0
+2002£3£2£R5-K6£After spending your target lock, roll 1 defense die.@On an evade result, immediately acquire a target lock on that same ship. You cannot spend this target lock during this attack.££1£1£1£0£1£0£1£0£0£0£0£0
+2003£3£1£R5 Astromech£During the End phase, you may choose 1 of your faceup Damage cards with the Ship trait and flip it facedown.££1£1£1£0£0£0£1£0£0£0£0£0
+2004£3£3£R5-D8£ACTION: Roll 1 defense die.@On an evade or focus result, discard 1 of your facedown Damage cards.££1£1£1£0£1£0£1£0£0£0£0£0
+2005£3£1£R2 Astromech£You may treat all 1- and 2-speed maneuvers as green maneuvers.££1£1£1£0£0£0£1£0£0£0£0£0
+2006£3£1£R2-D6£Your upgrade bar gains the elite upgrade icon. You cannot equip this upgrade if you already have an elite upgrade icon or if your pilot skill value is "2" or lower.££1£1£1£0£1£0£1£0£0£0£0£0
+2007£3£2£R3-A2£When you declare the target of your attack, if the defender is inside your firing arc, you may receive 1 stress token to cause the defender to receive 1 stress token.££1£1£1£0£1£0£1£0£0£0£0£0
+2008£3£1£R4-D6£When you are hit by an attack and there are at least 3 uncancelled hit results, you may choose and cancel those results until there are 2 remaining. For each result cancelled in this way, receive 1 stress token.££1£1£1£0£1£0£1£0£0£0£0£0
+2009£3£3£R5-P9£At the end of the Combat phase, you may spend 1 of your focus tokens to recover 1 shield (up to your shield value).££1£1£1£0£1£0£1£0£0£0£0£0
+2010£3£3£R7-T1£ACTION: Choose an enemy ship at Range 1-2. If you are inside that ship's firing arc, you may acquire a target lock on that ship. Then, you may perform a free boost action.££1£1£1£0£1£0£1£0£0£0£0£0
+2011£3£2£R7 Astromech£Once per round when defending, if you have a target lock on the attacker, you may spend the target lock to choose any or all attack dice. The attacker must reroll the chosen dice.££1£1£1£0£0£0£1£0£0£0£0£0
+2012£3£2£BB-8£When you reveal a green maneuver, you may perform a free barrel roll action.££1£1£1£0£1£0£1£0£0£0£0£0
+2013£3£1£R5-X3£Before you reveal your maneuver, you may discard this card to ignore obstacles until the end of the round.££1£1£1£0£1£0£1£0£0£0£0£0
+2014£3£2£Targeting Astromech£After you execute a red maneuver, you may acquire a target lock.££1£1£1£0£0£0£1£0£0£0£0£0
+2015£3£2£R3 Astromech£Once per round, when attacking with a primary weapon, you may cancel 1 of your focus results during the "Modify Attack Dice" step to assign 1 evade token to your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+2016£3£3£M9-G8£When a ship you have locked is attacking, you may choose 1 attack die. The attacker must reroll that die.@You can acquire target locks on other friendly ships.££1£1£1£0£1£0£1£0£0£0£0£0
+3000£4£4£Proton Torpedoes£ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack.@You may change 1 of your focus results to a critical result.££1£1£1£1£0£0£1£0£0£0£0£0
+3001£4£6£Advanced Proton Torpedoes£ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack.@You may change up to 3 of your blank results to focus results.££1£1£1£1£0£0£1£0£0£0£0£0
+3002£4£2£Flechette Torpedoes£ATTACK (TARGET LOCK): Discard this card and spend your target lock to perform this attack.@After you perform this attack, the defender receives 1 stress token if its hull value is "4" or lower.££1£1£1£1£0£0£1£0£0£0£0£0
+3003£4£5£Ion Torpedoes£Attack (target lock): Spend your target lock and discard this card to perform this attack. If this attack hits, the defender and each ship at Range 1 of it receives 1 ion token.££1£1£1£1£0£0£1£0£0£0£0£0
+3004£4£0£Bomb Loadout£Your upgrade bar gains the Bomb icon.££1£1£38£0£0£1£1£0£0£0£0£0
+3005£4£2£Extra Munitions£When you equip this card, place 1 ordnance token on each equipped Torpedoes, Missiles, and Bomb Upgrade card. When you are instructed to discard an Upgrade card, you may discard 1 ordnance token on that card instead.££1£1£1£0£0£1£1£0£0£0£0£0
+3006£4£3£Plasma Torpedoes£ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack.@If this attack hits, after dealing damage, remove 1 shield token from the defender.££1£1£1£1£0£0£1£0£0£0£0£0
+3007£4£2£Seismic Torpedo£ACTION: Discard this card to choose an obstacle at Range 1-2 and inside your primary firing arc. Each ship at Range 1 of the obstacle rolls 1 attack die and suffers any damage or critical damage rolled. Then remove the obstacle.££1£1£1£1£0£0£1£0£0£0£0£0
+4000£5£4£Cluster Missiles£ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack twice.££1£1£1£1£0£0£1£0£0£0£0£0
+4001£5£4£Concussion Missiles£ATTACK (TARGET LOCK): Spend your target lock and discard this card to peform this attack.@You may change 1 of your blank results to a hit result.££1£1£1£1£0£0£1£0£0£0£0£0
+4002£5£5£Assault Missiles£ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack.@If this attack hits, each other ship at Range 1 of the defender suffers 1 damage.££1£1£1£1£0£0£1£0£0£0£0£0
+4003£5£5£Homing Missiles£ATTACK (TARGET LOCK): Discard this card to perform this attack.@The defender cannot spend evade tokens during this attack.££1£1£1£1£0£0£1£0£0£0£0£0
+4004£5£3£Ion Pulse Missiles£ATTACK (TARGET LOCK): Discard this card to peform this attack.@If this attack hits, the defender suffers 1 damage and recieves 2 ion tokens. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+4005£5£-2£Chardaan Refit£This card has a negative squad point cost.££1£1£2£0£0£0£1£0£0£0£0£0
+4006£5£3£Proton Rockets£ATTACK (FOCUS): Discard this card to perform this attack.@You may roll additional attack dice equal to your agility value, to a maximum of 3 additional dice.££1£1£1£1£0£0£1£0£0£0£0£0
+4007£5£3£Advanced Homing Missiles£ATTACK (TARGET LOCK): Discard this card to perform this attack.@If this attack hits, deal 1 faceup Damage card to the defender. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+4008£5£1£XX-23 S-Thread Tracers£ATTACK (FOCUS): Discard this card to perform this attack.@If this attack hits, each friendly ship at Range 1-2 of you may acquire a target lock on the defender. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+5000£6£7£Heavy Laser Cannon£ATTACK: Attack 1 ship.@Immediately after rolling your attack dice, you must change all of your critical results to hit results.££1£1£1£1£0£0£1£0£0£0£0£0
+5001£6£3£Ion Cannon£ATTACK: Attack 1 ship.@If this attack hits, the defender suffers 1 damage and receives 1 ion token. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+5002£6£5£Autoblaster£ATTACK: Attack 1 ship.@Your hit results cannot be canceled by defense dice.@The defender may cancel critical results before hit results.££1£1£1£1£0£0£1£0£0£0£0£0
+5003£6£2£Flechette Cannon£ATTACK: Attack 1 ship.@If this attack hits, the defender suffers 1 damage and, if the defender is not stressed, it also receives 1 stress token. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+5004£6£4£Mangler Cannon£Attack: Attack 1 ship.@When attacking, you may change 1 of your hit results to a critical result.££1£1£1£1£0£0£1£0£0£0£0£0
+5005£6£1£Tractor Beam£ATTACK: Attack 1 ship.@If this attack hits, the defender receives 1 tractor beam token. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+6000£7£5£Ion Cannon Turret£ATTACK: Attack 1 ship (even a ship outside your firing arc).@If this attack hits the target ship, the ship suffers 1 damage and receives 1 ion token. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+6001£7£4£Blaster Turret£ATTACK (FOCUS): Spend 1 focus token to perform this attack against 1 ship (even a ship outside your firing arc).££1£1£1£1£0£0£1£0£0£0£0£0
+6002£7£2£Autoblaster Turret£ATTACK: Attack 1 ship (even a ship outside your firing arc).@Your hit results cannot be canceled by defense dice. The defender may cancel critical results before hit results.££1£1£1£1£0£0£1£0£0£0£0£0
+6003£7£6£Twin Laser Turret£ATTACK: Perform this attack twice (even against a ship outside your firing arc).@Each time this attack hits, the defender suffers 1 damage. Then cancel all dice results.££1£1£1£1£0£0£1£0£0£0£0£0
+6004£7£3£Dorsal Turret£ATTACK: Attack 1 ship (even a ship outside your firing arc).@If the target of this attack is at Range 1, roll 1 additional attack die.££1£1£1£1£0£0£1£0£0£0£0£0
+7000£8£3£Proximity Mines£ACTION: Discard this card to drop 1 proximity mine token.@When a ship's base or maneuver template overlaps this token, this token detonates.££1£1£1£1£0£0£1£0£0£0£0£0
+7001£8£2£Seismic Charges£When you reveal your maneuver dial, you may discard this card to drop 1 seismic charge token.@This token detonates at the end of the Activation phase.££1£1£1£1£0£0£1£0£0£0£0£0
+7002£8£5£Proton Bombs£When you reveal your maneuver dial, you may discard this card to drop 1 proton bomb token.@This token detonates at the end of the Activation phase.££1£1£1£1£0£0£1£0£0£0£0£0
+7003£8£4£Cluster Mines£ACTION: Discard this card to drop 1 cluster mine token set.@When a ship's base or maneuver template overlaps a cluster mine token, that token detonates.££1£1£1£1£0£0£1£0£0£0£0£0
+7004£8£4£Conner Net£ACTION: Discard this card to drop 1 Conner net token.@When a ship's base or maneuver template overlaps this token, this token detonates.££1£1£1£1£0£0£1£0£0£0£0£0
+7005£8£2£Ion Bombs£When you reveal your maneuver dial, you may discard this card to drop 1 ion bomb token.@This card detonates at the end of the Activation phase.££1£1£1£1£0£0£1£0£0£0£0£0
+7006£8£3£Thermal Detonators£When you reveal your maneuver dial, you may discard this card to drop 1 thermal detonator token.@This token detonates at the end of the Activation phase.££1£1£1£1£0£0£1£0£0£0£0£0
+8000£9£2£WED-15 Repair Droid£ACTION: Spend 1 energy to discard 1 of your facedown Damage cards, or spend 3 energy to discard 1 of your faceup Damage cards.££1£4£1£0£0£0£1£0£0£0£0£0
+8001£9£1£Shield Technician£When you perform a recover action, instead of spending all of your energy, you can choose any amount of energy to spend.££1£4£1£0£0£0£1£0£0£0£0£0
+8002£9£2£Captain Needa£If you overlap an obstacle during the Activation Phase, do not suffer 1 faceup damage card. Instead, roll 1 attack die. On a hit or a critical result, suffer 1 damage.££3£4£1£0£1£0£1£0£0£0£0£0
+8003£9£6£Grand Moff Tarkin£At the start of the Combat Phase, you may choose another ship at Range 1-4. Either remove 1 focus token from the chosen ship or assign 1 focus token to that ship.££3£4£1£0£1£0£1£0£0£0£0£0
+8004£9£3£Rear Admiral Chiraneau£Action: Execute a white (1 forward) maneuver.££3£4£1£0£1£0£1£0£0£0£0£0
+8005£9£2£Admiral Ozzel£ENERGY: You may remove up to 3 shields from your ship. For each shield removed, gain 1 energy.££3£4£1£0£1£0£1£0£0£0£0£0
+8006£9£3£Construction Droid£When you perform a recover action, you may spend 1 energy to discard 1 facedown Damage card.££1£4£1£0£0£1£1£0£0£0£0£0
+8007£9£2£Azmorigan£At the start of the End phase, you may spend 1 energy to replace a faceup Crew or Team Upgrade card you have equipped with another Upgrade card of the same type of equal or fewer squad points.££4£4£1£0£1£0£1£0£0£0£0£0
+8008£9£8£Emperor Palpatine£Once per round, you may change a friendly ship's die result to any other die result. That die result cannot be modified again.££3£1£1£0£1£0£2£0£0£0£0£0
+8009£9£3£Fleet Officer£ACTION: Choose up to 2 friendly ships at Range 1-2 and assign 1 focus token to each of those ships. Then receive 1 stress token.££3£1£1£0£0£0£1£0£0£0£0£0
+8010£9£3£Mara Jade£At the end of the Combat phase, each enemy ship at Range 1 that does not have a stress token receives 1 stress token.££3£1£1£0£1£0£1£0£0£0£0£0
+8011£9£4£Ysanne Isard£At the start of the Combat phase, if you have no shields and at least 1 Damage card assigned to your ship, you may perform a free evade action.££3£1£1£0£1£0£1£0£0£0£0£0
+8012£9£3£Rebel Captive£Once per round, the first ship that declares you as the target of an attack immediately receives 1 stress token.££3£1£1£0£1£0£1£0£0£0£0£0
+8013£9£3£Darth Vader£After you perform an attack against an enemy ship, you may suffer 2 damage to cause that ship to suffer 1 critical damage.££3£1£1£0£1£0£1£0£0£0£0£0
+8014£9£2£Agent Kallus£At the start of the first round, choose 1 enemy small or large ship. When attacking or defending against that ship, you may change 1 of your focus results to a hit or evade result.££3£1£1£0£1£0£1£0£0£0£0£0
+8015£9£5£General Hux£ACTION: Choose up to 3 friendly ships at Range 1-2. Assign 1 focus token to each of those ships and assign the "Fanatical Devotion" Condition card to 1 of them. Then receive 1 stress token.££3£1£1£0£1£0£1£0£0£0£0£0
+8016£9£3£Kylo Ren£ACTION: Assign the "I'll Show You the Dark Side" Condition card to an enemy ship at Range 1-3.££3£1£1£0£1£0£1£0£0£0£0£0
+8017£9£2£Moff Jerjerrod£When you are dealt a faceup Damage card, you may discard this Upgrade card or another Crew Upgrade card to flip that Damage card facedown (without resolving its effect).££3£1£1£0£1£0£1£0£0£0£0£0
+8018£9£2£Systems Officer£After you execute a green maneuver, choose another friendly ship at Range 1. That ship may acquire a target lock.££3£1£1£0£0£1£1£0£0£0£0£0
+8019£9£2£Tactician£After you perform an attack against a ship inside your firing arc at Range 2, that ship receives 1 stress token.££1£1£1£0£0£1£1£0£0£0£0£0
+8020£9£2£Tail Gunner£When attacking from your rear-facing auxiliary firing arc, reduce the defender's agility by 1 (to a minimum of "0").££1£1£1£0£0£1£1£0£0£0£0£0
+8021£9£3£Operations Specialist£After a friendly ship at Range 1-2 performs an attack that does not hit, you may assign 1 focus token to a friendly ship at Range 1-3 of the attacker.££1£1£1£0£0£1£1£0£0£0£0£0
+8022£9£4£Targeting Coordinator£Energy: You may spend 1 energy to choose 1 friendly ship at Range 1-2. Acquire a target lock, then assign the blue target lock token to the chosen ship.££1£1£1£0£0£1£1£0£0£0£0£0
+8023£9£1£Intelligence Agent£At the start of the Activation phase, choose 1 enemy ship at Range 1-2. You may look at that ship's chosen maneuver.££1£1£1£0£0£0£1£0£0£0£0£0
+8024£9£3£Recon Specialist£When you perform a focus action, assign 1 additional focus token to your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+8025£9£2£Saboteur£ACTION: Choose 1 enemy ship at Range 1 and roll 1 attack die. On a hit or critical result, choose 1 random facedown Damage card assigned to that ship, flip it faceup, and resolve it.££1£1£1£0£0£0£1£0£0£0£0£0
+8026£9£2£Mercenary Copilot£When attacking at Range 3, you may change 1 of your hit results to a critical result.££1£1£1£0£0£0£1£0£0£0£0£0
+8027£9£5£Gunner£After you perform an attack that does not hit, you may immediately perform a primary weapon attack. You cannot perform another attack this round.££1£1£1£0£0£0£1£0£0£0£0£0
+8028£9£3£Weapons Engineer£You may maintain 2 target locks (only 1 per enemy ship).@When you acquire a target lock, you may lock onto 2 different ships.££1£1£1£0£0£0£1£0£0£0£0£0
+8029£9£4£Flight Instructor£When defending, you may reroll one of your focus results. If the attacker's pilot skill is '2' or lower, you may reroll 1 of your blank results instead.££1£1£1£0£0£0£1£0£0£0£0£0
+8030£9£3£Navigator£When you reveal a maneuver, you may rotate your dial to another maneuver with the same bearing.@You cannot rotate to a red maneuver if you have any stress tokens.££1£1£1£0£0£0£1£0£0£0£0£0
+8031£9£1£Bombardier£When dropping a bomb, you may use the [2 straight] template instead of the [1 straight] template.££1£1£1£0£0£0£1£0£0£0£0£0
+8032£9£4£Hotshot Co-Pilot£When attacking with a primary weapon, the defender must spend 1 focus token if able.@When defending, the attacker must spend 1 focus token if able.££1£1£1£0£0£0£1£0£0£0£0£0
+8033£9£2£BoShek£When a ship you are touching activates, you may look at its chosen maneuver. If you do, its owner must rotate the dial to an adjacent maneuver. The ship can reveal and execute that maneuver even while stressed.££1£1£1£0£1£0£1£0£0£0£0£0
+8034£9£1£Inspiring Recruit£Once per round, when a friendly ship at Range 1-2 removes a stress token, it may remove 1 additional stress token.££1£1£1£0£0£0£1£0£0£0£0£0
+8035£9£4£R2-D2£At the end of the End phase, if you have no shields, you may recover 1 shield and roll 1 attack die. On a hit result, randomly flip 1 of your facedown Damage cards faceup and resolve it.££2£1£1£0£1£0£1£0£0£0£0£0
+8036£9£2£Jan Ors£Once per round, when a friendly ship at Range 1-3 performs a focus action or would be assigned a focus token, you may assign that ship an evade token instead.££2£1£1£0£1£0£1£0£0£0£0£0
+8037£9£3£Kyle Katarn£After you remove a stress token from your ship, you may assign a focus token to your ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8038£9£3£Lando Calrissian£ACTION: Roll 2 defense dice. For each focus result, assign 1 focus token to your ship. For each evade result, assign 1 evade token to your ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8039£9£2£Dash Rendar£You may perform attacks while overlapping an obstacle.@Your attacks cannot be obstructed.££2£1£1£0£1£0£1£0£0£0£0£0
+8040£9£2£“Leebo”£ACTION: Perform a free boost action. Then receive 1 ion token.££2£1£1£0£1£0£1£0£0£0£0£0
+8041£9£7£Luke Skywalker£After you perform an attack that does not hit, you may immediately perform a primary weapon attack. You may change 1 Focus result to a Hit result. You cannot perform another attack this round.££2£1£1£0£1£0£1£0£0£0£0£0
+8042£9£1£Nien Nunb£You may treat all Straight maneuvers as green maneuvers.££2£1£1£0£1£0£1£0£0£0£0£0
+8043£9£3£C-3PO£Once per round, before you roll 1 or more defense dice, you may guess aloud a number of evade results. If you roll that many evade results (before modifying dice), add 1 evade result.££2£1£1£0£1£0£1£0£0£0£0£0
+8044£9£2£Han Solo£When attacking, if you have a target lock on the defender, you may spend that target lock to change all of your Focus results to Hit results.££2£1£1£0£1£0£1£0£0£0£0£0
+8045£9£1£Hera Syndulla£You can reveal and execute red maneuvers even while you are stressed.££2£1£1£0£1£0£1£0£0£0£0£0
+8046£9£3£Kanan Jarrus£Once per round, after a friendly ship at Range 1-2 executes a white maneuver, you may remove 1 stress token from that ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8047£9£2£Sabine Wren£Your upgrade bar gains the bomb upgrade icon. Once per round, before a friendly bomb token is removed, choose 1 enemy ship at Range 1 of that token. That ship suffers 1 damage.££2£1£1£0£1£0£1£0£0£0£0£0
+8048£9£0£“Chopper”£You may perform actions even while you are stressed.@After you perform an action while you are stressed, suffer 1 damage.££2£1£1£0£1£0£1£0£0£0£0£0
+8049£9£1£“Zeb” Orrelios£Enemy ships inside your firing arc that you are touching are not considered to be touching you when either you or they activate during the Combat phase.££2£1£1£0£1£0£1£0£0£0£0£0
+8050£9£3£Ezra Bridger£When attacking, if you are stressed, you may change 1 of your focus results to a crit result.££2£1£1£0£1£0£1£0£0£0£0£0
+8051£9£2£Captain Rex£After you perform an attack that does not hit, you may assign 1 focus token to your ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8052£9£5£Finn£When attacking with a primary weapon or defending, if the enemy ship is inside your firing arc, you may add 1 blank result to your roll.££2£1£1£0£1£0£1£0£0£0£0£0
+8053£9£2£Rey£At the start of the End phase, you may place 1 of your ship's focus tokens on this card. At the start of the Combat phase, you may assign 1 of those tokens to your ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8054£9£3£Baze Malbus£After you perform an attack that does not hit, you may immediately perform a primary weapon attack against a different ship. You cannot perform another attack this round.££2£1£1£0£1£0£1£0£0£0£0£0
+8055£9£2£Cassian Andor£At the end of the Planning phase, you may choose an enemy ship at Range 1-2. Guess aloud that ship's bearing and speed, then look at its dial. If you are correct, you may rotate your dial to another maneuver.££2£1£1£0£1£0£1£0£0£0£0£0
+8056£9£1£Bodhi Rook£When you acquire a target lock, you can lock onto an enemy ship at Range 1-3 of any friendly ship.££2£1£1£0£1£0£1£0£0£0£0£0
+8057£9£2£Bistan£When attacking at Range 1-2, you may change 1 of your hit results to a critical result.££2£1£1£0£1£0£1£0£0£0£0£0
+8058£9£2£Jyn Erso£Action: Choose 1 friendly ship at Range 1-2. Assign 1 focus token to that ship for each enemy ship inside your firing arc at Range 1-3. You cannot assign more than 3 tokens in this way.££2£1£1£0£1£0£1£0£0£0£0£0
+8059£9£4£Chewbacca£When you are dealt a Damage card, you may immediately discard that card and recover 1 shield.@Then, discard this Upgrade card.££2£1£1£0£1£0£1£0£0£0£0£0
+8060£9£4£Leia Organa£At the start of the Activation phase, you may discard this card to allow all friendly ships that reveal a red maneuver to treat that maneuver as a white maneuver until the end of the phase.££2£1£1£0£1£0£1£0£0£0£0£0
+8061£9£6£Raymus Antilles£At the start of the Activation phase, choose 1 enemy ship at Range 1-3. You may look at that ship's chosen maneuver. If the maneuver is white, assign that ship 1 stress token.££2£4£1£0£1£0£1£0£0£0£0£0
+8062£9£3£Carlist Rieekan£At the start of the Activation phase, you may discard this card to treat each friendly ship's pilot skill as "12" until the end of the phase.££2£4£1£0£1£0£1£0£0£0£0£0
+8063£9£6£Toryn Farr£ACTION:  Spend any amount of energy to choose that many enemy ships at Range 1-2. Remove all focus, evade, and blue target lock tokens from those ships.££2£4£1£0£1£0£1£0£0£0£0£0
+8064£9£6£Jan Dodonna£When another friendly ship at Range 1 is attacking, it may change 1 of its hit results to a critical result.££2£4£1£0£1£0£1£0£0£0£0£0
+8065£9£3£K4 Security Droid£After executing a green maneuver, you may acquire a target lock.££4£1£1£0£0£0£1£0£0£0£0£0
+8066£9£1£Greedo£The first time you attack each round and the first time you defend each round, the first Damage card dealt is dealt faceup.££4£1£1£0£1£0£1£0£0£0£0£0
+8067£9£3£Dengar£When attacking, you may reroll 1 attack die. If the defender is a unique pilot, you may instead reroll up to 2 attack dice.££4£1£1£0£1£0£1£0£0£0£0£0
+8068£9£2£“Gonk”£ACTION: Place 1 shield token on this card.@ACTION: Remove 1 shield token from this card to recover 1 shield (up to your shield value).££4£1£1£0£1£0£1£0£0£0£0£0
+8069£9£1£Boba Fett£After performing an attack, if the defender was dealt a faceup Damage card, you may discard this card to choose and discard 1 of the defender's Upgrade cards.££4£1£1£0£1£0£1£0£0£0£0£0
+8070£9£1£4-LOM£When attacking, during the "Modify Attack Dice" step, you may receive 1 ion token to choose 1 of the defender's focus or evade tokens. That token cannot be spent during this attack.££4£1£1£0£1£0£1£0£0£0£0£0
+8071£9£1£Zuckuss£When attacking, you may receive any number of stress tokens to choose an equal number of defense dice. The defender must reroll those dice.££4£1£1£0£1£0£1£0£0£0£0£0
+8072£9£2£Bossk£After you perform an attack that does not hit, if you are not stressed, you must receive 1 stress token. Then assign 1 focus token to your ship and acquire a target lock on the defender.££4£1£1£0£1£0£1£0£0£0£0£0
+8073£9£1£Ketsu Onyo£At the start of the End phase, you may choose 1 enemy ship inside your firing arc at Range 1-2. That ship does not remove its tractor beam tokens.££4£1£1£0£1£0£1£0£0£0£0£0
+8074£9£2£Latts Razzi£When defending, you may remove 1 stress token from the attacker to add 1 evade result to your roll.££4£1£1£0£1£0£1£0£0£0£0£0
+8075£9£1£IG-88D£You have the pilot ability of each friendly ship with the IG-2000 Upgrade card (in addition to your own pilot ability).££4£1£1£0£1£0£1£0£0£0£0£0
+8076£9£1£Unkar Plutt£After executing a maneuver that causes you to overlap an enemy ship, you may suffer 1 damage to perform 1 free action.££4£1£1£0£1£0£1£0£0£0£0£0
+8077£9£0£Cikatro Vizago£At the start of the End phase, you may discard this card to replace a faceup Illicit or Cargo Upgrade card you have equipped with another Upgrade card of the same type of equal or fewer squad points.££4£1£1£0£1£0£1£0£0£0£0£0
+8078£9£2£Outlaw Tech£After you execute a red maneuver, you may assign 1 focus token to your ship.££4£1£1£0£0£1£1£0£0£0£0£0
+9000£10£2£R4 Agromech£When attacking, after you spend a focus token, you may acquire a target lock on the defender.££1£1£1£0£0£0£1£0£0£0£0£0
+9001£10£2£Unhinged Astromech£You may treat all 3-speed maneuvers as green maneuvers.££1£1£1£0£0£0£1£0£0£0£0£0
+9002£10£0£“Genius”£If you are equipped with a bomb that can be dropped when you reveal your maneuver, you may drop the bomb after you execute your maneuver instead.££1£1£1£0£1£0£1£0£0£0£0£0
+9003£10£3£R4-B11£When attacking, if you have a target lock on the defender, you may spend the target lock to choose any or all defense dice. The defender must reroll the chosen dice.££1£1£1£0£1£0£1£0£0£0£0£0
+9004£10£2£Salvaged Astromech£When you are dealt a faceup Damage card with the Ship trait, you may immediately discard that card (before resolving its effect). Then, discard this Upgrade card.££1£1£1£0£0£0£1£0£0£0£0£0
+9005£10£1£Overclocked R4£During the Combat Phase, when you spend a focus token, you may receive 1 stress token to assign 1 focus token to your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+9006£10£3£R5-P8£Once per round, after defending, you may roll 1 attack die. On a hit result, the attacker suffers 1 damage. On a critical hit result, you and the attacker each suffer 1 damage.££1£1£1£0£1£0£1£0£0£0£0£0
+10000£11£3£Reinforced Deflectors£After you suffer 3 or more damage from an attack, recover 1 shield (up to your shield value).££1£3£1£0£0£0£1£0£0£0£0£0
+10001£11£4£Sensor Jammer£When defending, you may change 1 of the attacker's hit results to a focus result.@The attacker cannot reroll the die with the changed result.££1£1£1£0£0£0£1£0£0£0£0£0
+10002£11£2£Fire-Control System£After you perform an attack, you may acquire a target lock on the defender.££1£1£1£0£0£0£1£0£0£0£0£0
+10003£11£1£Enhanced Scopes£During the Activation phase, treat your pilot skill value as "0".££1£1£1£0£0£0£1£0£0£0£0£0
+10004£11£3£Advanced Sensors£Immediately before you reveal your maneuver, you may perform 1 free action.@If you use this ability, you must skip your "Perform Action" step during this round.££1£1£1£0£0£0£1£0£0£0£0£0
+10005£11£3£Accuracy Corrector£When attacking, during the “Modify Attack Dice” step, you may cancel all of your dice results. Then, you may add 2 hit results to your roll. Your dice cannot be modified again during this attack.££1£1£1£0£0£0£1£0£0£0£0£0
+10006£11£1£Electronic Baffle£When you receive a stress token or an ion token, you may suffer 1 damage to discard that token.££1£1£1£0£0£0£1£0£0£0£0£0
+10007£11£0£Collision Detector£When performing a boost, barrel roll, or decloak, your ship and maneuver template can overlap obstacles. When rolling for obstacle damage, ignore all critical results.££1£1£1£0£0£0£1£0£0£0£0£0
+10008£11£5£Advanced Targeting Computer£When attacking with your primary weapon, if you have a target lock on the defender, you may add 1 critical result to your roll. If you do, you cannot spend target locks during this attack.££1£1£26£0£0£0£1£0£0£0£0£0
+11000£12£0£Phantom£While you are docked, the Ghost can perform primary weapon attacks from its special firing arc and, at the end of the Combat phase, it may perform an additional attack with an equipped Turret. If it performs this attack, it cannot attack again this round.££1£1£4£0£1£0£1£0£0£0£0£0
+11001£12£0£A-Wing Test Pilot£Your upgrade bar gains 1 Elite upgrade icon.@You cannot equip 2 of the same Elite Upgrade cards. You cannot equip this card if your pilot skill value is "1" or lower.££1£1£2£0£0£0£1£0£0£0£0£0
+11002£12£0£IG-2000£You have the pilot ability of each other friendly ship with the IG-2000 Upgrade card (in addition to your own pilot ability).££1£1£43£0£0£0£1£0£0£0£0£0
+11003£12£0£Alliance Overhaul£When attacking with a primary weapon from your primary firing arc, you may roll 1 additional attack die. When attacking from your auxiliary firing arc, you may change 1 of your Focus results to a Critical result.££1£1£3£0£0£0£1£0£0£0£0£0
+11004£12£2£Merchant One£Your upgrade bar gains 1 additional Crew upgrade icon and 1 additional Team upgrade icon and loses 1 Cargo upgrade icon.££1£1£44£0£1£0£1£0£0£0£0£0
+11005£12£4£Dodonna's Pride£When you perform a coordinate action, you may choose 2 friendly ships (instead of 1). Those ships may each perform 1 free action.££1£1£6£0£1£0£1£0£0£0£0£0
+11006£12£4£Tantive IV£Your fore section upgrade bar gains 1 additional Crew and 1 additional Team upgrade icon.££1£1£6£0£1£0£1£0£0£0£0£0
+11007£12£2£Jaina's Light£When defending, once per attack, if you are dealt a faceup Damage card, you may discard it and draw another faceup Damage card.££1£1£6£0£1£0£1£0£0£0£0£0
+11008£12£0£Andrasta£Your upgrade bar gains two additional Bomb upgrade icons.££1£1£8£0£1£0£1£0£0£0£0£0
+11009£12£0£Slave I£Your upgrade bar gains the Torpedoes upgrade icon.££1£1£8£0£1£0£1£0£0£0£0£0
+11010£12£0£Mist Hunter£Your action bar gains the Barrel Roll action icon.@You must equip 1 "Tractor Beam" upgrade card (paying its squad point cost as normal).££1£1£9£0£1£0£1£0£0£0£0£0
+11011£12£4£Requiem£When you deploy a ship, treat its pilot skill value as "8" until the end of the round.££1£1£11£0£1£0£1£0£0£0£0£0
+11012£12£2£Vector£After you execute a maneuver, you may deploy up to 4 docked ships (instead of 2).££1£1£11£0£1£0£1£0£0£0£0£0
+11013£12£6£Suppressor£Once per round, after you acquire a target lock on an enemy ship, you may remove 1 focus, evade, or blue target lock from that ship.££1£1£11£0£1£0£1£0£0£0£0£0
+11014£12£4£Quantum Storm£At the start of the End phase, if you have 1 or fewer energy tokens, gain 1 energy token.££1£1£12£0£1£0£1£0£0£0£0£0
+11015£12£2£Dutyfree£When performing a jam action, you may choose an enemy ship at Range 1-3 (instead of at Range 1-2).££1£1£12£0£1£0£1£0£0£0£0£0
+11016£12£5£Bright Hope£A reinforce token assigned to your fore section adds 2 evade results (instead of 1).££1£1£12£0£1£0£1£0£0£0£0£0
+11017£12£3£Moldy Crow£During the End phase, do not remove unused focus tokens from your ship.££1£1£13£0£1£0£1£0£0£0£0£0
+11018£12£12£Punishing One£Increase your primary weapon value by 1.££1£1£17£0£1£0£1£0£0£0£0£0
+11019£12£3£ST 321£When acquiring a target lock, you may lock onto any enemy ship in the play area.££1£1£20£0£1£0£1£0£0£0£0£0
+11020£12£2£“Heavy Scyk” Interceptor£Your upgrade bar gains the Cannon, Torpedoes or Missiles upgrade icon.@Increase your hull value by 1.££1£1£21£0£0£0£1£0£0£0£0£0
+11021£12£-2£“Light Scyk” Interceptor£All Damage cards dealt to you are dealt faceup. You may treat all bank maneuvers ([Left Bank] or [Right Bank]) as green maneuvers. You cannot equip Modification upgrades.££1£1£21£0£0£0£1£0£0£0£0£0
+11022£12£1£Concord Dawn Protector£When defending, if you are inside the attacker's firing arc and at Range 1, and the attacker is inside your firing arc, add 1 Evade result.££1£1£22£0£0£0£1£0£0£0£0£0
+11023£12£3£Shadow Caster£After you perform an attack that hits, if the defender is inside your mobile firing arc and at Range 1-2, you may assign the defender 1 tractor beam token.££1£1£45£0£0£0£1£0£0£0£0£0
+11024£12£3£Impetuous£After you perform an attack that destroys an enemy ship, you may acquire a target lock.££1£1£46£0£1£0£1£0£0£0£0£0
+11025£12£2£Assailer£When defending, if the target section has a reinforce token, you may change 1 focus result to a evade result.££1£1£46£0£1£0£1£0£0£0£0£0
+11026£12£4£Instigator£After you perform a recover action, recover 1 additional shield.££1£1£46£0£1£0£1£0£0£0£0£0
+11027£12£1£Virago£Your upgrade bar gains the System and Illicit upgrade icons.@You cannot equip this card if your pilot skill value is "3" or lower.££1£1£24£0£1£0£1£0£0£0£0£0
+11028£12£1£Black One£After you perform a boost or barrel roll action, you may remove 1 enemy target lock from a friendly ship at Range 1. You cannot equip this card if your pilot skill is "6" or lower.££1£1£25£0£1£0£1£0£0£0£0£0
+11029£12£0£TIE/x1£Your upgrade bar gains the System upgrade icon.@If you equip a System upgrade, its squad point cost is reduced by 4 (to a minimum of 0).££1£1£26£0£0£0£1£0£0£0£0£0
+11030£12£1£TIE/v1£After you acquire a target lock, you may perform a free evade action.££1£1£47£0£0£0£1£0£0£0£0£0
+11031£12£0£TIE Shuttle£Your upgrade bar loses all Torpedo, Missile, and Bomb icons and gains 2 Crew upgrade icons. You cannot equip a Crew upgrade card that costs more than 4 squad points.££1£1£27£0£0£0£1£0£0£0£0£0
+11032£12£-2£TIE/x7£Your upgrade bar loses the Cannon and Missile upgrade icons.@After executing a 3-, 4- or 5-speed maneuver, you may assign 1 evade token to your ship.££1£1£28£0£0£0£1£0£0£0£0£0
+11033£12£0£TIE/D£Once per round, after you perform an attack with a Cannon secondary weapon that costs 3 or fewer squad points, you may perform a primary weapon attack.££1£1£28£0£0£0£1£0£0£0£0£0
+11034£12£0£Royal Guard TIE£You may equip up to 2 different Modification upgrades (instead of 1).@You cannot equip this card if your pilot skill value is "4" or lower.££1£1£30£0£0£0£1£0£0£0£0£0
+11035£12£0£Adaptive Ailerons£Immediately before you reveal your dial, if you are not stressed, you must execute a white (Left Bank 1), (Straight 1) or (Right Bank 1) maneuver.££1£1£48£0£0£0£1£0£0£0£0£0
+11036£12£0£Special Ops Training£When attacking with a primary weapon from your primary firing arc, you may roll 1 additional attack die. If you do not, you may perform an additional attack from your auxiliary firing arc.££1£1£34£0£0£0£1£0£0£0£0£0
+11037£12£0£Pivot Wing£Increase your agility value by 1.@After you execute a maneuver, you may flip this card.@Other Side:@When you reveal a [Stop 0] maneuver, you may rotate your ship 180°.@After you execute a maneuver, you may flip this card.££1£1£49£0£0£0£1£1£0£0£0£0
+11038£12£0£Ghost£Equip the Phantom title card to a friendly Attack Shuttle and dock it to this ship.@After you execute a maneuver, you may deploy it from your rear guides.££1£1£35£0£1£0£1£0£0£0£0£0
+11039£12£2£Dauntless£After you execute a maneuver that causes you to overlap another ship, you may perform one free action. Then receive 1 stress token.££1£1£36£0£1£0£1£0£0£0£0£0
+11040£12£0£BTL-A4 Y-wing£You cannot attack ships outside your firing arc. After you perform a primary weapon attack, you may immediately perform an attack with a Turret secondary weapon.££1£1£38£0£0£0£1£0£0£0£0£0
+11041£12£1£Millennium Falcon£Your action bar gains the evade action icon.££1£1£39£0£1£0£1£0£0£0£0£0
+11042£12£1£Millennium Falcon (HOR)£After you execute a 3-speed bank maneuver, if you are not touching another ship and you are not stressed, you may receive 1 stress token to rotate your ship 180 degrees.££1£1£39£0£1£0£1£0£0£0£0£0
+11043£12£5£Outrider£While you have a Cannon Upgrade card equipped, you cannot perform primary weapon attacks and you may perform Cannon secondary weapons attacks against ships outside your firing arc.££1£1£40£0£1£0£1£0£0£0£0£0
+11044£12£6£Hound's Tooth£After you are destroyed, before you are removed from the play area, you may deploy the Nashtah Pup Pilot.@It cannot attack this round.££1£1£41£0£1£0£1£0£0£0£0£0
+12000£13£1£B-Wing/E2£Your upgrade bar gains the Crew upgrade icon.££1£1£5£0£0£0£1£0£0£0£0£0
+12001£13£10£Combat Retrofit£Increase your hull value by 2 and your shield value by 1.££1£4£12£0£0£0£1£0£0£0£0£0
+12002£13£5£Automated Protocols£Once per round, after you perform an action that is not a recover or reinforce action, you may spend 1 energy to perform a free recover or reinforce action.££1£4£1£0£0£0£1£0£0£0£0£0
+12003£13£5£Optimized Generators£Once per round, when you assign energy to an equipped Upgrade card, gain 2 energy.££1£4£1£0£0£0£1£0£0£0£0£0
+12004£13£5£Ordnance Tubes£You may treat each of your Hardpoint upgrade icons as a Torpedo or Missile upgrade icon.@When you are instructed to discard a Torpedo or Missile Upgrade card, do not discard it.££1£4£1£0£0£0£1£0£0£0£0£0
+12005£13£2£Gyroscopic Targeting£At the end of the Combat phase, if you executed a 3, 4 or 5-speed maneuver this round, you may rotate your mobile firing arc.££1£1£45£0£0£0£1£0£0£0£0£0
+12006£13£1£Tactical Jammer£Your ship can obstruct enemy attacks.££1£3£1£0£0£0£1£0£0£0£0£0
+12007£13£3£Countermeasures£At the start of the Combat phase, you may discard this card to increase your agility value by 1 until the end of the round. Then you may remove 1 enemy target lock from your ship.££1£3£1£0£0£0£1£0£0£0£0£0
+12008£13£2£Anti Pursuit Laser£After an enemy ship executes a maneuver that causes it to overlap your ship, roll 1 attack die. On a hit or critical result, the enemy ship suffers 1 damage.££1£3£1£0£0£0£1£0£0£0£0£0
+12009£13£2£Ion Projector£After an enemy ship executes a maneuver that causes it to overlap your ship, roll 1 attack die. On a HIT or CRITICAL HIT result, the enemy ship receives 1 ion token.££1£3£1£0£0£0£1£0£0£0£0£0
+12010£13£2£Stygium Particle Accelerator£When you either decloak or perform a cloak action, you may perform a free evade action.££1£1£1£0£0£0£1£0£0£0£0£0
+12011£13£1£Munitions Failsafe£When attacking with a secondary weapon that instructs you to discard it to perform the attack, do not discard it unless the attack hits.££1£1£1£0£0£0£1£0£0£0£0£0
+12012£13£3£Experimental Interface£Once per round, after you perform an action, you may perform 1 free action from an equipped Upgrade card with the "Action:" header. Then receive 1 stress token.££1£1£1£0£1£0£1£0£0£0£0£0
+12013£13£3£Stealth Device£Increase your agility value by 1. If you are hit by an attack, discard this card.££1£1£1£0£0£0£1£0£0£0£0£0
+12014£13£4£Shield Upgrade£Increase your shield value by 1.££1£1£1£0£0£0£1£0£0£0£0£0
+12015£13£4£Engine Upgrade£Your action bar gains the boost action icon.££1£1£1£0£0£0£1£0£0£0£0£0
+12016£13£3£Hull Upgrade£Increase your hull value by 1.££1£1£1£0£0£0£1£0£0£0£0£0
+12017£13£2£Targeting Computer£Your action bar gains the target lock action icon.££1£1£1£0£0£0£1£0£0£0£0£0
+12018£13£2£Advanced SLAM£After performing a SLAM action, if you did not overlap an obstacle or another ship, you may perform a free action.££1£1£1£0£0£0£1£0£0£0£0£0
+12019£13£0£Guidance Chips£Once per round, when attacking with a Torpedo or Missile secondary weapon, you may change 1 die result to a hit result (or a crit result if your primary weapon value is "3" or higher).££1£1£1£0£0£0£1£0£0£0£0£0
+12020£13£2£Spacetug Tractor Array£Action: Choose a ship inside your firing arc at Range 1 and assign a tractor beam token to it. If it is a friendly ship, resolve the effect of the tractor beam token as though it were an enemy ship.££1£1£50£0£0£0£1£0£0£0£0£0
+12021£13£0£Long Range Scanners£You can acquire target locks on ships at Range 3 and beyond. You cannot acquire target locks on ships at Range 1-2. You can equip this card only if you have Torpedo and Missile in your upgrade bar.££1£1£1£0£0£0£1£0£1£0£0£0
+12022£13£2£Autothrusters£When defending, if you are inside the attacker's firing arc beyond Range 2 or outside the attacker's firing arc, you may change 1 of your blank results to an evade result. You can equip this card only if you have the Boost action icon.££1£1£1£0£0£0£1£0£0£1£0£0
+12023£13£2£Vectored Thrusters£Your action bar gains the barrel roll action icon.££1£2£1£0£0£0£1£0£0£0£0£0
+12024£13£1£Captured TIE£Enemy ships with a pilot skill value lower than yours cannot declare you as the target of an attack. After you perform an attack, or when you are the only remaining friendly ship in play, discard this card.££2£1£29£0£1£0£1£0£0£0£0£0
+12025£13£1£Twin Ion Engine Mk. II£You may treat all bank maneuvers (left or right) as green maneuvers.££1£1£1£0£0£0£1£0£0£0£1£0
+12026£13£2£Lightweight Frame£When defending, after rolling defense dice, if there are more attack dice than defense dice, roll 1 additional defense die.@You cannot equip this card if your agility value is "3" or higher.££1£1£1£0£0£0£1£0£0£0£1£0
+12027£13£4£Advanced Cloaking Device£After you perform an attack, you may perform a free cloak action.££1£1£31£0£0£0£1£0£0£0£0£0
+12028£13£0£Integrated Astromech£When you are dealt a Damage card, you may discard 1 of your Astromech Upgrade cards to discard that Damage card (without resolving its effect).££1£1£1£0£0£0£1£0£0£0£0£1
+12029£13£1£Maneuvering Fins£When you reveal a turn maneuver (left turn or right turn}, you may rotate your dial to the corresponding bank maneuver (left bank or right bank) of the same speed.££1£1£41£0£0£0£1£0£0£0£0£0
+13000£14£1£Rigged Cargo Chute£ACTION: Discard this card to drop one cargo token.££1£3£1£0£0£0£1£0£0£0£0£0
+13001£14£1£Burnout SLAM£Your action bar gains the SLAM action icon.@After you perform a SLAM action, discard this card.££1£3£1£0£0£0£1£0£0£0£0£0
+13002£14£2£Feedback Array£During the Combat phase, instead of performing any attacks, you may receive 1 ion token and suffer 1 damage to choose 1 enemy ship at Range 1. That ship suffers 1 damage.££1£1£1£0£0£0£1£0£0£0£0£0
+13003£14£2£Dead Man's Switch£When you are destroyed, each ship at Range 1 suffers one damage.££1£1£1£0£0£0£1£0£0£0£0£0
+13004£14£2£Glitterstim£At the start of the Combat phase, you may discard this card and receive 1 stress token. If you do, until the end of the round, when attacking or defending, you may change all of your focus results to hit or evade results.££1£1£1£0£0£0£1£0£0£0£0£0
+13005£14£1£Inertial Dampeners£When you reveal your maneuver, you may discard this card to instead perform a white [Stop 0] maneuver. Then receive 1 stress token.££1£1£1£0£0£0£1£0£0£0£0£0
+13006£14£3£Hot Shot Blaster£ATTACK: Discard this card to attack 1 ship (even a ship outside your firing arc).££1£1£1£0£0£0£1£0£0£0£0£0
+13007£14£1£Black Market Slicer Tools£ACTION: Choose a stressed enemy ship at Range 1-2 and roll 1 attack die. On a hit or a critical hit result, remove 1 stress token and deal it 1 facedown Damage card.££1£1£1£0£0£0£1£0£0£0£0£0
+13008£14£2£EMP Device£During the Combat phase, instead of performing any attacks, you may discard this card to assign 2 ion tokens to each ship at Range 1.££1£1£1£0£0£0£1£0£0£0£0£0
+13009£14£2£Scavenger Crane£After a ship at Range 1-2 is destroyed, you may choose a discarded Torpedo, Missile, Bomb, Cannon, Turret or Modification Upgrade card that was equipped to your ship and flip it faceup. Then roll 1 attack die. On a blank result, discard Scavenger Crane.££1£1£1£0£0£0£1£0£0£0£0£0
+13010£14£2£Cloaking Device£ACTION: Perform a free cloak action.@At the end of each round, if you are cloaked, roll 1 attack die. On a focus result, discard this card, then decloak or discard your cloak token.££1£2£1£0£0£0£1£0£0£0£0£0
+14000£15£2£Broadcast Array£Your action bar gains the Jam action icon.££1£1£11£0£0£0£1£0£0£0£0£0
+14001£15£0£Docking Clamps£You may dock up to 4 TIE fighters, TIE Interceptors, TIE bombers, or TIE Advanced to this ship. All of these ships must have the same ship type.££1£1£11£0£0£1£1£0£0£0£0£0
+14002£15£1£Expanded Cargo Hold£Once per round, when you would be dealt a faceup Damage card, you may draw that card from either the fore or aft Damage deck.££1£1£12£0£0£0£1£0£0£0£0£0
+14003£15£3£Engine Booster£Immediately before you reveal your maneuver dial, you may spend 1 energy to execute a white [Straight 1] maneuver. You cannot use this ability if you would overlap another ship.££1£1£1£0£0£1£1£0£0£0£0£0
+14004£15£4£Frequency Jammer£When you perform a jam action, choose 1 enemy ship that does not have a stress token and is at Range 1 of the jammed ship. The chosen ship receives 1 stress token.££1£1£1£0£0£1£1£0£0£0£0£0
+14005£15£3£Backup Shield Generator£At the end of each round, you may spend 1 energy to recover 1 shield (up to your shield value).££1£1£1£0£0£1£1£0£0£0£0£0
+14006£15£3£EM Emitter£When you obstruct an attack, the defender rolls 3 additional defense dice (instead of 1).££1£1£1£0£0£1£1£0£0£0£0£0
+14007£15£4£Tibanna Gas Supplies£ENERGY: You may discard this card to gain 3 energy.££1£1£1£0£0£1£1£0£0£0£0£0
+14008£15£4£Ionization Reactor£Energy: Spend 5 energy from this card and discard this card to cause each other ship at Range 1 to suffer 1 damage and receive 1 ion token.££1£1£1£0£0£1£1£0£0£0£0£0
+14009£15£4£Comms Booster£ENERGY: Spend 1 energy to remove all stress tokens from a friendly ship at Range 1-3. Then assign 1 focus token to that ship.££1£1£1£0£0£0£1£0£0£0£0£0
+14010£15£7£Slicer Tools£ACTION: Choose 1 or more enemy ships at Range 1-3 that have a stress token. For each ship chosen, you may spend 1 energy to cause that ship to suffer 1 damage.££1£1£1£0£0£0£1£0£0£0£0£0
+14011£15£4£Shield Projector£When an enemy ship is declaring either a small or large ship as the target of its attack, you may spend 3 energy to force that ship to target you if possible.££1£1£1£0£0£0£1£0£0£0£0£0
+14012£15£4£Cluster Bombs£After defending, you may discard this card. If you do, each other ship at Range 1 of the defending section rolls 2 attack dice, suffering all damage and critical damage rolled.££1£1£1£0£0£0£1£0£0£0£0£0
+15000£16£6£Quad Laser Cannons£ATTACK (ENERGY):  Spend 1 energy from this card to perform this attack. If this attack does not hit, you may immediately spend 1 energy from this card to perform this attack again.££1£1£1£0£0£0£1£0£0£0£0£0
+15001£16£8£Single Turbolasers£ATTACK (ENERGY): Spend 2 energy from this card to perform this attack. The defender doubles his agility value against this attack. You may change 1 of your focus results to a hit result.££1£1£1£0£0£0£1£0£0£0£0£0
+15002£16£6£Ion Cannon Battery£ATTACK (ENERGY): Spend 2 energy from this card to perform this attack. If this attack hits, the defender suffers 1 critical damage and receives 1 ion token. Then cancel all dice results.££1£1£1£0£0£0£1£0£0£0£0£0
+15003£16£5£Dual Laser Turret£Attack (Energy): Spend 1 energy from this card to perform this attack against 1 ship (even a ship outside of your firing arc).££1£1£11£0£0£0£1£0£0£0£0£0
+15004£16£5£Heavy Laser Turret£Attack (Energy): Spend 2 energy from this card to perform this attack against 1 ship (even a ship outside of your firing arc).££1£1£44£0£0£0£1£0£0£0£0£0
+16000£17£4£Gunnery Team£Once per round, when attacking with a secondary weapon, you may spend 1 energy to change 1 of your blank results to a hit result.££1£1£1£0£0£1£1£0£0£0£0£0
+16001£17£4£Engineering Team£During the Activation phase, when you reveal a Straight maneuver, gain 1 additional energy during the "Gain Energy" step.££1£1£1£0£0£1£1£0£0£0£0£0
+16002£17£4£Sensor Team£When acquiring a target lock, you may lock onto an enemy ship at Range 1-5 (instead of Range 1-3).££1£1£1£0£0£0£1£0£0£0£0£0
+16003£17£5£Ordnance Experts£Once per round, when a friendly ship at Range 1-3 performs an attack with a Torpedo or Missile secondary weapon, it may change 1 of its blank results to a hit result.££1£1£1£0£0£1£1£0£0£0£0£0
+17000£18£2£Weapons Guidance£When attacking, you may spend a focus token to change 1 of your blank results to a Hit result.££1£1£1£0£0£0£1£0£0£0£0£0
+17001£18£3£Comm Relay£You cannot have more than 1 evade token.@During the End phase, do not remove an unused evade token from your ship.££1£1£1£0£0£0£1£0£0£0£0£0
+17002£18£2£Sensor Cluster£When defending, you may spend a focus token to change 1 of your blank results to an evade result.££1£1£1£0£0£0£1£0£0£0£0£0
+17003£18£1£Primed Thrusters£Stress Tokens do not prevent you from performing boost or barrel roll actions unless you have 3 or more stress tokens.££1£2£1£0£0£0£1£0£0£0£0£0
+17004£18£2£Pattern Analyzer£When executing a maneuver, you may resolve the "Check Pilot Stress" step after the "Perform Action" step (instead of before that step).££1£1£1£0£0£0£1£0£0£0£0£0
+17005£18£3£Targeting Synchronizer£When a friendly ship at Range 1-2 is attacking a ship you have locked, the friendly ship treats the 'ATTACK (TARGET LOCK):' header as 'ATTACK:' If a game effect instructs that ship to spend a target lock, it may spend your target lock instead.££1£1£1£0£0£0£1£0£0£0£0£0
+17006£18£1£Hyperwave Comm Scanner£At the start of the 'Place Forces' step, you may choose to treat your pilot skill value as "0," "6," or "12," until the end of the step.@During setup, after another friendly ship is placed at Range 1-2, you may assign 1 focus or evade token to it.££1£1£1£0£0£0£1£0£0£0£0£0
