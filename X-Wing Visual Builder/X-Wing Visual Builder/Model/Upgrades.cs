@@ -22,7 +22,6 @@ namespace X_Wing_Visual_Builder.Model
                 parser.SetDelimiters("£");
                 while (!parser.EndOfData)
                 {
-                    //Processing row
                     string[] fields = parser.ReadFields();
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], fields[5],
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (Ship)Int32.Parse(fields[8]),
