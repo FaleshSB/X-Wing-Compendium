@@ -35,38 +35,40 @@ namespace X_Wing_Visual_Builder.View
             build.AddPilot(new Pilot());
             build.AddPilot(new Pilot());
 
-            build.AddUpgrade(0, new Upgrade());
-            build.AddUpgrade(0, new Upgrade());
-            build.AddUpgrade(0, new Upgrade());
-            build.AddUpgrade(0, new Upgrade());
 
-            build.AddUpgrade(1, new Upgrade());
-            build.AddUpgrade(1, new Upgrade());
-            build.AddUpgrade(1, new Upgrade());
-            build.AddUpgrade(1, new Upgrade());
+            Upgrades upgrades = new Upgrades();
 
-            build.AddUpgrade(2, new Upgrade());
-            build.AddUpgrade(2, new Upgrade());
-            build.AddUpgrade(2, new Upgrade());
-            build.AddUpgrade(2, new Upgrade());
+            build.AddUpgrade(0, upgrades.GetUpgrade(13006));
+            build.AddUpgrade(0, upgrades.GetUpgrade(14004));
+            build.AddUpgrade(0, upgrades.GetUpgrade(8030));
+            build.AddUpgrade(0, upgrades.GetUpgrade(7001));
+
+            build.AddUpgrade(1, upgrades.GetUpgrade(6001));
+            build.AddUpgrade(1, upgrades.GetUpgrade(5001));
+            build.AddUpgrade(1, upgrades.GetUpgrade(4001));
+            build.AddUpgrade(1, upgrades.GetUpgrade(3001));
+
+            build.AddUpgrade(2, upgrades.GetUpgrade(2001));
+            build.AddUpgrade(2, upgrades.GetUpgrade(1001));
+            build.AddUpgrade(2, upgrades.GetUpgrade(9001));
+            build.AddUpgrade(2, upgrades.GetUpgrade(10001));
             
-            build.AddUpgrade(3, new Upgrade());
+            build.AddUpgrade(3, upgrades.GetUpgrade(11001));
 
-            build.AddUpgrade(4, new Upgrade());
-            build.AddUpgrade(4, new Upgrade());
-            build.AddUpgrade(4, new Upgrade());
+            build.AddUpgrade(4, upgrades.GetUpgrade(12001));
+            build.AddUpgrade(4, upgrades.GetUpgrade(7003));
+            build.AddUpgrade(4, upgrades.GetUpgrade(6002));
 
-            build.AddUpgrade(5, new Upgrade());
-            build.AddUpgrade(5, new Upgrade());
-            build.AddUpgrade(5, new Upgrade());
-            build.AddUpgrade(5, new Upgrade());
+            build.AddUpgrade(5, upgrades.GetUpgrade(4006));
+            build.AddUpgrade(5, upgrades.GetUpgrade(3007));
+            build.AddUpgrade(5, upgrades.GetUpgrade(2004));
+            build.AddUpgrade(5, upgrades.GetUpgrade(1009));
         }
         
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             //AllignCards();
             //Testing();
-            Upgrades upgrades = new Upgrades();
             CloserTesting();
         }
 

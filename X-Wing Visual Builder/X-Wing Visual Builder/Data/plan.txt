@@ -7,3 +7,5 @@ Add zoom
 Batch resize photoshop cards to multiple sizes
 
 Add stats with multiple of the following on each roll, _______(name) When Attacking|Defending spend Nothing|Focus|Target Lock|Evade to change 0|1|2|3 Blank|Focus|Hit|Crit results Hit|Crit|Evade
+
+Make sure to add isXwing and isTIE
