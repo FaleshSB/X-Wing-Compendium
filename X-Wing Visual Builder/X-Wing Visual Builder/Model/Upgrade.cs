@@ -20,27 +20,25 @@ namespace X_Wing_Visual_Builder.Model
 {
     class Upgrade
     {
-        private Build build;
+        public int id { get; set; }
+        public UpgradeType upgradeType { get; set; }
+        public int cost { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string faq { get; set; }
+        public Faction faction { get; set; }
+        public ShipSize shipSize { get; set; }
+        public Ship ship { get; set; }
+        public bool isWeapon { get; set; }
+        public bool isUnique { get; set; }
+        public bool isLimited { get; set; }
+        public int numberOfUpgradeSlots { get; set; }
+        public bool isDualCard { get; set; }
+        public bool needsTorpedoAndMissile { get; set; }
+        public bool needsBoost { get; set; }
+        public bool isTieOnly { get; set; }
+        public bool isXWingOnly { get; set; }
 
-        private int id;
-        private UpgradeType upgradeType;
-        private int cost;
-        private string name;
-        private string description;
-        private string faq;
-        private Faction faction;
-        private ShipSize shipSize;
-        private Ship ship;
-        private bool isWeapon;
-        private bool isUnique;
-        private bool isLimited;
-        private int numberOfUpgradeSlots;
-        private bool isDualCard;
-        private bool needsTorpedoAndMissile;
-        private bool needsBoost;
-        private bool isTieOnly;
-        private bool isXWingOnly;
-        
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
                        Ship ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool needsTorpedoAndMissile,
                        bool needsBoost, bool isTieOnly, bool isXWingOnly)
@@ -64,16 +62,24 @@ namespace X_Wing_Visual_Builder.Model
             this.isTieOnly = isTieOnly;
             this.isXWingOnly = isXWingOnly;
         }
-
-        public void AddBuild(Build build)
+        /*
+        public UpgradeCard GetUpgradeCard(double width, double height)
         {
-            this.build = build;
+            BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + "150.jpg"));
+            UpgradeCard upgradeCard = new UpgradeCard();
+            RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
+            upgradeCard.Source = webImage;
+            upgradeCard.Height = Math.Round(height);
+            upgradeCard.Width = Math.Round(width);
+            upgradeCard.UseLayoutRounding = true;
+
+            return upgradeCard;
         }
-
-        public UpgradeCard GetUpgradeCard()
+        */
+        public UpgradeCard GetUpgradeCard(double widthD, double heightD)
         {
-            int height = Convert.ToInt32(Math.Round(build.GetCanvasSize() / 8.311688312));
-            int width = Convert.ToInt32(Math.Round(((build.GetCanvasSize() / 8.311688312) / 717) * 466));
+            int height = (int)heightD;
+            int width = (int)widthD;
 
             System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png");
             System.Drawing.Image resizedUpgradeImage = ImageResizer.Resize(sourceUpgradeImage, new System.Drawing.Size(width, height));
@@ -86,7 +92,7 @@ namespace X_Wing_Visual_Builder.Model
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.StreamSource = ms;
             bi.EndInit();
-                
+
             //BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
             UpgradeCard upgradeCard = new UpgradeCard();
             //upgradeCard.Source = webImage;
@@ -94,6 +100,7 @@ namespace X_Wing_Visual_Builder.Model
             upgradeCard.Height = Convert.ToDouble(height);
             upgradeCard.Width = Convert.ToDouble(width);
             upgradeCard.UseLayoutRounding = true;
+            RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
 
             sourceUpgradeImage.Dispose();
             resizedUpgradeImage.Dispose();
@@ -101,5 +108,54 @@ namespace X_Wing_Visual_Builder.Model
 
             return upgradeCard;
         }
+        /*
+        private UpgradeCard ResizeMethodOne()
+        {
+            double height = build.GetCanvasSize() / 8.311688312;
+            double width = ((build.GetCanvasSize() / 8.311688312) / 717) * 466;
+            BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + "150.jpg"));
+            UpgradeCard upgradeCard = new UpgradeCard();
+            RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
+            upgradeCard.Source = webImage;
+            upgradeCard.Height = Math.Round(height);
+            upgradeCard.Width = Math.Round(width);
+            upgradeCard.UseLayoutRounding = true;
+
+            return upgradeCard;
+        }
+
+        private UpgradeCard ResizeMethodTwo()
+        {
+            int height = Convert.ToInt32(Math.Round(build.GetCanvasSize() / 7.48));// 6.8
+            int width = Convert.ToInt32(Math.Round(((build.GetCanvasSize() / 7.48) / 717) * 466));// 7.48
+
+            System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png");
+            System.Drawing.Image resizedUpgradeImage = ImageResizer.Resize(sourceUpgradeImage, new System.Drawing.Size(width, height));
+            var ms = new MemoryStream();
+            resizedUpgradeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            //BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
+            UpgradeCard upgradeCard = new UpgradeCard();
+            //upgradeCard.Source = webImage;
+            upgradeCard.Source = bi;
+            upgradeCard.Height = Convert.ToDouble(height);
+            upgradeCard.Width = Convert.ToDouble(width);
+            upgradeCard.UseLayoutRounding = true;
+            RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
+
+            sourceUpgradeImage.Dispose();
+            resizedUpgradeImage.Dispose();
+            ms.Dispose();
+
+            return upgradeCard;
+        }
+        */
     }
 }

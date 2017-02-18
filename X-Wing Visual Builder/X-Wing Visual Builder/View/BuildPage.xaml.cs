@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,15 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Build.xaml
     /// </summary>
-    public partial class DisplayBuild : Page
+    public partial class BuildPage : Page
     {
-        private Build build = new Build();
+        private Build build;
+        private Upgrades upgrades;
 
-        public DisplayBuild()
+        public BuildPage()
         {
+            build = new Build();
+            upgrades = new Upgrades();
             InitializeComponent();
 
             build.AddPilot(new Pilot());
@@ -35,8 +39,7 @@ namespace X_Wing_Visual_Builder.View
             build.AddPilot(new Pilot());
             build.AddPilot(new Pilot());
 
-
-            Upgrades upgrades = new Upgrades();
+            
 
             build.AddUpgrade(0, upgrades.GetUpgrade(13006));
             build.AddUpgrade(0, upgrades.GetUpgrade(14004));
@@ -70,6 +73,8 @@ namespace X_Wing_Visual_Builder.View
             //AllignCards();
             //Testing();
             CloserTesting();
+            //NavigationService.Navigate(new UpgradeCards(build, upgrades));
+            //NavigationService.Navigate(new StatsPage());
         }
 
         private void canvasArea_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -80,7 +85,22 @@ namespace X_Wing_Visual_Builder.View
         private void PilotClicked(object sender, RoutedEventArgs e)
         {
             PilotCard pilotCard = (PilotCard)sender;
-            int i = pilotCard.GetPilotKey();
+            int i = pilotCard.pilotKey;
+        }
+
+        private void DeleteClicked(object sender, RoutedEventArgs e)
+        {
+            DeleteButton deleteButton = (DeleteButton)sender;
+
+        }
+
+        private void DisplayUpgrades()
+        {
+            build.SetCanvasSize(canvasArea.ActualWidth);
+            canvasArea.Children.Clear();
+
+
+
         }
 
         private void CloserTesting()
@@ -121,24 +141,32 @@ namespace X_Wing_Visual_Builder.View
                         for (int z = 0; z < build.GetNumberOfUpgrades(currentPilotKey); z++)
                         {
                             left = currentLeftOffset + cardGap;
-                            UpgradeCard upgradeCard = build.GetUpgradeCard(currentPilotKey, z);
+                            UpgradeCard upgradeCard = build.GetUpgradeCard(currentPilotKey, z, GetUpgradeCardWidth(), GetUpgradeCardHeight());
                             if (z % 2 == 0)
                             {
                                 height = currentHeightOffset;
                             }
                             else
                             {
-                                height = + currentHeightOffset + upgradeCard.Height + cardGap;
-                                currentLeftOffset += cardGap + upgradeCard.Width;
+                                height = + currentHeightOffset + GetUpgradeCardHeight() + cardGap;
+                                currentLeftOffset += cardGap + GetUpgradeCardWidth();
                             }
                             if(z + 1 == build.GetNumberOfUpgrades(currentPilotKey) && build.GetNumberOfUpgrades(currentPilotKey) % 2 == 1)
                             {
-                                currentLeftOffset += cardGap + upgradeCard.Width;
+                                currentLeftOffset += cardGap + GetUpgradeCardWidth();
                             }
                             
                             Canvas.SetLeft(upgradeCard, left);
                             Canvas.SetTop(upgradeCard, height);
                             canvasArea.Children.Add(upgradeCard);
+
+                            DeleteButton deleteButton = new DeleteButton();
+                            deleteButton.pilotKey = upgradeCard.pilotKey;
+                            deleteButton.upgradeKey = upgradeCard.upgradeKey;
+                            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteClicked);
+                            Canvas.SetLeft(deleteButton, left);
+                            Canvas.SetTop(deleteButton, height);
+                            canvasArea.Children.Add(deleteButton);
                         }
                     }
                 }
@@ -158,7 +186,7 @@ namespace X_Wing_Visual_Builder.View
                 numberOfUpgrades = build.GetNumberOfUpgrades(i);
                 if (numberOfUpgrades > 0)
                 {
-                    pilotAndUpgradesWidth = build.GetPilotCard(i).Width + (Math.Ceiling((double)numberOfUpgrades / 2) * (build.GetUpgradeCard(i, 0).Width + cardGap));
+                    pilotAndUpgradesWidth = build.GetPilotCard(i).Width + (Math.Ceiling((double)numberOfUpgrades / 2) * (GetUpgradeCardWidth() + cardGap));
                 }
                 else
                 {
@@ -179,6 +207,19 @@ namespace X_Wing_Visual_Builder.View
             }
             pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
             return pilotsAndWidthRemainingInRows;
+        }
+
+        private double GetUpgradeCardWidth()
+        {
+            double width = ((SystemParameters.PrimaryScreenWidth / 8.311688312) / 717) * 466;
+
+            return width;
+        }
+        private double GetUpgradeCardHeight()
+        {
+            double height = SystemParameters.PrimaryScreenWidth / 8.311688312;
+
+            return height;
         }
     }
 }

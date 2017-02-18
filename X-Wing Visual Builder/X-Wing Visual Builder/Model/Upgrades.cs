@@ -36,5 +36,32 @@ namespace X_Wing_Visual_Builder.Model
         {
             return upgrades[id];
         }
+
+        public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
+        {
+            List<Upgrade> upgrades = new List<Upgrade>();
+
+            foreach (KeyValuePair<int, Upgrade> entry in this.upgrades)
+            {
+                if(entry.Value.upgradeType == upgradeType && (entry.Value.faction == Faction.All || entry.Value.faction == faction) && (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize))
+                {
+                    upgrades.Add(entry.Value);
+                }
+            }
+
+            upgrades.Sort(
+                delegate (Upgrade upgradeOne, Upgrade upgradeTwo)
+                {
+                    int compareDate = upgradeTwo.cost.CompareTo(upgradeOne.cost);
+                    if (compareDate == 0)
+                    {
+                        return upgradeOne.name.CompareTo(upgradeTwo.name);
+                    }
+                    return compareDate;
+                });
+
+
+            return upgrades;
+        }
     }
 }

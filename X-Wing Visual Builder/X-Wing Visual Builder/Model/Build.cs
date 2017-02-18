@@ -28,7 +28,6 @@ namespace X_Wing_Visual_Builder.Model
 
         public void AddUpgrade(int pilotKey, Upgrade upgrade)
         {
-            upgrade.AddBuild(this);
             pilots.ElementAt(pilotKey).AddUpgrade(upgrade);
         }
 
@@ -40,11 +39,11 @@ namespace X_Wing_Visual_Builder.Model
             return pilotCard;
         }
 
-        public UpgradeCard GetUpgradeCard(int pilotKey, int upgradeKey)
+        public UpgradeCard GetUpgradeCard(int pilotKey, int upgradeKey, double width, double height)
         {
-            UpgradeCard upgradeCard = pilots.ElementAt(pilotKey).GetUpgrades().ElementAt(upgradeKey).GetUpgradeCard();
-            upgradeCard.SetPilotKey(pilotKey);
-            upgradeCard.SetUpgradeKey(upgradeKey);
+            UpgradeCard upgradeCard = pilots.ElementAt(pilotKey).GetUpgrades().ElementAt(upgradeKey).GetUpgradeCard(width, height);
+            upgradeCard.pilotKey = pilotKey;
+            upgradeCard.upgradeKey = upgradeKey;
 
             return upgradeCard;
         }

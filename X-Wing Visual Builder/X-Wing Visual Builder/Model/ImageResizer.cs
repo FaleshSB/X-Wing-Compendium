@@ -20,7 +20,8 @@ namespace X_Wing_Visual_Builder.Model
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 graphics.SmoothingMode = SmoothingMode.None;
-                graphics.DrawImage(image, new Rectangle(location, size), new Rectangle(location, image.Size), GraphicsUnit.Pixel);
+                graphics.DrawImage(image, new Rectangle(location, size),
+                                   new Rectangle(location, image.Size), GraphicsUnit.Pixel);
             }
 
             return resizedImage;

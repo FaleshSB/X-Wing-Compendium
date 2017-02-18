@@ -11,15 +11,6 @@ namespace X_Wing_Visual_Builder.Model
 {
     class PilotCard : Image
     {
-        public int pilotKey;
-
-        public int GetPilotKey()
-        {
-            return pilotKey;
-        }
-        public void SetPilotKey(int newPilotKey)
-        {
-                pilotKey = newPilotKey;
-        }
+        public int pilotKey { get; set; }
     }
 }

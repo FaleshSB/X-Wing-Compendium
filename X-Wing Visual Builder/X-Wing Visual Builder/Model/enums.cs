@@ -9,6 +9,7 @@ namespace X_Wing_Visual_Builder.Model
     enum UpgradeType { All = 1, Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
                        SalvagedAstromech = 10, System = 11, Title = 12, Modification = 13, Illicit = 14, Cargo = 15, Hardpoint = 16,
                        Team = 17, Tech = 18 }
+    enum UpgradeSort { Name = 1, Cost = 2 }
     enum Faction { All = 1, Rebel = 2, Imperial = 3, Scum = 4 }
     enum ShipSize { All = 1, Small = 2, Large = 3, Huge = 4 }
     enum Ship { All = 1,
@@ -65,4 +66,6 @@ namespace X_Wing_Visual_Builder.Model
 
     enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }
     enum Maneuver { White, Green, Red }
+    enum RollType { Attack, Defend }
+    enum DieFace { Blank, Focus, Evade, Hit, Crit }
 }
