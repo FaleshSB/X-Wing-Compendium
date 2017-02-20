@@ -19,16 +19,33 @@ namespace X_Wing_Visual_Builder.Model
     {
         private List<Pilot> pilots = new List<Pilot>();
         private double canvasSize = 1920;
+        public int totalCost
+        {
+            get
+            {
+                int cost = 0;
+
+                foreach (Pilot pilot in pilots)
+                {
+                    foreach(Upgrade upgrade in pilot.upgrades)
+                    {
+                        cost += upgrade.cost;
+                    }
+                }
+
+                return cost;
+            }
+        }
 
         public void AddPilot(Pilot pilot)
         {
-            pilot.AddBuild(this);
+            pilot.build = this;
             pilots.Add(pilot);
         }
 
         public void AddUpgrade(int pilotKey, Upgrade upgrade)
         {
-            pilots.ElementAt(pilotKey).AddUpgrade(upgrade);
+            pilots.ElementAt(pilotKey).upgrades.Add(upgrade);
         }
 
         public PilotCard GetPilotCard(int pilotKey)
@@ -41,11 +58,21 @@ namespace X_Wing_Visual_Builder.Model
 
         public UpgradeCard GetUpgradeCard(int pilotKey, int upgradeKey, double width, double height)
         {
-            UpgradeCard upgradeCard = pilots.ElementAt(pilotKey).GetUpgrades().ElementAt(upgradeKey).GetUpgradeCard(width, height);
+            UpgradeCard upgradeCard = pilots.ElementAt(pilotKey).upgrades.ElementAt(upgradeKey).GetUpgradeCard(width, height);
             upgradeCard.pilotKey = pilotKey;
             upgradeCard.upgradeKey = upgradeKey;
 
             return upgradeCard;
+        }
+
+        public void DeleteUpgrade(int pilotKey, int upgradeKey)
+        {
+            pilots.ElementAt(pilotKey).upgrades.RemoveAt(upgradeKey);
+        }
+
+        public void DeletePilot(int pilotKey)
+        {
+            pilots.RemoveAt(pilotKey);
         }
 
         public int GetNumberOfPilots()
@@ -55,7 +82,7 @@ namespace X_Wing_Visual_Builder.Model
 
         public int GetNumberOfUpgrades(int pilotKey)
         {
-            return pilots.ElementAt(pilotKey).GetUpgrades().Count;
+            return pilots.ElementAt(pilotKey).upgrades.Count;
         }
 
         public void SetCanvasSize(double canvasSize)

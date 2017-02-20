@@ -88,10 +88,18 @@ namespace X_Wing_Visual_Builder.View
             int i = pilotCard.pilotKey;
         }
 
-        private void DeleteClicked(object sender, RoutedEventArgs e)
+        private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
+            build.DeleteUpgrade(deleteButton.pilotKey, deleteButton.upgradeKey);
+            CloserTesting();
+        }
 
+        private void DeletePilotClicked(object sender, RoutedEventArgs e)
+        {
+            DeleteButton deleteButton = (DeleteButton)sender;
+            build.DeletePilot(deleteButton.pilotKey);
+            CloserTesting();
         }
 
         private void DisplayUpgrades()
@@ -107,9 +115,15 @@ namespace X_Wing_Visual_Builder.View
         {
             build.SetCanvasSize(canvasArea.ActualWidth);
             canvasArea.Children.Clear();
-            
 
-            
+            Label cost = new Label();
+            cost.Content = build.totalCost;
+            cost.FontSize = 30;
+            cost.Foreground = new SolidColorBrush(Color.FromRgb(250, 30, 30));
+            Canvas.SetLeft(cost, 10);
+            Canvas.SetTop(cost, 10);
+            canvasArea.Children.Add(cost);
+
 
             double cardGap = Math.Round(canvasArea.ActualWidth / 640);
 
@@ -119,6 +133,7 @@ namespace X_Wing_Visual_Builder.View
             double currentHeightOffset = 40;
             double currentLeftOffset;
             double spacersGap;
+            DeleteButton deleteButton;
             for (int i = 0; i < pilotsAndWidthRemainingInRows.Count; i++)
             {
                 currentLeftOffset = 0;
@@ -133,6 +148,13 @@ namespace X_Wing_Visual_Builder.View
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
                     canvasArea.Children.Add(pilotCard);
+
+                    deleteButton = new DeleteButton();
+                    deleteButton.pilotKey = pilotCard.pilotKey;
+                    deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
+                    Canvas.SetLeft(deleteButton, left);
+                    Canvas.SetTop(deleteButton, height);
+                    canvasArea.Children.Add(deleteButton);
 
                     currentLeftOffset += spacersGap + pilotCard.Width;
 
@@ -160,10 +182,10 @@ namespace X_Wing_Visual_Builder.View
                             Canvas.SetTop(upgradeCard, height);
                             canvasArea.Children.Add(upgradeCard);
 
-                            DeleteButton deleteButton = new DeleteButton();
+                            deleteButton = new DeleteButton();
                             deleteButton.pilotKey = upgradeCard.pilotKey;
                             deleteButton.upgradeKey = upgradeCard.upgradeKey;
-                            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteClicked);
+                            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
                             Canvas.SetLeft(deleteButton, left);
                             Canvas.SetTop(deleteButton, height);
                             canvasArea.Children.Add(deleteButton);
