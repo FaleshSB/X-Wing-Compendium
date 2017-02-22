@@ -20,6 +20,7 @@ namespace X_Wing_Visual_Builder.Model
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters("£");
+                parser.HasFieldsEnclosedInQuotes = false;
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();

@@ -27,7 +27,8 @@ namespace X_Wing_Visual_Builder.Model
 
                 foreach (Pilot pilot in pilots)
                 {
-                    foreach(Upgrade upgrade in pilot.upgrades)
+                    cost += pilot.cost;
+                    foreach (Upgrade upgrade in pilot.upgrades)
                     {
                         cost += upgrade.cost;
                     }
@@ -39,7 +40,6 @@ namespace X_Wing_Visual_Builder.Model
 
         public void AddPilot(Pilot pilot)
         {
-            pilot.build = this;
             pilots.Add(pilot);
         }
 
@@ -48,9 +48,9 @@ namespace X_Wing_Visual_Builder.Model
             pilots.ElementAt(pilotKey).upgrades.Add(upgrade);
         }
 
-        public PilotCard GetPilotCard(int pilotKey)
+        public PilotCard GetPilotCard(int pilotKey, double width, double height)
         {
-            PilotCard pilotCard = pilots.ElementAt(pilotKey).GetPilotCard();
+            PilotCard pilotCard = pilots.ElementAt(pilotKey).GetPilotCard(width, height);
             pilotCard.pilotKey = pilotKey;
 
             return pilotCard;

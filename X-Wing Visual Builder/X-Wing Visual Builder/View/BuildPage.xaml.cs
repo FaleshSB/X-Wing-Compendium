@@ -24,20 +24,22 @@ namespace X_Wing_Visual_Builder.View
     {
         private Build build;
         private Upgrades upgrades;
+        private Pilots pilots;
 
         public BuildPage()
         {
             build = new Build();
             upgrades = new Upgrades();
+            pilots = new Pilots();
             InitializeComponent();
 
-            build.AddPilot(new Pilot());
-            build.AddPilot(new Pilot());
-            build.AddPilot(new Pilot());
+            build.AddPilot(pilots.GetPilot(100));
+            build.AddPilot(pilots.GetPilot(1300));
+            build.AddPilot(pilots.GetPilot(900));
 
-            build.AddPilot(new Pilot());
-            build.AddPilot(new Pilot());
-            build.AddPilot(new Pilot());
+            build.AddPilot(pilots.GetPilot(400));
+            build.AddPilot(pilots.GetPilot(2300));
+            build.AddPilot(pilots.GetPilot(1900));
 
             
 
@@ -143,7 +145,7 @@ namespace X_Wing_Visual_Builder.View
                     currentPilotKey++;
                     double left = currentLeftOffset + spacersGap;
                     double height = currentHeightOffset + 40;
-                    PilotCard pilotCard = build.GetPilotCard(currentPilotKey);
+                    PilotCard pilotCard = build.GetPilotCard(currentPilotKey, GetPilotCardWidth(), GetPilotCardHeight());
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
@@ -208,11 +210,11 @@ namespace X_Wing_Visual_Builder.View
                 numberOfUpgrades = build.GetNumberOfUpgrades(i);
                 if (numberOfUpgrades > 0)
                 {
-                    pilotAndUpgradesWidth = build.GetPilotCard(i).Width + (Math.Ceiling((double)numberOfUpgrades / 2) * (GetUpgradeCardWidth() + cardGap));
+                    pilotAndUpgradesWidth = GetPilotCardWidth() + (Math.Ceiling((double)numberOfUpgrades / 2) * (GetUpgradeCardWidth() + cardGap));
                 }
                 else
                 {
-                    pilotAndUpgradesWidth = build.GetPilotCard(i).Width;
+                    pilotAndUpgradesWidth = GetPilotCardWidth();
                 }
 
                 if(pilotAndUpgradesWidth + totalWidth > (canvasArea.ActualWidth - 100))
@@ -233,14 +235,23 @@ namespace X_Wing_Visual_Builder.View
 
         private double GetUpgradeCardWidth()
         {
-            double width = ((SystemParameters.PrimaryScreenWidth / 8.311688312) / 717) * 466;
-
+            double width = ((SystemParameters.PrimaryScreenWidth / 8.3116883116883116883116883116883) / 717) * 466;
             return width;
         }
         private double GetUpgradeCardHeight()
         {
-            double height = SystemParameters.PrimaryScreenWidth / 8.311688312;
+            double height = SystemParameters.PrimaryScreenWidth / 8.3116883116883116883116883116883;
+            return height;
+        }
 
+        private double GetPilotCardWidth()
+        {
+            double width = ((SystemParameters.PrimaryScreenWidth / 4.6829268292682926829268292682927) / 410) * 292;
+            return width;
+        }
+        private double GetPilotCardHeight()
+        {
+            double height = SystemParameters.PrimaryScreenWidth / 4.6829268292682926829268292682927;
             return height;
         }
     }

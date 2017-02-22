@@ -11,7 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     class Pilots
     {
-        private Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
+        private Dictionary<int, Pilot> pilots = new Dictionary<int, Pilot>();
 
         public Pilots()
         {
@@ -20,28 +20,42 @@ namespace X_Wing_Visual_Builder.Model
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters("£");
+                parser.HasFieldsEnclosedInQuotes = false;
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], fields[5],
-                                             (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (Ship)Int32.Parse(fields[8]),
-                                             Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
-                                             Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])),
-                                             Convert.ToBoolean(Int32.Parse(fields[15])), Convert.ToBoolean(Int32.Parse(fields[16])), Convert.ToBoolean(Int32.Parse(fields[17]))));
+                    Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
+                    if (fields[6].Length > 0) {
+                        string[] possibleUpgradesSplit = fields[6].Split(',');
+                        foreach (string possibleUpgrade in possibleUpgradesSplit)
+                        {
+                            if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
+                            {
+                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
+                            }
+                            else
+                            {
+                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
+                            }
+                        }
+                    }
+                    pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (Ship)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
+                               Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9])));                    
                 }
             }
         }
 
-        public Upgrade GetUpgrade(int id)
+        public Pilot GetPilot(int id)
         {
-            return upgrades[id];
+            return pilots[id];
         }
 
+        /*
         public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
         {
             List<Upgrade> upgrades = new List<Upgrade>();
 
-            foreach (KeyValuePair<int, Upgrade> entry in this.upgrades)
+            foreach (KeyValuePair<int, Pilot> entry in this.pilots)
             {
                 if (entry.Value.upgradeType == upgradeType && (entry.Value.faction == Faction.All || entry.Value.faction == faction) && (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize))
                 {
@@ -62,6 +76,6 @@ namespace X_Wing_Visual_Builder.Model
 
 
             return upgrades;
-        }
+        }*/
     }
 }
