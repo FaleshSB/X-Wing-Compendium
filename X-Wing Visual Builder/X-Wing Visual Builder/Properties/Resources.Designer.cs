@@ -61,6 +61,18 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100£2£1£Arvel Crynyd£6£You may declare an enemy ship inside your firing arc that you are touching as the target of your attack.£5£23££2
+        ///101£2£1£Gemmer Sojan£5£While you are at Range 1 of at least 1 enemy ship, increase your agility value by 1.£5£22££2
+        ///102£2£0£Green Squadron Pilot£3£Conceived by General Dodonna, the RZ-1 A-wing interceptor proved its worth by crippling Star Destroyers during the Battle of Endor.£2,5£19££2
+        ///103£2£1£Jake Farrell£7£After you perform a focus action or are assigned a focus toke [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PilotDatabase {
+            get {
+                return ResourceManager.GetString("PilotDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1000£2£1£Determination£When you are dealt a faceup Damage card with the Pilot trait, discard it immediately without resolving its effect.££1£1£1£0£0£0£1£0£0£0£0£0
         ///1001£2£3£Marksmanship£ACTION: When attacking this round, you may change 1 of your focus results to a critical result and all your other focus results to hit results.££1£1£1£0£0£0£1£0£0£0£0£0
         ///1002£2£2£Expert Handling£ACTION: Perform a free barrel roll action. If you do not have the barrel roll action icon, receive 1 stress token.@You may then rem [rest of string was truncated]&quot;;.

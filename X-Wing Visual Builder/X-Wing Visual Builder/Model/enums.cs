@@ -20,21 +20,17 @@ namespace X_Wing_Visual_Builder.Model
                 CR90 = 6,
                 E_Wing = 7,
                 Firespray_31 = 8,
-                G_1A = 9,
-                G24 = 10,
+                G_1A_Starfighter = 9,
                 Gozanti_Class_Cruiser = 11,
                 GR_75_ = 12,
                 HWK_290 = 13,
-                IG_2000 = 14,
                 Imperial_Raider = 15,
-                Inquisitors_TIE = 16,
                 Jumpmaster_5000 = 17,
                 K_Wing = 18,
                 Kihraxz_Fighter = 19,
                 Lambda_Shuttle = 20,
                 M3_A_Interceptor = 21,
                 Protectorate_Starfighter = 22,
-                Shadow_Caster = 23,
                 StarViper = 24,
                 T_70_X_Wing = 25,
                 TIE_Advanced = 26,
@@ -61,7 +57,9 @@ namespace X_Wing_Visual_Builder.Model
                 TIE_Advanced_Prototype = 47,
                 TIE_Striker = 48,
                 U_Wing = 49,
-                Quadjumper = 50
+                Quadjumper = 50,
+                Rebel_TIE_Fighter = 51,
+                Upsilon_class_shuttle = 52
     }
 
     enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }
