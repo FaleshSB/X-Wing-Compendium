@@ -28,8 +28,8 @@ namespace X_Wing_Visual_Builder.View
         private string manageSquadsButtonName = "manage_squads";
         private string yourCollectionButtonName = "your_collection";
         private string calculateStatsButtonName = "calculate_stats";
-        private string upgradeQuizButtonName = "upgrade_quiz";
-        private string pilotQuizButtonName = "pilot_quiz";
+        private string upgradeQuizPageButtonName = "upgrade_quiz";
+        private string pilotQuizPageButtonName = "pilot_quiz";
         private string maneuverButtonName = "maneuver_quiz";
 
         public StartPage()
@@ -39,8 +39,8 @@ namespace X_Wing_Visual_Builder.View
             buttons.Add(manageSquadsButtonName, CreateButton(manageSquadsButtonName));
             buttons.Add(yourCollectionButtonName, CreateButton(yourCollectionButtonName));
             buttons.Add(calculateStatsButtonName, CreateButton(calculateStatsButtonName));
-            buttons.Add(upgradeQuizButtonName, CreateButton(upgradeQuizButtonName));
-            buttons.Add(pilotQuizButtonName, CreateButton(pilotQuizButtonName));
+            buttons.Add(upgradeQuizPageButtonName, CreateButton(upgradeQuizPageButtonName));
+            buttons.Add(pilotQuizPageButtonName, CreateButton(pilotQuizPageButtonName));
             buttons.Add(maneuverButtonName, CreateButton(maneuverButtonName));
         }
 
@@ -76,9 +76,17 @@ namespace X_Wing_Visual_Builder.View
             buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\buttons\" + button.Name + "_pressed.png"), buttonSize);
             await Task.Delay(120);
 
-            if(button.Name == upgradeQuizButtonName)
+            if(button.Name == upgradeQuizPageButtonName)
             {
-                NavigationService.Navigate(new UpgradeQuiz());
+                NavigationService.Navigate(new UpgradeQuizPage());
+            }
+            else if(button.Name == pilotQuizPageButtonName)
+            {
+                NavigationService.Navigate(new PilotQuizPage());
+            }
+            else if (button.Name == manageSquadsButtonName)
+            {
+                NavigationService.Navigate(new SquadsPage());
             }
         }
 
@@ -103,13 +111,13 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(buttons[calculateStatsButtonName], 500);
             canvasArea.Children.Add(buttons[calculateStatsButtonName]);
 
-            Canvas.SetLeft(buttons[upgradeQuizButtonName], 800);
-            Canvas.SetTop(buttons[upgradeQuizButtonName], 550);
-            canvasArea.Children.Add(buttons[upgradeQuizButtonName]);
+            Canvas.SetLeft(buttons[upgradeQuizPageButtonName], 800);
+            Canvas.SetTop(buttons[upgradeQuizPageButtonName], 550);
+            canvasArea.Children.Add(buttons[upgradeQuizPageButtonName]);
 
-            Canvas.SetLeft(buttons[pilotQuizButtonName], 800);
-            Canvas.SetTop(buttons[pilotQuizButtonName], 600);
-            canvasArea.Children.Add(buttons[pilotQuizButtonName]);
+            Canvas.SetLeft(buttons[pilotQuizPageButtonName], 800);
+            Canvas.SetTop(buttons[pilotQuizPageButtonName], 600);
+            canvasArea.Children.Add(buttons[pilotQuizPageButtonName]);
 
             Canvas.SetLeft(buttons[maneuverButtonName], 800);
             Canvas.SetTop(buttons[maneuverButtonName], 650);

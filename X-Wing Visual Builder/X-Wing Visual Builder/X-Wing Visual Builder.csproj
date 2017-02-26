@@ -82,8 +82,11 @@
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
     <Compile Include="Model\Upgrades.cs" />
-    <Compile Include="View\BuildPage.xaml.cs">
-      <DependentUpon>BuildPage.xaml</DependentUpon>
+    <Compile Include="View\SquadsPage.xaml.cs">
+      <DependentUpon>SquadsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PilotQuizPage.xaml.cs">
+      <DependentUpon>PilotQuizPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -94,8 +97,8 @@
     <Compile Include="View\UpgradeCardsPage.xaml.cs">
       <DependentUpon>UpgradeCardsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UpgradeQuiz.xaml.cs">
-      <DependentUpon>UpgradeQuiz.xaml</DependentUpon>
+    <Compile Include="View\UpgradeQuizPage.xaml.cs">
+      <DependentUpon>UpgradeQuizPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -109,7 +112,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\BuildPage.xaml">
+    <Page Include="View\SquadsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PilotQuizPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UpgradeQuiz.xaml">
+    <Page Include="View\UpgradeQuizPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

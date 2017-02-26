@@ -93,9 +93,7 @@ namespace X_Wing_Visual_Builder.Model
             bi.StreamSource = ms;
             bi.EndInit();
 
-            //BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
             UpgradeCard upgradeCard = new UpgradeCard();
-            //upgradeCard.Source = webImage;
             upgradeCard.Source = bi;
             upgradeCard.Height = Convert.ToDouble(height);
             upgradeCard.Width = Convert.ToDouble(width);
@@ -108,6 +106,9 @@ namespace X_Wing_Visual_Builder.Model
 
             return upgradeCard;
         }
+
+
+
         /*
         private UpgradeCard ResizeMethodOne()
         {

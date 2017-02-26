@@ -17,9 +17,9 @@ using X_Wing_Visual_Builder.Model;
 namespace X_Wing_Visual_Builder.View
 {
     /// <summary>
-    /// Interaction logic for UpgradeQuiz.xaml
+    /// Interaction logic for UpgradeQuizPage.xaml
     /// </summary>
-    public partial class UpgradeQuiz : Page
+    public partial class UpgradeQuizPage : Page
     {
         private Upgrades upgrades;
         private int upgradeCardWidth = 233;
@@ -27,7 +27,7 @@ namespace X_Wing_Visual_Builder.View
         private Upgrade currentRandomUpgrade;
         private bool isShowingName = false;
 
-        public UpgradeQuiz()
+        public UpgradeQuizPage()
         {
             InitializeComponent();
             upgrades = new Upgrades();

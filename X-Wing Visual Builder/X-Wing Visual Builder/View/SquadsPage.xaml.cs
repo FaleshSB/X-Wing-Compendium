@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Build.xaml
     /// </summary>
-    public partial class BuildPage : Page
+    public partial class SquadsPage : Page
     {
         private Build build;
         private Upgrades upgrades;
@@ -30,7 +30,7 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
 
-        public BuildPage()
+        public SquadsPage()
         {
             build = new Build();
             upgrades = new Upgrades();
@@ -47,41 +47,40 @@ namespace X_Wing_Visual_Builder.View
 
             
 
-            build.AddUpgrade(0, upgrades.GetUpgrade(13006));
-            build.AddUpgrade(0, upgrades.GetUpgrade(14004));
-            build.AddUpgrade(0, upgrades.GetUpgrade(8030));
-            build.AddUpgrade(0, upgrades.GetUpgrade(7001));
+            build.AddUpgrade(0, upgrades.GetUpgrade(1000));
+            build.AddUpgrade(0, upgrades.GetUpgrade(1001));
+            build.AddUpgrade(0, upgrades.GetUpgrade(1002));
+            build.AddUpgrade(0, upgrades.GetUpgrade(1003));
 
-            build.AddUpgrade(1, upgrades.GetUpgrade(6001));
-            build.AddUpgrade(1, upgrades.GetUpgrade(5001));
-            build.AddUpgrade(1, upgrades.GetUpgrade(4001));
-            build.AddUpgrade(1, upgrades.GetUpgrade(3001));
+            build.AddUpgrade(1, upgrades.GetUpgrade(2000));
+            build.AddUpgrade(1, upgrades.GetUpgrade(2001));
+            build.AddUpgrade(1, upgrades.GetUpgrade(2002));
+            build.AddUpgrade(1, upgrades.GetUpgrade(2003));
 
-            build.AddUpgrade(2, upgrades.GetUpgrade(2001));
-            build.AddUpgrade(2, upgrades.GetUpgrade(1001));
-            build.AddUpgrade(2, upgrades.GetUpgrade(9001));
-            build.AddUpgrade(2, upgrades.GetUpgrade(10001));
-            
-            build.AddUpgrade(3, upgrades.GetUpgrade(11001));
+            build.AddUpgrade(2, upgrades.GetUpgrade(3000));
+            build.AddUpgrade(2, upgrades.GetUpgrade(3001));
+            build.AddUpgrade(2, upgrades.GetUpgrade(3002));
+            build.AddUpgrade(2, upgrades.GetUpgrade(3003));
 
-            build.AddUpgrade(4, upgrades.GetUpgrade(12001));
-            build.AddUpgrade(4, upgrades.GetUpgrade(7003));
-            build.AddUpgrade(4, upgrades.GetUpgrade(6002));
+            build.AddUpgrade(3, upgrades.GetUpgrade(4000));
+            build.AddUpgrade(3, upgrades.GetUpgrade(4001));
+            build.AddUpgrade(3, upgrades.GetUpgrade(4002));
+            build.AddUpgrade(3, upgrades.GetUpgrade(4003));
 
-            build.AddUpgrade(5, upgrades.GetUpgrade(4006));
-            build.AddUpgrade(5, upgrades.GetUpgrade(3007));
-            build.AddUpgrade(5, upgrades.GetUpgrade(2004));
-            build.AddUpgrade(5, upgrades.GetUpgrade(1009));
+            build.AddUpgrade(4, upgrades.GetUpgrade(5000));
+            build.AddUpgrade(4, upgrades.GetUpgrade(5001));
+            build.AddUpgrade(4, upgrades.GetUpgrade(5002));
+            build.AddUpgrade(4, upgrades.GetUpgrade(5003));
+
+            build.AddUpgrade(5, upgrades.GetUpgrade(6000));
+            build.AddUpgrade(5, upgrades.GetUpgrade(6001));
+            build.AddUpgrade(5, upgrades.GetUpgrade(6002));
+            build.AddUpgrade(5, upgrades.GetUpgrade(6003));
         }
         
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            //AllignCards();
-            //Testing();
-            //NavigationService.Navigate(new UpgradeCardsPage(build, upgrades));
-            //NavigationService.Navigate(new StatsPage());
-            NavigationService.Navigate(new UpgradeQuiz());
-            //CloserTesting();
+            CloserTesting();
         }
 
         private void canvasArea_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -107,15 +106,6 @@ namespace X_Wing_Visual_Builder.View
             DeleteButton deleteButton = (DeleteButton)sender;
             build.DeletePilot(deleteButton.pilotKey);
             CloserTesting();
-        }
-
-        private void DisplayUpgrades()
-        {
-            build.SetCanvasSize(canvasArea.ActualWidth);
-            canvasArea.Children.Clear();
-
-
-
         }
 
         private void CloserTesting()

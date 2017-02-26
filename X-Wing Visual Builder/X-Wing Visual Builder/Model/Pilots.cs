@@ -50,6 +50,14 @@ namespace X_Wing_Visual_Builder.Model
             return pilots[id];
         }
 
+        public Pilot GetRandomPilot()
+        {
+            Random rand = new Random();
+            List<int> keyList = new List<int>(pilots.Keys);
+            Pilot randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
+            return randomPilot;
+        }
+
         /*
         public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
         {
