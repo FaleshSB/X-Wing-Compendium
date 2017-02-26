@@ -38,6 +38,25 @@ namespace X_Wing_Visual_Builder.Model
             return upgrades[id];
         }
 
+        public Upgrade GetRandomUpgrade()
+        {
+            Random rand = new Random();
+            List<int> keyList = new List<int>(upgrades.Keys);
+            Upgrade randomUpgrade = upgrades[keyList[rand.Next(keyList.Count)]];
+            while(true)
+            {
+                if(randomUpgrade.shipSize == ShipSize.Huge || randomUpgrade.upgradeType == UpgradeType.Hardpoint || randomUpgrade.upgradeType == UpgradeType.Team)
+                {
+                    randomUpgrade = upgrades[keyList[rand.Next(keyList.Count)]];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return randomUpgrade;
+        }
+
         public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
         {
             List<Upgrade> upgrades = new List<Upgrade>();

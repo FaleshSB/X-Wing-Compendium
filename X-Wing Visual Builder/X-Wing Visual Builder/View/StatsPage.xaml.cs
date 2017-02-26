@@ -25,9 +25,9 @@ namespace X_Wing_Visual_Builder.View
         {
             InitializeComponent();
             Stats stats = new Stats(RollType.Attack);
-            stats.isFocused = false;
+            stats.isFocused = true;
             stats.isTargetLocked = true;
-            stats.numberOfDice = 4;
+            stats.numberOfDice = 2;
             stats.Calculate(false);
         }
     }

@@ -74,6 +74,7 @@
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\DeleteButton.cs" />
     <Compile Include="Model\ImageResizer.cs" />
+    <Compile Include="Model\Options.cs" />
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
     <Compile Include="Model\Stats.cs" />
@@ -88,6 +89,9 @@
     </Compile>
     <Compile Include="View\UpgradeCardsPage.xaml.cs">
       <DependentUpon>UpgradeCardsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpgradeQuiz.xaml.cs">
+      <DependentUpon>UpgradeQuiz.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UpgradeCardsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpgradeQuiz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
