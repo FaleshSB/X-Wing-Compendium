@@ -9,11 +9,11 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Pilots
+    static class Pilots
     {
-        private Dictionary<int, Pilot> pilots = new Dictionary<int, Pilot>();
+        public static Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
 
-        public Pilots()
+        static Pilots()
         {
             StringReader sr = new StringReader(Properties.Resources.PilotDatabase);
             using (TextFieldParser parser = new TextFieldParser(sr))
@@ -45,12 +45,7 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
-        public Pilot GetPilot(int id)
-        {
-            return pilots[id];
-        }
-
-        public Pilot GetRandomPilot()
+        public static Pilot GetRandomPilot()
         {
             Random rand = new Random();
             List<int> keyList = new List<int>(pilots.Keys);
@@ -68,33 +63,5 @@ namespace X_Wing_Visual_Builder.Model
             }
             return randomPilot;
         }
-
-        /*
-        public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
-        {
-            List<Upgrade> upgrades = new List<Upgrade>();
-
-            foreach (KeyValuePair<int, Pilot> entry in this.pilots)
-            {
-                if (entry.Value.upgradeType == upgradeType && (entry.Value.faction == Faction.All || entry.Value.faction == faction) && (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize))
-                {
-                    upgrades.Add(entry.Value);
-                }
-            }
-
-            upgrades.Sort(
-                delegate (Upgrade upgradeOne, Upgrade upgradeTwo)
-                {
-                    int compareDate = upgradeTwo.cost.CompareTo(upgradeOne.cost);
-                    if (compareDate == 0)
-                    {
-                        return upgradeOne.name.CompareTo(upgradeTwo.name);
-                    }
-                    return compareDate;
-                });
-
-
-            return upgrades;
-        }*/
     }
 }

@@ -22,13 +22,11 @@ namespace X_Wing_Visual_Builder.View
     public partial class UpgradeCardsPage : DefaultPage
     {
         private Build build;
-        private Upgrades upgrades;
         private int upgradeCardWidth = 166;
         private int upgradeCardHeight = 255;
 
         public UpgradeCardsPage(object build, object upgrades)
         {
-            this.upgrades = (Upgrades)upgrades;
             this.build = (Build)build;
             InitializeComponent();
         }
@@ -37,10 +35,10 @@ namespace X_Wing_Visual_Builder.View
         {
             canvasArea.Children.Clear();
             List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
-            //upgradesToDisplay.Add(upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
-            //upgradesToDisplay.Add(upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
-            upgradesToDisplay.Add(upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
-            upgradesToDisplay.Add(upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
+            upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
             double currentHeightOffset = -30;
             double currentLeftOffset = 20;
             double spacersGap = 4;

@@ -9,11 +9,11 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Upgrades
+    static class Upgrades
     {
-        private Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
+        public static Dictionary<int, Upgrade> upgrades { get; set; } = new Dictionary<int, Upgrade>();
 
-        public Upgrades()
+        static Upgrades()
         {
             StringReader sr = new StringReader(Properties.Resources.UpgradeDatabase);
             using (TextFieldParser parser = new TextFieldParser(sr))
@@ -33,12 +33,7 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
-        public Upgrade GetUpgrade(int id)
-        {
-            return upgrades[id];
-        }
-
-        public Upgrade GetRandomUpgrade()
+        public static Upgrade GetRandomUpgrade()
         {
             Random rand = new Random();
             List<int> keyList = new List<int>(upgrades.Keys);
@@ -56,20 +51,20 @@ namespace X_Wing_Visual_Builder.Model
             }
             return randomUpgrade;
         }
-
-        public List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
+        
+        public static List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
         {
-            List<Upgrade> upgrades = new List<Upgrade>();
+            List<Upgrade> upgradesToReturn = new List<Upgrade>();
 
-            foreach (KeyValuePair<int, Upgrade> entry in this.upgrades)
+            foreach (KeyValuePair<int, Upgrade> entry in upgrades)
             {
                 if(entry.Value.upgradeType == upgradeType && (entry.Value.faction == Faction.All || entry.Value.faction == faction) && (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize))
                 {
-                    upgrades.Add(entry.Value);
+                    upgradesToReturn.Add(entry.Value);
                 }
             }
 
-            upgrades.Sort(
+            upgradesToReturn.Sort(
                 delegate (Upgrade upgradeOne, Upgrade upgradeTwo)
                 {
                     int compareDate = upgradeTwo.cost.CompareTo(upgradeOne.cost);
@@ -81,7 +76,7 @@ namespace X_Wing_Visual_Builder.Model
                 });
 
 
-            return upgrades;
+            return upgradesToReturn;
         }
     }
 }

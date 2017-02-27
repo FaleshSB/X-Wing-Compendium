@@ -23,8 +23,6 @@ namespace X_Wing_Visual_Builder.View
     public partial class SquadsPage : DefaultPage
     {
         private Build build;
-        private Upgrades upgrades;
-        private Pilots pilots;
         private int upgradeCardWidth = 150;
         private int upgradeCardHeight = 231;
         private int pilotCardWidth = 292;
@@ -33,49 +31,47 @@ namespace X_Wing_Visual_Builder.View
         public SquadsPage()
         {
             build = new Build();
-            upgrades = new Upgrades();
-            pilots = new Pilots();
             InitializeComponent();
 
-            build.AddPilot(pilots.GetPilot(100));
-            build.AddPilot(pilots.GetPilot(1300));
-            build.AddPilot(pilots.GetPilot(900));
+            build.AddPilot(Pilots.pilots[100]);
+            build.AddPilot(Pilots.pilots[1300]);
+            build.AddPilot(Pilots.pilots[900]);
 
-            build.AddPilot(pilots.GetPilot(400));
-            build.AddPilot(pilots.GetPilot(2300));
-            build.AddPilot(pilots.GetPilot(1900));
+            build.AddPilot(Pilots.pilots[400]);
+            build.AddPilot(Pilots.pilots[2300]);
+            build.AddPilot(Pilots.pilots[1900]);
 
             
 
-            build.AddUpgrade(0, upgrades.GetUpgrade(1000));
-            build.AddUpgrade(0, upgrades.GetUpgrade(1001));
-            build.AddUpgrade(0, upgrades.GetUpgrade(1002));
-            build.AddUpgrade(0, upgrades.GetUpgrade(1003));
+            build.AddUpgrade(0, Upgrades.upgrades[1000]);
+            build.AddUpgrade(0, Upgrades.upgrades[1001]);
+            build.AddUpgrade(0, Upgrades.upgrades[1002]);
+            build.AddUpgrade(0, Upgrades.upgrades[1003]);
 
-            build.AddUpgrade(1, upgrades.GetUpgrade(2000));
-            build.AddUpgrade(1, upgrades.GetUpgrade(2001));
-            build.AddUpgrade(1, upgrades.GetUpgrade(2002));
-            build.AddUpgrade(1, upgrades.GetUpgrade(2003));
+            build.AddUpgrade(1, Upgrades.upgrades[2000]);
+            build.AddUpgrade(1, Upgrades.upgrades[2001]);
+            build.AddUpgrade(1, Upgrades.upgrades[2002]);
+            build.AddUpgrade(1, Upgrades.upgrades[2003]);
 
-            build.AddUpgrade(2, upgrades.GetUpgrade(3000));
-            build.AddUpgrade(2, upgrades.GetUpgrade(3001));
-            build.AddUpgrade(2, upgrades.GetUpgrade(3002));
-            build.AddUpgrade(2, upgrades.GetUpgrade(3003));
+            build.AddUpgrade(2, Upgrades.upgrades[3000]);
+            build.AddUpgrade(2, Upgrades.upgrades[3001]);
+            build.AddUpgrade(2, Upgrades.upgrades[3002]);
+            build.AddUpgrade(2, Upgrades.upgrades[3003]);
 
-            build.AddUpgrade(3, upgrades.GetUpgrade(4000));
-            build.AddUpgrade(3, upgrades.GetUpgrade(4001));
-            build.AddUpgrade(3, upgrades.GetUpgrade(4002));
-            build.AddUpgrade(3, upgrades.GetUpgrade(4003));
+            build.AddUpgrade(3, Upgrades.upgrades[4000]);
+            build.AddUpgrade(3, Upgrades.upgrades[4001]);
+            build.AddUpgrade(3, Upgrades.upgrades[4002]);
+            build.AddUpgrade(3, Upgrades.upgrades[4003]);
 
-            build.AddUpgrade(4, upgrades.GetUpgrade(5000));
-            build.AddUpgrade(4, upgrades.GetUpgrade(5001));
-            build.AddUpgrade(4, upgrades.GetUpgrade(5002));
-            build.AddUpgrade(4, upgrades.GetUpgrade(5003));
+            build.AddUpgrade(4, Upgrades.upgrades[5000]);
+            build.AddUpgrade(4, Upgrades.upgrades[5001]);
+            build.AddUpgrade(4, Upgrades.upgrades[5002]);
+            build.AddUpgrade(4, Upgrades.upgrades[5003]);
 
-            build.AddUpgrade(5, upgrades.GetUpgrade(6000));
-            build.AddUpgrade(5, upgrades.GetUpgrade(6001));
-            build.AddUpgrade(5, upgrades.GetUpgrade(6002));
-            build.AddUpgrade(5, upgrades.GetUpgrade(6003));
+            build.AddUpgrade(5, Upgrades.upgrades[6000]);
+            build.AddUpgrade(5, Upgrades.upgrades[6001]);
+            build.AddUpgrade(5, Upgrades.upgrades[6002]);
+            build.AddUpgrade(5, Upgrades.upgrades[6003]);
         }
         
         private void PageLoaded(object sender, RoutedEventArgs e)

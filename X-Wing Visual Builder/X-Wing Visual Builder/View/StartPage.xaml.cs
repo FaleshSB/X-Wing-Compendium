@@ -88,6 +88,10 @@ namespace X_Wing_Visual_Builder.View
             {
                 NavigationService.Navigate(new SquadsPage());
             }
+            else if (button.Name == yourCollectionButtonName)
+            {
+                NavigationService.Navigate(new BrowseCardsPage());
+            }
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)

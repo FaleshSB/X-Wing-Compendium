@@ -21,7 +21,6 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class UpgradeQuizPage : DefaultPage
     {
-        private Upgrades upgrades;
         private int upgradeCardWidth = 233;
         private int upgradeCardHeight = 359;
         private Upgrade currentRandomUpgrade;
@@ -30,9 +29,8 @@ namespace X_Wing_Visual_Builder.View
         public UpgradeQuizPage()
         {
             InitializeComponent();
-            upgrades = new Upgrades();
 
-            currentRandomUpgrade = upgrades.GetRandomUpgrade();
+            currentRandomUpgrade = Upgrades.GetRandomUpgrade();
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -44,7 +42,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isShowingName == true)
             {
-                currentRandomUpgrade = upgrades.GetRandomUpgrade();
+                currentRandomUpgrade = Upgrades.GetRandomUpgrade();
             }
 
             isShowingName = !isShowingName;

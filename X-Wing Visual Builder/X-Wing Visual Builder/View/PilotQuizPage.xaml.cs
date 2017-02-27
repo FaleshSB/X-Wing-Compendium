@@ -21,7 +21,6 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class PilotQuizPage : DefaultPage
     {
-        private Pilots pilots;
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private Pilot currentRandomPilot;
@@ -30,9 +29,8 @@ namespace X_Wing_Visual_Builder.View
         public PilotQuizPage()
         {
             InitializeComponent();
-            pilots = new Pilots();
 
-            currentRandomPilot = pilots.GetRandomPilot();
+            currentRandomPilot = Pilots.GetRandomPilot();
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -44,7 +42,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isShowingName == true)
             {
-                currentRandomPilot = pilots.GetRandomPilot();
+                currentRandomPilot = Pilots.GetRandomPilot();
             }
 
             isShowingName = !isShowingName;

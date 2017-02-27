@@ -83,6 +83,9 @@
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
     <Compile Include="Model\Upgrades.cs" />
+    <Compile Include="View\BrowseCardsPage.xaml.cs">
+      <DependentUpon>BrowseCardsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SquadsPage.xaml.cs">
       <DependentUpon>SquadsPage.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\BrowseCardsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SquadsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
