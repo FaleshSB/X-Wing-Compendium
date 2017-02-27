@@ -30,10 +30,11 @@ namespace X_Wing_Visual_Builder.Model
         public int cost { get; set; }
         public string faq { get; set; }
         public Faction faction { get; set; }
+        public bool hasAbility { get; set; }
 
         public List<Upgrade> upgrades { get; set; } = new List<Upgrade>();
 
-        public Pilot(int id, Ship ship, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction)
+        public Pilot(int id, Ship ship, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility)
         {
             this.id = id;
             this.ship = ship;
@@ -45,6 +46,7 @@ namespace X_Wing_Visual_Builder.Model
             this.cost = cost;
             this.faq = faq;
             this.faction = faction;
+            this.hasAbility = hasAbility;
         }
         
         public PilotCard GetPilotCard(double widthD, double heightD)
@@ -53,29 +55,16 @@ namespace X_Wing_Visual_Builder.Model
             int width = (int)widthD;
 
             System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
-            System.Drawing.Image resizedUpgradeImage = ImageResizer.Resize(sourceUpgradeImage, new System.Drawing.Size(width, height));
-            var ms = new MemoryStream();
-            resizedUpgradeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.StreamSource = ms;
-            bi.EndInit();
-
-            //BitmapImage webImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
+            BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
+            
             PilotCard pilotCard = new PilotCard();
-            //upgradeCard.Source = webImage;
-            pilotCard.Source = bi;
+            pilotCard.Source = resizedUpgradeImage;
             pilotCard.Height = Convert.ToDouble(height);
             pilotCard.Width = Convert.ToDouble(width);
             pilotCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(pilotCard, BitmapScalingMode.HighQuality);
 
             sourceUpgradeImage.Dispose();
-            resizedUpgradeImage.Dispose();
-            ms.Dispose();
 
             return pilotCard;
         }

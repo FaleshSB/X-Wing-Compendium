@@ -40,7 +40,7 @@ namespace X_Wing_Visual_Builder.Model
                         }
                     }
                     pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (Ship)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                               Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9])));                    
+                               Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));                    
                 }
             }
         }
@@ -55,6 +55,17 @@ namespace X_Wing_Visual_Builder.Model
             Random rand = new Random();
             List<int> keyList = new List<int>(pilots.Keys);
             Pilot randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
+            while (true)
+            {
+                if (randomPilot.hasAbility == false)
+                {
+                    randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
+                }
+                else
+                {
+                    break;
+                }
+            }
             return randomPilot;
         }
 

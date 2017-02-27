@@ -82,27 +82,16 @@ namespace X_Wing_Visual_Builder.Model
             int width = (int)widthD;
 
             System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png");
-            System.Drawing.Image resizedUpgradeImage = ImageResizer.Resize(sourceUpgradeImage, new System.Drawing.Size(width, height));
-            var ms = new MemoryStream();
-            resizedUpgradeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.StreamSource = ms;
-            bi.EndInit();
-
+            BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
+            
             UpgradeCard upgradeCard = new UpgradeCard();
-            upgradeCard.Source = bi;
+            upgradeCard.Source = resizedUpgradeImage;
             upgradeCard.Height = Convert.ToDouble(height);
             upgradeCard.Width = Convert.ToDouble(width);
             upgradeCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
 
             sourceUpgradeImage.Dispose();
-            resizedUpgradeImage.Dispose();
-            ms.Dispose();
 
             return upgradeCard;
         }
