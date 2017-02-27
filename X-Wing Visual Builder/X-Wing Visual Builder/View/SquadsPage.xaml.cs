@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Build.xaml
     /// </summary>
-    public partial class SquadsPage : Page
+    public partial class SquadsPage : DefaultPage
     {
         private Build build;
         private Upgrades upgrades;

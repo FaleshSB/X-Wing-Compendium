@@ -19,7 +19,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for PilotQuizPage.xaml
     /// </summary>
-    public partial class PilotQuizPage : Page
+    public partial class PilotQuizPage : DefaultPage
     {
         private Pilots pilots;
         private int pilotCardWidth = 292;

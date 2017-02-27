@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for StartPage.xaml
     /// </summary>
-    public partial class StartPage : X_Wing_Visual_Builder.Model.DefaultPage
+    public partial class StartPage : DefaultPage
     {
         private System.Drawing.Size buttonSize = new System.Drawing.Size(168, 36);
 

@@ -19,7 +19,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for UpgradeCards.xaml
     /// </summary>
-    public partial class UpgradeCardsPage : Page
+    public partial class UpgradeCardsPage : DefaultPage
     {
         private Build build;
         private Upgrades upgrades;

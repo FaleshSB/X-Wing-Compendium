@@ -19,7 +19,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Stats.xaml
     /// </summary>
-    public partial class StatsPage : Page
+    public partial class StatsPage : DefaultPage
     {
         public StatsPage()
         {
@@ -29,6 +29,12 @@ namespace X_Wing_Visual_Builder.View
             stats.isTargetLocked = true;
             stats.numberOfDice = 2;
             stats.Calculate(false);
+        }
+
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

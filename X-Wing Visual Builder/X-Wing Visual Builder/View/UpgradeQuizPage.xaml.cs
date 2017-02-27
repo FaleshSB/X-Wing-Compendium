@@ -19,7 +19,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for UpgradeQuizPage.xaml
     /// </summary>
-    public partial class UpgradeQuizPage : Page
+    public partial class UpgradeQuizPage : DefaultPage
     {
         private Upgrades upgrades;
         private int upgradeCardWidth = 233;
