@@ -12,23 +12,22 @@ namespace X_Wing_Visual_Builder.Model
     enum UpgradeSort { Name = 1, Cost = 2 }
     enum Faction { All = 1, Rebel = 2, Imperial = 3, Scum = 4 }
     enum ShipSize { All = 1, Small = 2, Large = 3, Huge = 4 }
-    enum Ship { All = 1,
+    enum ShipType { All = 1,
                 A_Wing = 2,
                 ARC_170 = 3,
                 Attack_Shuttle = 4,
                 B_Wing = 5,
-                CR90 = 6,
+                CR90_Corvette = 6,
                 E_Wing = 7,
                 Firespray_31 = 8,
                 G_1A_Starfighter = 9,
                 Gozanti_Class_Cruiser = 11,
-                GR_75_ = 12,
+                GR_75_Medium_Transport = 12,
                 HWK_290 = 13,
-                Imperial_Raider = 15,
-                Jumpmaster_5000 = 17,
+                JumpMaster_5000 = 17,
                 K_Wing = 18,
                 Kihraxz_Fighter = 19,
-                Lambda_Shuttle = 20,
+                Lambda_Class_Shuttle = 20,
                 M3_A_Interceptor = 21,
                 Protectorate_Starfighter = 22,
                 StarViper = 24,
@@ -43,15 +42,15 @@ namespace X_Wing_Visual_Builder.Model
                 TIE_FO_Fighter = 33,
                 TIE_SF_Fighter = 34,
                 VCX_100 = 35,
-                VT_49 = 36,
+                VT_49_Decimator = 36,
                 X_Wing = 37,
                 Y_Wing = 38,
                 YT_1300 = 39,
                 YT_2400 = 40,
                 YV_666 = 41,
-                Z_95 = 42,
+                Z_95_Headhunter = 42,
                 Aggressor = 43,
-                C_ROC = 44,
+                C_ROC_Cruiser = 44,
                 Lancer_Class_Pursuit_Craft = 45,
                 Raider_Class_Corvette = 46,
                 TIE_Advanced_Prototype = 47,
@@ -59,7 +58,7 @@ namespace X_Wing_Visual_Builder.Model
                 U_Wing = 49,
                 Quadjumper = 50,
                 Rebel_TIE_Fighter = 51,
-                Upsilon_class_shuttle = 52
+                Upsilon_Class_Shuttle = 52
     }
 
     enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }

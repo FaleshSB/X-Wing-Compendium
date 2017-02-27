@@ -28,7 +28,7 @@ namespace X_Wing_Visual_Builder.Model
         public string faq { get; set; }
         public Faction faction { get; set; }
         public ShipSize shipSize { get; set; }
-        public Ship ship { get; set; }
+        public ShipType ship { get; set; }
         public bool isWeapon { get; set; }
         public bool isUnique { get; set; }
         public bool isLimited { get; set; }
@@ -40,7 +40,7 @@ namespace X_Wing_Visual_Builder.Model
         public bool isXWingOnly { get; set; }
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
-                       Ship ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool needsTorpedoAndMissile,
+                       ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool needsTorpedoAndMissile,
                        bool needsBoost, bool isTieOnly, bool isXWingOnly)
         {
             this.id = id;

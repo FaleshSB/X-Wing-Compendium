@@ -78,6 +78,7 @@
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
+    <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
@@ -171,9 +172,6 @@
     <Resource Include="Data\plan.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\UpgradeDatabase.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -187,9 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\UpgradeDatabase.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Data\PilotDatabase.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PilotDatabase.txt" />

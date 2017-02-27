@@ -34,10 +34,9 @@ namespace X_Wing_Visual_Builder.Model
 
         public List<Upgrade> upgrades { get; set; } = new List<Upgrade>();
 
-        public Pilot(int id, Ship ship, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility)
+        public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility)
         {
             this.id = id;
-            this.ship = ship;
             this.isUnique = isUnique;
             this.name = name;
             this.pilotSkill = pilotSkill;
@@ -47,6 +46,8 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.hasAbility = hasAbility;
+
+            ship = new Ship(shipType);
         }
         
         public PilotCard GetPilotCard(double widthD, double heightD)
