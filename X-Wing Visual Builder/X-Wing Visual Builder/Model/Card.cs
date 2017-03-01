@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Card : Image
+    public class Card : Image
     {
         public int id { get; set; }
     }

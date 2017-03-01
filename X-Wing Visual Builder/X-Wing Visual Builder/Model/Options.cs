@@ -7,16 +7,16 @@ using System.Windows;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    static class Options
+    static class Opt
     {
         private static double resolutionMultiplier { get; set; }
 
-        static Options()
+        static Opt()
         {
             resolutionMultiplier = SystemParameters.PrimaryScreenWidth / 1920;
         }
 
-        public static double ApplyResolutionMultiplier(double number)
+        public static double ApResMod(double number)
         {
             return Math.Round(number * resolutionMultiplier);
         }

@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AddUpgradeButton.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\DefaultPage.cs" />

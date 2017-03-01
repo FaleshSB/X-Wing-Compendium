@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Ship
+    public class Ship
     {
         public ShipType shipType { get; set; }
         public ShipSize shipSize { get; set; }

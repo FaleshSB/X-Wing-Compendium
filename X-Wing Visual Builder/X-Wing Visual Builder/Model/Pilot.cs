@@ -18,7 +18,7 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Pilot
+    public class Pilot
     {
         public int id { get; set; }
         public int cost { get; set; }

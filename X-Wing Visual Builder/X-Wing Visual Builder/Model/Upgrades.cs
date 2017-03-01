@@ -52,29 +52,39 @@ namespace X_Wing_Visual_Builder.Model
             return randomUpgrade;
         }
         
-        public static List<Upgrade> GetUpgrades(UpgradeType upgradeType, UpgradeSort upgradeSort, Faction faction, ShipSize shipSize)
+        public static List<Upgrade> GetUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, List<Faction> factions, List<ShipSize> shipSizes, List<ShipType> shipTypes)
         {
             List<Upgrade> upgradesToReturn = new List<Upgrade>();
 
+
             foreach (KeyValuePair<int, Upgrade> entry in upgrades)
             {
-                if(entry.Value.upgradeType == upgradeType && (entry.Value.faction == Faction.All || entry.Value.faction == faction) && (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize))
+                bool isCorrectType = false;
+                bool isCorrectFaction = false;
+                bool isCorrectShipSize = false;
+                bool isCorrectShipType = false;
+                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
+                {
+                    if(entry.Value.upgradeType == UpgradeType.All || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
+                }
+                foreach (Faction faction in factions)
+                {
+                    if (entry.Value.faction == Faction.All || entry.Value.faction == faction) { isCorrectFaction = true; break; }
+                }
+                foreach (ShipSize shipSize in shipSizes)
+                {
+                    if (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize) { isCorrectShipSize = true; break; }
+                }
+                foreach (ShipType shipType in shipTypes)
+                {
+                    if (entry.Value.shipType == ShipType.All || (entry.Value.shipType == shipType)) { isCorrectShipType = true; break; }
+                }
+
+                if (isCorrectType && isCorrectFaction && isCorrectShipSize && isCorrectShipType)
                 {
                     upgradesToReturn.Add(entry.Value);
                 }
             }
-
-            upgradesToReturn.Sort(
-                delegate (Upgrade upgradeOne, Upgrade upgradeTwo)
-                {
-                    int compareDate = upgradeTwo.cost.CompareTo(upgradeOne.cost);
-                    if (compareDate == 0)
-                    {
-                        return upgradeOne.name.CompareTo(upgradeTwo.name);
-                    }
-                    return compareDate;
-                });
-
 
             return upgradesToReturn;
         }

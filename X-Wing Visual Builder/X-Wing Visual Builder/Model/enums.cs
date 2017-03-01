@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3 }
-    enum UpgradeType { All = 1, Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
+    public enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3, SquadsPage = 4 }
+    public enum UpgradeType { All = 1, Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
                        SalvagedAstromech = 10, System = 11, Title = 12, Modification = 13, Illicit = 14, Cargo = 15, Hardpoint = 16,
                        Team = 17, Tech = 18 }
-    enum UpgradeSort { Name = 1, Cost = 2 }
-    enum Faction { All = 1, Rebel = 2, Imperial = 3, Scum = 4 }
-    enum ShipSize { All = 1, Small = 2, Large = 3, Huge = 4 }
-    enum ShipType { All = 1,
+    public enum UpgradeSort { Name = 1, Cost = 2 }
+    public enum Faction { All = 1, Rebel = 2, Imperial = 3, Scum = 4 }
+    public enum ShipSize { All = 1, Small = 2, Large = 3, Huge = 4 }
+    public enum ShipType {
+                All = 1,
                 A_Wing = 2,
                 ARC_170 = 3,
                 Attack_Shuttle = 4,
@@ -62,8 +63,8 @@ namespace X_Wing_Visual_Builder.Model
                 Upsilon_Class_Shuttle = 52
     }
 
-    enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }
-    enum Maneuver { White, Green, Red }
-    enum RollType { Attack, Defend }
-    enum DieFace { Blank, Focus, Evade, Hit, Crit }
+    public enum Action { BarrelRoll, Boost, Cloak, Coordinate, Evade, Focus, Jam, Recover, Reinforce, RotateArc, SLAM, TargetLock }
+    public enum Maneuver { White, Green, Red }
+    public enum RollType { Attack, Defend }
+    public enum DieFace { Blank, Focus, Evade, Hit, Crit }
 }

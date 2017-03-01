@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class PilotCard : Card
+    public class PilotCard : Card
     {
         public int pilotKey { get; set; }
     }

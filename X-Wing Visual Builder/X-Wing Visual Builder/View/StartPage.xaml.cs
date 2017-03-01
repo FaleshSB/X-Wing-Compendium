@@ -79,19 +79,19 @@ namespace X_Wing_Visual_Builder.View
 
             if(button.Name == upgradeQuizPageButtonName)
             {
-                NavigationService.Navigate(new UpgradeQuizPage());
+                NavigationService.Navigate((UpgradeQuizPage)Pages.pages[PageName.UpgradeQuiz]);
             }
             else if(button.Name == pilotQuizPageButtonName)
             {
-                NavigationService.Navigate(new PilotQuizPage());
+                NavigationService.Navigate((PilotQuizPage)Pages.pages[PageName.PilotQuiz]);
             }
             else if (button.Name == manageSquadsButtonName)
             {
-                NavigationService.Navigate(new SquadsPage());
+                NavigationService.Navigate((SquadsPage)Pages.pages[PageName.SquadsPage]);
             }
             else if (button.Name == yourCollectionButtonName)
             {
-                NavigationService.Navigate(new BrowseCardsPage());
+                NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
             }
         }
 

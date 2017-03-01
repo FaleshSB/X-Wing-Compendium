@@ -18,7 +18,7 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Upgrade
+    public class Upgrade
     {
         public int id { get; set; }
         public int cost { get; set; }
@@ -28,7 +28,7 @@ namespace X_Wing_Visual_Builder.Model
         public UpgradeType upgradeType { get; set; }
         public Faction faction { get; set; }
         public ShipSize shipSize { get; set; }
-        public ShipType ship { get; set; }
+        public ShipType shipType { get; set; }
         public bool isWeapon { get; set; }
         public bool isUnique { get; set; }
         public bool isLimited { get; set; }
@@ -51,7 +51,7 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.shipSize = shipSize;
-            this.ship = ship;
+            this.shipType = ship;
             this.isWeapon = isWeapon;
             this.isUnique = isUnique;
             this.isLimited = isLimited;
@@ -81,9 +81,12 @@ namespace X_Wing_Visual_Builder.Model
             int height = (int)heightD;
             int width = (int)widthD;
 
-            System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png");
-            BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
-            
+            //System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png");
+            //BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
+            //sourceUpgradeImage.Dispose();
+
+            BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
+
             UpgradeCard upgradeCard = new UpgradeCard();
             upgradeCard.id = id;
             upgradeCard.Source = resizedUpgradeImage;
@@ -91,9 +94,7 @@ namespace X_Wing_Visual_Builder.Model
             upgradeCard.Width = Convert.ToDouble(width);
             upgradeCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
-
-            sourceUpgradeImage.Dispose();
-
+            
             return upgradeCard;
         }
 

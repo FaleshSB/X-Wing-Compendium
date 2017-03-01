@@ -22,7 +22,11 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class SquadsPage : DefaultPage
     {
-        private Build build;
+        private Build build { get; set; } = new Build();
+        public void SetBuild(Build build)
+        {
+            this.build = build;
+        }
         private int upgradeCardWidth = 150;
         private int upgradeCardHeight = 231;
         private int pilotCardWidth = 292;
@@ -30,18 +34,8 @@ namespace X_Wing_Visual_Builder.View
 
         public SquadsPage()
         {
-            build = new Build();
+            Pages.pages[PageName.SquadsPage] = this;            
             InitializeComponent();
-
-            build.AddPilot(Pilots.pilots[502]);
-            build.AddPilot(Pilots.pilots[604]);
-            
-
-            build.AddUpgrade(0, Upgrades.upgrades[1000]);
-
-            build.AddUpgrade(1, Upgrades.upgrades[2009]);
-            build.AddUpgrade(1, Upgrades.upgrades[17004]);
-            build.AddUpgrade(1, Upgrades.upgrades[12022]);
         }
 
         private void contentCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -88,10 +82,11 @@ namespace X_Wing_Visual_Builder.View
             List<double[]> pilotsAndWidthRemainingInRows = CalculatePilotsAndWidthRemainingInRows(build, cardGap);
             
             int currentPilotKey = -1;
-            double currentHeightOffset = 40;
+            double currentHeightOffset = 60;
             double currentLeftOffset;
             double spacersGap;
             DeleteButton deleteButton;
+            AddUpgradeButton addUpgrade;
             for (int i = 0; i < pilotsAndWidthRemainingInRows.Count; i++)
             {
                 currentLeftOffset = 0;
@@ -100,8 +95,8 @@ namespace X_Wing_Visual_Builder.View
                 {
                     currentPilotKey++;
                     double left = currentLeftOffset + spacersGap;
-                    double height = currentHeightOffset + 40;
-                    PilotCard pilotCard = build.GetPilotCard(currentPilotKey, Options.ApplyResolutionMultiplier(pilotCardWidth), Options.ApplyResolutionMultiplier(pilotCardHeight));
+                    double height = currentHeightOffset;
+                    PilotCard pilotCard = build.GetPilotCard(currentPilotKey, Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
@@ -114,6 +109,16 @@ namespace X_Wing_Visual_Builder.View
                     Canvas.SetTop(deleteButton, height);
                     contentCanvas.Children.Add(deleteButton);
 
+                    addUpgrade = new AddUpgradeButton();
+                    addUpgrade.pilotKey = pilotCard.pilotKey;
+                    addUpgrade.FontSize = 16;
+                    addUpgrade.FontWeight = FontWeights.Bold;
+                    addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
+                    addUpgrade.Content = "Add Upgrade";
+                    Canvas.SetLeft(addUpgrade, left);
+                    Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
+                    contentCanvas.Children.Add(addUpgrade);
+
                     currentLeftOffset += spacersGap + pilotCard.Width;
 
                     if(build.GetNumberOfUpgrades(currentPilotKey) > 0)
@@ -121,19 +126,19 @@ namespace X_Wing_Visual_Builder.View
                         for (int z = 0; z < build.GetNumberOfUpgrades(currentPilotKey); z++)
                         {
                             left = currentLeftOffset + cardGap;
-                            UpgradeCard upgradeCard = build.GetUpgradeCard(currentPilotKey, z, Options.ApplyResolutionMultiplier(upgradeCardWidth), Options.ApplyResolutionMultiplier(upgradeCardHeight));
+                            UpgradeCard upgradeCard = build.GetUpgradeCard(currentPilotKey, z, Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
                             if (z % 2 == 0)
                             {
                                 height = currentHeightOffset;
                             }
                             else
                             {
-                                height = + currentHeightOffset + Options.ApplyResolutionMultiplier(upgradeCardHeight) + cardGap;
-                                currentLeftOffset += cardGap + Options.ApplyResolutionMultiplier(upgradeCardWidth);
+                                height = + currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + cardGap;
+                                currentLeftOffset += cardGap + Opt.ApResMod(upgradeCardWidth);
                             }
                             if(z + 1 == build.GetNumberOfUpgrades(currentPilotKey) && build.GetNumberOfUpgrades(currentPilotKey) % 2 == 1)
                             {
-                                currentLeftOffset += cardGap + Options.ApplyResolutionMultiplier(upgradeCardWidth);
+                                currentLeftOffset += cardGap + Opt.ApResMod(upgradeCardWidth);
                             }
                             
                             Canvas.SetLeft(upgradeCard, left);
@@ -154,6 +159,16 @@ namespace X_Wing_Visual_Builder.View
             }
         }
 
+        private void AddUpgrade(object sender, RoutedEventArgs e)
+        {
+            AddUpgradeButton addUpgradeButton = (AddUpgradeButton)sender;
+            BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
+            browseCardsPage.pilotKey = addUpgradeButton.pilotKey;
+            browseCardsPage.isAddingUpgrade = true;
+            browseCardsPage.SetBuild(build);
+            NavigationService.Navigate(browseCardsPage);
+        }
+
         private List<double[]> CalculatePilotsAndWidthRemainingInRows(Build build, double cardGap)
         {
             List<double[]> pilotsAndWidthRemainingInRows = new List<double[]>();
@@ -166,11 +181,11 @@ namespace X_Wing_Visual_Builder.View
                 numberOfUpgrades = build.GetNumberOfUpgrades(i);
                 if (numberOfUpgrades > 0)
                 {
-                    pilotAndUpgradesWidth = Options.ApplyResolutionMultiplier(pilotCardWidth) + (Math.Ceiling((double)numberOfUpgrades / 2) * (Options.ApplyResolutionMultiplier(upgradeCardWidth) + cardGap));
+                    pilotAndUpgradesWidth = Opt.ApResMod(pilotCardWidth) + (Math.Ceiling((double)numberOfUpgrades / 2) * (Opt.ApResMod(upgradeCardWidth) + cardGap));
                 }
                 else
                 {
-                    pilotAndUpgradesWidth = Options.ApplyResolutionMultiplier(pilotCardWidth);
+                    pilotAndUpgradesWidth = Opt.ApResMod(pilotCardWidth);
                 }
 
                 if(pilotAndUpgradesWidth + totalWidth > (contentCanvas.ActualWidth - 100))

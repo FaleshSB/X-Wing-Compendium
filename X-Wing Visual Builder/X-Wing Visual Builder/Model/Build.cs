@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class Build
+    public class Build
     {
-        private List<Pilot> pilots = new List<Pilot>();
+        private List<Pilot> pilots { get; set; } = new List<Pilot>();
         private double canvasSize = 1920;
         public int totalCost
         {
@@ -38,9 +38,24 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
+        public Build()
+        {
+            AddPilot(Pilots.pilots[604]);
+            AddPilot(Pilots.pilots[801]);
+            
+            AddUpgrade(0, Upgrades.upgrades[2009]);
+            AddUpgrade(0, Upgrades.upgrades[17004]);
+            AddUpgrade(0, Upgrades.upgrades[12022]);
+            AddUpgrade(0, Upgrades.upgrades[1016]);
+        }
+
         public void AddPilot(Pilot pilot)
         {
             pilots.Add(pilot);
+        }
+        public Pilot GetPilot(int pilotId)
+        {
+            return pilots[pilotId];
         }
 
         public void AddUpgrade(int pilotKey, Upgrade upgrade)

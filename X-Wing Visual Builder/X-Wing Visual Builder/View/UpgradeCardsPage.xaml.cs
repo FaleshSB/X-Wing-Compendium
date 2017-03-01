@@ -37,8 +37,8 @@ namespace X_Wing_Visual_Builder.View
             List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
             //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
             //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
-            upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
-            upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
             double currentHeightOffset = -30;
             double currentLeftOffset = 20;
             double spacersGap = 4;
@@ -53,12 +53,12 @@ namespace X_Wing_Visual_Builder.View
                 }
                 else if (currentUpgradeId < upgradesToDisplay.ElementAt(currentTypeId).Count)
                 {
-                    UpgradeCard upgradeCard = upgradesToDisplay.ElementAt(currentTypeId).ElementAt(currentUpgradeId).GetUpgradeCard(Options.ApplyResolutionMultiplier(upgradeCardWidth), Options.ApplyResolutionMultiplier(upgradeCardHeight));
+                    UpgradeCard upgradeCard = upgradesToDisplay.ElementAt(currentTypeId).ElementAt(currentUpgradeId).GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
                     Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
                     Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
                     contentCanvas.Children.Add(upgradeCard);
                     currentUpgradeId++;
-                    currentLeftOffset += spacersGap + Options.ApplyResolutionMultiplier(upgradeCardWidth);
+                    currentLeftOffset += spacersGap + Opt.ApResMod(upgradeCardWidth);
                     currentRowNumber++;
                 }
                 else
@@ -69,12 +69,12 @@ namespace X_Wing_Visual_Builder.View
                 
                 if (currentRowNumber > 10)
                 {
-                    currentHeightOffset += spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight);
+                    currentHeightOffset += spacersGap + Opt.ApResMod(upgradeCardHeight);
                     currentLeftOffset = 20;
                     currentRowNumber = 0;
                 }
             }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight) + 80;
+            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(upgradeCardHeight) + 80;
         }
     }
 }

@@ -22,8 +22,10 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class BrowseCardsPage : DefaultPage
     {
-        List<Upgrade> upgradesToDisplay = new List<Upgrade>();
-        List<Pilot> pilotsToDisplay = new List<Pilot>();
+
+        private List<Upgrade> upgrades = new List<Upgrade>();
+        private List<Upgrade> upgradesToDisplay = new List<Upgrade>();
+        private List<Pilot> pilotsToDisplay = new List<Pilot>();
         private int upgradeCardWidth = 166;
         private int upgradeCardHeight = 255;
         private int pilotCardWidth = 292;
@@ -33,17 +35,42 @@ namespace X_Wing_Visual_Builder.View
         private string previousUpgradeSearchResultIds = "";
         private string previousPilotSearchResultIds = "";
 
+        public bool isAddingUpgrade { get; set; } = false;
+        public int pilotKey { get; set; }
+        private Build build { get; set; }
+        public void SetBuild(Build build)
+        {
+            this.build = build;
+        }
+
         public BrowseCardsPage()
         {
             Pages.pages[PageName.BrowseCards] = this;
             InitializeComponent();
+            upgrades = Upgrades.upgrades.Values.ToList();
             cardScrollViewer.Height = 990;
             searchTextBox.Focus();
             SetIsUpgradeChecked();
             SetIsSearchDescriptionChecked();
         }
 
-
+        protected override void DisplayContent()
+        {
+            if(isAddingUpgrade == true)
+            {
+                Pilot pilot = build.GetPilot(pilotKey);
+                List<Faction> factions = new List<Faction>();
+                factions.Add(pilot.faction);
+                List<ShipSize> shipSizes = new List<ShipSize>();
+                shipSizes.Add(pilot.ship.shipSize);
+                List<ShipType> shipTypes = new List<ShipType>();
+                shipTypes.Add(pilot.ship.shipType);
+                upgrades = Upgrades.GetUpgrades(pilot.possibleUpgrades, factions, shipSizes, shipTypes);
+                upgrades = upgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
+                upgradesToDisplay = upgrades;
+            }
+            DisplayUpgradeCards();
+        }
 
         private void UpdateContents()
         {
@@ -65,14 +92,14 @@ namespace X_Wing_Visual_Builder.View
                 if (isUpgradeChecked)
                 {
                     string currentUpgradeSearchResultIds = "";
-                    foreach (KeyValuePair<int, Upgrade> entry in Upgrades.upgrades)
+                    foreach (Upgrade upgrade in upgrades)
                     {
                         /*bool hasFoundAllWords = true;
                         foreach(string searchWord in searchWords)
                         {
-                            bool hasFoundWordInName = entry.Value.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInDescription = entry.Value.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInType = entry.Value.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInDescription = upgrade.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInType = upgrade.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             if (isSearchDescriptionChecked == false && hasFoundWordInName == false && hasFoundWordInType == false)
                             {
                                 hasFoundAllWords = false;
@@ -87,9 +114,9 @@ namespace X_Wing_Visual_Builder.View
                         bool hasFoundAllWords = false;
                         foreach (string searchWord in searchWords)
                         {
-                            bool hasFoundWordInName = entry.Value.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInDescription = entry.Value.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInType = entry.Value.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInDescription = upgrade.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInType = upgrade.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             if (isSearchDescriptionChecked == false && (hasFoundWordInName == true || hasFoundWordInType == true))
                             {
                                 hasFoundAllWords = true;
@@ -104,8 +131,8 @@ namespace X_Wing_Visual_Builder.View
 
                         if (hasFoundAllWords)
                         {
-                            upgradesToDisplay.Add(entry.Value);
-                            currentUpgradeSearchResultIds += entry.Value.id.ToString();
+                            upgradesToDisplay.Add(upgrade);
+                            currentUpgradeSearchResultIds += upgrade.id.ToString();
                         }
                     }
 
@@ -225,28 +252,35 @@ namespace X_Wing_Visual_Builder.View
             int currentRowNumber = 0;
             foreach(Upgrade upgrade in upgradesToDisplay)
             {
-                UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Options.ApplyResolutionMultiplier(upgradeCardWidth), Options.ApplyResolutionMultiplier(upgradeCardHeight));
+                UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
                 upgradeCard.MouseDown += CardClicked;
                 Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
                 Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
                 contentCanvas.Children.Add(upgradeCard);
-                currentLeftOffset += spacersGap + Options.ApplyResolutionMultiplier(upgradeCardWidth);
+                currentLeftOffset += spacersGap + Opt.ApResMod(upgradeCardWidth);
                 currentRowNumber++;
 
                 if (currentRowNumber > 10)
                 {
-                    currentHeightOffset += spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight);
+                    currentHeightOffset += spacersGap + Opt.ApResMod(upgradeCardHeight);
                     currentLeftOffset = 20;
                     currentRowNumber = 0;
                 }
             }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight) + 80;
+            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(upgradeCardHeight) + 80;
         }
 
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
             Card card = (Card)sender;
             cardId.Content = card.id.ToString();
+            if(isAddingUpgrade == true)
+            {
+                build.AddUpgrade(pilotKey, Upgrades.upgrades[card.id]);
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
+                squadsPage.SetBuild(build);
+                NavigationService.Navigate(squadsPage);
+            }
         }
 
         private void TempButton(object sender, RoutedEventArgs e)
@@ -268,22 +302,22 @@ namespace X_Wing_Visual_Builder.View
             int currentRowNumber = 0;
             foreach (Pilot pilot in pilotsToDisplay)
             {
-                PilotCard pilotCard = pilot.GetPilotCard(Options.ApplyResolutionMultiplier(pilotCardWidth), Options.ApplyResolutionMultiplier(pilotCardHeight));
+                PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
                 pilotCard.MouseDown += CardClicked;
                 Canvas.SetLeft(pilotCard, currentLeftOffset + spacersGap);
                 Canvas.SetTop(pilotCard, currentHeightOffset + 40);
                 contentCanvas.Children.Add(pilotCard);
-                currentLeftOffset += spacersGap + Options.ApplyResolutionMultiplier(pilotCardWidth);
+                currentLeftOffset += spacersGap + Opt.ApResMod(pilotCardWidth);
                 currentRowNumber++;
 
                 if (currentRowNumber > 5)
                 {
-                    currentHeightOffset += spacersGap + Options.ApplyResolutionMultiplier(pilotCardHeight);
+                    currentHeightOffset += spacersGap + Opt.ApResMod(pilotCardHeight);
                     currentLeftOffset = 20;
                     currentRowNumber = 0;
                 }
             }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Options.ApplyResolutionMultiplier(pilotCardHeight) + 80;
+            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(pilotCardHeight) + 80;
         }
     }
 }
