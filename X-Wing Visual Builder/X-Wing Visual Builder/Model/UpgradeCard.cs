@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class UpgradeCard : Image
+    class UpgradeCard : Card
     {
         public int pilotKey { get; set; }
         public int upgradeKey { get; set; }

@@ -21,11 +21,11 @@ namespace X_Wing_Visual_Builder.Model
     class Upgrade
     {
         public int id { get; set; }
-        public UpgradeType upgradeType { get; set; }
         public int cost { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string faq { get; set; }
+        public UpgradeType upgradeType { get; set; }
         public Faction faction { get; set; }
         public ShipSize shipSize { get; set; }
         public ShipType ship { get; set; }
@@ -85,6 +85,7 @@ namespace X_Wing_Visual_Builder.Model
             BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
             
             UpgradeCard upgradeCard = new UpgradeCard();
+            upgradeCard.id = id;
             upgradeCard.Source = resizedUpgradeImage;
             upgradeCard.Height = Convert.ToDouble(height);
             upgradeCard.Width = Convert.ToDouble(width);

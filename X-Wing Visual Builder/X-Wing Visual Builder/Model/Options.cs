@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public static class Options
+    static class Options
     {
         private static double resolutionMultiplier { get; set; }
 

@@ -21,14 +21,14 @@ namespace X_Wing_Visual_Builder.Model
     class Pilot
     {
         public int id { get; set; }
+        public int cost { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string faq { get; set; }
         public Ship ship { get; set; }
         public bool isUnique { get; set; }
-        public string name { get; set; }
         public int pilotSkill { get; set; }
-        public string description { get; set; }
         public Dictionary<UpgradeType, int> possibleUpgrades { get; set; } = new Dictionary<UpgradeType, int>();
-        public int cost { get; set; }
-        public string faq { get; set; }
         public Faction faction { get; set; }
         public bool hasAbility { get; set; }
 
@@ -59,6 +59,7 @@ namespace X_Wing_Visual_Builder.Model
             BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
             
             PilotCard pilotCard = new PilotCard();
+            pilotCard.id = id;
             pilotCard.Source = resizedUpgradeImage;
             pilotCard.Height = Convert.ToDouble(height);
             pilotCard.Width = Convert.ToDouble(width);

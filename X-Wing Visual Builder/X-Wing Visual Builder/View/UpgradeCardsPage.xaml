@@ -7,10 +7,5 @@
       xmlns:model="clr-namespace:X_Wing_Visual_Builder.Model"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="UpgradeCards">
-
-    <ScrollViewer>
-        <Canvas Name="canvasArea" Loaded="PageLoaded"></Canvas>
-    </ScrollViewer>
-
+      Title="UpgradeCards" Loaded="PageLoaded">
 </model:DefaultPage>

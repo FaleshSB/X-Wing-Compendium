@@ -33,55 +33,20 @@ namespace X_Wing_Visual_Builder.View
             build = new Build();
             InitializeComponent();
 
-            build.AddPilot(Pilots.pilots[100]);
-            build.AddPilot(Pilots.pilots[1300]);
-            build.AddPilot(Pilots.pilots[900]);
-
-            build.AddPilot(Pilots.pilots[400]);
-            build.AddPilot(Pilots.pilots[2300]);
-            build.AddPilot(Pilots.pilots[1900]);
-
+            build.AddPilot(Pilots.pilots[502]);
+            build.AddPilot(Pilots.pilots[604]);
             
 
             build.AddUpgrade(0, Upgrades.upgrades[1000]);
-            build.AddUpgrade(0, Upgrades.upgrades[1001]);
-            build.AddUpgrade(0, Upgrades.upgrades[1002]);
-            build.AddUpgrade(0, Upgrades.upgrades[1003]);
 
-            build.AddUpgrade(1, Upgrades.upgrades[2000]);
-            build.AddUpgrade(1, Upgrades.upgrades[2001]);
-            build.AddUpgrade(1, Upgrades.upgrades[2002]);
-            build.AddUpgrade(1, Upgrades.upgrades[2003]);
-
-            build.AddUpgrade(2, Upgrades.upgrades[3000]);
-            build.AddUpgrade(2, Upgrades.upgrades[3001]);
-            build.AddUpgrade(2, Upgrades.upgrades[3002]);
-            build.AddUpgrade(2, Upgrades.upgrades[3003]);
-
-            build.AddUpgrade(3, Upgrades.upgrades[4000]);
-            build.AddUpgrade(3, Upgrades.upgrades[4001]);
-            build.AddUpgrade(3, Upgrades.upgrades[4002]);
-            build.AddUpgrade(3, Upgrades.upgrades[4003]);
-
-            build.AddUpgrade(4, Upgrades.upgrades[5000]);
-            build.AddUpgrade(4, Upgrades.upgrades[5001]);
-            build.AddUpgrade(4, Upgrades.upgrades[5002]);
-            build.AddUpgrade(4, Upgrades.upgrades[5003]);
-
-            build.AddUpgrade(5, Upgrades.upgrades[6000]);
-            build.AddUpgrade(5, Upgrades.upgrades[6001]);
-            build.AddUpgrade(5, Upgrades.upgrades[6002]);
-            build.AddUpgrade(5, Upgrades.upgrades[6003]);
-        }
-        
-        private void PageLoaded(object sender, RoutedEventArgs e)
-        {
-            CloserTesting();
+            build.AddUpgrade(1, Upgrades.upgrades[2009]);
+            build.AddUpgrade(1, Upgrades.upgrades[17004]);
+            build.AddUpgrade(1, Upgrades.upgrades[12022]);
         }
 
-        private void canvasArea_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void contentCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            CloserTesting();
+            DisplayContent();
         }
 
         private void PilotClicked(object sender, RoutedEventArgs e)
@@ -94,31 +59,31 @@ namespace X_Wing_Visual_Builder.View
         {
             DeleteButton deleteButton = (DeleteButton)sender;
             build.DeleteUpgrade(deleteButton.pilotKey, deleteButton.upgradeKey);
-            CloserTesting();
+            DisplayContent();
         }
 
         private void DeletePilotClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
             build.DeletePilot(deleteButton.pilotKey);
-            CloserTesting();
+            DisplayContent();
         }
 
-        private void CloserTesting()
+        protected override void DisplayContent()
         {
-            build.SetCanvasSize(canvasArea.ActualWidth);
-            canvasArea.Children.Clear();
+            build.SetCanvasSize(contentCanvas.ActualWidth);
+            contentCanvas.Children.Clear();
 
             Label cost = new Label();
             cost.Content = build.totalCost;
             cost.FontSize = 30;
-            cost.Foreground = new SolidColorBrush(Color.FromRgb(250, 30, 30));
-            Canvas.SetLeft(cost, 10);
+            cost.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Canvas.SetLeft(cost, 940);
             Canvas.SetTop(cost, 10);
-            canvasArea.Children.Add(cost);
+            contentCanvas.Children.Add(cost);
 
 
-            double cardGap = Math.Round(canvasArea.ActualWidth / 640);
+            double cardGap = Math.Round(contentCanvas.ActualWidth / 640);
 
             List<double[]> pilotsAndWidthRemainingInRows = CalculatePilotsAndWidthRemainingInRows(build, cardGap);
             
@@ -140,14 +105,14 @@ namespace X_Wing_Visual_Builder.View
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
-                    canvasArea.Children.Add(pilotCard);
+                    contentCanvas.Children.Add(pilotCard);
 
                     deleteButton = new DeleteButton();
                     deleteButton.pilotKey = pilotCard.pilotKey;
                     deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
                     Canvas.SetLeft(deleteButton, left);
                     Canvas.SetTop(deleteButton, height);
-                    canvasArea.Children.Add(deleteButton);
+                    contentCanvas.Children.Add(deleteButton);
 
                     currentLeftOffset += spacersGap + pilotCard.Width;
 
@@ -173,7 +138,7 @@ namespace X_Wing_Visual_Builder.View
                             
                             Canvas.SetLeft(upgradeCard, left);
                             Canvas.SetTop(upgradeCard, height);
-                            canvasArea.Children.Add(upgradeCard);
+                            contentCanvas.Children.Add(upgradeCard);
 
                             deleteButton = new DeleteButton();
                             deleteButton.pilotKey = upgradeCard.pilotKey;
@@ -181,7 +146,7 @@ namespace X_Wing_Visual_Builder.View
                             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
                             Canvas.SetLeft(deleteButton, left);
                             Canvas.SetTop(deleteButton, height);
-                            canvasArea.Children.Add(deleteButton);
+                            contentCanvas.Children.Add(deleteButton);
                         }
                     }
                 }
@@ -208,9 +173,9 @@ namespace X_Wing_Visual_Builder.View
                     pilotAndUpgradesWidth = Options.ApplyResolutionMultiplier(pilotCardWidth);
                 }
 
-                if(pilotAndUpgradesWidth + totalWidth > (canvasArea.ActualWidth - 100))
+                if(pilotAndUpgradesWidth + totalWidth > (contentCanvas.ActualWidth - 100))
                 {
-                    pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
+                    pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, contentCanvas.ActualWidth - totalWidth });
                     pilotsInRow = 1;
                     totalWidth = pilotAndUpgradesWidth;
                 }
@@ -220,7 +185,7 @@ namespace X_Wing_Visual_Builder.View
                     totalWidth += pilotAndUpgradesWidth;
                 }
             }
-            pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, canvasArea.ActualWidth - totalWidth });
+            pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, contentCanvas.ActualWidth - totalWidth });
             return pilotsAndWidthRemainingInRows;
         }
     }

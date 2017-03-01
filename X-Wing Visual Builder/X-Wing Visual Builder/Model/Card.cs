@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class PilotCard : Card
+    class Card : Image
     {
-        public int pilotKey { get; set; }
+        public int id { get; set; }
     }
 }

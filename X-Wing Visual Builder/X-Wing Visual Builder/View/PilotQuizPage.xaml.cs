@@ -28,14 +28,10 @@ namespace X_Wing_Visual_Builder.View
 
         public PilotQuizPage()
         {
+            Pages.pages[PageName.PilotQuiz] = this;
             InitializeComponent();
 
             currentRandomPilot = Pilots.GetRandomPilot();
-        }
-
-        private void PageLoaded(object sender, RoutedEventArgs e)
-        {
-            DisplayCard();
         }
 
         private void ShowNameClicked(object sender, RoutedEventArgs e)
@@ -46,17 +42,44 @@ namespace X_Wing_Visual_Builder.View
             }
 
             isShowingName = !isShowingName;
-            DisplayCard();
+            DisplayContent();
         }
 
-        private void DisplayCard()
+        private void TempButton(object sender, RoutedEventArgs e)
         {
-            canvasArea.Children.Clear();
+            Button button = (Button)sender;
+            if (button.Content.ToString() == "Browse Cards")
+            {
+                //NavigationService.GoBack();
+                NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
+            }
+        }
+
+        protected override void DisplayContent()
+        {
+            contentCanvas.Children.Clear();
+
+
+            Button browseCards = new Button();
+            browseCards.Name = "browseCards";
+            browseCards.Width = 130;
+            browseCards.Height = 40;
+            browseCards.FontSize = 16;
+            browseCards.FontWeight = FontWeights.Bold;
+            browseCards.Click += new RoutedEventHandler(TempButton);
+            browseCards.UseLayoutRounding = true;
+            browseCards.Content = "Browse Cards";
+            Canvas.SetLeft(browseCards, 850);
+            Canvas.SetTop(browseCards, 180);
+            contentCanvas.Children.Add(browseCards);
+
+
+
 
             PilotCard randomPilotCard = currentRandomPilot.GetPilotCard(pilotCardWidth, pilotCardHeight);
             Canvas.SetLeft(randomPilotCard, 760);
             Canvas.SetTop(randomPilotCard, 360);
-            canvasArea.Children.Add(randomPilotCard);
+            contentCanvas.Children.Add(randomPilotCard);
 
             Button showName = new Button();
             showName.Name = "ShowNameButton";
@@ -78,7 +101,7 @@ namespace X_Wing_Visual_Builder.View
                 blueRectangle.UseLayoutRounding = true;
                 Canvas.SetLeft(blueRectangle, 760);
                 Canvas.SetTop(blueRectangle, 360);
-                canvasArea.Children.Add(blueRectangle);
+                contentCanvas.Children.Add(blueRectangle);
             }
             else
             {
@@ -86,7 +109,7 @@ namespace X_Wing_Visual_Builder.View
             }
             Canvas.SetLeft(showName, 850);
             Canvas.SetTop(showName, 780);
-            canvasArea.Children.Add(showName);
+            contentCanvas.Children.Add(showName);
         }
     }
 }

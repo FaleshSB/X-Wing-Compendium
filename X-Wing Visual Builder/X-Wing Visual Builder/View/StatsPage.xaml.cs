@@ -30,11 +30,5 @@ namespace X_Wing_Visual_Builder.View
             stats.numberOfDice = 2;
             stats.Calculate(false);
         }
-
-
-        private void PageLoaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -28,14 +28,10 @@ namespace X_Wing_Visual_Builder.View
 
         public UpgradeQuizPage()
         {
+            Pages.pages[PageName.UpgradeQuiz] = this;
             InitializeComponent();
 
             currentRandomUpgrade = Upgrades.GetRandomUpgrade();
-        }
-
-        private void PageLoaded(object sender, RoutedEventArgs e)
-        {
-            DisplayCard();
         }
 
         private void ShowNameClicked(object sender, RoutedEventArgs e)
@@ -51,12 +47,12 @@ namespace X_Wing_Visual_Builder.View
 
         private void DisplayCard()
         {
-            canvasArea.Children.Clear();
+            contentCanvas.Children.Clear();
 
             UpgradeCard randomUpgradeCard = currentRandomUpgrade.GetUpgradeCard(upgradeCardWidth, upgradeCardHeight);
             Canvas.SetLeft(randomUpgradeCard, 800);
             Canvas.SetTop(randomUpgradeCard, 400);
-            canvasArea.Children.Add(randomUpgradeCard);
+            contentCanvas.Children.Add(randomUpgradeCard);
 
             Button showName = new Button();
             showName.Name = "ShowNameButton";
@@ -78,7 +74,7 @@ namespace X_Wing_Visual_Builder.View
                 blueRectangle.UseLayoutRounding = true;
                 Canvas.SetLeft(blueRectangle, 800);
                 Canvas.SetTop(blueRectangle, 400);
-                canvasArea.Children.Add(blueRectangle);
+                contentCanvas.Children.Add(blueRectangle);
             }
             else
             {
@@ -86,7 +82,7 @@ namespace X_Wing_Visual_Builder.View
             }
             Canvas.SetLeft(showName, 850);
             Canvas.SetTop(showName, 780);
-            canvasArea.Children.Add(showName);
+            contentCanvas.Children.Add(showName);
         }
     }
 }

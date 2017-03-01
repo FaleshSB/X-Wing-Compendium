@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:X_Wing_Visual_Builder.View"
       xmlns:model="clr-namespace:X_Wing_Visual_Builder.Model"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="BrowseCardsPage">
+      d:DesignHeight="400" d:DesignWidth="600"
+      Title="BrowseCardsPage" Loaded="PageLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -17,36 +17,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ScrollViewer x:Name="cardScrollViewer" Grid.Row="1" Grid.Column="0">
-            <Canvas Name="canvasArea" Loaded="PageLoaded" />
+            <Canvas Name="contentCanvas" Loaded="PageLoaded" />
         </ScrollViewer>
-        <TextBox Grid.Row="0" Grid.Column="0" x:Name="searchTextBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="0,40,0,0" Width="120" TextChanged="textBox_TextChanged"/>
-        <RadioButton 
-            Content="Upgrades"
-            x:Name="upgradesRadioButton"
-            Grid.Row="0"
-            Grid.Column="0"
-            Checked="IsUpgrade_Checked"
-            HorizontalAlignment="Left"
-            Margin="10,10,0,0"
-            VerticalAlignment="Top"/>
-        <RadioButton
-            Content="Pilots"
-            x:Name="pilotsRadioButton"
-            Grid.Row="0"
-            Grid.Column="0"
-            Checked="IsUpgrade_Checked"
-            HorizontalAlignment="Left"
-            Margin="10,30,0,0"
-            VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox 
-            Content="Search Description"
-            x:Name="searchDescriptionCheckBox"
-            Grid.Row="0"
-            Grid.Column="0"
-            Checked="SearchDescription_Checked"
-            Unchecked="SearchDescription_Checked"
-            HorizontalAlignment="Left"
-            Margin="10,50,0,0"
-            VerticalAlignment="Top"/>
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="searchTextBox" HorizontalAlignment="Center" Height="23" Text="" VerticalAlignment="Top" Margin="0,40,0,0" Width="120" TextChanged="textBox_TextChanged"/>
+        <RadioButton Content="Upgrades" x:Name="upgradesRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton Content="Pilots" x:Name="pilotsRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Search Description" x:Name="searchDescriptionCheckBox" Grid.Row="0" Grid.Column="0" Checked="SearchDescription_Checked" Unchecked="SearchDescription_Checked" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Pilot Quiz" HorizontalAlignment="Left" Height="26" Margin="382,30,0,0" VerticalAlignment="Top" Width="99" Click="TempButton"/>
+        <Label x:Name="cardId" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Margin="0,60,0,0"/>
+        <Button x:Name="button1" Content="Exit" HorizontalAlignment="right" Height="22"  VerticalAlignment="Top" Width="27" Click="ExitButton"/>
     </Grid>
 </model:DefaultPage>

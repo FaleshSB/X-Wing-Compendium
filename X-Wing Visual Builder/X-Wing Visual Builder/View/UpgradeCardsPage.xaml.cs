@@ -31,9 +31,9 @@ namespace X_Wing_Visual_Builder.View
             InitializeComponent();
         }
 
-        private void DisplayCards()
+        new private void DisplayContent()
         {
-            canvasArea.Children.Clear();
+            contentCanvas.Children.Clear();
             List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
             //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
             //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
@@ -56,7 +56,7 @@ namespace X_Wing_Visual_Builder.View
                     UpgradeCard upgradeCard = upgradesToDisplay.ElementAt(currentTypeId).ElementAt(currentUpgradeId).GetUpgradeCard(Options.ApplyResolutionMultiplier(upgradeCardWidth), Options.ApplyResolutionMultiplier(upgradeCardHeight));
                     Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
                     Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
-                    canvasArea.Children.Add(upgradeCard);
+                    contentCanvas.Children.Add(upgradeCard);
                     currentUpgradeId++;
                     currentLeftOffset += spacersGap + Options.ApplyResolutionMultiplier(upgradeCardWidth);
                     currentRowNumber++;
@@ -74,12 +74,7 @@ namespace X_Wing_Visual_Builder.View
                     currentRowNumber = 0;
                 }
             }
-            canvasArea.Height = currentHeightOffset + spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight) + 80;
-        }
-
-        private void PageLoaded(object sender, RoutedEventArgs e)
-        {
-            DisplayCards();
+            contentCanvas.Height = currentHeightOffset + spacersGap + Options.ApplyResolutionMultiplier(upgradeCardHeight) + 80;
         }
     }
 }

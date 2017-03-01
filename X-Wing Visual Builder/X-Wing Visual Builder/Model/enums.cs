@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
+    enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3 }
     enum UpgradeType { All = 1, Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
                        SalvagedAstromech = 10, System = 11, Title = 12, Modification = 13, Illicit = 14, Cargo = 15, Hardpoint = 16,
                        Team = 17, Tech = 18 }
