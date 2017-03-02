@@ -20,6 +20,19 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Pilot
     {
+        public int totalCost
+        {
+            get
+            {
+                int totalCost = 0;
+                totalCost += cost;
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    totalCost += upgrade.cost;
+                }
+                return totalCost;
+            }
+        }
         public int id { get; set; }
         public int cost { get; set; }
         public string name { get; set; }
@@ -48,6 +61,13 @@ namespace X_Wing_Visual_Builder.Model
             this.hasAbility = hasAbility;
 
             ship = new Ship(shipType);
+        }
+
+        public Pilot GetPilotClone()
+        {
+            Pilot pilotClone = (Pilot)MemberwiseClone();
+            pilotClone.upgrades = new List<Upgrade>();
+            return pilotClone;
         }
         
         public PilotCard GetPilotCard(double widthD, double heightD)

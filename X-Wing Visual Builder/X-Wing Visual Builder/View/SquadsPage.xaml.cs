@@ -76,6 +76,12 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(cost, 10);
             contentCanvas.Children.Add(cost);
 
+            Button addPilot = new Button();
+            addPilot.Click += new RoutedEventHandler(AddPilotClicked);
+            addPilot.Content = "Add Pilot";
+            Canvas.SetLeft(addPilot, 870);
+            Canvas.SetTop(addPilot, 25);
+            contentCanvas.Children.Add(addPilot);
 
             double cardGap = Math.Round(contentCanvas.ActualWidth / 640);
 
@@ -87,6 +93,7 @@ namespace X_Wing_Visual_Builder.View
             double spacersGap;
             DeleteButton deleteButton;
             AddUpgradeButton addUpgrade;
+            Label pilotTotalCostLabel;
             for (int i = 0; i < pilotsAndWidthRemainingInRows.Count; i++)
             {
                 currentLeftOffset = 0;
@@ -118,6 +125,14 @@ namespace X_Wing_Visual_Builder.View
                     Canvas.SetLeft(addUpgrade, left);
                     Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
                     contentCanvas.Children.Add(addUpgrade);
+                    
+                    pilotTotalCostLabel = new Label();
+                    pilotTotalCostLabel.Content = build.GetPilot(currentPilotKey).totalCost;
+                    pilotTotalCostLabel.FontSize = 30;
+                    pilotTotalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    Canvas.SetLeft(pilotTotalCostLabel, left + 240);
+                    Canvas.SetTop(pilotTotalCostLabel, height + Opt.ApResMod(pilotCardHeight));
+                    contentCanvas.Children.Add(pilotTotalCostLabel);
 
                     currentLeftOffset += spacersGap + pilotCard.Width;
 
@@ -159,13 +174,18 @@ namespace X_Wing_Visual_Builder.View
             }
         }
 
+        private void AddPilotClicked(object sender, RoutedEventArgs e)
+        {
+            BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
+            browseCardsPage.AddPilot(build);
+            NavigationService.Navigate(browseCardsPage);
+        }
+
         private void AddUpgrade(object sender, RoutedEventArgs e)
         {
             AddUpgradeButton addUpgradeButton = (AddUpgradeButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.pilotKey = addUpgradeButton.pilotKey;
-            browseCardsPage.isAddingUpgrade = true;
-            browseCardsPage.SetBuild(build);
+            browseCardsPage.AddAvailibleUpdates(addUpgradeButton.pilotKey, build);
             NavigationService.Navigate(browseCardsPage);
         }
 

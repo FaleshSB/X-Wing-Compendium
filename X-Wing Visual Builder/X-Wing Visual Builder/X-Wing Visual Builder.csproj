@@ -76,6 +76,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\DefaultPage.cs" />
     <Compile Include="Model\DeleteButton.cs" />
+    <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\ImageResizer.cs" />
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\Pages.cs" />

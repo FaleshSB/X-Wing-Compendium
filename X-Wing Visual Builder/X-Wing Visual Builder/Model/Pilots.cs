@@ -15,34 +15,42 @@ namespace X_Wing_Visual_Builder.Model
 
         static Pilots()
         {
-            StringReader sr = new StringReader(Properties.Resources.PilotDatabase);
-            using (TextFieldParser parser = new TextFieldParser(sr))
+            using (StringReader stringReader = new StringReader(Properties.Resources.PilotDatabase))
             {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters("£");
-                parser.HasFieldsEnclosedInQuotes = false;
-                while (!parser.EndOfData)
+                using (TextFieldParser parser = new TextFieldParser(stringReader))
                 {
-                    string[] fields = parser.ReadFields();
-                    Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
-                    if (fields[6].Length > 0) {
-                        string[] possibleUpgradesSplit = fields[6].Split(',');
-                        foreach (string possibleUpgrade in possibleUpgradesSplit)
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters("£");
+                    parser.HasFieldsEnclosedInQuotes = false;
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
+                        if (fields[6].Length > 0)
                         {
-                            if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
+                            string[] possibleUpgradesSplit = fields[6].Split(',');
+                            foreach (string possibleUpgrade in possibleUpgradesSplit)
                             {
-                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
-                            }
-                            else
-                            {
-                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
+                                if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
+                                {
+                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
+                                }
+                                else
+                                {
+                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
+                                }
                             }
                         }
+                        pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
+                                   Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));
                     }
-                    pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                               Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));                    
                 }
             }
+        }
+
+        public static Pilot GetPilotClone(int pilotId)
+        {
+            return pilots[pilotId].GetPilotClone();
         }
 
         public static Pilot GetRandomPilot()
@@ -62,6 +70,22 @@ namespace X_Wing_Visual_Builder.Model
                 }
             }
             return randomPilot;
+        }
+
+        public static List<Pilot> GetPilots(Faction faction)
+        {
+            List<Pilot> pilotsToReturn = new List<Pilot>();
+
+
+            foreach (KeyValuePair<int, Pilot> entry in pilots)
+            {
+                if (entry.Value.faction == faction)
+                {
+                    pilotsToReturn.Add(entry.Value);
+                }
+            }
+
+            return pilotsToReturn;
         }
     }
 }

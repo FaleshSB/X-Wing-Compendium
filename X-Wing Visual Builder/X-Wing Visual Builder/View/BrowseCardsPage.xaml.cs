@@ -25,6 +25,7 @@ namespace X_Wing_Visual_Builder.View
 
         private List<Upgrade> upgrades = new List<Upgrade>();
         private List<Upgrade> upgradesToDisplay = new List<Upgrade>();
+        private List<Pilot> pilots = new List<Pilot>();
         private List<Pilot> pilotsToDisplay = new List<Pilot>();
         private int upgradeCardWidth = 166;
         private int upgradeCardHeight = 255;
@@ -35,9 +36,10 @@ namespace X_Wing_Visual_Builder.View
         private string previousUpgradeSearchResultIds = "";
         private string previousPilotSearchResultIds = "";
 
-        public bool isAddingUpgrade { get; set; } = false;
-        public int pilotKey { get; set; }
-        private Build build { get; set; }
+        private bool isAddingPilot = false;
+        private bool isAddingUpgrade = false;
+        private int pilotKey;
+        private Build build;
         public void SetBuild(Build build)
         {
             this.build = build;
@@ -54,22 +56,38 @@ namespace X_Wing_Visual_Builder.View
             SetIsSearchDescriptionChecked();
         }
 
+
+        internal void AddPilot(Build build)
+        {
+            pilotsRadioButton.IsChecked = true;
+            isAddingPilot = true;
+            this.build = build;
+            pilots = Pilots.GetPilots(build.faction);
+            pilots = pilots.OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.shipType).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ToList();
+            pilotsToDisplay = pilots.ToList();
+        }
+        public void AddAvailibleUpdates(int pilotKey, Build build)
+        {
+            upgradesRadioButton.IsChecked = true;
+            isAddingUpgrade = true;
+            this.pilotKey = pilotKey;
+            this.build = build;
+            Pilot pilot = build.GetPilot(pilotKey);
+            List<Faction> factions = new List<Faction>();
+            factions.Add(pilot.faction);
+            List<ShipSize> shipSizes = new List<ShipSize>();
+            shipSizes.Add(pilot.ship.shipSize);
+            List<Ship> ships = new List<Ship>();
+            ships.Add(pilot.ship);
+            upgrades = Upgrades.GetUpgrades(pilot.possibleUpgrades, factions, shipSizes, ships);
+            upgrades = upgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
+            upgradesToDisplay = upgrades.ToList();
+        }
+
         protected override void DisplayContent()
         {
-            if(isAddingUpgrade == true)
-            {
-                Pilot pilot = build.GetPilot(pilotKey);
-                List<Faction> factions = new List<Faction>();
-                factions.Add(pilot.faction);
-                List<ShipSize> shipSizes = new List<ShipSize>();
-                shipSizes.Add(pilot.ship.shipSize);
-                List<ShipType> shipTypes = new List<ShipType>();
-                shipTypes.Add(pilot.ship.shipType);
-                upgrades = Upgrades.GetUpgrades(pilot.possibleUpgrades, factions, shipSizes, shipTypes);
-                upgrades = upgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
-                upgradesToDisplay = upgrades;
-            }
             DisplayUpgradeCards();
+            DisplayPilotCards();
         }
 
         private void UpdateContents()
@@ -85,6 +103,9 @@ namespace X_Wing_Visual_Builder.View
             searchWords = searchWords.Where(s => s != "  ").ToArray();
             searchWords = searchWords.Where(s => s.Count() > 2).ToArray();
 
+            if(filteredSearchText == "" && isAddingUpgrade) { upgradesToDisplay = upgrades.ToList(); DisplayUpgradeCards(); previousUpgradeSearchResultIds = "it was changed, really!"; }
+            if(filteredSearchText == "" && isAddingPilot) { pilotsToDisplay = pilots.ToList(); DisplayPilotCards(); previousPilotSearchResultIds = "it was changed, really!"; }
+
             if (searchWords.Count() > 0)
             {
                 pilotsToDisplay.Clear();
@@ -94,7 +115,7 @@ namespace X_Wing_Visual_Builder.View
                     string currentUpgradeSearchResultIds = "";
                     foreach (Upgrade upgrade in upgrades)
                     {
-                        /*bool hasFoundAllWords = true;
+                        bool hasFoundAllWords = true;
                         foreach(string searchWord in searchWords)
                         {
                             bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
@@ -110,8 +131,8 @@ namespace X_Wing_Visual_Builder.View
                                 hasFoundAllWords = false;
                                 break;
                             }
-                        }*/
-                        bool hasFoundAllWords = false;
+                        }
+                        /*bool hasFoundAllWords = false;
                         foreach (string searchWord in searchWords)
                         {
                             bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
@@ -127,7 +148,7 @@ namespace X_Wing_Visual_Builder.View
                                 hasFoundAllWords = true;
                                 break;
                             }
-                        }
+                        }*/
 
                         if (hasFoundAllWords)
                         {
@@ -146,7 +167,7 @@ namespace X_Wing_Visual_Builder.View
                 else
                 {
                     string currentPilotSearchResultIds = "";
-                    foreach (KeyValuePair<int, Pilot> entry in Pilots.pilots)
+                    foreach (Pilot pilot in pilots)
                     {
                         /*bool hasFoundAllWords = true;
                         foreach (string searchWord in searchWords)
@@ -168,15 +189,15 @@ namespace X_Wing_Visual_Builder.View
                         bool hasFoundAllWords = false;
                         foreach (string searchWord in searchWords)
                         {
-                            bool hasFoundWordInName = entry.Value.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInShipName = entry.Value.ship.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundWordInDescription = entry.Value.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInName = pilot.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInShipName = pilot.ship.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundWordInDescription = pilot.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             if (isSearchDescriptionChecked == false && (hasFoundWordInName == true || hasFoundWordInShipName == true))
                             {
                                 hasFoundAllWords = true;
                                 break;
                             }
-                            if (isSearchDescriptionChecked == true && (entry.Value.hasAbility == true && hasFoundWordInDescription == true))
+                            if (isSearchDescriptionChecked == true && (pilot.hasAbility == true && hasFoundWordInDescription == true))
                             {
                                 hasFoundAllWords = true;
                                 break;
@@ -185,8 +206,8 @@ namespace X_Wing_Visual_Builder.View
 
                         if (hasFoundAllWords)
                         {
-                            pilotsToDisplay.Add(entry.Value);
-                            currentPilotSearchResultIds += entry.Value.id.ToString();
+                            pilotsToDisplay.Add(pilot);
+                            currentPilotSearchResultIds += pilot.id.ToString();
                         }
                     }
 

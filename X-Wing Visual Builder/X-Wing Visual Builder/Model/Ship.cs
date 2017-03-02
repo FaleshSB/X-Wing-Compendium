@@ -10,6 +10,8 @@ namespace X_Wing_Visual_Builder.Model
     {
         public ShipType shipType { get; set; }
         public ShipSize shipSize { get; set; }
+        public bool isTie { get; set; } = false;
+        public bool isXWing { get; set; } = false;
         public string name { get; set; }
 
         public Ship(ShipType shipType)
@@ -74,33 +76,43 @@ namespace X_Wing_Visual_Builder.Model
                     break;
                 case ShipType.T_70_X_Wing:
                     name = "T-70 X-wing";
+                    isXWing = true;
                     break;
                 case ShipType.TIE_Advanced:
                     name = "TIE Advanced";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Bomber:
                     name = "TIE Bomber";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Defender:
                     name = "TIE Defender";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Fighter:
                     name = "TIE Fighter";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Interceptor:
                     name = "TIE Interceptor";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Phantom:
                     name = "TIE Phantom";
+                    isTie = true;
                     break;
                 case ShipType.TIE_Punisher:
                     name = "TIE Punisher";
+                    isTie = true;
                     break;
                 case ShipType.TIE_FO_Fighter:
                     name = "TIE/fo Fighter";
+                    isTie = true;
                     break;
                 case ShipType.TIE_SF_Fighter:
                     name = "TIE/sf Fighter";
+                    isTie = true;
                     break;
                 case ShipType.VCX_100:
                     name = "VCX-100";
@@ -110,6 +122,7 @@ namespace X_Wing_Visual_Builder.Model
                     break;
                 case ShipType.X_Wing:
                     name = "X-Wing";
+                    isXWing = true;
                     break;
                 case ShipType.Y_Wing:
                     name = "Y-Wing";

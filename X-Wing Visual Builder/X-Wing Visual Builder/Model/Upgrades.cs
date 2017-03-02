@@ -52,7 +52,7 @@ namespace X_Wing_Visual_Builder.Model
             return randomUpgrade;
         }
         
-        public static List<Upgrade> GetUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, List<Faction> factions, List<ShipSize> shipSizes, List<ShipType> shipTypes)
+        public static List<Upgrade> GetUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, List<Faction> factions, List<ShipSize> shipSizes, List<Ship> ships)
         {
             List<Upgrade> upgradesToReturn = new List<Upgrade>();
 
@@ -65,7 +65,7 @@ namespace X_Wing_Visual_Builder.Model
                 bool isCorrectShipType = false;
                 foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
                 {
-                    if(entry.Value.upgradeType == UpgradeType.All || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
+                    if((entry.Value.upgradeType == UpgradeType.All || entry.Value.upgradeType == UpgradeType.Title || entry.Value.upgradeType == UpgradeType.Modification) || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
                 }
                 foreach (Faction faction in factions)
                 {
@@ -75,9 +75,12 @@ namespace X_Wing_Visual_Builder.Model
                 {
                     if (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize) { isCorrectShipSize = true; break; }
                 }
-                foreach (ShipType shipType in shipTypes)
+                foreach (Ship ship in ships)
                 {
-                    if (entry.Value.shipType == ShipType.All || (entry.Value.shipType == shipType)) { isCorrectShipType = true; break; }
+                    if ((entry.Value.shipType == ShipType.All || (entry.Value.shipType == ship.shipType))
+                        && (entry.Value.isTieOnly == false || (entry.Value.isTieOnly == true && ship.isTie))
+                        && (entry.Value.isXWingOnly == false || (entry.Value.isXWingOnly == true && ship.isXWing))
+                        ) { isCorrectShipType = true; break; }
                 }
 
                 if (isCorrectType && isCorrectFaction && isCorrectShipSize && isCorrectShipType)
