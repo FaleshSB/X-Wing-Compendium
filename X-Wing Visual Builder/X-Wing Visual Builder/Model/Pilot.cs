@@ -75,9 +75,12 @@ namespace X_Wing_Visual_Builder.Model
             int height = (int)heightD;
             int width = (int)widthD;
 
-            System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
-            BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
-            
+            //System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
+            //BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
+            //sourceUpgradeImage.Dispose();
+
+            BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png"));
+
             PilotCard pilotCard = new PilotCard();
             pilotCard.id = id;
             pilotCard.Source = resizedUpgradeImage;
@@ -85,8 +88,6 @@ namespace X_Wing_Visual_Builder.Model
             pilotCard.Width = Convert.ToDouble(width);
             pilotCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(pilotCard, BitmapScalingMode.HighQuality);
-
-            sourceUpgradeImage.Dispose();
 
             return pilotCard;
         }

@@ -294,10 +294,17 @@ namespace X_Wing_Visual_Builder.View
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
             Card card = (Card)sender;
-            cardId.Content = card.id.ToString();
+            //cardId.Content = card.id.ToString();
             if(isAddingUpgrade == true)
             {
                 build.AddUpgrade(pilotKey, Upgrades.upgrades[card.id]);
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
+                squadsPage.SetBuild(build);
+                NavigationService.Navigate(squadsPage);
+            }
+            else if(isAddingPilot == true)
+            {
+                build.AddPilot(Pilots.GetPilotClone(card.id));
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
                 squadsPage.SetBuild(build);
                 NavigationService.Navigate(squadsPage);
