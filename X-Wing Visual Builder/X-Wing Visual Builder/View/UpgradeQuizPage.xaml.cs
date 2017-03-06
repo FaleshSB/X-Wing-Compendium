@@ -25,10 +25,18 @@ namespace X_Wing_Visual_Builder.View
         private int upgradeCardHeight = 359;
         private Upgrade currentRandomUpgrade;
         private bool isShowingName = false;
+        private Canvas contentCanvas = new Canvas();
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public UpgradeQuizPage()
         {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
             Pages.pages[PageName.UpgradeQuiz] = this;
+            contentCanvas.Name = "contentCanvas";
+            contentWrapPanel.Children.Add(contentCanvas);
             InitializeComponent();
 
             currentRandomUpgrade = Upgrades.GetRandomUpgrade();

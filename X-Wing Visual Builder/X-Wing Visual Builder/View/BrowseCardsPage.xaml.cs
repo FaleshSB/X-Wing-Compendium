@@ -22,6 +22,11 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class BrowseCardsPage : DefaultPage
     {
+        private TextBox searchTextBox = new TextBox();
+        RadioButton upgradesRadioButton = new RadioButton();
+        RadioButton pilotsRadioButton = new RadioButton();
+        CheckBox searchDescriptionCheckBox = new CheckBox();
+        Button exitButton = new Button();
 
         private List<Upgrade> upgrades = new List<Upgrade>();
         private List<Upgrade> upgradesToDisplay = new List<Upgrade>();
@@ -44,13 +49,66 @@ namespace X_Wing_Visual_Builder.View
         {
             this.build = build;
         }
+        
+        private Canvas contentCanvas = new Canvas();
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public BrowseCardsPage()
         {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
+            contentCanvas.Name = "contentCanvas";
+            contentWrapPanel.Children.Add(contentCanvas);
+
+            /*<TextBox Grid.Row="0" Grid.Column="0" x:Name="searchTextBox" HorizontalAlignment="Center" Height="23" Text="" VerticalAlignment="Top" Margin="0,40,0,0" Width="120" TextChanged="textBox_TextChanged"/>
+        <RadioButton Content="Upgrades" x:Name="upgradesRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton Content="Pilots" x:Name="pilotsRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Search Description" x:Name="searchDescriptionCheckBox" Grid.Row="0" Grid.Column="0" Checked="SearchDescription_Checked" Unchecked="SearchDescription_Checked" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Pilot Quiz" HorizontalAlignment="Left" Height="26" Margin="382,30,0,0" VerticalAlignment="Top" Width="99" Click="TempButton"/>
+        <Label x:Name="cardId" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Margin="0,60,0,0"/>
+        <Button x:Name="button1" Content="Exit" HorizontalAlignment="right" Height="22"  VerticalAlignment="Top" Width="27" Click="ExitButton"/>*/
+            searchTextBox.Name = "searchTextBox";
+            searchTextBox.TextChanged += textBox_TextChanged;
+            searchTextBox.Width = 120;
+            searchTextBox.Height = 23;
+            Canvas.SetLeft(searchTextBox, 200);
+            Canvas.SetTop(searchTextBox, 20);
+            manuNavigationCanvas.Children.Add(searchTextBox);
+            
+            upgradesRadioButton.Name = "upgradesRadioButton";
+            upgradesRadioButton.Content = "Upgrades";
+            upgradesRadioButton.Checked += IsUpgrade_Checked;
+            upgradesRadioButton.IsChecked = true;
+            Canvas.SetLeft(upgradesRadioButton, 300);
+            Canvas.SetTop(upgradesRadioButton, 20);
+            manuNavigationCanvas.Children.Add(upgradesRadioButton);
+            
+            pilotsRadioButton.Name = "pilotsRadioButton";
+            pilotsRadioButton.Content = "Pilots";
+            pilotsRadioButton.Checked += IsUpgrade_Checked;
+            pilotsRadioButton.IsChecked = false;
+            Canvas.SetLeft(pilotsRadioButton, 300);
+            Canvas.SetTop(pilotsRadioButton, 40);
+            manuNavigationCanvas.Children.Add(pilotsRadioButton);
+
+            searchDescriptionCheckBox.Name = "searchDescriptionCheckBox";
+            searchDescriptionCheckBox.Content = "Search Description";
+            searchDescriptionCheckBox.Checked += SearchDescription_Checked;
+            searchDescriptionCheckBox.Unchecked += SearchDescription_Checked;
+            searchDescriptionCheckBox.IsChecked = false;
+            Canvas.SetLeft(searchDescriptionCheckBox, 600);
+            Canvas.SetTop(searchDescriptionCheckBox, 40);
+            manuNavigationCanvas.Children.Add(searchDescriptionCheckBox);
+
+            manuNavigationCanvas.Height = 150;
+
+
             Pages.pages[PageName.BrowseCards] = this;
             InitializeComponent();
             upgrades = Upgrades.upgrades.Values.ToList();
-            cardScrollViewer.Height = 990;
+            //cardScrollViewer.Height = 990;
             searchTextBox.Focus();
             SetIsUpgradeChecked();
             SetIsSearchDescriptionChecked();
@@ -79,15 +137,33 @@ namespace X_Wing_Visual_Builder.View
             shipSizes.Add(pilot.ship.shipSize);
             List<Ship> ships = new List<Ship>();
             ships.Add(pilot.ship);
-            upgrades = Upgrades.GetUpgrades(pilot.possibleUpgrades, factions, shipSizes, ships);
+            upgrades = Upgrades.GetUpgrades(build.GetPossibleUpgrades(pilot.uniquePilotId), factions, shipSizes, ships);
             upgrades = upgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
             upgradesToDisplay = upgrades.ToList();
         }
 
         protected override void DisplayContent()
         {
-            DisplayUpgradeCards();
-            DisplayPilotCards();
+            //DisplayUpgradeCards();
+            //DisplayPilotCards();
+            contentWrapPanel.Children.Clear();
+            
+            foreach (Upgrade upgrade in upgradesToDisplay)
+            {
+                UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
+                upgradeCard.MouseDown += CardClicked;
+                upgradeCard.Margin = new Thickness(2, 2, 2, 2);
+                contentWrapPanel.Children.Add(upgradeCard);
+            }
+
+
+            foreach (Pilot pilot in pilotsToDisplay)
+            {
+                PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
+                pilotCard.MouseDown += CardClicked;
+                pilotCard.Margin = new Thickness(2, 2, 2, 2);
+                contentWrapPanel.Children.Add(pilotCard);
+            }
         }
 
         private void UpdateContents()
@@ -150,7 +226,7 @@ namespace X_Wing_Visual_Builder.View
                             }
                         }*/
 
-                        if (hasFoundAllWords)
+            if (hasFoundAllWords)
                         {
                             upgradesToDisplay.Add(upgrade);
                             currentUpgradeSearchResultIds += upgrade.id.ToString();
@@ -161,7 +237,8 @@ namespace X_Wing_Visual_Builder.View
                     {
                         previousUpgradeSearchResultIds = currentUpgradeSearchResultIds;
                         upgradesToDisplay = upgradesToDisplay.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
-                        DisplayUpgradeCards();
+                        //DisplayUpgradeCards();
+                        DisplayContent();
                     }
                 }
                 else
@@ -297,16 +374,18 @@ namespace X_Wing_Visual_Builder.View
             //cardId.Content = card.id.ToString();
             if(isAddingUpgrade == true)
             {
+                isAddingUpgrade = false;
+                isAddingPilot = false;
                 build.AddUpgrade(pilotKey, Upgrades.upgrades[card.id]);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
-                squadsPage.SetBuild(build);
                 NavigationService.Navigate(squadsPage);
             }
             else if(isAddingPilot == true)
             {
+                isAddingUpgrade = false;
+                isAddingPilot = false;
                 build.AddPilot(Pilots.GetPilotClone(card.id));
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
-                squadsPage.SetBuild(build);
                 NavigationService.Navigate(squadsPage);
             }
         }

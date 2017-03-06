@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class FileHandler
+    static class FileHandler
     {
-        public void SaveFile(string fileName, string data)
+        public static void SaveFile(string fileName, string data)
         {
             File.WriteAllText(@"D:\Documents\Game Stuff\X-Wing\" + fileName, data);
         }
-        public string[] LoadFile(string fileName)
+        public static string[] LoadFile(string fileName)
         {
             return File.ReadAllLines(@"D:\Documents\Game Stuff\X-Wing\" + fileName);
             /*

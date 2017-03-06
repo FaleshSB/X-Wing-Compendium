@@ -11,6 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     class DeleteButton : Image
     {
+        public int buildId { get; set; }
         public int pilotKey { get; set; }
         public int upgradeKey { get; set; }
 

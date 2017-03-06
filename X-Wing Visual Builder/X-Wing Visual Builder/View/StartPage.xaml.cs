@@ -31,9 +31,20 @@ namespace X_Wing_Visual_Builder.View
         private string upgradeQuizPageButtonName = "upgrade_quiz";
         private string pilotQuizPageButtonName = "pilot_quiz";
         private string maneuverButtonName = "maneuver_quiz";
+        private Canvas contentCanvas = new Canvas();
+
+        private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public StartPage()
         {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
+            contentCanvas.Name = "contentCanvas";
+            contentCanvas.Height = 900;
+            contentCanvas.Background = new SolidColorBrush(Colors.Black);
+            contentWrapPanel.Children.Add(contentCanvas);
             InitializeComponent();
             buttons.Add(manageSquadsButtonName, CreateButton(manageSquadsButtonName));
             buttons.Add(yourCollectionButtonName, CreateButton(yourCollectionButtonName));
@@ -41,6 +52,7 @@ namespace X_Wing_Visual_Builder.View
             buttons.Add(upgradeQuizPageButtonName, CreateButton(upgradeQuizPageButtonName));
             buttons.Add(pilotQuizPageButtonName, CreateButton(pilotQuizPageButtonName));
             buttons.Add(maneuverButtonName, CreateButton(maneuverButtonName));
+            contentCanvas.Width = buttons[maneuverButtonName].Width;
         }
 
         
@@ -98,28 +110,28 @@ namespace X_Wing_Visual_Builder.View
         protected override void DisplayContent()
         {
             contentCanvas.Children.Clear();
-
-            Canvas.SetLeft(buttons[manageSquadsButtonName], 800);
+            
+            Canvas.SetLeft(buttons[manageSquadsButtonName], 0);
             Canvas.SetTop(buttons[manageSquadsButtonName], 400);
             contentCanvas.Children.Add(buttons[manageSquadsButtonName]);
 
-            Canvas.SetLeft(buttons[yourCollectionButtonName], 800);
+            Canvas.SetLeft(buttons[yourCollectionButtonName], 0);
             Canvas.SetTop(buttons[yourCollectionButtonName], 450);
             contentCanvas.Children.Add(buttons[yourCollectionButtonName]);
 
-            Canvas.SetLeft(buttons[calculateStatsButtonName], 800);
+            Canvas.SetLeft(buttons[calculateStatsButtonName], 0);
             Canvas.SetTop(buttons[calculateStatsButtonName], 500);
             contentCanvas.Children.Add(buttons[calculateStatsButtonName]);
 
-            Canvas.SetLeft(buttons[upgradeQuizPageButtonName], 800);
+            Canvas.SetLeft(buttons[upgradeQuizPageButtonName], 0);
             Canvas.SetTop(buttons[upgradeQuizPageButtonName], 550);
             contentCanvas.Children.Add(buttons[upgradeQuizPageButtonName]);
 
-            Canvas.SetLeft(buttons[pilotQuizPageButtonName], 800);
+            Canvas.SetLeft(buttons[pilotQuizPageButtonName], 0);
             Canvas.SetTop(buttons[pilotQuizPageButtonName], 600);
             contentCanvas.Children.Add(buttons[pilotQuizPageButtonName]);
 
-            Canvas.SetLeft(buttons[maneuverButtonName], 800);
+            Canvas.SetLeft(buttons[maneuverButtonName], 0);
             Canvas.SetTop(buttons[maneuverButtonName], 650);
             contentCanvas.Children.Add(buttons[maneuverButtonName]);
         }

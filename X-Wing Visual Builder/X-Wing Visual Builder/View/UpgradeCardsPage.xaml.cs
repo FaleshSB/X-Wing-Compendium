@@ -24,15 +24,23 @@ namespace X_Wing_Visual_Builder.View
         private Build build;
         private int upgradeCardWidth = 166;
         private int upgradeCardHeight = 255;
+        private Canvas contentCanvas = new Canvas();
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public UpgradeCardsPage(object build, object upgrades)
         {
             this.build = (Build)build;
+            contentCanvas.Name = "contentCanvas";
+            contentWrapPanel.Children.Add(contentCanvas);
             InitializeComponent();
         }
 
         new private void DisplayContent()
         {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
             contentCanvas.Children.Clear();
             List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
             //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));

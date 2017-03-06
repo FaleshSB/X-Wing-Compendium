@@ -72,7 +72,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AddUpgradeButton.cs" />
+    <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
+    <Compile Include="Model\Builds.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\DefaultPage.cs" />
     <Compile Include="Model\DeleteButton.cs" />

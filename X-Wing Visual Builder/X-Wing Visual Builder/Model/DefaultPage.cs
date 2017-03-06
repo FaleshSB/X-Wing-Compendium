@@ -19,9 +19,9 @@ namespace X_Wing_Visual_Builder.Model
     {
         protected Canvas manuNavigationCanvas = new Canvas();
         protected Canvas topToolsCanvas = new Canvas();
-        protected Canvas contentCanvas = new Canvas();
         protected Canvas bottomBarCanvas = new Canvas();
         protected Grid pageStructureGrid = new Grid();
+        protected ScrollViewer contentScrollViewer = new ScrollViewer();
 
         public DefaultPage()
         {
@@ -60,32 +60,36 @@ namespace X_Wing_Visual_Builder.Model
             Grid.SetRow(topToolsCanvas, 1);
             pageStructureGrid.Children.Add(topToolsCanvas);
 
-            contentCanvas.Name = "contentCanvas";
-            Grid.SetColumn(contentCanvas, 0);
-            Grid.SetRow(contentCanvas, 2);
-            pageStructureGrid.Children.Add(contentCanvas);
-
+            contentScrollViewer.Name = "contentScrollViewer";
+            contentScrollViewer.MaxHeight = 999;
+            contentScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            Grid.SetColumn(contentScrollViewer, 0);
+            Grid.SetRow(contentScrollViewer, 2);
+            pageStructureGrid.Children.Add(contentScrollViewer);
+            
             bottomBarCanvas.Name = "bottomBarCanvas";
             Grid.SetColumn(bottomBarCanvas, 0);
             Grid.SetRow(bottomBarCanvas, 3);
             pageStructureGrid.Children.Add(bottomBarCanvas);
 
-            
-            Button browseCards = new Button();
-            browseCards.Name = "browseCards";
-            browseCards.Width = 40;
-            browseCards.Height = 40;
-            browseCards.FontSize = 16;
-            browseCards.FontWeight = FontWeights.Bold;
-            browseCards.Click += new RoutedEventHandler(ExitButton);
-            browseCards.UseLayoutRounding = true;
-            browseCards.Content = "X";
-            Canvas.SetRight(browseCards, 0);
-            Canvas.SetTop(browseCards, 0);
-            manuNavigationCanvas.Children.Add(browseCards);
-
+            /*
+            Button closeWindowButton = new Button();
+            closeWindowButton.Name = "closeWindowButton";
+            closeWindowButton.Width = 40;
+            closeWindowButton.Height = 40;
+            closeWindowButton.FontSize = 16;
+            closeWindowButton.FontWeight = FontWeights.Bold;
+            closeWindowButton.Click += new RoutedEventHandler(ExitButton);
+            closeWindowButton.UseLayoutRounding = true;
+            closeWindowButton.Content = "X";
+            Canvas.SetRight(closeWindowButton, 0);
+            Canvas.SetTop(closeWindowButton, 0);
+            manuNavigationCanvas.Children.Add(closeWindowButton);
+            */
 
             Content = pageStructureGrid;
+
+            this.Loaded += PageLoaded;
         }
 
         protected void ExitButton(object sender, RoutedEventArgs e)

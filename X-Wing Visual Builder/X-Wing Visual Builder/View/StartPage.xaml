@@ -7,5 +7,5 @@
       xmlns:model="clr-namespace:X_Wing_Visual_Builder.Model"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="StartPage" Loaded="PageLoaded">
+      Title="StartPage">
 </model:DefaultPage>

@@ -23,6 +23,8 @@ namespace X_Wing_Visual_Builder
         public MainWindow()
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.CanResize;
+            WindowState = WindowState.Maximized;
         }
     }
 }

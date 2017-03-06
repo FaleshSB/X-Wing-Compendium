@@ -25,10 +25,20 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardHeight = 410;
         private Pilot currentRandomPilot;
         private bool isShowingName = false;
+        private Canvas contentCanvas = new Canvas();
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public PilotQuizPage()
         {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
             Pages.pages[PageName.PilotQuiz] = this;
+
+            contentCanvas.Name = "contentCanvas";
+            contentWrapPanel.Children.Add(contentCanvas);
+
             InitializeComponent();
 
             currentRandomPilot = Pilots.GetRandomPilot();

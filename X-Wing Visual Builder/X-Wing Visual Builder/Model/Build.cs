@@ -17,8 +17,9 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Build
     {
+        public int id { get; set; }
         public Faction faction;
-        private List<Pilot> pilots { get; set; } = new List<Pilot>();
+        public Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
         private double canvasSize = 1920;
         public int totalCost
         {
@@ -26,114 +27,91 @@ namespace X_Wing_Visual_Builder.Model
             {
                 int cost = 0;
 
-                foreach (Pilot pilot in pilots)
+                foreach (KeyValuePair<int, Pilot> pilot in pilots)
                 {
-                    cost += pilot.totalCost;
+                    cost += pilot.Value.totalCost;
                 }
 
                 return cost;
             }
         }
-        private string buildInfo = "";
 
         public Build()
         {
-            LoadBuild();
-            //AddPilot(Pilots.GetPilotClone(300));
-            //AddUpgrade(1, Upgrades.upgrades[1010]);
+
         }
 
-        private void SaveBuild()
+        public Dictionary<UpgradeType, int> GetPossibleUpgrades(int uniquePilotId)
         {
-            buildInfo = (int)faction + "|";
-            for(int i=0;i< pilots.Count;i++)
+            Dictionary<UpgradeType, int> possibleUpgrades = pilots[uniquePilotId].possibleUpgrades;
+            foreach(Upgrade upgrade in pilots[uniquePilotId].upgrades)
             {
-                buildInfo += i + "£" + pilots[i].id + "£";
-                foreach(Upgrade upgrade in pilots[i].upgrades)
-                {
-                    buildInfo += upgrade.id + "$";
-                }
-                buildInfo = buildInfo.TrimEnd('$');
-                buildInfo += "&";
+                possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
             }
-            buildInfo = buildInfo.TrimEnd('&');
-            FileHandler fileHandler = new FileHandler();
-            fileHandler.SaveFile("build.txt", buildInfo);
-            pilots = pilots.OrderByDescending(pilots => pilots.pilotSkill).ThenByDescending(pilots => pilots.cost).ToList();
-        }
-        private void LoadBuild()
-        {
-            FileHandler fileHandler = new FileHandler();
-            string[] allBuilds = fileHandler.LoadFile("build.txt");
-
-            pilots.Clear();
-            string[] buildInfo = allBuilds[0].Split('|');
-            faction = (Faction)Int32.Parse(buildInfo[0]);
-
-            string[] pilotBuilds = buildInfo[1].Split('&');
-            foreach(string pilot in pilotBuilds)
-            {
-               string[] pilotInfo = pilot.Split('£');
-                int pilotKey = Int32.Parse(pilotInfo[0]);
-                int pilotId = Int32.Parse(pilotInfo[1]);
-                AddPilot(Pilots.GetPilotClone(pilotId));
-                string[] upgrades = pilotInfo[2].Split('$');
-                foreach (string upgradeIdString in upgrades)
-                {
-                    int upgradeId;
-                    if (int.TryParse(upgradeIdString, out upgradeId))
-                    {
-                        AddUpgrade(pilotKey, Upgrades.upgrades[upgradeId]);
-                    }
-                }
-            }
-            pilots = pilots.OrderByDescending(pilots => pilots.pilotSkill).ThenByDescending(pilots => pilots.cost).ToList();
+            return possibleUpgrades;
         }
 
         public void AddPilot(Pilot pilot)
         {
-            pilots.Add(pilot);
-            faction = pilot.faction;
-            SaveBuild();
+            int newPilotId = 0;
+            while (true)
+            {
+                int origionalNewPilotId = newPilotId;
+                foreach (KeyValuePair<int, Pilot> otherPilot in pilots)
+                {
+                    if (otherPilot.Value.uniquePilotId == newPilotId)
+                    {
+                        newPilotId++;
+                        break;
+                    }
+                }
+                if (origionalNewPilotId == newPilotId)
+                {
+                    pilot.uniquePilotId = newPilotId;
+                    break;
+                }
+            }
+            pilots.Add(pilot.uniquePilotId, pilot);
+            Builds.SaveBuilds();
         }
         public Pilot GetPilot(int pilotId)
         {
             return pilots[pilotId];
         }
 
-        public void AddUpgrade(int pilotKey, Upgrade upgrade)
+        public void AddUpgrade(int uniquePilotId, Upgrade upgrade)
         {
-            pilots.ElementAt(pilotKey).upgrades.Add(upgrade);
-            SaveBuild();
+            pilots[uniquePilotId].upgrades.Add(upgrade);
+            Builds.SaveBuilds();
         }
 
-        public PilotCard GetPilotCard(int pilotKey, double width, double height)
+        public PilotCard GetPilotCard(int uniquePilotId, double width, double height)
         {
-            PilotCard pilotCard = pilots.ElementAt(pilotKey).GetPilotCard(width, height);
-            pilotCard.pilotKey = pilotKey;
+            PilotCard pilotCard = pilots[uniquePilotId].GetPilotCard(width, height);
+            pilotCard.pilotKey = uniquePilotId;
 
             return pilotCard;
         }
 
-        public UpgradeCard GetUpgradeCard(int pilotKey, int upgradeKey, double width, double height)
+        public UpgradeCard GetUpgradeCard(int uniquePilotId, int upgradeKey, double width, double height)
         {
-            UpgradeCard upgradeCard = pilots.ElementAt(pilotKey).upgrades.ElementAt(upgradeKey).GetUpgradeCard(width, height);
-            upgradeCard.pilotKey = pilotKey;
+            UpgradeCard upgradeCard = pilots[uniquePilotId].upgrades.ElementAt(upgradeKey).GetUpgradeCard(width, height);
+            upgradeCard.pilotKey = uniquePilotId;
             upgradeCard.upgradeKey = upgradeKey;
 
             return upgradeCard;
         }
 
-        public void DeleteUpgrade(int pilotKey, int upgradeKey)
+        public void DeleteUpgrade(int uniquePilotId, int upgradeKey)
         {
-            pilots.ElementAt(pilotKey).upgrades.RemoveAt(upgradeKey);
-            SaveBuild();
+            pilots[uniquePilotId].upgrades.RemoveAt(upgradeKey);
+            Builds.SaveBuilds();
         }
 
-        public void DeletePilot(int pilotKey)
+        public void DeletePilot(int uniquePilotId)
         {
-            pilots.RemoveAt(pilotKey);
-            SaveBuild();
+            pilots.Remove(uniquePilotId);
+            Builds.SaveBuilds();
         }
 
         public int GetNumberOfPilots()
@@ -141,9 +119,9 @@ namespace X_Wing_Visual_Builder.Model
             return pilots.Count;
         }
 
-        public int GetNumberOfUpgrades(int pilotKey)
+        public int GetNumberOfUpgrades(int uniquePilotId)
         {
-            return pilots.ElementAt(pilotKey).upgrades.Count;
+            return pilots[uniquePilotId].upgrades.Count;
         }
 
         public void SetCanvasSize(double canvasSize)

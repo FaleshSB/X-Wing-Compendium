@@ -33,6 +33,7 @@ namespace X_Wing_Visual_Builder.Model
                 return totalCost;
             }
         }
+        public int uniquePilotId { get; set; }
         public int id { get; set; }
         public int cost { get; set; }
         public string name { get; set; }
