@@ -41,6 +41,8 @@ namespace X_Wing_Visual_Builder.Model
                                 }
                             }
                         }
+                        possibleUpgrades.Add(UpgradeType.Title, 1);
+                        possibleUpgrades.Add(UpgradeType.Modification, 1);
                         pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
                                    Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));
                     }

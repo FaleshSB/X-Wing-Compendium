@@ -63,7 +63,7 @@ namespace X_Wing_Visual_Builder.Model
 
             ship = new Ship(shipType);
         }
-
+        
         public Pilot GetPilotClone()
         {
             Pilot pilotClone = (Pilot)MemberwiseClone();

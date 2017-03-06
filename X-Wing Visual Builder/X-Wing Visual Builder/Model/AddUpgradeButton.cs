@@ -9,6 +9,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     class AddUpgradeButton : Button
     {
-        public int pilotKey { get; set; }
+        public int uniqueBuildId { get; set; }
+        public int uniquePilotId { get; set; }
     }
 }

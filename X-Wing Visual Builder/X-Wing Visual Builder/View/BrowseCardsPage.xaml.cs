@@ -374,6 +374,8 @@ namespace X_Wing_Visual_Builder.View
             //cardId.Content = card.id.ToString();
             if(isAddingUpgrade == true)
             {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
                 isAddingUpgrade = false;
                 isAddingPilot = false;
                 build.AddUpgrade(pilotKey, Upgrades.upgrades[card.id]);
@@ -382,6 +384,8 @@ namespace X_Wing_Visual_Builder.View
             }
             else if(isAddingPilot == true)
             {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
                 isAddingUpgrade = false;
                 isAddingPilot = false;
                 build.AddPilot(Pilots.GetPilotClone(card.id));

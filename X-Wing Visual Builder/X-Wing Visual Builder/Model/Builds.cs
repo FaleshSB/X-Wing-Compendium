@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.Model
         {
             foreach(Build build in builds)
             {
-                if(build.id == id)
+                if(build.uniqueBuildId == id)
                 {
                     return build;
                 }
@@ -38,7 +38,7 @@ namespace X_Wing_Visual_Builder.Model
                 int origionalNewBuildId = newBuildId;
                 foreach (Build build in builds)
                 {
-                    if(build.id == newBuildId)
+                    if(build.uniqueBuildId == newBuildId)
                     {
                         newBuildId++;
                         break;
@@ -46,7 +46,7 @@ namespace X_Wing_Visual_Builder.Model
                 }
                 if(origionalNewBuildId == newBuildId)
                 {
-                    newBuild.id = newBuildId;
+                    newBuild.uniqueBuildId = newBuildId;
                     break;
                 }
             }
@@ -60,7 +60,7 @@ namespace X_Wing_Visual_Builder.Model
             string buildInfo = "";
             foreach (Build build in builds)
             {
-                buildInfo += build.id + "|";
+                buildInfo += build.uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
                 for (int i = 0; i < build.pilots.Count; i++)
                 {
@@ -88,7 +88,7 @@ namespace X_Wing_Visual_Builder.Model
                     Build build = new Build();
 
                     string[] buildInfo = buildString.Split('|');
-                    build.id = Int32.Parse(buildInfo[0]);
+                    build.uniqueBuildId = Int32.Parse(buildInfo[0]);
                     build.faction = (Faction)Int32.Parse(buildInfo[1]);
 
                     string[] pilotBuilds = buildInfo[2].Split('&');

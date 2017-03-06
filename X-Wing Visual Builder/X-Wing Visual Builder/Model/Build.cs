@@ -17,7 +17,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Build
     {
-        public int id { get; set; }
+        public int uniqueBuildId { get; set; }
         public Faction faction;
         public Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
         private double canvasSize = 1920;
@@ -102,9 +102,9 @@ namespace X_Wing_Visual_Builder.Model
             return upgradeCard;
         }
 
-        public void DeleteUpgrade(int uniquePilotId, int upgradeKey)
+        public void DeleteUpgrade(int uniquePilotId, int upgradeId)
         {
-            pilots[uniquePilotId].upgrades.RemoveAt(upgradeKey);
+            pilots[uniquePilotId].upgrades.Remove(Upgrades.upgrades[upgradeId]);
             Builds.SaveBuilds();
         }
 

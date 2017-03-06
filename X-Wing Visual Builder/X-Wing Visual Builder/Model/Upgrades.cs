@@ -65,7 +65,7 @@ namespace X_Wing_Visual_Builder.Model
                 bool isCorrectShipType = false;
                 foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
                 {
-                    if((entry.Value.upgradeType == UpgradeType.All || entry.Value.upgradeType == UpgradeType.Title || entry.Value.upgradeType == UpgradeType.Modification) || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
+                    if(entry.Value.upgradeType == UpgradeType.All || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
                 }
                 foreach (Faction faction in factions)
                 {

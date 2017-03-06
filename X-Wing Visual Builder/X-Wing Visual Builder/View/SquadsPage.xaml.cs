@@ -90,14 +90,14 @@ namespace X_Wing_Visual_Builder.View
         private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.buildId).DeleteUpgrade(deleteButton.pilotKey, deleteButton.upgradeKey);
+            Builds.GetBuild(deleteButton.uniqueBuildId).DeleteUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);
             DisplayContent();
         }
 
         private void DeletePilotClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.buildId).DeletePilot(deleteButton.pilotKey);
+            Builds.GetBuild(deleteButton.uniqueBuildId).DeletePilot(deleteButton.uniquePilotId);
             DisplayContent();
         }
 
@@ -108,7 +108,7 @@ namespace X_Wing_Visual_Builder.View
             { 
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                for (int currentPilotKey = 0; currentPilotKey < Builds.builds[currentBuildKey].GetNumberOfPilots(); currentPilotKey++)
+                foreach(KeyValuePair<int, Pilot> pilot in Builds.builds[currentBuildKey].pilots)
                 {
                     double left = 0;
                     double height = 0;
@@ -116,7 +116,7 @@ namespace X_Wing_Visual_Builder.View
                     double currentHeightOffset = 0;
                     pilotCanvas = new Canvas();
 
-                    PilotCard pilotCard = Builds.builds[currentBuildKey].GetPilotCard(currentPilotKey, Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
+                    PilotCard pilotCard = pilot.Value.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
@@ -124,8 +124,8 @@ namespace X_Wing_Visual_Builder.View
 
                     DeleteButton deleteButton;
                     deleteButton = new DeleteButton();
-                    deleteButton.buildId = build.id;
-                    deleteButton.pilotKey = pilotCard.pilotKey;
+                    deleteButton.uniqueBuildId = build.uniqueBuildId;
+                    deleteButton.uniquePilotId = pilot.Value.uniquePilotId;
                     deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
                     Canvas.SetLeft(deleteButton, left);
                     Canvas.SetTop(deleteButton, height);
@@ -133,7 +133,8 @@ namespace X_Wing_Visual_Builder.View
 
                     AddUpgradeButton addUpgrade;
                     addUpgrade = new AddUpgradeButton();
-                    addUpgrade.pilotKey = pilotCard.pilotKey;
+                    addUpgrade.uniquePilotId = pilot.Value.uniquePilotId;
+                    addUpgrade.uniqueBuildId = build.uniqueBuildId;
                     addUpgrade.FontSize = 16;
                     addUpgrade.FontWeight = FontWeights.Bold;
                     addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
@@ -144,7 +145,7 @@ namespace X_Wing_Visual_Builder.View
 
                     Label pilotTotalCostLabel;
                     pilotTotalCostLabel = new Label();
-                    pilotTotalCostLabel.Content = Builds.builds[currentBuildKey].GetPilot(currentPilotKey).totalCost;
+                    pilotTotalCostLabel.Content = pilot.Value.totalCost;
                     pilotTotalCostLabel.FontSize = 30;
                     pilotTotalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                     Canvas.SetLeft(pilotTotalCostLabel, left + 240);
@@ -153,44 +154,43 @@ namespace X_Wing_Visual_Builder.View
 
                     currentLeftOffset += pilotCard.Width;
 
-                    if (Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) > 0)
+                    int currentUpgradeNumber = 0;
+                    List<Upgrade> sortedUpgrades = pilot.Value.upgrades;
+                    sortedUpgrades = sortedUpgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
+                    foreach (Upgrade upgrade in sortedUpgrades)
                     {
-                        currentLeftOffset += Opt.ApResMod(upgradeCardMargin);
-                        for (int currentUpgradeKey = 0; currentUpgradeKey < Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey); currentUpgradeKey++)
+                        if (currentUpgradeNumber == 0) { currentLeftOffset += Opt.ApResMod(upgradeCardMargin); }
+                        left = currentLeftOffset;
+                        if (currentUpgradeNumber % 2 == 0)
                         {
-                            left = currentLeftOffset;
-                            UpgradeCard upgradeCard = Builds.builds[currentBuildKey].GetUpgradeCard(currentPilotKey, currentUpgradeKey, Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-                            if (currentUpgradeKey % 2 == 0)
-                            {
-                                height = currentHeightOffset;
-                            }
-                            else
-                            {
-                                height += currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + Opt.ApResMod(upgradeCardMargin);
-                                currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
-                            }
-                            if (currentUpgradeKey + 1 == Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) && Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) % 2 == 1)
-                            {
-                                currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
-                            }
-
-                            Canvas.SetLeft(upgradeCard, left);
-                            Canvas.SetTop(upgradeCard, height);
-                            pilotCanvas.Children.Add(upgradeCard);
-
-                            deleteButton = new DeleteButton();
-                            deleteButton.buildId = build.id;
-                            deleteButton.pilotKey = upgradeCard.pilotKey;
-                            deleteButton.upgradeKey = upgradeCard.upgradeKey;
-                            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
-                            Canvas.SetLeft(deleteButton, left);
-                            Canvas.SetTop(deleteButton, height);
-                            pilotCanvas.Children.Add(deleteButton);
+                            height = currentHeightOffset;
                         }
+                        else
+                        {
+                            height += currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + Opt.ApResMod(upgradeCardMargin);
+                            currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
+                        }
+
+                        UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
+                        Canvas.SetLeft(upgradeCard, left);
+                        Canvas.SetTop(upgradeCard, height);
+                        pilotCanvas.Children.Add(upgradeCard);
+
+                        deleteButton = new DeleteButton();
+                        deleteButton.uniqueBuildId = build.uniqueBuildId;
+                        deleteButton.uniquePilotId = pilot.Value.uniquePilotId;
+                        deleteButton.upgradeId = upgrade.id;
+                        deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
+                        Canvas.SetLeft(deleteButton, left);
+                        Canvas.SetTop(deleteButton, height);
+                        pilotCanvas.Children.Add(deleteButton);
+
+                        currentUpgradeNumber++;
                     }
 
-                    pilotCanvas.Height = (Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) > 1) ? (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin) : Opt.ApResMod(pilotCardHeight) + 80;
-                    pilotCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)Builds.builds[currentBuildKey].GetNumberOfUpgrades(currentPilotKey) / 2) * Opt.ApResMod(upgradeCardWidth);
+                    //pilotCanvas.Height = (pilot.Value.upgrades.Count > 1) ? (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin) : Opt.ApResMod(pilotCardHeight) + 80;
+                    pilotCanvas.Height = (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin);
+                    pilotCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)pilot.Value.upgrades.Count / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)pilot.Value.upgrades.Count / 2) * Opt.ApResMod(upgradeCardWidth);
                     pilotCanvas.Margin = new Thickness(10, 0, 10, 0);
                     buildWrapPanel.Children.Add(pilotCanvas);
                 }
@@ -208,7 +208,7 @@ namespace X_Wing_Visual_Builder.View
         {
             AddUpgradeButton addUpgradeButton = (AddUpgradeButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddAvailibleUpdates(addUpgradeButton.pilotKey, Builds.builds[currentBuildKey]);
+            browseCardsPage.AddAvailibleUpdates(addUpgradeButton.uniquePilotId, Builds.builds[currentBuildKey]);
             NavigationService.Navigate(browseCardsPage);
         }
 
