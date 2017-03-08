@@ -62,13 +62,6 @@ namespace X_Wing_Visual_Builder.View
             contentCanvas.Name = "contentCanvas";
             contentWrapPanel.Children.Add(contentCanvas);
 
-            /*<TextBox Grid.Row="0" Grid.Column="0" x:Name="searchTextBox" HorizontalAlignment="Center" Height="23" Text="" VerticalAlignment="Top" Margin="0,40,0,0" Width="120" TextChanged="textBox_TextChanged"/>
-        <RadioButton Content="Upgrades" x:Name="upgradesRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton Content="Pilots" x:Name="pilotsRadioButton" Grid.Row="0" Grid.Column="0" Checked="IsUpgrade_Checked" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Search Description" x:Name="searchDescriptionCheckBox" Grid.Row="0" Grid.Column="0" Checked="SearchDescription_Checked" Unchecked="SearchDescription_Checked" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Pilot Quiz" HorizontalAlignment="Left" Height="26" Margin="382,30,0,0" VerticalAlignment="Top" Width="99" Click="TempButton"/>
-        <Label x:Name="cardId" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Margin="0,60,0,0"/>
-        <Button x:Name="button1" Content="Exit" HorizontalAlignment="right" Height="22"  VerticalAlignment="Top" Width="27" Click="ExitButton"/>*/
             searchTextBox.Name = "searchTextBox";
             searchTextBox.TextChanged += textBox_TextChanged;
             searchTextBox.Width = 120;
@@ -105,15 +98,40 @@ namespace X_Wing_Visual_Builder.View
             manuNavigationCanvas.Height = 150;
 
 
+            Button squads = new Button();
+            squads.Name = "squads";
+            squads.Content = "Squads";
+            squads.Width = 130;
+            squads.Height = 40;
+            squads.FontSize = 16;
+            squads.FontWeight = FontWeights.Bold;
+            squads.Click += new RoutedEventHandler(squadsClicked);
+            squads.UseLayoutRounding = true;
+            Canvas.SetLeft(squads, 10);
+            Canvas.SetTop(squads, 10);
+            manuNavigationCanvas.Children.Add(squads);
+
+
+
             Pages.pages[PageName.BrowseCards] = this;
             InitializeComponent();
             upgrades = Upgrades.upgrades.Values.ToList();
+            pilots = Pilots.pilots.Values.ToList();
             //cardScrollViewer.Height = 990;
             searchTextBox.Focus();
             SetIsUpgradeChecked();
             SetIsSearchDescriptionChecked();
         }
 
+        private void squadsClicked(object sender, RoutedEventArgs e)
+        {
+            // TODO having to clear the below is probably each time you leave this page without adding a card to the squad is prone to bugs
+            upgradesToDisplay.Clear();
+            pilotsToDisplay.Clear();
+            isAddingUpgrade = false;
+            isAddingPilot = false;
+            NavigationService.Navigate((SquadsPage)Pages.pages[PageName.SquadsPage]);
+        }
 
         internal void AddPilot(Build build)
         {
@@ -124,13 +142,13 @@ namespace X_Wing_Visual_Builder.View
             pilots = pilots.OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.shipType).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ToList();
             pilotsToDisplay = pilots.ToList();
         }
-        public void AddAvailibleUpdates(int pilotKey, Build build)
+        public void AddUpgrade(int uniquePilotId, Build build)
         {
             upgradesRadioButton.IsChecked = true;
             isAddingUpgrade = true;
-            this.pilotKey = pilotKey;
+            this.pilotKey = uniquePilotId;
             this.build = build;
-            Pilot pilot = build.GetPilot(pilotKey);
+            Pilot pilot = build.GetPilot(uniquePilotId);
             List<Faction> factions = new List<Faction>();
             factions.Add(pilot.faction);
             List<ShipSize> shipSizes = new List<ShipSize>();
@@ -144,8 +162,6 @@ namespace X_Wing_Visual_Builder.View
 
         protected override void DisplayContent()
         {
-            //DisplayUpgradeCards();
-            //DisplayPilotCards();
             contentWrapPanel.Children.Clear();
             
             foreach (Upgrade upgrade in upgradesToDisplay)
@@ -179,8 +195,8 @@ namespace X_Wing_Visual_Builder.View
             searchWords = searchWords.Where(s => s != "  ").ToArray();
             searchWords = searchWords.Where(s => s.Count() > 2).ToArray();
 
-            if(filteredSearchText == "" && isAddingUpgrade) { upgradesToDisplay = upgrades.ToList(); DisplayUpgradeCards(); previousUpgradeSearchResultIds = "it was changed, really!"; }
-            if(filteredSearchText == "" && isAddingPilot) { pilotsToDisplay = pilots.ToList(); DisplayPilotCards(); previousPilotSearchResultIds = "it was changed, really!"; }
+            if(filteredSearchText == "" && isAddingUpgrade) { upgradesToDisplay = upgrades.ToList(); DisplayContent(); previousUpgradeSearchResultIds = "it was changed, really!"; }
+            if(filteredSearchText == "" && isAddingPilot) { pilotsToDisplay = pilots.ToList(); DisplayContent(); previousPilotSearchResultIds = "it was changed, really!"; }
 
             if (searchWords.Count() > 0)
             {
@@ -237,7 +253,6 @@ namespace X_Wing_Visual_Builder.View
                     {
                         previousUpgradeSearchResultIds = currentUpgradeSearchResultIds;
                         upgradesToDisplay = upgradesToDisplay.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
-                        //DisplayUpgradeCards();
                         DisplayContent();
                     }
                 }
@@ -292,7 +307,7 @@ namespace X_Wing_Visual_Builder.View
                     {
                         previousPilotSearchResultIds = currentPilotSearchResultIds;
                         pilotsToDisplay = pilotsToDisplay.OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.shipType).ThenByDescending(pilot => pilot.cost).ToList();
-                        DisplayPilotCards();
+                        DisplayContent();
                     }
                 }
             }
@@ -338,34 +353,6 @@ namespace X_Wing_Visual_Builder.View
         private void SearchDescription_Checked(object sender, RoutedEventArgs e)
         {
             SetIsSearchDescriptionChecked();
-        }        
-
-        private void DisplayUpgradeCards()
-        {
-            contentCanvas.Children.Clear();
-
-            double currentHeightOffset = -30;
-            double currentLeftOffset = 20;
-            double spacersGap = 4;
-            int currentRowNumber = 0;
-            foreach(Upgrade upgrade in upgradesToDisplay)
-            {
-                UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-                upgradeCard.MouseDown += CardClicked;
-                Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
-                Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
-                contentCanvas.Children.Add(upgradeCard);
-                currentLeftOffset += spacersGap + Opt.ApResMod(upgradeCardWidth);
-                currentRowNumber++;
-
-                if (currentRowNumber > 10)
-                {
-                    currentHeightOffset += spacersGap + Opt.ApResMod(upgradeCardHeight);
-                    currentLeftOffset = 20;
-                    currentRowNumber = 0;
-                }
-            }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(upgradeCardHeight) + 80;
         }
 
         private void CardClicked(object sender, MouseButtonEventArgs e)
@@ -401,34 +388,6 @@ namespace X_Wing_Visual_Builder.View
             {
                 NavigationService.Navigate((PilotQuizPage)Pages.pages[PageName.PilotQuiz]);
             }
-        }
-
-        private void DisplayPilotCards()
-        {
-            contentCanvas.Children.Clear();
-
-            double currentHeightOffset = -30;
-            double currentLeftOffset = 20;
-            double spacersGap = 4;
-            int currentRowNumber = 0;
-            foreach (Pilot pilot in pilotsToDisplay)
-            {
-                PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
-                pilotCard.MouseDown += CardClicked;
-                Canvas.SetLeft(pilotCard, currentLeftOffset + spacersGap);
-                Canvas.SetTop(pilotCard, currentHeightOffset + 40);
-                contentCanvas.Children.Add(pilotCard);
-                currentLeftOffset += spacersGap + Opt.ApResMod(pilotCardWidth);
-                currentRowNumber++;
-
-                if (currentRowNumber > 5)
-                {
-                    currentHeightOffset += spacersGap + Opt.ApResMod(pilotCardHeight);
-                    currentLeftOffset = 20;
-                    currentRowNumber = 0;
-                }
-            }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(pilotCardHeight) + 80;
         }
     }
 }

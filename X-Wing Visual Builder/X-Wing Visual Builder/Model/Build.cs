@@ -36,19 +36,19 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
-        public Build()
-        {
-
-        }
-
         public Dictionary<UpgradeType, int> GetPossibleUpgrades(int uniquePilotId)
         {
-            Dictionary<UpgradeType, int> possibleUpgrades = pilots[uniquePilotId].possibleUpgrades;
+            Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(pilots[uniquePilotId].possibleUpgrades);
             foreach(Upgrade upgrade in pilots[uniquePilotId].upgrades)
             {
                 possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
             }
             return possibleUpgrades;
+        }
+        public void AddPilot(int uniquePilotId, Pilot pilot)
+        {
+            pilots.Add(pilot.uniquePilotId, pilot);
+            Builds.SaveBuilds();
         }
 
         public void AddPilot(Pilot pilot)

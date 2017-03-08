@@ -27,7 +27,6 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private int upgradeCardMargin = 4;
-        private int currentBuildKey = 0;
         private Canvas pilotCanvas;
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
@@ -51,7 +50,7 @@ namespace X_Wing_Visual_Builder.View
             addBuildButton.FontWeight = FontWeights.Bold;
             addBuildButton.Click += new RoutedEventHandler(AddBuildClicked);
             addBuildButton.UseLayoutRounding = true;
-            Canvas.SetLeft(addBuildButton, 800);
+            Canvas.SetLeft(addBuildButton, 400);
             Canvas.SetTop(addBuildButton, 10);
             topToolsCanvas.Children.Add(addBuildButton);
 
@@ -64,11 +63,29 @@ namespace X_Wing_Visual_Builder.View
             addPilotButton.FontWeight = FontWeights.Bold;
             addPilotButton.Click += new RoutedEventHandler(AddPilotClicked);
             addPilotButton.UseLayoutRounding = true;
-            Canvas.SetLeft(addPilotButton, 930);
+            Canvas.SetLeft(addPilotButton, 530);
             Canvas.SetTop(addPilotButton, 10);
             topToolsCanvas.Children.Add(addPilotButton);
 
+            Button browseCards = new Button();
+            browseCards.Name = "browseCards";
+            browseCards.Content = "Browse Cards";
+            browseCards.Width = 130;
+            browseCards.Height = 40;
+            browseCards.FontSize = 16;
+            browseCards.FontWeight = FontWeights.Bold;
+            browseCards.Click += new RoutedEventHandler(browseCardsClicked);
+            browseCards.UseLayoutRounding = true;
+            Canvas.SetLeft(browseCards, 660);
+            Canvas.SetTop(browseCards, 10);
+            topToolsCanvas.Children.Add(browseCards);
+
             topToolsCanvas.Height = 40;
+        }
+
+        private void browseCardsClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
         }
 
         private void AddBuildClicked(object sender, RoutedEventArgs e)
@@ -108,7 +125,16 @@ namespace X_Wing_Visual_Builder.View
             { 
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                foreach(KeyValuePair<int, Pilot> pilot in Builds.builds[currentBuildKey].pilots)
+
+
+                Label totalCostLabel;
+                totalCostLabel = new Label();
+                totalCostLabel.Content = build.totalCost;
+                totalCostLabel.FontSize = 30;
+                totalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                buildWrapPanel.Children.Add(totalCostLabel);
+
+                foreach (KeyValuePair<int, Pilot> pilot in build.pilots)
                 {
                     double left = 0;
                     double height = 0;
@@ -138,7 +164,7 @@ namespace X_Wing_Visual_Builder.View
                     addUpgrade.FontSize = 16;
                     addUpgrade.FontWeight = FontWeights.Bold;
                     addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
-                    addUpgrade.Content = "Add Upgrade";
+                    addUpgrade.Content = build.uniqueBuildId+ "Add Upgrade" + pilot.Value.uniquePilotId;
                     Canvas.SetLeft(addUpgrade, left);
                     Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
                     pilotCanvas.Children.Add(addUpgrade);
@@ -208,43 +234,8 @@ namespace X_Wing_Visual_Builder.View
         {
             AddUpgradeButton addUpgradeButton = (AddUpgradeButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddAvailibleUpdates(addUpgradeButton.uniquePilotId, Builds.builds[currentBuildKey]);
+            browseCardsPage.AddUpgrade(addUpgradeButton.uniquePilotId, Builds.GetBuild(addUpgradeButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
-        }
-
-        private List<double[]> CalculatePilotsAndWidthRemainingInRows(Build build, double cardGap)
-        {
-            List<double[]> pilotsAndWidthRemainingInRows = new List<double[]>();
-            double totalWidth = 0;
-            int pilotsInRow = 0;
-            int numberOfUpgrades = 0;
-            double pilotAndUpgradesWidth = 0;
-            for (int i = 0; i < Builds.builds[currentBuildKey].GetNumberOfPilots(); i++)
-            {
-                numberOfUpgrades = Builds.builds[currentBuildKey].GetNumberOfUpgrades(i);
-                if (numberOfUpgrades > 0)
-                {
-                    pilotAndUpgradesWidth = Opt.ApResMod(pilotCardWidth) + (Math.Ceiling((double)numberOfUpgrades / 2) * (Opt.ApResMod(upgradeCardWidth) + cardGap));
-                }
-                else
-                {
-                    pilotAndUpgradesWidth = Opt.ApResMod(pilotCardWidth);
-                }
-
-                if(pilotAndUpgradesWidth + totalWidth > (pilotCanvas.ActualWidth - 100))
-                {
-                    pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, pilotCanvas.ActualWidth - totalWidth });
-                    pilotsInRow = 1;
-                    totalWidth = pilotAndUpgradesWidth;
-                }
-                else
-                {
-                    pilotsInRow++;
-                    totalWidth += pilotAndUpgradesWidth;
-                }
-            }
-            pilotsAndWidthRemainingInRows.Add(new double[2] { pilotsInRow, pilotCanvas.ActualWidth - totalWidth });
-            return pilotsAndWidthRemainingInRows;
         }
     }
 }

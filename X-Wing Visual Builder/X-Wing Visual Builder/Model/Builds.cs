@@ -16,11 +16,11 @@ namespace X_Wing_Visual_Builder.Model
             LoadBuilds();
         }
 
-        public static Build GetBuild(int id)
+        public static Build GetBuild(int uniqueBuildId)
         {
             foreach(Build build in builds)
             {
-                if(build.uniqueBuildId == id)
+                if(build.uniqueBuildId == uniqueBuildId)
                 {
                     return build;
                 }
@@ -62,10 +62,10 @@ namespace X_Wing_Visual_Builder.Model
             {
                 buildInfo += build.uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
-                for (int i = 0; i < build.pilots.Count; i++)
+                foreach(KeyValuePair<int, Pilot> pilot in build.pilots)
                 {
-                    buildInfo += build.pilots[i].uniquePilotId + "£" + build.pilots[i].id + "£";
-                    foreach (Upgrade upgrade in build.pilots[i].upgrades)
+                    buildInfo += pilot.Value.uniquePilotId + "£" + pilot.Value.id + "£";
+                    foreach (Upgrade upgrade in pilot.Value.upgrades)
                     {
                         buildInfo += upgrade.id + "$";
                     }
@@ -95,12 +95,14 @@ namespace X_Wing_Visual_Builder.Model
                     pilotBuilds = pilotBuilds.Where(s => s != "").ToArray();
                     if (pilotBuilds.Count() > 0)
                     {
-                        foreach (string pilot in pilotBuilds)
+                        foreach (string pilotString in pilotBuilds)
                         {
-                            string[] pilotInfo = pilot.Split('£');
-                            int pilotKey = Int32.Parse(pilotInfo[0]);
+                            string[] pilotInfo = pilotString.Split('£');
+                            int uniquePilotId = Int32.Parse(pilotInfo[0]);
                             int pilotId = Int32.Parse(pilotInfo[1]);
-                            build.AddPilot(Pilots.GetPilotClone(pilotId));
+                            Pilot pilot = Pilots.GetPilotClone(pilotId);
+                            pilot.uniquePilotId = uniquePilotId;
+                            build.AddPilot(uniquePilotId, pilot);
                             string[] upgrades = pilotInfo[2].Split('$');
                             upgrades = upgrades.Where(s => s != "").ToArray();
                             if (upgrades.Count() > 0)
@@ -110,7 +112,7 @@ namespace X_Wing_Visual_Builder.Model
                                     int upgradeId;
                                     if (int.TryParse(upgradeIdString, out upgradeId))
                                     {
-                                        build.AddUpgrade(pilotKey, Upgrades.upgrades[upgradeId]);
+                                        build.AddUpgrade(uniquePilotId, Upgrades.upgrades[upgradeId]);
                                     }
                                 }
                             }
