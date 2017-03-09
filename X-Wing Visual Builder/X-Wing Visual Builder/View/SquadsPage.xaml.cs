@@ -126,15 +126,24 @@ namespace X_Wing_Visual_Builder.View
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
+                Canvas spacerCanvas = new Canvas();
+                spacerCanvas.Height = 30;
+                spacerCanvas.Width = 1800;
 
                 Label totalCostLabel;
                 totalCostLabel = new Label();
                 totalCostLabel.Content = build.totalCost;
-                totalCostLabel.FontSize = 30;
+                totalCostLabel.FontSize = 20;
                 totalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-                buildWrapPanel.Children.Add(totalCostLabel);
+                Canvas.SetLeft(totalCostLabel, 900);
+                Canvas.SetTop(totalCostLabel, 0);
+                spacerCanvas.Children.Add(totalCostLabel);
 
-                foreach (KeyValuePair<int, Pilot> pilot in build.pilots)
+                buildWrapPanel.Children.Add(spacerCanvas);
+                
+                List<KeyValuePair<int, Pilot>> pilots = build.pilots.OrderByDescending(pilot => pilot.Value.pilotSkill).ThenByDescending(pilot => pilot.Value.cost).ToList();
+
+                foreach (KeyValuePair<int, Pilot> pilot in pilots)
                 {
                     double left = 0;
                     double height = 0;
@@ -153,21 +162,33 @@ namespace X_Wing_Visual_Builder.View
                     deleteButton.uniqueBuildId = build.uniqueBuildId;
                     deleteButton.uniquePilotId = pilot.Value.uniquePilotId;
                     deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
-                    Canvas.SetLeft(deleteButton, left);
+                    Canvas.SetLeft(deleteButton, left + (Opt.ApResMod(pilotCardWidth) - deleteButton.Width));
                     Canvas.SetTop(deleteButton, height);
                     pilotCanvas.Children.Add(deleteButton);
 
-                    AddUpgradeButton addUpgrade;
-                    addUpgrade = new AddUpgradeButton();
+                    BuildPilotUpgrade addUpgrade;
+                    addUpgrade = new BuildPilotUpgrade();
                     addUpgrade.uniquePilotId = pilot.Value.uniquePilotId;
                     addUpgrade.uniqueBuildId = build.uniqueBuildId;
                     addUpgrade.FontSize = 16;
                     addUpgrade.FontWeight = FontWeights.Bold;
                     addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
-                    addUpgrade.Content = build.uniqueBuildId+ "Add Upgrade" + pilot.Value.uniquePilotId;
+                    addUpgrade.Content = "Add Upgrade";
                     Canvas.SetLeft(addUpgrade, left);
                     Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
                     pilotCanvas.Children.Add(addUpgrade);
+
+                    BuildPilotUpgrade swapPilot;
+                    swapPilot = new BuildPilotUpgrade();
+                    swapPilot.uniquePilotId = pilot.Value.uniquePilotId;
+                    swapPilot.uniqueBuildId = build.uniqueBuildId;
+                    swapPilot.FontSize = 16;
+                    swapPilot.FontWeight = FontWeights.Bold;
+                    swapPilot.Click += new RoutedEventHandler(SwapPilot);
+                    swapPilot.Content = "Swap Pilot";
+                    Canvas.SetLeft(swapPilot, left + 150);
+                    Canvas.SetTop(swapPilot, height + Opt.ApResMod(pilotCardHeight) + 10);
+                    pilotCanvas.Children.Add(swapPilot);
 
                     Label pilotTotalCostLabel;
                     pilotTotalCostLabel = new Label();
@@ -207,32 +228,40 @@ namespace X_Wing_Visual_Builder.View
                         deleteButton.uniquePilotId = pilot.Value.uniquePilotId;
                         deleteButton.upgradeId = upgrade.id;
                         deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
-                        Canvas.SetLeft(deleteButton, left);
+                        Canvas.SetLeft(deleteButton, left + (Opt.ApResMod(upgradeCardWidth) - deleteButton.Width));
                         Canvas.SetTop(deleteButton, height);
                         pilotCanvas.Children.Add(deleteButton);
 
                         currentUpgradeNumber++;
                     }
 
-                    //pilotCanvas.Height = (pilot.Value.upgrades.Count > 1) ? (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin) : Opt.ApResMod(pilotCardHeight) + 80;
                     pilotCanvas.Height = (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin);
                     pilotCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)pilot.Value.upgrades.Count / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)pilot.Value.upgrades.Count / 2) * Opt.ApResMod(upgradeCardWidth);
-                    pilotCanvas.Margin = new Thickness(10, 0, 10, 0);
+                    pilotCanvas.Margin = new Thickness(10, 20, 10, 0);
                     buildWrapPanel.Children.Add(pilotCanvas);
                 }
                 contentWrapPanel.Children.Add(buildWrapPanel);
             }
         }
+
+        private void SwapPilot(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade SwapPilotButton = (BuildPilotUpgrade)sender;
+            BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
+            browseCardsPage.SwapPilot(Builds.GetBuild(SwapPilotButton.uniqueBuildId), Builds.GetBuild(SwapPilotButton.uniqueBuildId).GetPilot(SwapPilotButton.uniquePilotId));
+            NavigationService.Navigate(browseCardsPage);
+        }
+
         private void AddPilotClicked(object sender, RoutedEventArgs e)
         {
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddPilot(Builds.GetBuild(0));
+            browseCardsPage.AddPilot(Builds.GetBuild(3));
             NavigationService.Navigate(browseCardsPage);
         }
 
         private void AddUpgrade(object sender, RoutedEventArgs e)
         {
-            AddUpgradeButton addUpgradeButton = (AddUpgradeButton)sender;
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
             browseCardsPage.AddUpgrade(addUpgradeButton.uniquePilotId, Builds.GetBuild(addUpgradeButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);

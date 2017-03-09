@@ -11,3 +11,7 @@ Add stats with multiple of the following on each roll, _______(name) When Attack
 Make sure to add isXwing and isTIE
 
 Remove pilots without a special ability from the pilotQuiz pool
+
+Shrink images to keep build on one line
+
+remove Needs Torp&Miss and others and make generic in spreadsheet

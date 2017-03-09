@@ -38,10 +38,12 @@ namespace X_Wing_Visual_Builder.Model
         public bool needsBoost { get; set; }
         public bool isTieOnly { get; set; }
         public bool isXWingOnly { get; set; }
+        public Dictionary<UpgradeType, int> upgradesAdded { get; set; }
+        public Dictionary<UpgradeType, int> upgradesRemoved { get; set; }
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
                        ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool needsTorpedoAndMissile,
-                       bool needsBoost, bool isTieOnly, bool isXWingOnly)
+                       bool needsBoost, bool isTieOnly, bool isXWingOnly, Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved)
         {
             this.id = id;
             this.upgradeType = upgradeType;
@@ -61,6 +63,8 @@ namespace X_Wing_Visual_Builder.Model
             this.needsBoost = needsBoost;
             this.isTieOnly = isTieOnly;
             this.isXWingOnly = isXWingOnly;
+            this.upgradesAdded = upgradesAdded;
+            this.upgradesRemoved = upgradesRemoved;
         }
         /*
         public UpgradeCard GetUpgradeCard(double width, double height)

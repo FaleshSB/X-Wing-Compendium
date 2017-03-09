@@ -71,7 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AddUpgradeButton.cs" />
+    <Compile Include="Model\BuildPilotUpgrade.cs" />
     <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Builds.cs" />
@@ -176,7 +176,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Resources\UpgradeDatabase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

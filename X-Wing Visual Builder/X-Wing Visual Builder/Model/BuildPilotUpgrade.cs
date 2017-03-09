@@ -7,9 +7,10 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class AddUpgradeButton : Button
+    class BuildPilotUpgrade : Button
     {
         public int uniqueBuildId { get; set; }
         public int uniquePilotId { get; set; }
+        public int uniqueUpgradeId { get; set; }
     }
 }

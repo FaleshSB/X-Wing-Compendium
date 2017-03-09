@@ -41,10 +41,12 @@ namespace X_Wing_Visual_Builder.View
         private string previousUpgradeSearchResultIds = "";
         private string previousPilotSearchResultIds = "";
 
+        private bool isSwappingPilot = false;
         private bool isAddingPilot = false;
         private bool isAddingUpgrade = false;
         private int pilotKey;
         private Build build;
+        private Pilot pilotToSwap;
         public void SetBuild(Build build)
         {
             this.build = build;
@@ -97,6 +99,8 @@ namespace X_Wing_Visual_Builder.View
 
             manuNavigationCanvas.Height = 150;
 
+            contentScrollViewer.Height = 1040 - manuNavigationCanvas.Height;
+
 
             Button squads = new Button();
             squads.Name = "squads";
@@ -117,7 +121,6 @@ namespace X_Wing_Visual_Builder.View
             InitializeComponent();
             upgrades = Upgrades.upgrades.Values.ToList();
             pilots = Pilots.pilots.Values.ToList();
-            //cardScrollViewer.Height = 990;
             searchTextBox.Focus();
             SetIsUpgradeChecked();
             SetIsSearchDescriptionChecked();
@@ -130,10 +133,21 @@ namespace X_Wing_Visual_Builder.View
             pilotsToDisplay.Clear();
             isAddingUpgrade = false;
             isAddingPilot = false;
+            isSwappingPilot = false;
             NavigationService.Navigate((SquadsPage)Pages.pages[PageName.SquadsPage]);
         }
 
-        internal void AddPilot(Build build)
+        public void SwapPilot(Build build, Pilot pilotToSwap)
+        {
+            this.pilotToSwap = pilotToSwap;
+            pilotsRadioButton.IsChecked = true;
+            isSwappingPilot = true;
+            this.build = build;
+            pilots = Pilots.GetPilots(build.faction, pilotToSwap.ship);
+            pilots = pilots.OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.shipType).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ToList();
+            pilotsToDisplay = pilots.ToList();
+        }
+        public void AddPilot(Build build)
         {
             pilotsRadioButton.IsChecked = true;
             isAddingPilot = true;
@@ -148,6 +162,7 @@ namespace X_Wing_Visual_Builder.View
             isAddingUpgrade = true;
             this.pilotKey = uniquePilotId;
             this.build = build;
+            /*
             Pilot pilot = build.GetPilot(uniquePilotId);
             List<Faction> factions = new List<Faction>();
             factions.Add(pilot.faction);
@@ -156,6 +171,8 @@ namespace X_Wing_Visual_Builder.View
             List<Ship> ships = new List<Ship>();
             ships.Add(pilot.ship);
             upgrades = Upgrades.GetUpgrades(build.GetPossibleUpgrades(pilot.uniquePilotId), factions, shipSizes, ships);
+            */
+            upgrades = Upgrades.GetUpgrades(build.GetPilot(uniquePilotId));
             upgrades = upgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
             upgradesToDisplay = upgrades.ToList();
         }
@@ -197,6 +214,7 @@ namespace X_Wing_Visual_Builder.View
 
             if(filteredSearchText == "" && isAddingUpgrade) { upgradesToDisplay = upgrades.ToList(); DisplayContent(); previousUpgradeSearchResultIds = "it was changed, really!"; }
             if(filteredSearchText == "" && isAddingPilot) { pilotsToDisplay = pilots.ToList(); DisplayContent(); previousPilotSearchResultIds = "it was changed, really!"; }
+            if(filteredSearchText == "" && isSwappingPilot) { pilotsToDisplay = pilots.ToList(); DisplayContent(); previousPilotSearchResultIds = "it was changed, really!"; }
 
             if (searchWords.Count() > 0)
             {
@@ -363,6 +381,7 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradesToDisplay.Clear();
                 pilotsToDisplay.Clear();
+                isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
                 build.AddUpgrade(pilotKey, Upgrades.upgrades[card.id]);
@@ -373,9 +392,25 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradesToDisplay.Clear();
                 pilotsToDisplay.Clear();
+                isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
                 build.AddPilot(Pilots.GetPilotClone(card.id));
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
+                NavigationService.Navigate(squadsPage);
+            }
+            else if (isSwappingPilot == true)
+            {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
+                isSwappingPilot = false;
+                isAddingUpgrade = false;
+                isAddingPilot = false;
+                Pilot newPilot = Pilots.GetPilotClone(card.id);
+                newPilot.upgrades = pilotToSwap.upgrades;
+                Upgrades.RemoveUnusableUpgrades(newPilot);
+                build.AddPilot(newPilot);
+                build.DeletePilot(pilotToSwap.uniquePilotId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
                 NavigationService.Navigate(squadsPage);
             }

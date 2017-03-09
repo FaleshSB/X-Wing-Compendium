@@ -77,8 +77,6 @@ namespace X_Wing_Visual_Builder.Model
         public static List<Pilot> GetPilots(Faction faction)
         {
             List<Pilot> pilotsToReturn = new List<Pilot>();
-
-
             foreach (KeyValuePair<int, Pilot> entry in pilots)
             {
                 if (entry.Value.faction == faction)
@@ -86,7 +84,18 @@ namespace X_Wing_Visual_Builder.Model
                     pilotsToReturn.Add(entry.Value);
                 }
             }
-
+            return pilotsToReturn;
+        }
+        public static List<Pilot> GetPilots(Faction faction, Ship ship)
+        {
+            List<Pilot> pilotsToReturn = new List<Pilot>();
+            foreach (KeyValuePair<int, Pilot> entry in pilots)
+            {
+                if (entry.Value.faction == faction && entry.Value.ship.shipType == ship.shipType)
+                {
+                    pilotsToReturn.Add(entry.Value);
+                }
+            }
             return pilotsToReturn;
         }
     }
