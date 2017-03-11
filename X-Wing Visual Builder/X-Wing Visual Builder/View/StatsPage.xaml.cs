@@ -21,14 +21,67 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class StatsPage : DefaultPage
     {
+        List<Stats> statsList = new List<Stats>();
+
         public StatsPage()
         {
             InitializeComponent();
-            Stats stats = new Stats(RollType.Attack);
+            Stats stats = new Stats();
             stats.isFocused = true;
             stats.isTargetLocked = true;
             stats.numberOfDice = 2;
-            stats.Calculate(false);
+            stats.Calculate();
+        }
+
+        protected override void DisplayContent()
+        {
+            AlignableWrapPanel inputWrapPanel = new AlignableWrapPanel();
+            inputWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            inputWrapPanel.Margin = new Thickness(0, 90, 0, 0);
+
+
+            RadioButton attackingRadioButton = new RadioButton();            
+            attackingRadioButton.Name = "attackingRadioButton";
+            attackingRadioButton.Content = "Attacking";
+            attackingRadioButton.Checked += AttackDefendChecked;
+            attackingRadioButton.IsChecked = true;
+            inputWrapPanel.Children.Add(attackingRadioButton);
+
+            RadioButton defendingRadioButton = new RadioButton();
+            defendingRadioButton.Name = "defendingRadioButton";
+            defendingRadioButton.Content = "Defending";
+            defendingRadioButton.Checked += AttackDefendChecked;
+            defendingRadioButton.IsChecked = false;
+            inputWrapPanel.Children.Add(defendingRadioButton);
+
+            ComboBox numberOfDieComboBox = new ComboBox();
+            numberOfDieComboBox.Name = "numberOfDie";
+            numberOfDieComboBox.DropDownClosed += NumberOfDieChanged;
+            numberOfDieComboBox.Items.Add(1);
+            numberOfDieComboBox.Items.Add(2);
+            numberOfDieComboBox.Items.Add(3);
+            numberOfDieComboBox.Items.Add(4);
+            numberOfDieComboBox.Items.Add(5);
+            numberOfDieComboBox.Items.Add(6);
+            numberOfDieComboBox.Items.Add(7);
+            numberOfDieComboBox.Items.Add(8);
+            numberOfDieComboBox.Items.Add(9);
+            numberOfDieComboBox.Items.Add(10);
+            inputWrapPanel.Children.Add(numberOfDieComboBox);
+
+            contentScrollViewer.Content = inputWrapPanel;
+        }
+
+        private void NumberOfDieChanged(object sender, EventArgs e)
+        {
+            ComboBox numberOfDieComboBox = (ComboBox)sender;
+            int i = 0;
+        }
+
+        private void AttackDefendChecked(object sender, RoutedEventArgs e)
+        {
+            RadioButton attackingDefendingRadioButton = (RadioButton)sender;
+            int i = 0;
         }
     }
 }

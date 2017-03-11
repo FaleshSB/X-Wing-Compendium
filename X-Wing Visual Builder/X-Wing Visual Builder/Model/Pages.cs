@@ -17,6 +17,7 @@ namespace X_Wing_Visual_Builder.Model
             pages[PageName.UpgradeQuiz] = new UpgradeQuizPage();
             pages[PageName.PilotQuiz] = new PilotQuizPage();
             pages[PageName.SquadsPage] = new SquadsPage();
+            pages[PageName.CalculateStats] = new StatsPage();
         }
     }
 }

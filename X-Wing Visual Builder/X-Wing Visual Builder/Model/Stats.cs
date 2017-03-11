@@ -18,12 +18,10 @@ namespace X_Wing_Visual_Builder.Model
         private int currentDie = 1;
         private DieFace[] currentDiceFaces;
         private Dictionary<string, int> results = new Dictionary<string, int>();
-
-        public Stats(RollType rollType)
+        
+        public void SetAttackingOrDefending(RollType rollType)
         {
             this.rollType = rollType;
-            this.numberOfDice = numberOfDice;
-            
 
             if (rollType == RollType.Attack)
             {
@@ -49,7 +47,7 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
-        public Dictionary<int, double> Calculate(bool isReRoll)
+        public Dictionary<int, double> Calculate(bool isReRoll = false)
         {
             GetAllDiePossibilities(currentDie);
             return CalculateAttackPercentages(isReRoll);
@@ -135,10 +133,6 @@ namespace X_Wing_Visual_Builder.Model
                         finalPercentages.Add(finalSuccesses, finalNumberOfResults / (Math.Pow(8, NumberOfDice) / 100));
                     }
                 }
-            }
-            if(isReRoll == false)
-            {
-                int i = 0;
             }
             return finalPercentages;
         }

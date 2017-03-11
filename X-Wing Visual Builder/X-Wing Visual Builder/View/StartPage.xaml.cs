@@ -27,6 +27,7 @@ namespace X_Wing_Visual_Builder.View
         private Dictionary<string, Image> buttons = new Dictionary<string, Image>();
         private string manageSquadsButtonName = "manage_squads";
         private string yourCollectionButtonName = "your_collection";
+        private string browseCardsButtonName = "browse_cards";
         private string calculateStatsButtonName = "calculate_stats";
         private string upgradeQuizPageButtonName = "upgrade_quiz";
         private string pilotQuizPageButtonName = "pilot_quiz";
@@ -48,6 +49,7 @@ namespace X_Wing_Visual_Builder.View
             InitializeComponent();
             buttons.Add(manageSquadsButtonName, CreateButton(manageSquadsButtonName));
             buttons.Add(yourCollectionButtonName, CreateButton(yourCollectionButtonName));
+            buttons.Add(browseCardsButtonName, CreateButton(browseCardsButtonName));
             buttons.Add(calculateStatsButtonName, CreateButton(calculateStatsButtonName));
             buttons.Add(upgradeQuizPageButtonName, CreateButton(upgradeQuizPageButtonName));
             buttons.Add(pilotQuizPageButtonName, CreateButton(pilotQuizPageButtonName));
@@ -105,6 +107,14 @@ namespace X_Wing_Visual_Builder.View
             {
                 NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
             }
+            else if (button.Name == browseCardsButtonName)
+            {
+                NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
+            }
+            else if (button.Name == calculateStatsButtonName)
+            {
+                NavigationService.Navigate((StatsPage)Pages.pages[PageName.CalculateStats]);
+            }
         }
 
         protected override void DisplayContent()
@@ -119,20 +129,24 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(buttons[yourCollectionButtonName], 450);
             contentCanvas.Children.Add(buttons[yourCollectionButtonName]);
 
+            Canvas.SetLeft(buttons[browseCardsButtonName], 0);
+            Canvas.SetTop(buttons[browseCardsButtonName], 500);
+            contentCanvas.Children.Add(buttons[browseCardsButtonName]);
+
             Canvas.SetLeft(buttons[calculateStatsButtonName], 0);
-            Canvas.SetTop(buttons[calculateStatsButtonName], 500);
+            Canvas.SetTop(buttons[calculateStatsButtonName], 550);
             contentCanvas.Children.Add(buttons[calculateStatsButtonName]);
 
             Canvas.SetLeft(buttons[upgradeQuizPageButtonName], 0);
-            Canvas.SetTop(buttons[upgradeQuizPageButtonName], 550);
+            Canvas.SetTop(buttons[upgradeQuizPageButtonName], 600);
             contentCanvas.Children.Add(buttons[upgradeQuizPageButtonName]);
 
             Canvas.SetLeft(buttons[pilotQuizPageButtonName], 0);
-            Canvas.SetTop(buttons[pilotQuizPageButtonName], 600);
+            Canvas.SetTop(buttons[pilotQuizPageButtonName], 650);
             contentCanvas.Children.Add(buttons[pilotQuizPageButtonName]);
 
             Canvas.SetLeft(buttons[maneuverButtonName], 0);
-            Canvas.SetTop(buttons[maneuverButtonName], 650);
+            Canvas.SetTop(buttons[maneuverButtonName], 700);
             contentCanvas.Children.Add(buttons[maneuverButtonName]);
         }
     }
