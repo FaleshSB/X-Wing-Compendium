@@ -84,7 +84,6 @@
     <Compile Include="Model\Pages.cs" />
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
-    <Compile Include="Model\RollResult.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Model\Upgrade.cs" />

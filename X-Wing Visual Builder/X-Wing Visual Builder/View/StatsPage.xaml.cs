@@ -26,11 +26,13 @@ namespace X_Wing_Visual_Builder.View
         public StatsPage()
         {
             InitializeComponent();
-            Stats stats = new Stats();
-            stats.isFocused = true;
+            
+            Stats stats = new Stats(RollType.Attack);
+            stats.isFocused = false;
             stats.isTargetLocked = true;
             stats.numberOfDice = 2;
-            stats.Calculate();
+            Dictionary<int, double> results = stats.Calculate();
+            int i = 0;
         }
 
         protected override void DisplayContent()
@@ -75,13 +77,11 @@ namespace X_Wing_Visual_Builder.View
         private void NumberOfDieChanged(object sender, EventArgs e)
         {
             ComboBox numberOfDieComboBox = (ComboBox)sender;
-            int i = 0;
         }
 
         private void AttackDefendChecked(object sender, RoutedEventArgs e)
         {
             RadioButton attackingDefendingRadioButton = (RadioButton)sender;
-            int i = 0;
         }
     }
 }

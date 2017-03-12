@@ -134,6 +134,9 @@ namespace X_Wing_Visual_Builder.View
             isAddingUpgrade = false;
             isAddingPilot = false;
             isSwappingPilot = false;
+            previousUpgradeSearchResultIds = "";
+            previousPilotSearchResultIds = "";
+            searchTextBox.Text = "";
             NavigationService.Navigate((SquadsPage)Pages.pages[PageName.SquadsPage]);
         }
 
@@ -381,6 +384,9 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradesToDisplay.Clear();
                 pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
@@ -392,6 +398,9 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradesToDisplay.Clear();
                 pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
@@ -403,6 +412,9 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradesToDisplay.Clear();
                 pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
