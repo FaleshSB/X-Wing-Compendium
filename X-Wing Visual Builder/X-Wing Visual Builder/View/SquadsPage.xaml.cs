@@ -107,14 +107,17 @@ namespace X_Wing_Visual_Builder.View
         private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.uniqueBuildId).DeleteUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);
+            Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);
+
+            UpgradeModifiers.RemoveUpgrade(Builds.GetBuild(deleteButton.uniqueBuildId), deleteButton.uniquePilotId, deleteButton.upgradeId);
+            
             DisplayContent();
         }
 
         private void DeletePilotClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.uniqueBuildId).DeletePilot(deleteButton.uniquePilotId);
+            Builds.GetBuild(deleteButton.uniqueBuildId).RemovePilot(deleteButton.uniquePilotId);
             DisplayContent();
         }
 
@@ -255,7 +258,7 @@ namespace X_Wing_Visual_Builder.View
         private void AddPilotClicked(object sender, RoutedEventArgs e)
         {
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddPilot(Builds.GetBuild(3));
+            browseCardsPage.AddPilot(Builds.GetBuild(8));
             NavigationService.Navigate(browseCardsPage);
         }
 

@@ -28,9 +28,7 @@ namespace X_Wing_Visual_Builder.Model
                 totalCost += cost;
                 foreach (Upgrade upgrade in upgrades)
                 {
-                    //TIE/x1
-                    if (upgrades.Contains(Upgrades.upgrades[11029]) && upgrade.upgradeType == UpgradeType.System) { totalCost += Math.Max(0, upgrade.cost - 4);  continue; }
-                    totalCost += upgrade.cost;
+                   totalCost += UpgradeModifiers.UpgradeCost(upgrade, upgrades);
                 }
                 return totalCost;
             }

@@ -114,13 +114,13 @@ namespace X_Wing_Visual_Builder.Model
             return upgradeCard;
         }
 
-        public void DeleteUpgrade(int uniquePilotId, int upgradeId)
+        public void RemoveUpgrade(int uniquePilotId, int upgradeId)
         {
             pilots[uniquePilotId].upgrades.Remove(Upgrades.upgrades[upgradeId]);
             Builds.SaveBuilds();
         }
 
-        public void DeletePilot(int uniquePilotId)
+        public void RemovePilot(int uniquePilotId)
         {
             pilots.Remove(uniquePilotId);
             Builds.SaveBuilds();

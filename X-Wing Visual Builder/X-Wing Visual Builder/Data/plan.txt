@@ -15,3 +15,8 @@ Remove pilots without a special ability from the pilotQuiz pool
 Shrink images to keep build on one line
 
 remove Needs Torp&Miss and others and make generic in spreadsheet
+
+Show Imp/Reb/Scum squads and other filters like user made groups
+
+TODO: Test Mist Hunter adding tractor beam and removing either if the other is removed
+

@@ -52,6 +52,7 @@ namespace X_Wing_Visual_Builder.Model
         public Dictionary<int, double> Calculate()
         {
             GetAllDiePossibilities(currentDie, numberOfDice);
+
             AddAllReRollPossibilities();
             return CalculateAttackPercentages();
         }
@@ -160,6 +161,7 @@ namespace X_Wing_Visual_Builder.Model
                     }
                 }
             }
+            int i = 0;
         }
         private void GetAllDiePossibilities(int currentDie, int numberOfDice)
         {
@@ -206,10 +208,17 @@ namespace X_Wing_Visual_Builder.Model
                 switch (dieFace)
                 {
                     case DieFace.Blank:
-                        whatToReRoll[dieFace] = 20;
+                        if (isTargetLocked == true)
+                        {
+                            whatToReRoll[dieFace] = 20;
+                        }
+                        else
+                        {
+                            whatToReRoll[dieFace] = 0;
+                        }
                         break;
                     case DieFace.Focus:
-                        if (isFocused == false)
+                        if (isFocused == false && isTargetLocked == true)
                         {
                             whatToReRoll[dieFace] = 20;
                         }
@@ -239,9 +248,12 @@ namespace X_Wing_Visual_Builder.Model
         private Dictionary<int, double> CalculateAttackPercentages()
         {
             Dictionary<int, double> finalPercentages = new Dictionary<int, double>();
+            Dictionary<int, double> numberOfSuccessesArray = new Dictionary<int, double>();
+            double totalNumberOfResults = 0;
 
             foreach (KeyValuePair<string, double> result in allDieRollCombinations)
             {
+                totalNumberOfResults += result.Value;
                 double numberOfResults = result.Value;
                 string[] splitResults = result.Key.Split(';');
                 int successes = 0;
@@ -270,25 +282,31 @@ namespace X_Wing_Visual_Builder.Model
                         }
                     }
                 }
-
-                Dictionary<int, double> percentagesArray = new Dictionary<int, double>();                
-                percentagesArray.Add(successes, numberOfResults);
-
-                foreach (KeyValuePair<int, double> percentages in percentagesArray)
+                if (numberOfSuccessesArray.ContainsKey(successes))
                 {
-                    int finalSuccesses = percentages.Key;
-                    double finalNumberOfResults = percentages.Value;
-
-                    if (finalPercentages.ContainsKey(finalSuccesses))
-                    {
-                        finalPercentages[finalSuccesses] += finalNumberOfResults / (Math.Pow(8, NumberOfDice) / 100);
-                    }
-                    else
-                    {
-                        finalPercentages.Add(finalSuccesses, finalNumberOfResults / (Math.Pow(8, NumberOfDice) / 100));
-                    }
+                    numberOfSuccessesArray[successes] += numberOfResults;
+                }
+                else
+                {
+                    numberOfSuccessesArray.Add(successes, numberOfResults);
                 }
             }
+
+            foreach (KeyValuePair<int, double> successes in numberOfSuccessesArray)
+            {
+                int finalSuccesses = successes.Key;
+                double finalNumberOfResults = successes.Value;
+
+                if (finalPercentages.ContainsKey(finalSuccesses))
+                {
+                    finalPercentages[finalSuccesses] += finalNumberOfResults / (totalNumberOfResults / 100);
+                }
+                else
+                {
+                    finalPercentages.Add(finalSuccesses, finalNumberOfResults / (totalNumberOfResults / 100));
+                }
+            }
+
             return finalPercentages;
         }
     }

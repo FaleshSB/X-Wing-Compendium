@@ -168,7 +168,7 @@
 1604£27£1£Major Rhymer£7£When attacking with a secondary weapon, you may increase or decrease the weapon range by 1 to a limit of Range 1-3.£2,4,4,5,5,8£26££3£1
 1203£8£1£Krassis Trelix£5£When attacking with a secondary weapon, you may reroll 1 attack die.£6,8,9,5£36££3£1
 4000£47£1£The Inquisitor£8£When attacking with your primary weapon at Range 2-3, treat the range of the attack as Range 1.£2,5£25££3£1
-205£5£1£Ten Numb£8£When attacking, 1 of your critical results cannot be canceled by defense dice.£11,6,4,4£31££2£1
+205£5£1£Ten Numb£8£When attacking, 1 of your critical results cannot be canceled by defense dice.£2,11,6,4,4£31££2£1
 1810£29£1£"Wampa"£4£When attacking, at the start of the "Compare Results" step, you may cancel all dice results. If you cancel a critical result, deal 1 facedown Damage card to the defender.££14££3£1
 1700£28£1£Colonel Vessery£6£When attacking, immediately after you roll attack dice, you may acquire a target lock on the defender if it already has a red target lock token.£2,6,5£35££3£1
 708£37£1£Wedge Antilles£9£When attacking, reduce the defender's agility value by 1 (to a minimum of "0").£2,4,3£29££2£1

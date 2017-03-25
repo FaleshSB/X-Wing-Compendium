@@ -84,7 +84,7 @@ namespace X_Wing_Visual_Builder.Model
             return randomUpgrade;
         }
         
-        private static void AddOrRemoveFromPossibleUpgrades(UpgradeType key, int value)
+        public static void AddOrRemoveFromPossibleUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, UpgradeType key, int value)
         {
             if(possibleUpgrades.ContainsKey(key))
             {
@@ -138,36 +138,19 @@ namespace X_Wing_Visual_Builder.Model
             possibleUpgrades = new Dictionary<UpgradeType, int>(pilot.possibleUpgrades);
             foreach (Upgrade upgrade in pilot.upgrades)
             {
-                AddOrRemoveFromPossibleUpgrades(upgrade.upgradeType, 0 - upgrade.numberOfUpgradeSlots);
+                AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgrade.upgradeType, 0 - upgrade.numberOfUpgradeSlots);
                 foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
                 {
-                    AddOrRemoveFromPossibleUpgrades(upgradeAdded.Key, upgradeAdded.Value);
+                    AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgradeAdded.Key, upgradeAdded.Value);
                 }
                 foreach (KeyValuePair<UpgradeType, int> upgradeRemoved in upgrade.upgradesRemoved)
                 {
-                    AddOrRemoveFromPossibleUpgrades(upgradeRemoved.Key, upgradeRemoved.Value);
+                    AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgradeRemoved.Key, upgradeRemoved.Value);
                 }
             }
 
-            // Heavy Scyk Interceptor
-            if (pilot.upgrades.Contains(Upgrades.upgrades[11020]))
-            {
-                if (possibleUpgrades.ContainsKey(UpgradeType.Cannon) && possibleUpgrades[UpgradeType.Cannon] < 1)
-                {
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Torpedo, -1);
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Missile, -1);
-                }
-                else if (possibleUpgrades.ContainsKey(UpgradeType.Missile) && possibleUpgrades[UpgradeType.Missile] < 1)
-                {
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Torpedo, -1);
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Cannon, -1);
-                }
-                else if (possibleUpgrades.ContainsKey(UpgradeType.Torpedo) && possibleUpgrades[UpgradeType.Torpedo] < 1)
-                {
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Missile, -1);
-                    AddOrRemoveFromPossibleUpgrades(UpgradeType.Cannon, -1);
-                }
-            }
+            UpgradeModifiers.ChangePossibleUpgrades(pilot, possibleUpgrades);
+            
             return possibleUpgrades;
         }
         public static List<Upgrade> GetUpgrades(Pilot pilot, bool isTestingToRemoveUpgrades = false)
@@ -218,16 +201,10 @@ namespace X_Wing_Visual_Builder.Model
                 }
                 if (isCorrectType && isCorrectFaction && isCorrectShipSize && isCorrectShipType)
                 {
-                    // A-Wing Test Pilot
-                    if(entry.Value.id == 11001 && pilot.pilotSkill < 2) { continue; }
-                    if(pilot.upgrades.Contains(Upgrades.upgrades[11001]) && entry.Value.upgradeType == UpgradeType.Elite && pilot.upgrades.Contains(entry.Value)) { continue; }
-                    // Virago
-                    if (entry.Value.id == 11027 && pilot.pilotSkill < 4) { continue; }
-                    // TIE Shuttle
-                    if (pilot.upgrades.Contains(Upgrades.upgrades[11031]) && entry.Value.upgradeType == UpgradeType.Crew && entry.Value.cost > 4) { continue; }
-                    // Royal Guard TIE
-                    if (pilot.upgrades.Contains(Upgrades.upgrades[11034]) && entry.Value.upgradeType == UpgradeType.Modification && pilot.upgrades.Contains(entry.Value)) { continue; }
-                    
+                    if(UpgradeModifiers.SkipGetUpgrade(pilot, entry.Value) == true)
+                    {
+                        continue;
+                    }
                     upgradesToReturn.Add(entry.Value);
                 }
             }

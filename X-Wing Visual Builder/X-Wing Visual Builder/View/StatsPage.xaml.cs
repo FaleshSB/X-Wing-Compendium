@@ -27,12 +27,7 @@ namespace X_Wing_Visual_Builder.View
         {
             InitializeComponent();
             
-            Stats stats = new Stats(RollType.Attack);
-            stats.isFocused = false;
-            stats.isTargetLocked = true;
-            stats.numberOfDice = 2;
-            Dictionary<int, double> results = stats.Calculate();
-            int i = 0;
+            
         }
 
         protected override void DisplayContent()
@@ -77,6 +72,16 @@ namespace X_Wing_Visual_Builder.View
         private void NumberOfDieChanged(object sender, EventArgs e)
         {
             ComboBox numberOfDieComboBox = (ComboBox)sender;
+            /*
+            Stats stats = new Stats(RollType.Attack);
+            stats.isFocused = false;
+            stats.isTargetLocked = true;
+            stats.numberOfDice = 2;
+            Dictionary<int, double> results = stats.Calculate();
+            int i = 0;
+            */
+            NewStats testing = new NewStats(RollType.Attack);
+            testing.go();
         }
 
         private void AttackDefendChecked(object sender, RoutedEventArgs e)
