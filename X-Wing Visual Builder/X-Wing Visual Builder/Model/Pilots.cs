@@ -11,7 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Pilots
     {
-        public static Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
+        public static Dictionary<int, Pilot> pilots = new Dictionary<int, Pilot>();
 
         static Pilots()
         {

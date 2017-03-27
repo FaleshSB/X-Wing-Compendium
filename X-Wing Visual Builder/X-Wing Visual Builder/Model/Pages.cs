@@ -9,7 +9,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Pages
     {
-        public static Dictionary<PageName, DefaultPage> pages { get; set; } = new Dictionary<PageName, DefaultPage>();
+        public static Dictionary<PageName, DefaultPage> pages = new Dictionary<PageName, DefaultPage>();
 
         static Pages()
         {

@@ -11,8 +11,8 @@ namespace X_Wing_Visual_Builder.Model
         private RollType rollType;
         private int NumberOfDice;
         public int numberOfDice { get { return NumberOfDice; } set { if (value < 1) { NumberOfDice = 1; currentDiceFaces = new DieFace[1 + 1]; } else if (value > 10) { NumberOfDice = 10; currentDiceFaces = new DieFace[10 + 1]; } else { NumberOfDice = value; currentDiceFaces = new DieFace[value + 1]; } } }
-        public bool isFocused { get; set; } = false;
-        public bool isTargetLocked { get; set; } = false;
+        public bool isFocused = false;
+        public bool isTargetLocked = false;
         
         private List<DieFace> dieFaces = new List<DieFace>();
         private int currentDie = 1;

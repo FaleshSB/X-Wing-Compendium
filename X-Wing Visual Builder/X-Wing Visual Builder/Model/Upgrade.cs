@@ -20,25 +20,25 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Upgrade
     {
-        public int id { get; set; }
-        public int cost { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string faq { get; set; }
-        public UpgradeType upgradeType { get; set; }
-        public Faction faction { get; set; }
-        public ShipSize shipSize { get; set; }
-        public ShipType shipType { get; set; }
-        public bool isWeapon { get; set; }
-        public bool isUnique { get; set; }
-        public bool isLimited { get; set; }
-        public int numberOfUpgradeSlots { get; set; }
-        public bool isDualCard { get; set; }
-        public bool needsBoost { get; set; }
-        public bool isTieOnly { get; set; }
-        public bool isXWingOnly { get; set; }
-        public Dictionary<UpgradeType, int> upgradesAdded { get; set; }
-        public Dictionary<UpgradeType, int> upgradesRemoved { get; set; }
+        public int id;
+        public int cost;
+        public string name;
+        public string description;
+        public string faq;
+        public UpgradeType upgradeType;
+        public Faction faction;
+        public ShipSize shipSize;
+        public ShipType shipType;
+        public bool isWeapon;
+        public bool isUnique;
+        public bool isLimited;
+        public int numberOfUpgradeSlots;
+        public bool isDualCard;
+        public bool needsBoost;
+        public bool isTieOnly;
+        public bool isXWingOnly;
+        public Dictionary<UpgradeType, int> upgradesAdded;
+        public Dictionary<UpgradeType, int> upgradesRemoved;
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
                        ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard,

@@ -11,7 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class UpgradeCard : Card
     {
-        public int pilotKey { get; set; }
-        public int upgradeKey { get; set; }
+        public int pilotKey;
+        public int upgradeKey;
     }
 }

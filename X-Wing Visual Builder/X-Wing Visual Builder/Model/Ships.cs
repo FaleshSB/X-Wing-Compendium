@@ -11,7 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Ships
     {
-        public static Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
+        public static Dictionary<ShipType, Dictionary<Faction, Ship>> ships = new Dictionary<ShipType, Dictionary<Faction, Ship>>();
 
         static Ships()
         {
@@ -25,88 +25,22 @@ namespace X_Wing_Visual_Builder.Model
                     while (!parser.EndOfData)
                     {
                         string[] fields = parser.ReadFields();
-                        Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
-                        if (fields[6].Length > 0)
+                        List<Action> actions = new List<Action>();
+                        if (fields[10].Length > 0)
                         {
-                            string[] possibleUpgradesSplit = fields[6].Split(',');
-                            foreach (string possibleUpgrade in possibleUpgradesSplit)
+                            string[] actionsSplit = fields[10].Split(',');
+                            foreach (string action in actionsSplit)
                             {
-                                if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
-                                {
-                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
-                                }
-                                else
-                                {
-                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
-                                }
+                                actions.Add((Action)Int32.Parse(action));
                             }
                         }
-                        possibleUpgrades.Add(UpgradeType.Title, 1);
-                        possibleUpgrades.Add(UpgradeType.Modification, 1);
-                        pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                                   Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));
+                        if (ships.ContainsKey((ShipType)Int32.Parse(fields[1])) == false) { ships[(ShipType)Int32.Parse(fields[1])] = new Dictionary<Faction, Ship>(); }
+                        ships[(ShipType)Int32.Parse(fields[1])][(Faction)Int32.Parse(fields[11])] = new Ship(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]),
+                            fields[2], (ShipSize)Int32.Parse(fields[3]), Convert.ToBoolean(Int32.Parse(fields[4])), Convert.ToBoolean(Int32.Parse(fields[5])),
+                            Int32.Parse(fields[6]), Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]));
                     }
                 }
             }
-            // Remove Huge Ship cards
-            List<int> pilotsToRemove = new List<int>();
-            foreach (KeyValuePair<int, Pilot> pilot in pilots)
-            {
-                if (pilot.Value.ship.shipSize == ShipSize.Huge) { pilotsToRemove.Add(pilot.Key); }
-            }
-            foreach (int pilotToRemove in pilotsToRemove)
-            {
-                pilots.Remove(pilotToRemove);
-            }
-        }
-
-        public static Pilot GetPilotClone(int pilotId)
-        {
-            return pilots[pilotId].GetPilotClone();
-        }
-
-        public static Pilot GetRandomPilot()
-        {
-            Random rand = new Random();
-            List<int> keyList = new List<int>(pilots.Keys);
-            Pilot randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
-            while (true)
-            {
-                if (randomPilot.hasAbility == false)
-                {
-                    randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return randomPilot;
-        }
-
-        public static List<Pilot> GetPilots(Faction faction)
-        {
-            List<Pilot> pilotsToReturn = new List<Pilot>();
-            foreach (KeyValuePair<int, Pilot> entry in pilots)
-            {
-                if (entry.Value.faction == faction)
-                {
-                    pilotsToReturn.Add(entry.Value);
-                }
-            }
-            return pilotsToReturn;
-        }
-        public static List<Pilot> GetPilots(Faction faction, Ship ship)
-        {
-            List<Pilot> pilotsToReturn = new List<Pilot>();
-            foreach (KeyValuePair<int, Pilot> entry in pilots)
-            {
-                if (entry.Value.faction == faction && entry.Value.ship.shipType == ship.shipType)
-                {
-                    pilotsToReturn.Add(entry.Value);
-                }
-            }
-            return pilotsToReturn;
         }
     }
 }

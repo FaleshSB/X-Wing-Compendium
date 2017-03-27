@@ -11,6 +11,6 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class PilotCard : Card
     {
-        public int pilotKey { get; set; }
+        public int pilotKey;
     }
 }

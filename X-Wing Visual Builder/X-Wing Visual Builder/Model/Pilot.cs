@@ -33,20 +33,20 @@ namespace X_Wing_Visual_Builder.Model
                 return totalCost;
             }
         }
-        public int uniquePilotId { get; set; }
-        public int id { get; set; }
-        public int cost { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string faq { get; set; }
-        public Ship ship { get; set; }
-        public bool isUnique { get; set; }
-        public int pilotSkill { get; set; }
-        public Dictionary<UpgradeType, int> possibleUpgrades { get; set; } = new Dictionary<UpgradeType, int>();
-        public Faction faction { get; set; }
-        public bool hasAbility { get; set; }
+        public int uniquePilotId;
+        public int id;
+        public int cost;
+        public string name;
+        public string description;
+        public string faq;
+        public Ship ship;
+        public bool isUnique;
+        public int pilotSkill;
+        public Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
+        public Faction faction;
+        public bool hasAbility;
 
-        public List<Upgrade> upgrades { get; set; } = new List<Upgrade>();
+        public List<Upgrade> upgrades = new List<Upgrade>();
 
         public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility)
         {
@@ -61,7 +61,7 @@ namespace X_Wing_Visual_Builder.Model
             this.faction = faction;
             this.hasAbility = hasAbility;
 
-            ship = new Ship(shipType);
+            this.ship = Ships.ships[shipType][faction];
         }
         
         public Pilot GetPilotClone()

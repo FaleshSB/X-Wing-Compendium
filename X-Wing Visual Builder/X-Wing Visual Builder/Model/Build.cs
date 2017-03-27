@@ -17,9 +17,9 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Build
     {
-        public int uniqueBuildId { get; set; }
+        public int uniqueBuildId;
         public Faction faction;
-        public Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
+        public Dictionary<int, Pilot> pilots = new Dictionary<int, Pilot>();
         private double canvasSize = 1920;
         public int totalCost
         {

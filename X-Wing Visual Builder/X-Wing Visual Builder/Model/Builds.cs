@@ -8,7 +8,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Builds
     {
-        public static List<Build> builds { get; set; } = new List<Build>();
+        public static List<Build> builds = new List<Build>();
         private static bool isLoadingBuild = false;
 
         static Builds()

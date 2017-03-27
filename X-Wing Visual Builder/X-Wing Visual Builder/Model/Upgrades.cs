@@ -11,7 +11,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Upgrades
     {
-        public static Dictionary<int, Upgrade> upgrades { get; set; } = new Dictionary<int, Upgrade>();
+        public static Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
         private static Dictionary<UpgradeType, int> possibleUpgrades;
         static Upgrades()
         {
@@ -197,7 +197,7 @@ namespace X_Wing_Visual_Builder.Model
                     foreach (Ship ship in ships)
                     {
                         if ((entry.Value.shipType == ShipType.All || (entry.Value.shipType == ship.shipType))
-                            && (entry.Value.isTieOnly == false || (entry.Value.isTieOnly == true && ship.isTie))
+                            && (entry.Value.isTieOnly == false || (entry.Value.isTieOnly == true && ship.isTIE))
                             && (entry.Value.isXWingOnly == false || (entry.Value.isXWingOnly == true && ship.isXWing))
                             ) { isCorrectShipType = true; break; }
                     }

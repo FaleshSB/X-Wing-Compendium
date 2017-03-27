@@ -9,6 +9,6 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Card : Image
     {
-        public int id { get; set; }
+        public int id;
     }
 }

@@ -9,7 +9,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class Opt
     {
-        private static double resolutionMultiplier { get; set; }
+        private static double resolutionMultiplier;
 
         static Opt()
         {
