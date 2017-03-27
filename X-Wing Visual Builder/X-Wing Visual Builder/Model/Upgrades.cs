@@ -59,9 +59,19 @@ namespace X_Wing_Visual_Builder.Model
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], fields[5],
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (ShipType)Int32.Parse(fields[8]),
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
-                                             Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])),
-                                             Convert.ToBoolean(Int32.Parse(fields[15])), Convert.ToBoolean(Int32.Parse(fields[16])), Convert.ToBoolean(Int32.Parse(fields[17])), upgradesAdded, upgradesRemoved));
+                                             Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])),
+                                             Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), Convert.ToBoolean(Int32.Parse(fields[16])), upgradesAdded, upgradesRemoved));
                 }
+            }
+            // Remove Huge Ship cards
+            List<int> upgradesToRemove = new List<int>();
+            foreach (KeyValuePair<int, Upgrade> upgrade in upgrades)
+            {
+                if(upgrade.Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
+            }
+            foreach(int upgradeToRemove in upgradesToRemove)
+            {
+                upgrades.Remove(upgradeToRemove);
             }
         }
 

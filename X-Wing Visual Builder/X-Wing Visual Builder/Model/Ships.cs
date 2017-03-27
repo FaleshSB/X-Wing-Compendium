@@ -9,13 +9,13 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    static class Pilots
+    static class Ships
     {
         public static Dictionary<int, Pilot> pilots { get; set; } = new Dictionary<int, Pilot>();
 
-        static Pilots()
+        static Ships()
         {
-            using (StringReader stringReader = new StringReader(Properties.Resources.PilotDatabase))
+            using (StringReader stringReader = new StringReader(Properties.Resources.shipsDatabase))
             {
                 using (TextFieldParser parser = new TextFieldParser(stringReader))
                 {

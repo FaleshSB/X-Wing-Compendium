@@ -88,6 +88,7 @@
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
     <Compile Include="Model\Ship.cs" />
+    <Compile Include="Model\Ships.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
@@ -204,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PilotDatabase.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shipsDatabase.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

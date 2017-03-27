@@ -12,7 +12,7 @@ namespace X_Wing_Visual_Builder.Model
         {
             int cost = upgrade.cost;
 
-            //TIE/x1
+            // TIE/x1
             if (upgrades.Contains(Upgrades.upgrades[11029]) && upgrade.upgradeType == UpgradeType.System)
             {
                 cost = Math.Max(0, upgrade.cost - 4);
@@ -72,6 +72,11 @@ namespace X_Wing_Visual_Builder.Model
             else if (pilot.upgrades.Contains(Upgrades.upgrades[11031]) && upgrade.upgradeType == UpgradeType.Crew && upgrade.cost > 4) { return true; }
             // Royal Guard TIE
             else if (pilot.upgrades.Contains(Upgrades.upgrades[11034]) && upgrade.upgradeType == UpgradeType.Modification && pilot.upgrades.Contains(upgrade)) { return true; }
+            // Lightweight Frame
+            else if (upgrade.id == 12026 && pilot.ship.agility > 2) { return true; }
+
+
+            
             return false;
         }
     }
