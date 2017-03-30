@@ -28,28 +28,18 @@ namespace X_Wing_Visual_Builder.Model
             return null;
         }
 
+        public static void DeleteBuild(int uniqueBuildId)
+        {
+            builds.Remove(GetBuild(uniqueBuildId));
+            SaveBuilds();
+        }
+
         public static void AddBuild(Faction faction)
         {
             Build newBuild = new Build();
             newBuild.faction = faction;
-            int newBuildId = 0;
-            while(true)
-            {
-                int origionalNewBuildId = newBuildId;
-                foreach (Build build in builds)
-                {
-                    if(build.uniqueBuildId == newBuildId)
-                    {
-                        newBuildId++;
-                        break;
-                    }
-                }
-                if(origionalNewBuildId == newBuildId)
-                {
-                    newBuild.uniqueBuildId = newBuildId;
-                    break;
-                }
-            }
+            int newBuildId = builds.OrderByDescending(build => build.uniqueBuildId).ToArray()[0].uniqueBuildId + 1;
+            newBuild.uniqueBuildId = newBuildId;
             builds.Add(newBuild);
             SaveBuilds();
         }
@@ -58,9 +48,10 @@ namespace X_Wing_Visual_Builder.Model
         {
             if (isLoadingBuild) { return; }
             string buildInfo = "";
-            foreach (Build build in builds)
+            int uniqueBuildId = 0;
+            foreach (Build build in builds.OrderBy(build => build.uniqueBuildId).ToList())
             {
-                buildInfo += build.uniqueBuildId + "|";
+                buildInfo += uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
                 foreach(KeyValuePair<int, Pilot> pilot in build.pilots)
                 {
@@ -74,6 +65,7 @@ namespace X_Wing_Visual_Builder.Model
                 }
                 buildInfo = buildInfo.TrimEnd('&');
                 buildInfo += System.Environment.NewLine;
+                uniqueBuildId++;
             }
             FileHandler.SaveFile("build.txt", buildInfo);
         }

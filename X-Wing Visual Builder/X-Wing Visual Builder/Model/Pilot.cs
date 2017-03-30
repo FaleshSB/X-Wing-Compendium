@@ -41,8 +41,78 @@ namespace X_Wing_Visual_Builder.Model
         public string faq;
         public Ship ship;
         public bool isUnique;
-        public int pilotSkill;
-        public Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
+        public List<Action> usableActions
+        {
+            get
+            {
+                List<Action> usableActions = new List<Action>(ship.actions);
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    usableActions.AddRange(upgrade.addsActions);
+                }
+
+                return usableActions;
+            }
+        }
+        private int _pilotSkill;
+        public int pilotSkill
+        {
+            get
+            {
+                int pilotSkill = _pilotSkill;
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    pilotSkill += upgrade.addsPilotSkill;
+                }
+                return pilotSkill;
+            }
+            set
+            {
+                _pilotSkill = value;
+            }
+        }
+        private Dictionary<UpgradeType, int> _possibleUpgrades = new Dictionary<UpgradeType, int>();
+        public Dictionary<UpgradeType, int> possibleUpgrades
+        {
+            get
+            {
+                Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(_possibleUpgrades);
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
+
+                    foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
+                    {
+                        if (possibleUpgrades.ContainsKey(upgradeAdded.Key))
+                        {
+                            possibleUpgrades[upgradeAdded.Key] += upgradeAdded.Value;
+                        }
+                        else
+                        {
+                            possibleUpgrades[upgradeAdded.Key] = 0 + upgradeAdded.Value;
+                        }
+                    }
+                    foreach (KeyValuePair<UpgradeType, int> upgradeRemoved in upgrade.upgradesRemoved)
+                    {
+                        if (possibleUpgrades.ContainsKey(upgradeRemoved.Key))
+                        {
+                            possibleUpgrades[upgradeRemoved.Key] -= upgradeRemoved.Value;
+                        }
+                        else
+                        {
+                            possibleUpgrades[upgradeRemoved.Key] = 0 - upgradeRemoved.Value;
+                        }
+                    }
+                    
+                }
+                UpgradeModifiers.ChangePossibleUpgrades(this, possibleUpgrades);
+                return possibleUpgrades;
+            }
+            set
+            {
+                _possibleUpgrades = value;
+            }
+        }
         public Faction faction;
         public bool hasAbility;
 

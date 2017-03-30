@@ -34,15 +34,20 @@ namespace X_Wing_Visual_Builder.Model
         public bool isLimited;
         public int numberOfUpgradeSlots;
         public bool isDualCard;
-        public bool needsBoost;
         public bool isTieOnly;
         public bool isXWingOnly;
         public Dictionary<UpgradeType, int> upgradesAdded;
         public Dictionary<UpgradeType, int> upgradesRemoved;
+        public int requiresPilotSkill;
+        public List<Action> requiresActions;
+        public List<int> requiresUpgrades;
+        public List<Action> addsActions;
+        public int addsPilotSkill;
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
-                       ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard,
-                       bool needsBoost, bool isTieOnly, bool isXWingOnly, Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved)
+                       ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
+                       Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
+                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill)
         {
             this.id = id;
             this.upgradeType = upgradeType;
@@ -58,11 +63,15 @@ namespace X_Wing_Visual_Builder.Model
             this.isLimited = isLimited;
             this.numberOfUpgradeSlots = numberOfUpgradeSlots;
             this.isDualCard = isDualCard;
-            this.needsBoost = needsBoost;
             this.isTieOnly = isTieOnly;
             this.isXWingOnly = isXWingOnly;
             this.upgradesAdded = upgradesAdded;
             this.upgradesRemoved = upgradesRemoved;
+            this.requiresPilotSkill = requiresPilotSkill;
+            this.requiresActions = requiresActions;
+            this.requiresUpgrades = requiresUpgrades;
+            this.addsActions = addsActions;
+            this.addsPilotSkill = addsPilotSkill;
         }
         /*
         public UpgradeCard GetUpgradeCard(double width, double height)

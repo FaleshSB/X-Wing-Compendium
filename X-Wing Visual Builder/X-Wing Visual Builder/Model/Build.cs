@@ -35,28 +35,6 @@ namespace X_Wing_Visual_Builder.Model
                 return cost;
             }
         }
-
-        /*
-        public Dictionary<UpgradeType, int> GetPossibleUpgrades(int uniquePilotId)
-        {
-            Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(pilots[uniquePilotId].possibleUpgrades);
-            foreach(Upgrade upgrade in pilots[uniquePilotId].upgrades)
-            {
-                possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
-
-                foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
-                {
-                    possibleUpgrades[upgradeAdded.Key] += upgradeAdded.Value;
-                }
-
-                foreach (KeyValuePair<UpgradeType, int> upgradeRemoved in upgrade.upgradesRemoved)
-                {
-                    possibleUpgrades[upgradeRemoved.Key] -= upgradeRemoved.Value;
-                }
-            }
-            return possibleUpgrades;
-        }
-        */
         public void AddPilot(int uniquePilotId, Pilot pilot)
         {
             pilots.Add(pilot.uniquePilotId, pilot);
@@ -117,6 +95,8 @@ namespace X_Wing_Visual_Builder.Model
         public void RemoveUpgrade(int uniquePilotId, int upgradeId)
         {
             pilots[uniquePilotId].upgrades.Remove(Upgrades.upgrades[upgradeId]);
+            UpgradeModifiers.RemoveUpgrade(this, uniquePilotId, upgradeId);
+            Upgrades.RemoveUnusableUpgrades(this, uniquePilotId);
             Builds.SaveBuilds();
         }
 

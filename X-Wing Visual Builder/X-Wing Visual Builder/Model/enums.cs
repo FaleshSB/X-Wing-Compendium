@@ -8,7 +8,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     public enum DieResult { Success = 1, Failure = 2, UsedFail = 3 }
     public enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3, SquadsPage = 4, CalculateStats = 5 }
-    public enum UpgradeType { All = 1, Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
+    public enum UpgradeType { Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
                        SalvagedAstromech = 10, System = 11, Title = 12, Modification = 13, Illicit = 14, Cargo = 15, Hardpoint = 16,
                        Team = 17, Tech = 18 }
     public enum UpgradeSort { Name = 1, Cost = 2 }

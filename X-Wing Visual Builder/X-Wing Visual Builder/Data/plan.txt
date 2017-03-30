@@ -20,3 +20,4 @@ Show Imp/Reb/Scum squads and other filters like user made groups
 
 TODO: Test Mist Hunter adding tractor beam and removing either if the other is removed
 
+Add Multiple Upgrades at the same time on the upgrades page without going back to the squad page each time

@@ -91,6 +91,7 @@ namespace X_Wing_Visual_Builder.View
         private void AddBuildClicked(object sender, RoutedEventArgs e)
         {
             Builds.AddBuild(Faction.Rebel);
+            DisplayContent();
         }
 
         private void contentCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -107,10 +108,7 @@ namespace X_Wing_Visual_Builder.View
         private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);
-
-            UpgradeModifiers.RemoveUpgrade(Builds.GetBuild(deleteButton.uniqueBuildId), deleteButton.uniquePilotId, deleteButton.upgradeId);
-            
+            Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);            
             DisplayContent();
         }
 
@@ -124,7 +122,7 @@ namespace X_Wing_Visual_Builder.View
         protected override void DisplayContent()
         {
             contentWrapPanel.Children.Clear();
-            foreach(Build build in Builds.builds)
+            foreach(Build build in Builds.builds.OrderByDescending(build => build.uniqueBuildId).ToList())
             { 
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -141,6 +139,28 @@ namespace X_Wing_Visual_Builder.View
                 Canvas.SetLeft(totalCostLabel, 900);
                 Canvas.SetTop(totalCostLabel, 0);
                 spacerCanvas.Children.Add(totalCostLabel);
+
+                BuildPilotUpgrade deleteBuild;
+                deleteBuild = new BuildPilotUpgrade();
+                deleteBuild.uniqueBuildId = build.uniqueBuildId;
+                deleteBuild.FontSize = 16;
+                deleteBuild.FontWeight = FontWeights.Bold;
+                deleteBuild.Click += new RoutedEventHandler(DeleteBuildClicked);
+                deleteBuild.Content = "Delete Build";
+                Canvas.SetLeft(deleteBuild, 805);
+                Canvas.SetTop(deleteBuild, 8);
+                spacerCanvas.Children.Add(deleteBuild);
+
+                BuildPilotUpgrade addPilot;
+                addPilot = new BuildPilotUpgrade();
+                addPilot.uniqueBuildId = build.uniqueBuildId;
+                addPilot.FontSize = 16;
+                addPilot.FontWeight = FontWeights.Bold;
+                addPilot.Click += new RoutedEventHandler(AddPilotClicked);
+                addPilot.Content = "Add Pilot";
+                Canvas.SetLeft(addPilot, 945);
+                Canvas.SetTop(addPilot, 8);
+                spacerCanvas.Children.Add(addPilot);
 
                 buildWrapPanel.Children.Add(spacerCanvas);
                 
@@ -257,9 +277,17 @@ namespace X_Wing_Visual_Builder.View
 
         private void AddPilotClicked(object sender, RoutedEventArgs e)
         {
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddPilot(Builds.GetBuild(8));
+            browseCardsPage.AddPilot(Builds.GetBuild(addUpgradeButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
+        }
+
+        private void DeleteBuildClicked(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
+            Builds.DeleteBuild(addUpgradeButton.uniqueBuildId);
+            DisplayContent();
         }
 
         private void AddUpgrade(object sender, RoutedEventArgs e)

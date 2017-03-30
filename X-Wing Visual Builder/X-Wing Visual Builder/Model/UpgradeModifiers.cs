@@ -48,19 +48,30 @@ namespace X_Wing_Visual_Builder.Model
             {
                 if (possibleUpgrades.ContainsKey(UpgradeType.Cannon) && possibleUpgrades[UpgradeType.Cannon] < 1)
                 {
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Torpedo, -1);
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Missile, -1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Torpedo, 1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Missile, 1);
                 }
                 else if (possibleUpgrades.ContainsKey(UpgradeType.Missile) && possibleUpgrades[UpgradeType.Missile] < 1)
                 {
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Torpedo, -1);
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Cannon, -1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Torpedo, 1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Cannon, 1);
                 }
                 else if (possibleUpgrades.ContainsKey(UpgradeType.Torpedo) && possibleUpgrades[UpgradeType.Torpedo] < 1)
                 {
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Missile, -1);
-                    Upgrades.AddOrRemoveFromPossibleUpgrades(possibleUpgrades, UpgradeType.Cannon, -1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Missile, 1);
+                    RemoveUpgradeHelper(possibleUpgrades, UpgradeType.Cannon, 1);
                 }
+            }
+        }
+        private static void RemoveUpgradeHelper(Dictionary<UpgradeType, int> possibleUpgrades, UpgradeType upgradeType, int numberToBeRemoved)
+        {
+            if (possibleUpgrades.ContainsKey(upgradeType))
+            {
+                possibleUpgrades[upgradeType] -= numberToBeRemoved;
+            }
+            else
+            {
+                possibleUpgrades[upgradeType] = 0 - numberToBeRemoved;
             }
         }
 

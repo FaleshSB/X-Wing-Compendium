@@ -188,8 +188,7 @@ namespace X_Wing_Visual_Builder.View
                 contentWrapPanel.Children.Add(upgradeCard);
             }
 
-            //pilotsToDisplay = pilotsToDisplay.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
-            pilotsToDisplay = pilots.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
+            pilotsToDisplay = pilotsToDisplay.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
             foreach (Pilot pilot in pilotsToDisplay)
             {
                 PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
@@ -317,9 +316,12 @@ namespace X_Wing_Visual_Builder.View
                                     break;
                                 }
                             }
+                            bool hasFoundFaction = (pilot.faction.ToString().ToLower() == searchWord.ToLower()) ? true : false;
 
 
-                            if (isSearchDescriptionChecked == false && (hasFoundWordInName == true || hasFoundWordInShipName == true || hasFoundPilotSkill == true || hasFoundUpgradeType))
+
+                            if (isSearchDescriptionChecked == false && (hasFoundWordInName == true || hasFoundWordInShipName == true
+                                || hasFoundPilotSkill == true || hasFoundUpgradeType == true || hasFoundFaction == true))
                             {
                                 hasFoundAllWords = true;
                                 break;
@@ -436,7 +438,7 @@ namespace X_Wing_Visual_Builder.View
                 isAddingPilot = false;
                 Pilot newPilot = Pilots.GetPilotClone(card.id);
                 newPilot.upgrades = pilotToSwap.upgrades;
-                Upgrades.RemoveUnusableUpgrades(newPilot);
+                Upgrades.RemoveUnusableUpgrades(build, newPilot.uniquePilotId);
                 build.AddPilot(newPilot);
                 build.RemovePilot(pilotToSwap.uniquePilotId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];

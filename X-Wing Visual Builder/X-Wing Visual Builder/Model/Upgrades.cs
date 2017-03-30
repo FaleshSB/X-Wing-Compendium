@@ -12,7 +12,6 @@ namespace X_Wing_Visual_Builder.Model
     static class Upgrades
     {
         public static Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
-        private static Dictionary<UpgradeType, int> possibleUpgrades;
         static Upgrades()
         {
             StringReader sr = new StringReader(Properties.Resources.UpgradeDatabase);
@@ -25,9 +24,9 @@ namespace X_Wing_Visual_Builder.Model
                 {
                     string[] fields = parser.ReadFields();
                     Dictionary<UpgradeType, int> upgradesAdded = new Dictionary<UpgradeType, int>();
-                    if (fields[18].Length > 0)
+                    if (fields[16].Length > 0)
                     {
-                        string[] possibleUpgradesSplit = fields[18].Split(',');
+                        string[] possibleUpgradesSplit = fields[16].Split(',');
                         foreach (string possibleUpgrade in possibleUpgradesSplit)
                         {
                             if (upgradesAdded.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
@@ -41,9 +40,9 @@ namespace X_Wing_Visual_Builder.Model
                         }
                     }
                     Dictionary<UpgradeType, int> upgradesRemoved = new Dictionary<UpgradeType, int>();
-                    if (fields[19].Length > 0)
+                    if (fields[17].Length > 0)
                     {
-                        string[] possibleUpgradesSplit = fields[19].Split(',');
+                        string[] possibleUpgradesSplit = fields[17].Split(',');
                         foreach (string possibleUpgrade in possibleUpgradesSplit)
                         {
                             if (upgradesRemoved.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
@@ -56,11 +55,48 @@ namespace X_Wing_Visual_Builder.Model
                             }
                         }
                     }
+                    int requiresPilotSkill = 0;
+                    if (fields[18].Length > 0)
+                    {
+                        requiresPilotSkill = Int32.Parse(fields[18]);
+                    }
+                    List<Action> requiresActions = new List<Action>();
+                    if (fields[19].Length > 0)
+                    {
+                        string[] requiresActionsSplit = fields[19].Split(',');
+                        foreach (string requiresAction in requiresActionsSplit)
+                        {
+                            requiresActions.Add((Action)Int32.Parse(requiresAction));
+                        }
+                    }
+                    List<int> requiresUpgrades = new List<int>();
+                    if (fields[20].Length > 0)
+                    {
+                        string[] requiresUpgradesSplit = fields[20].Split(',');
+                        foreach (string requiresUpgrade in requiresUpgradesSplit)
+                        {
+                            requiresUpgrades.Add(Int32.Parse(requiresUpgrade));
+                        }
+                    }
+                    List<Action> addsActions = new List<Action>();
+                    if (fields[21].Length > 0)
+                    {
+                        string[] addsActionsSplit = fields[21].Split(',');
+                        foreach (string addsAction in addsActionsSplit)
+                        {
+                            addsActions.Add((Action)Int32.Parse(addsAction));
+                        }
+                    }
+                    int addsPilotSkill = 0;
+                    if (fields[22].Length > 0)
+                    {
+                        addsPilotSkill = Int32.Parse(fields[22]);
+                    }
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], fields[5],
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (ShipType)Int32.Parse(fields[8]),
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
-                                             Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])),
-                                             Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), Convert.ToBoolean(Int32.Parse(fields[16])), upgradesAdded, upgradesRemoved));
+                                             Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
+                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill));
                 }
             }
             // Remove Huge Ship cards
@@ -94,174 +130,102 @@ namespace X_Wing_Visual_Builder.Model
             return randomUpgrade;
         }
         
-        public static void AddOrRemoveFromPossibleUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, UpgradeType key, int value)
-        {
-            if(possibleUpgrades.ContainsKey(key))
-            {
-                possibleUpgrades[key] += value;
-            }
-            else
-            {
-                possibleUpgrades[key] = 0 + value;
-            }
-        }
-
-        public static Pilot RemoveUnusableUpgrades(Pilot pilot)
+        public static void RemoveUnusableUpgrades(Build build, int uniquePilotId)
         {
             bool hasAnUpgradeBeenRemoved = false;
-            Dictionary<UpgradeType, int> possibleUpgrades = GetPossibleUpgrades(pilot);
-            foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
+
+            foreach(Upgrade upgrade in build.pilots[uniquePilotId].upgrades)
             {
-                if(possibleUpgrade.Value < 0)
+                if (IsUpgradeUsable(build.pilots[uniquePilotId], upgrade, true) == false)
                 {
-                    foreach(Upgrade upgrade in pilot.upgrades)
-                    {
-                        if(upgrade.upgradeType == possibleUpgrade.Key)
-                        {
-                            pilot.upgrades.Remove(Upgrades.upgrades[upgrade.id]);
-                            hasAnUpgradeBeenRemoved = true;
-                            break;
-                        }
-                    }
+                    build.RemoveUpgrade(uniquePilotId, upgrade.id);
+                    hasAnUpgradeBeenRemoved = true;
+                    break;
                 }
             }
-            //add GetUpgrades search to see if upgrades are present in case of lowering ps/other upgrade requirements
+
             if (hasAnUpgradeBeenRemoved == true)
             {
-                return RemoveUnusableUpgrades(pilot);
+                RemoveUnusableUpgrades(build, uniquePilotId);
+            }
+        }
+
+        private static bool IsUpgradeUsable(Pilot pilot, Upgrade upgrade, bool isRemovingUpgrades = false)
+        {
+            bool isUpgradeUsable = true;
+
+            if (pilot.pilotSkill < upgrade.requiresPilotSkill) { isUpgradeUsable = false; }
+            if (upgrade.faction != Faction.All && upgrade.faction != pilot.faction) { isUpgradeUsable = false; }
+            if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != pilot.ship.shipSize) { isUpgradeUsable = false; }
+
+            if(isRemovingUpgrades == false)
+            {
+                bool hasSlotForUpgrade = false;
+                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in pilot.possibleUpgrades)
+                {
+                    if ((upgrade.upgradeType == possibleUpgrade.Key && upgrade.numberOfUpgradeSlots <= possibleUpgrade.Value)) { hasSlotForUpgrade = true; break; }
+                }
+                if (hasSlotForUpgrade == false) { isUpgradeUsable = false; }
             }
             else
             {
-                return pilot;
+                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in pilot.possibleUpgrades)
+                {
+                    if ((upgrade.upgradeType == possibleUpgrade.Key && possibleUpgrade.Value < 0)) { isUpgradeUsable = false; break; }
+                }
             }
-        }
 
-        private static Dictionary<UpgradeType, int> GetPossibleUpgrades(Pilot pilot)
-        {
-            List<Faction> factions = new List<Faction>();
-            factions.Add(pilot.faction);
-            List<ShipSize> shipSizes = new List<ShipSize>();
-            shipSizes.Add(pilot.ship.shipSize);
-            List<Ship> ships = new List<Ship>();
-            ships.Add(pilot.ship);
+            bool isCorrectShipType = false;
+            if ((upgrade.shipType == ShipType.All || (upgrade.shipType == pilot.ship.shipType))
+                    && (upgrade.isTieOnly == false || (upgrade.isTieOnly == true && pilot.ship.isTIE))
+                    && (upgrade.isXWingOnly == false || (upgrade.isXWingOnly == true && pilot.ship.isXWing))
+                    ) { isCorrectShipType = true; }
+            if (isCorrectShipType == false) { isUpgradeUsable = false; }
 
-            possibleUpgrades = new Dictionary<UpgradeType, int>(pilot.possibleUpgrades);
-            foreach (Upgrade upgrade in pilot.upgrades)
+            if (upgrade.requiresActions.Count > 0)
             {
-                AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgrade.upgradeType, 0 - upgrade.numberOfUpgradeSlots);
-                foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
+                foreach (Action requiredAction in upgrade.requiresActions)
                 {
-                    AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgradeAdded.Key, upgradeAdded.Value);
-                }
-                foreach (KeyValuePair<UpgradeType, int> upgradeRemoved in upgrade.upgradesRemoved)
-                {
-                    AddOrRemoveFromPossibleUpgrades(possibleUpgrades, upgradeRemoved.Key, upgradeRemoved.Value);
+                    if (pilot.usableActions.Exists(action => action == requiredAction) == false)
+                    {
+                        isUpgradeUsable = false;
+                        break;
+                    }
                 }
             }
 
-            UpgradeModifiers.ChangePossibleUpgrades(pilot, possibleUpgrades);
-            
-            return possibleUpgrades;
-        }
-        public static List<Upgrade> GetUpgrades(Pilot pilot, bool isTestingToRemoveUpgrades = false)
-        {
-            List<Faction> factions = new List<Faction>();
-            factions.Add(pilot.faction);
-            List<ShipSize> shipSizes = new List<ShipSize>();
-            shipSizes.Add(pilot.ship.shipSize);
-            List<Ship> ships = new List<Ship>();
-            ships.Add(pilot.ship);
-
-            Dictionary<UpgradeType, int> possibleUpgrades = GetPossibleUpgrades(pilot);
-            List<Upgrade> upgradesToReturn = new List<Upgrade>();
-            foreach (KeyValuePair<int, Upgrade> entry in upgrades)
+            if (upgrade.requiresUpgrades.Count > 0)
             {
-                bool isCorrectType = false;
-                bool isCorrectFaction = false;
-                bool isCorrectShipSize = false;
-                bool isCorrectShipType = false;
-                if (isTestingToRemoveUpgrades == false)
+                foreach (int requiredupgrade in upgrade.requiresUpgrades)
                 {
-                    foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
+                    if (pilot.upgrades.Exists(upgradeElement => upgradeElement.id == requiredupgrade) == false)
                     {
-                        if (entry.Value.upgradeType == UpgradeType.All || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true; break; }
+                        isUpgradeUsable = false;
+                        break;
                     }
-                    foreach (Faction faction in factions)
-                    {
-                        if (entry.Value.faction == Faction.All || entry.Value.faction == faction) { isCorrectFaction = true; break; }
-                    }
-                    foreach (ShipSize shipSize in shipSizes)
-                    {
-                        if (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize) { isCorrectShipSize = true; break; }
-                    }
-                    foreach (Ship ship in ships)
-                    {
-                        if ((entry.Value.shipType == ShipType.All || (entry.Value.shipType == ship.shipType))
-                            && (entry.Value.isTieOnly == false || (entry.Value.isTieOnly == true && ship.isTIE))
-                            && (entry.Value.isXWingOnly == false || (entry.Value.isXWingOnly == true && ship.isXWing))
-                            ) { isCorrectShipType = true; break; }
-                    }
-                }
-                else
-                {
-                    isCorrectType = true;
-                    isCorrectFaction = true;
-                    isCorrectShipSize = true;
-                    isCorrectShipType = true;
-                }
-                if (isCorrectType && isCorrectFaction && isCorrectShipSize && isCorrectShipType)
-                {
-                    if(UpgradeModifiers.SkipGetUpgrade(pilot, entry.Value) == true)
-                    {
-                        continue;
-                    }
-                    upgradesToReturn.Add(entry.Value);
                 }
             }
 
+            if (UpgradeModifiers.SkipGetUpgrade(pilot, upgrade) == true)
+            {
+                isUpgradeUsable = false;
+            }
 
-            return upgradesToReturn;
+            return isUpgradeUsable;
         }
-        /*
-        public static List<Upgrade> GetUpgrades(Dictionary<UpgradeType, int> possibleUpgrades, List<Faction> factions, List<ShipSize> shipSizes, List<Ship> ships)
+
+        public static List<Upgrade> GetUpgrades(Pilot pilot)
         {
             List<Upgrade> upgradesToReturn = new List<Upgrade>();
-
-
-            foreach (KeyValuePair<int, Upgrade> entry in upgrades)
+            foreach (Upgrade upgrade in upgrades.Values.ToList())
             {
-                bool isCorrectType = false;
-                bool isCorrectFaction = false;
-                bool isCorrectShipSize = false;
-                bool isCorrectShipType = false;
-                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in possibleUpgrades)
+                if(IsUpgradeUsable(pilot, upgrade) == true)
                 {
-                    if(entry.Value.upgradeType == UpgradeType.All || (entry.Value.upgradeType == possibleUpgrade.Key && entry.Value.numberOfUpgradeSlots <= possibleUpgrade.Value)) { isCorrectType = true;  break; }
-                }
-                foreach (Faction faction in factions)
-                {
-                    if (entry.Value.faction == Faction.All || entry.Value.faction == faction) { isCorrectFaction = true; break; }
-                }
-                foreach (ShipSize shipSize in shipSizes)
-                {
-                    if (entry.Value.shipSize == ShipSize.All || entry.Value.shipSize == shipSize) { isCorrectShipSize = true; break; }
-                }
-                foreach (Ship ship in ships)
-                {
-                    if ((entry.Value.shipType == ShipType.All || (entry.Value.shipType == ship.shipType))
-                        && (entry.Value.isTieOnly == false || (entry.Value.isTieOnly == true && ship.isTie))
-                        && (entry.Value.isXWingOnly == false || (entry.Value.isXWingOnly == true && ship.isXWing))
-                        ) { isCorrectShipType = true; break; }
-                }
-
-                if (isCorrectType && isCorrectFaction && isCorrectShipSize && isCorrectShipType)
-                {
-                    upgradesToReturn.Add(entry.Value);
+                    upgradesToReturn.Add(upgrade);
                 }
             }
 
             return upgradesToReturn;
         }
-        */
     }
 }
