@@ -158,21 +158,20 @@ namespace X_Wing_Visual_Builder.Model
             if (upgrade.faction != Faction.All && upgrade.faction != pilot.faction) { isUpgradeUsable = false; }
             if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != pilot.ship.shipSize) { isUpgradeUsable = false; }
 
-            if(isRemovingUpgrades == false)
+            if(pilot.possibleUpgrades.ContainsKey(upgrade.upgradeType))
             {
-                bool hasSlotForUpgrade = false;
-                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in pilot.possibleUpgrades)
+                if (isRemovingUpgrades)
                 {
-                    if ((upgrade.upgradeType == possibleUpgrade.Key && upgrade.numberOfUpgradeSlots <= possibleUpgrade.Value)) { hasSlotForUpgrade = true; break; }
+                    isUpgradeUsable = (pilot.possibleUpgrades[upgrade.upgradeType] >= 0) ? isUpgradeUsable : false;
                 }
-                if (hasSlotForUpgrade == false) { isUpgradeUsable = false; }
+                else
+                {
+                    isUpgradeUsable = (upgrade.numberOfUpgradeSlots <= pilot.possibleUpgrades[upgrade.upgradeType]) ? isUpgradeUsable : false;
+                }
             }
             else
             {
-                foreach (KeyValuePair<UpgradeType, int> possibleUpgrade in pilot.possibleUpgrades)
-                {
-                    if ((upgrade.upgradeType == possibleUpgrade.Key && possibleUpgrade.Value < 0)) { isUpgradeUsable = false; break; }
-                }
+                isUpgradeUsable = false;
             }
 
             bool isCorrectShipType = false;
@@ -206,7 +205,7 @@ namespace X_Wing_Visual_Builder.Model
                 }
             }
 
-            if (UpgradeModifiers.SkipGetUpgrade(pilot, upgrade) == true)
+            if (UpgradeModifiers.SkipGetUpgrade(pilot, upgrade, isRemovingUpgrades) == true)
             {
                 isUpgradeUsable = false;
             }

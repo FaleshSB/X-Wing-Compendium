@@ -238,9 +238,9 @@
 12012£13£3£Experimental Interface£Once per round, after you perform an action, you may perform 1 free action from an equipped Upgrade card with the "Action:" header. Then receive 1 stress token.££1£1£1£0£1£0£1£0£0£0£££££££
 12016£13£3£Hull Upgrade£Increase your hull value by 1.££1£1£1£0£0£0£1£0£0£0£££££££
 12013£13£3£Stealth Device£Increase your agility value by 1. If you are hit by an attack, discard this card.££1£1£1£0£0£0£1£0£0£0£££££££
-12018£13£2£Advanced SLAM£After performing a SLAM action, if you did not overlap an obstacle or another ship, you may perform a free action.££1£1£1£0£0£0£1£0£0£0£££££11££
+12018£13£2£Advanced SLAM£After performing a SLAM action, if you did not overlap an obstacle or another ship, you may perform a free action.££1£1£1£0£0£0£1£0£0£0££££11£££
 12008£13£2£Anti Pursuit Laser£After an enemy ship executes a maneuver that causes it to overlap your ship, roll 1 attack die. On a hit or critical result, the enemy ship suffers 1 damage.££1£3£1£0£0£0£1£0£0£0£££££££
-12022£13£2£Autothrusters£When defending, if you are inside the attacker's firing arc beyond Range 2 or outside the attacker's firing arc, you may change 1 of your blank results to an evade result. You can equip this card only if you have the Boost action icon.££1£1£1£0£0£0£1£0£0£0£££££2££
+12022£13£2£Autothrusters£When defending, if you are inside the attacker's firing arc beyond Range 2 or outside the attacker's firing arc, you may change 1 of your blank results to an evade result. You can equip this card only if you have the Boost action icon.££1£1£1£0£0£0£1£0£0£0££££2£££
 12005£13£2£Gyroscopic Targeting£At the end of the Combat phase, if you executed a 3, 4 or 5-speed maneuver this round, you may rotate your mobile firing arc.££1£1£45£0£0£0£1£0£0£0£££££££
 12009£13£2£Ion Projector£After an enemy ship executes a maneuver that causes it to overlap your ship, roll 1 attack die. On a HIT or CRITICAL HIT result, the enemy ship receives 1 ion token.££1£3£1£0£0£0£1£0£0£0£££££££
 12026£13£2£Lightweight Frame£When defending, after rolling defense dice, if there are more attack dice than defense dice, roll 1 additional defense die.@You cannot equip this card if your agility value is "3" or higher.££1£1£1£0£0£0£1£0£1£0£££££££

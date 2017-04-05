@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
+    public enum Maneuver { LSloop = 1, RSloop = 2, KTurn = 3, LTurn = 4, RTurn = 5, Stop = 6, LBank = 7, RBank = 8, Streight = 9, LTalon = 10, RTalon = 11, LBack = 12, RBack = 13, Back = 14 }
+    public enum ManeuverDificulty { White = 1, Green = 2, Red = 3}
     public enum DieResult { Success = 1, Failure = 2, UsedFail = 3 }
     public enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3, SquadsPage = 4, CalculateStats = 5 }
     public enum UpgradeType { Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
@@ -65,7 +67,6 @@ namespace X_Wing_Visual_Builder.Model
     }
 
     public enum Action { BarrelRoll = 1, Boost = 2, Cloak = 3, Coordinate = 4, Evade = 5, Focus = 6, Jam = 7, Recover = 8, Reinforce = 9, RotateArc = 10, SLAM = 11, TargetLock = 12 }
-    public enum Maneuver { White, Green, Red }
     public enum RollType { Attack, Defend }
     public enum DieFace { Blank, Focus, Evade, Hit, Crit }
 }
