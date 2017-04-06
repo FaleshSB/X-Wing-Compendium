@@ -79,7 +79,10 @@ namespace X_Wing_Visual_Builder.Model
                 Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(_possibleUpgrades);
                 foreach (Upgrade upgrade in upgrades)
                 {
-                    possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
+                    if (possibleUpgrades.ContainsKey(upgrade.upgradeType))
+                    {
+                        possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
+                    }
 
                     foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
                     {
@@ -140,25 +143,20 @@ namespace X_Wing_Visual_Builder.Model
             pilotClone.upgrades = new List<Upgrade>();
             return pilotClone;
         }
-        
-        public PilotCard GetPilotCard(double widthD, double heightD)
+
+        public PilotCard GetPilotCard(double width, double height, int uniqueBuildId = 0)
         {
-            int height = (int)heightD;
-            int width = (int)widthD;
-
-            //System.Drawing.Image sourceUpgradeImage = System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
-            //BitmapImage resizedUpgradeImage = ImageResizer.ResizeImage(sourceUpgradeImage, new System.Drawing.Size(width, height));
-            //sourceUpgradeImage.Dispose();
-
             BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png"));
 
             PilotCard pilotCard = new PilotCard();
             pilotCard.id = id;
             pilotCard.Source = resizedUpgradeImage;
-            pilotCard.Height = Convert.ToDouble(height);
-            pilotCard.Width = Convert.ToDouble(width);
+            pilotCard.Height = height;
+            pilotCard.Width = width;
             pilotCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(pilotCard, BitmapScalingMode.HighQuality);
+            pilotCard.uniquePilotId = uniquePilotId;
+            pilotCard.uniqueBuildId = uniqueBuildId;
 
             return pilotCard;
         }

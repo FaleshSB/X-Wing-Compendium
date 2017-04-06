@@ -74,15 +74,7 @@ namespace X_Wing_Visual_Builder.Model
             pilots[uniquePilotId].upgrades.Add(upgrade);
             Builds.SaveBuilds();
         }
-
-        public PilotCard GetPilotCard(int uniquePilotId, double width, double height)
-        {
-            PilotCard pilotCard = pilots[uniquePilotId].GetPilotCard(width, height);
-            pilotCard.pilotKey = uniquePilotId;
-
-            return pilotCard;
-        }
-
+        
         public UpgradeCard GetUpgradeCard(int uniquePilotId, int upgradeKey, double width, double height)
         {
             UpgradeCard upgradeCard = pilots[uniquePilotId].upgrades.ElementAt(upgradeKey).GetUpgradeCard(width, height);

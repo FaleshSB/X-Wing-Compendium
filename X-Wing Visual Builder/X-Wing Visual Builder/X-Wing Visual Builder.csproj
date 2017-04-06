@@ -82,6 +82,7 @@
     <Compile Include="Model\DiceRollResult.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\ImageResizer.cs" />
+    <Compile Include="Model\ManeuverCard.cs" />
     <Compile Include="Model\NewStats.cs" />
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\Pages.cs" />

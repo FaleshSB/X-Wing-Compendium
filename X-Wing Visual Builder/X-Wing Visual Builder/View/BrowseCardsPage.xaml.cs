@@ -240,6 +240,7 @@ namespace X_Wing_Visual_Builder.View
                                 break;
                             }
                         }
+                        if(searchWords.Count() == 1 && searchWords[0].ToLower() == "all") { hasFoundAllWords = true; }
                         /*bool hasFoundAllWords = false;
                         foreach (string searchWord in searchWords)
                         {
@@ -332,7 +333,7 @@ namespace X_Wing_Visual_Builder.View
                                 break;
                             }
                         }
-
+                        if (searchWords.Count() == 1 && searchWords[0].ToLower() == "all") { hasFoundAllWords = true; }
                         if (hasFoundAllWords)
                         {
                             pilotsToDisplay.Add(pilot);
@@ -438,8 +439,8 @@ namespace X_Wing_Visual_Builder.View
                 isAddingPilot = false;
                 Pilot newPilot = Pilots.GetPilotClone(card.id);
                 newPilot.upgrades = pilotToSwap.upgrades;
-                Upgrades.RemoveUnusableUpgrades(build, newPilot.uniquePilotId);
                 build.AddPilot(newPilot);
+                Upgrades.RemoveUnusableUpgrades(build, newPilot.uniquePilotId);
                 build.RemovePilot(pilotToSwap.uniquePilotId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.SquadsPage];
                 NavigationService.Navigate(squadsPage);
