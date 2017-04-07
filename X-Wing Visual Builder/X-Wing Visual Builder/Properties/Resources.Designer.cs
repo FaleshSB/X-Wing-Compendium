@@ -74,9 +74,9 @@ namespace X_Wing_Visual_Builder.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 1£2£A-Wing£2£0£0£2£3£2£2£6,12,2,5£2
         ///2£3£ARC-170£2£0£0£2£1£6£3£6,12£2
-        ///3£4£Attack Shuttle£2£0£0£3£2£2£2£6,11,5£2
-        ///4£5£B-Wing£2£0£0£3£1£3£5£6,12,11£2
-        ///5£7£E-Wing£2£0£0£3£3£2£3£6,12,11,5£2
+        ///3£4£Attack Shuttle£2£0£0£3£2£2£2£6,1,5£2
+        ///4£5£B-Wing£2£0£0£3£1£3£5£6,12,1£2
+        ///5£7£E-Wing£2£0£0£3£3£2£3£6,12,1,5£2
         ///6£13£HWK-290£2£0£0£1£2£4£1£6,12£2
         ///7£18£K-Wing£2£0£0£2£1£5£4£6,12,11£2
         ///8£25£T70 X-Wing£2£0£1£3£2£3£3£6,12,2£2
@@ -84,19 +84,19 @@ namespace X_Wing_Visual_Builder.Properties {
         ///10£37£X-Wing£2£0£1£3£2£3£2£6,12£2
         ///11£38£Y-Wing£2£0£0£2£1£5£3£6,12£2
         ///12£39£YT-1300£3£0£0£3£1£8£5£6,12£2
-        ///13£40£YT-2400£3£0£0£2£2£5£5£6,12,11£2
-        ///14£42£Z-95 Headhunter£2£0£0£2 [rest of string was truncated]&quot;;.
+        ///13£40£YT-2400£3£0£0£2£2£5£5£6,12,1£2
+        ///14£42£Z-95 Headhunter£2£0£0£2£2£2 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string shipsDatabase {
+        internal static string ShipsDatabase {
             get {
-                return ResourceManager.GetString("shipsDatabase", resourceCulture);
+                return ResourceManager.GetString("ShipsDatabase", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1000£2£1£Determination£When you are dealt a faceup Damage card with the Pilot trait, discard it immediately without resolving its effect.££1£1£1£0£0£0£1£0£0£0£0£0£££
-        ///1001£2£3£Marksmanship£ACTION: When attacking this round, you may change 1 of your focus results to a critical result and all your other focus results to hit results.££1£1£1£0£0£0£1£0£0£0£0£0£££
-        ///1002£2£2£Expert Handling£ACTION: Perform a free barrel roll action. If you do not have the barrel roll action icon, receive 1 stress token.@You may th [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 1035£2£4£Expertise£When attacking, if you are not stressed, you may change all of your focus results to hit results.££1£1£1£0£0£0£1£0£0£0£££££££
+        ///1008£2£4£Expose£ACTION: Until the end of the round, increase your primary weapon value by 1 and decrease your agility value by 1.££1£1£1£0£0£0£1£0£0£0£££££££
+        ///1013£2£4£Opportunist£When attacking, if the defender does not have any focus or evade tokens, you may receive 1 stress token to roll 1 additional attack die.@You cannot use this ability if you have any stres [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string UpgradeDatabase {
             get {

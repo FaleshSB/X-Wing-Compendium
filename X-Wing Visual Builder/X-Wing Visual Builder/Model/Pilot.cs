@@ -133,7 +133,6 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.hasAbility = hasAbility;
-
             this.ship = Ships.ships[shipType][faction];
         }
         

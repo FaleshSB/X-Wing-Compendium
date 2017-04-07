@@ -15,7 +15,7 @@ namespace X_Wing_Visual_Builder.Model
 
         static Ships()
         {
-            using (StringReader stringReader = new StringReader(Properties.Resources.shipsDatabase))
+            using (StringReader stringReader = new StringReader(Properties.Resources.ShipsDatabase))
             {
                 using (TextFieldParser parser = new TextFieldParser(stringReader))
                 {
@@ -34,13 +34,30 @@ namespace X_Wing_Visual_Builder.Model
                                 actions.Add((Action)Int32.Parse(action));
                             }
                         }
+
+                        string[] maneuverDistanceSplit = fields[12].Split('|');
+                        Dictionary<int, List<int>> maneuvers = new Dictionary<int, List<int>>();
+                        foreach (string maneuverDistance in maneuverDistanceSplit)
+                        {
+                            string[] maneuverSplit = maneuverDistance.Split(',');
+                            int maneuverDistanceKey = Int32.Parse(maneuverSplit[0]);
+                            bool isDistanceKey = true;
+                            foreach (string maneuver in maneuverSplit)
+                            {
+                                int r = 0;
+                                if(isDistanceKey) { isDistanceKey = false; maneuvers[maneuverDistanceKey] = new List<int>(); continue; }
+                                maneuvers[maneuverDistanceKey].Add(Int32.Parse(maneuver));
+                            }
+                        }
+
                         if (ships.ContainsKey((ShipType)Int32.Parse(fields[1])) == false) { ships[(ShipType)Int32.Parse(fields[1])] = new Dictionary<Faction, Ship>(); }
                         ships[(ShipType)Int32.Parse(fields[1])][(Faction)Int32.Parse(fields[11])] = new Ship(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]),
                             fields[2], (ShipSize)Int32.Parse(fields[3]), Convert.ToBoolean(Int32.Parse(fields[4])), Convert.ToBoolean(Int32.Parse(fields[5])),
-                            Int32.Parse(fields[6]), Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]));
+                            Int32.Parse(fields[6]), Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]), maneuvers);
                     }
                 }
             }
+            int i = 0;
         }
     }
 }

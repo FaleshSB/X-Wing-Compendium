@@ -22,7 +22,6 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class SquadsPage : DefaultPage
     {
-        private int maneuverElementWidthAndHeight = 30;
         private int upgradeCardWidth = 150;
         private int upgradeCardHeight = 231;
         private int pilotCardWidth = 292;
@@ -200,7 +199,7 @@ namespace X_Wing_Visual_Builder.View
                         pilotCanvas.Children.Add(maneuverCardBackground);
                         */
 
-                        ManeuverCard maneuverCard = pilot.ship.GetManeuverCard(maneuverElementWidthAndHeight, maneuverElementWidthAndHeight);
+                        ManeuverCard maneuverCard = pilot.ship.GetManeuverCard(Math.Round(Opt.ApResMod(pilotCardWidth) / 11));
                         maneuverCard.uniqueBuildId = build.uniqueBuildId;
                         maneuverCard.uniquePilotId = pilot.uniquePilotId;
                         maneuverCard.MouseEnter += new MouseEventHandler(ManeuverMouseHover);

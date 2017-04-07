@@ -121,7 +121,7 @@
   <data name="PilotDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PilotDatabase.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
-  <data name="shipsDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ShipsDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shipsDatabase.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="UpgradeDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
