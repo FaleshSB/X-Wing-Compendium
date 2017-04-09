@@ -26,8 +26,6 @@ namespace X_Wing_Visual_Builder.View
         public StatsPage()
         {
             InitializeComponent();
-            
-            
         }
 
         protected override void DisplayContent()

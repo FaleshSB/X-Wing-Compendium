@@ -54,14 +54,15 @@ namespace X_Wing_Visual_Builder.Model
 
         public ManeuverCard GetManeuverCard(double size)
         {
-            size = size * maneuvers.First().Value.Count;
+            double height = size * maneuvers.Count;
+            double width = size * maneuvers.First().Value.Count;
             ManeuverCard maneuverCard = new ManeuverCard();
             maneuverCard.Source = CombineImages();
-            maneuverCard.Height = size;
-            maneuverCard.Width = size;
+            maneuverCard.Height = height;
+            maneuverCard.Width = width;
             maneuverCard.UseLayoutRounding = true;
             RenderOptions.SetBitmapScalingMode(maneuverCard, BitmapScalingMode.HighQuality);
-            CombineImages();
+
             return maneuverCard;
         }
 
@@ -76,9 +77,10 @@ namespace X_Wing_Visual_Builder.Model
             Bitmap finalManeuverCard = new Bitmap(finalManeuverCardWidth, finalManeuverCardHeight);
             Graphics g = Graphics.FromImage(finalManeuverCard);
             g.Clear(System.Drawing.SystemColors.AppWorkspace);
+            int row = 1;
             foreach (KeyValuePair<int, List<int>> maneuverRow in maneuvers)
             {
-                int currentHeight = finalManeuverCardHeight - (maneuverRow.Key * maneuverHeight);
+                int currentHeight = finalManeuverCardHeight - (row * maneuverHeight);
                 int nIndex = 0;
                 int currentWidth = 0;
                 foreach (int maneuverName in maneuverRow.Value)
@@ -97,56 +99,12 @@ namespace X_Wing_Visual_Builder.Model
                     }
                     img.Dispose();
                 }
+                row++;
             }
             g.Dispose();
             BitmapImage finalConvertedManeuverCard = ConvertBitmapToBitmapImage.Convert(finalManeuverCard);
             finalManeuverCard.Dispose();
             return finalConvertedManeuverCard;
-        }
-
-        private void CombineImages2()
-        {
-            string finalImage = @"D:\\Documents\\Game Stuff\\X-Wing\\Maneuvers\\test.jpg";
-            List<Bitmap> maneuverRows = new List<Bitmap>();
-            foreach (List<int> maneuverRow in maneuvers.Values.ToList())
-            {
-                List<int> imageHeights = new List<int>();
-                int nIndex = 0;
-                int width = 0;
-                foreach (int maneuverName in maneuvers[2])
-                {
-                    System.Drawing.Image img = System.Drawing.Image.FromFile(@"D:\\Documents\\Game Stuff\\X-Wing\\Maneuvers\\" + maneuverName.ToString() + ".png");
-                    imageHeights.Add(img.Height);
-                    width += img.Width;
-                    img.Dispose();
-                }
-                imageHeights.Sort();
-                int height = imageHeights[imageHeights.Count - 1];
-                Bitmap img3 = new Bitmap(width, height);
-                Graphics g = Graphics.FromImage(img3);
-                g.Clear(System.Drawing.SystemColors.AppWorkspace);
-                foreach (int maneuverName in maneuvers[2])
-                {
-                    System.Drawing.Image img = System.Drawing.Image.FromFile(@"D:\\Documents\\Game Stuff\\X-Wing\\Maneuvers\\" + maneuverName.ToString() + ".png");
-                    if (nIndex == 0)
-                    {
-                        g.DrawImage(img, new System.Drawing.Point(0, 0));
-                        nIndex++;
-                        width = img.Width;
-                    }
-                    else
-                    {
-                        g.DrawImage(img, new System.Drawing.Point(width, 0));
-                        width += img.Width;
-                    }
-                    img.Dispose();
-                }
-                g.Dispose();
-                maneuverRows.Add(img3);
-            }
-
-            //img3.Save(finalImage, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //img3.Dispose();
         }
     }
 }

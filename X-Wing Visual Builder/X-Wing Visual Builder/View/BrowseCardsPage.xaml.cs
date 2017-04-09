@@ -55,6 +55,10 @@ namespace X_Wing_Visual_Builder.View
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
+        private bool isMouseOverPilot = false;
+        private int hoveredPilotId;
+        private Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
+
         public BrowseCardsPage()
         {
             contentWrapPanel.Name = "contentWrapPanel";
@@ -191,10 +195,46 @@ namespace X_Wing_Visual_Builder.View
             pilotsToDisplay = pilotsToDisplay.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
             foreach (Pilot pilot in pilotsToDisplay)
             {
-                PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
-                pilotCard.MouseDown += CardClicked;
-                pilotCard.Margin = new Thickness(2, 2, 2, 2);
-                contentWrapPanel.Children.Add(pilotCard);
+                Canvas pilotCanvas;
+                if (pilotCanvasCache.ContainsKey(pilot.id) == false)
+                {
+                    pilotCanvasCache[pilot.id] = new Canvas();
+                    pilotCanvasCache[pilot.id].Width = Opt.ApResMod(pilotCardWidth);
+                    pilotCanvasCache[pilot.id].Height = Opt.ApResMod(pilotCardHeight);
+                    pilotCanvasCache[pilot.id].Margin = new Thickness(2, 2, 2, 2);
+
+                    PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
+                    pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
+                    pilotCard.MouseEnter += new MouseEventHandler(PilotMouseHover);
+                    pilotCard.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
+                    pilotCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+
+                    Canvas.SetLeft(pilotCard, 0);
+                    Canvas.SetTop(pilotCard, 0);
+                    pilotCanvasCache[pilot.id].Children.Add(pilotCard);
+                }
+                pilotCanvas = pilotCanvasCache[pilot.id];
+                
+                if (isMouseOverPilot && hoveredPilotId == pilot.id)
+                {
+                    ManeuverCard maneuverCard = pilot.ship.GetManeuverCard(Math.Round(Opt.ApResMod(pilotCardWidth) / 11));
+                    maneuverCard.uniquePilotId = pilot.id;
+                    maneuverCard.MouseEnter += new MouseEventHandler(ManeuverMouseHover);
+                    maneuverCard.MouseLeave += new MouseEventHandler(ManeuverMouseHoverLeave);
+                    maneuverCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+                    Canvas.SetLeft(maneuverCard, (Opt.ApResMod(pilotCardWidth) / 2) - (maneuverCard.Width / 2));
+                    Canvas.SetTop(maneuverCard, 0);
+                    pilotCanvas.Children.Add(maneuverCard);
+                }
+                else
+                {
+                    if (pilotCanvas.Children.Count > 1)
+                    {
+                        pilotCanvas.Children.RemoveAt(1);
+                    }
+                }
+                
+                contentWrapPanel.Children.Add(pilotCanvas);
             }
         }
 
@@ -229,7 +269,14 @@ namespace X_Wing_Visual_Builder.View
                             bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInDescription = upgrade.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInType = upgrade.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            if (isSearchDescriptionChecked == false && hasFoundWordInName == false && hasFoundWordInType == false)
+                            bool hasFoundCost = false;
+                            regex = new Regex(@"([0-9]+)\-([0-9]+)$", RegexOptions.IgnoreCase);
+                            Match match = regex.Match(searchWord);
+                            if (match.Success)
+                            {
+                                if (upgrade.cost >= Int32.Parse(match.Groups[1].Value) && upgrade.cost <= Int32.Parse(match.Groups[2].Value)) { hasFoundCost = true; }
+                            }
+                            if (isSearchDescriptionChecked == false && hasFoundWordInName == false && hasFoundWordInType == false && hasFoundCost == false)
                             {
                                 hasFoundAllWords = false;
                                 break;
@@ -301,9 +348,9 @@ namespace X_Wing_Visual_Builder.View
                             bool hasFoundWordInShipName = pilot.ship.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInDescription = pilot.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundPilotSkill = false;
-                            Regex r = new Regex(@"ps[0-9]+$", RegexOptions.IgnoreCase);
-                            Match m = r.Match(searchWord);
-                            if(m.Success == true)
+                            regex = new Regex(@"ps[0-9]+$", RegexOptions.IgnoreCase);
+                            Match match = regex.Match(searchWord);
+                            if(match.Success)
                             {
                                 string ps = Regex.Replace(searchWord, "[^0-9.]", "");
                                 if (Int32.Parse(ps) == pilot.pilotSkill) { hasFoundPilotSkill = true; }
@@ -318,11 +365,10 @@ namespace X_Wing_Visual_Builder.View
                                 }
                             }
                             bool hasFoundFaction = (pilot.faction.ToString().ToLower() == searchWord.ToLower()) ? true : false;
-
-
-
-                            if (isSearchDescriptionChecked == false && (hasFoundWordInName == true || hasFoundWordInShipName == true
-                                || hasFoundPilotSkill == true || hasFoundUpgradeType == true || hasFoundFaction == true))
+                            bool hasFoundShipSize = (pilot.ship.shipSize.ToString().ToLower() == searchWord.ToLower()) ? true : false;
+                            
+                            if (isSearchDescriptionChecked == false && (hasFoundWordInName || hasFoundWordInShipName
+                                || hasFoundPilotSkill || hasFoundUpgradeType || hasFoundFaction || hasFoundShipSize))
                             {
                                 hasFoundAllWords = true;
                                 break;
@@ -454,6 +500,37 @@ namespace X_Wing_Visual_Builder.View
             {
                 NavigationService.Navigate((PilotQuizPage)Pages.pages[PageName.PilotQuiz]);
             }
+        }
+
+
+        private void PilotMouseHover(object sender, MouseEventArgs e)
+        {
+            PilotCard hoveredPilot = (PilotCard)sender;
+            hoveredPilotId = hoveredPilot.id;
+            isMouseOverPilot = true;
+            DisplayContent();
+        }
+        private void PilotMouseHoverLeave(object sender, MouseEventArgs e)
+        {
+            isMouseOverPilot = false;
+            DisplayContent();
+        }
+        private void ManeuverMouseHover(object sender, MouseEventArgs e)
+        {
+            ManeuverCard hoveredManeuver = (ManeuverCard)sender;
+            hoveredPilotId = hoveredManeuver.uniquePilotId;
+            isMouseOverPilot = true;
+            DisplayContent();
+        }
+        private void ManeuverMouseHoverLeave(object sender, MouseEventArgs e)
+        {
+            isMouseOverPilot = false;
+            DisplayContent();
+        }
+        private void ContentScroll(object sender, MouseWheelEventArgs e)
+        {
+            contentScrollViewer.ScrollToVerticalOffset(contentScrollViewer.VerticalOffset - e.Delta);
+            e.Handled = true;
         }
     }
 }

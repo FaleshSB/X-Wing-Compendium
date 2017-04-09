@@ -44,7 +44,6 @@ namespace X_Wing_Visual_Builder.Model
                             bool isDistanceKey = true;
                             foreach (string maneuver in maneuverSplit)
                             {
-                                int r = 0;
                                 if(isDistanceKey) { isDistanceKey = false; maneuvers[maneuverDistanceKey] = new List<int>(); continue; }
                                 maneuvers[maneuverDistanceKey].Add(Int32.Parse(maneuver));
                             }
@@ -57,7 +56,6 @@ namespace X_Wing_Visual_Builder.Model
                     }
                 }
             }
-            int i = 0;
         }
     }
 }
