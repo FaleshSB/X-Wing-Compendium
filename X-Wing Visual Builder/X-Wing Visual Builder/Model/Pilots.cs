@@ -17,6 +17,7 @@ namespace X_Wing_Visual_Builder.Model
         {
             using (StringReader stringReader = new StringReader(Properties.Resources.PilotDatabase))
             {
+                Dictionary<int, int> numberOfPilotsOwned = LoadPilotsOwned();
                 using (TextFieldParser parser = new TextFieldParser(stringReader))
                 {
                     parser.TextFieldType = FieldType.Delimited;
@@ -41,10 +42,15 @@ namespace X_Wing_Visual_Builder.Model
                                 }
                             }
                         }
+                        int numberOwned = 0;
+                        if(numberOfPilotsOwned.ContainsKey(Int32.Parse(fields[0])))
+                        {
+                            numberOwned = numberOfPilotsOwned[Int32.Parse(fields[0])];
+                        }
                         possibleUpgrades.Add(UpgradeType.Title, 1);
                         possibleUpgrades.Add(UpgradeType.Modification, 1);
                         pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                                   Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10]))));
+                                   Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10])), numberOwned));
                     }
                 }
             }
@@ -58,6 +64,35 @@ namespace X_Wing_Visual_Builder.Model
             {
                 pilots.Remove(pilotToRemove);
             }
+            SaveNumberOfPilotsOwned();
+        }
+
+        private static Dictionary<int, int> LoadPilotsOwned()
+        {
+            Dictionary<int, int> pilotKeyOwned = new Dictionary<int, int>();
+            string[] allPilotsOwned = FileHandler.LoadFile("pilotsowned.txt");
+            if (allPilotsOwned != null)
+            {
+                if (allPilotsOwned.Count() > 0)
+                {
+                    foreach (string pilotOwnedString in allPilotsOwned)
+                    {
+                        string[] pilotOwnedInfo = pilotOwnedString.Split(',');
+                        pilotKeyOwned[Int32.Parse(pilotOwnedInfo[0])] = Int32.Parse(pilotOwnedInfo[2]);
+                    }
+                }
+            }
+            return pilotKeyOwned;
+        }
+        public static void SaveNumberOfPilotsOwned()
+        {
+            string numberOfPilotsOwned = "";
+            foreach (Pilot pilot in pilots.Values.OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList())
+            {
+                numberOfPilotsOwned += pilot.id.ToString() + "," + pilot.name + "," + pilot.numberOwned.ToString();
+                numberOfPilotsOwned += System.Environment.NewLine;
+            }
+            FileHandler.SaveFile("pilotsowned.txt", numberOfPilotsOwned);
         }
 
         public static Pilot GetPilotClone(int pilotId)

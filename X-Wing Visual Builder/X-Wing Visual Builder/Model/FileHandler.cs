@@ -15,7 +15,14 @@ namespace X_Wing_Visual_Builder.Model
         }
         public static string[] LoadFile(string fileName)
         {
-            return File.ReadAllLines(@"D:\Documents\Game Stuff\X-Wing\" + fileName);
+            if(File.Exists(@"D:\Documents\Game Stuff\X-Wing\" + fileName))
+            {
+                return File.ReadAllLines(@"D:\Documents\Game Stuff\X-Wing\" + fileName);
+            }
+            else
+            {
+                return null;
+            }
             /*
             string line;
             using (StreamReader streamReader = new StreamReader(@"D:\Documents\Game Stuff\X-Wing\" + fileName))

@@ -14,6 +14,7 @@ namespace X_Wing_Visual_Builder.Model
         public static Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
         static Upgrades()
         {
+            Dictionary<int, int> upgradeKeyOwned = LoadUpgradesOwned();
             StringReader sr = new StringReader(Properties.Resources.UpgradeDatabase);
             using (TextFieldParser parser = new TextFieldParser(sr))
             {
@@ -23,6 +24,15 @@ namespace X_Wing_Visual_Builder.Model
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
+                    List<string> faq = new List<string>();
+                    if (fields[5].Length > 0)
+                    {
+                        string[] possibleFaqSplit = fields[5].Split('|');
+                        foreach (string possibleFaq in possibleFaqSplit)
+                        {
+                            faq.Add(possibleFaq);
+                        }
+                    }
                     Dictionary<UpgradeType, int> upgradesAdded = new Dictionary<UpgradeType, int>();
                     if (fields[16].Length > 0)
                     {
@@ -92,11 +102,16 @@ namespace X_Wing_Visual_Builder.Model
                     {
                         addsPilotSkill = Int32.Parse(fields[22]);
                     }
-                    upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], fields[5],
+                    int numberOwned = 0;
+                    if(upgradeKeyOwned.ContainsKey(Int32.Parse(fields[0])))
+                    {
+                        numberOwned = upgradeKeyOwned[Int32.Parse(fields[0])];
+                    }
+                    upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], faq,
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (ShipType)Int32.Parse(fields[8]),
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
                                              Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
-                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill));
+                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned));
                 }
             }
             // Remove Huge Ship cards
@@ -109,6 +124,36 @@ namespace X_Wing_Visual_Builder.Model
             {
                 upgrades.Remove(upgradeToRemove);
             }
+            SaveNumberOfUpgradesOwned();
+        }
+
+        private static Dictionary<int, int> LoadUpgradesOwned()
+        {
+            Dictionary<int, int> upgradeKeyOwned = new Dictionary<int, int>();
+            string[] allUpgradesOwned = FileHandler.LoadFile("upgradesowned.txt");
+            if (allUpgradesOwned != null)
+            {
+                if (allUpgradesOwned.Count() > 0)
+                {
+                    foreach (string upgradeOwnedString in allUpgradesOwned)
+                    {
+                        string[] upgradeOwnedInfo = upgradeOwnedString.Split(',');
+                        upgradeKeyOwned[Int32.Parse(upgradeOwnedInfo[0])] = Int32.Parse(upgradeOwnedInfo[2]);
+                    }
+                }
+            }
+            return upgradeKeyOwned;
+        }
+
+        public static void SaveNumberOfUpgradesOwned()
+        {
+            string numberOfUpgradesOwned = "";
+            foreach (Upgrade upgrade in upgrades.Values.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList())
+            {
+                numberOfUpgradesOwned += upgrade.id.ToString() + "," + upgrade.name + "," + upgrade.numberOwned.ToString();
+                numberOfUpgradesOwned += System.Environment.NewLine;
+            }
+            FileHandler.SaveFile("upgradesowned.txt", numberOfUpgradesOwned);
         }
 
         public static Upgrade GetRandomUpgrade()

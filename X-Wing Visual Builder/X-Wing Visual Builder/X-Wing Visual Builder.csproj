@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AddButton.cs" />
     <Compile Include="Model\AllDiceRollResults.cs" />
     <Compile Include="Model\BuildPilotUpgrade.cs" />
     <Compile Include="Model\AlignableWrapPanel.cs" />
@@ -86,9 +87,12 @@
     <Compile Include="Model\ManeuverCard.cs" />
     <Compile Include="Model\NewStats.cs" />
     <Compile Include="Model\Options.cs" />
+    <Compile Include="Model\OutlinedTextBlock.cs" />
     <Compile Include="Model\Pages.cs" />
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
+    <Compile Include="Model\InfoButton.cs" />
+    <Compile Include="Model\RemoveButton.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Ships.cs" />
     <Compile Include="Model\Stats.cs" />
@@ -98,6 +102,9 @@
     <Compile Include="Model\Upgrades.cs" />
     <Compile Include="View\BrowseCardsPage.xaml.cs">
       <DependentUpon>BrowseCardsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InfoDialogBox.xaml.cs">
+      <DependentUpon>InfoDialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SquadsPage.xaml.cs">
       <DependentUpon>SquadsPage.xaml</DependentUpon>
@@ -130,6 +137,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\BrowseCardsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InfoDialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

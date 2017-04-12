@@ -118,10 +118,16 @@ namespace X_Wing_Visual_Builder.Model
         }
         public Faction faction;
         public bool hasAbility;
+        private int _numberOwned;
+        public int numberOwned
+        {
+            get { return _numberOwned; }
+            set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); }
+        }
 
         public List<Upgrade> upgrades = new List<Upgrade>();
 
-        public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility)
+        public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility, int numberOwned)
         {
             this.id = id;
             this.isUnique = isUnique;
@@ -133,6 +139,7 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.hasAbility = hasAbility;
+            this.numberOwned = numberOwned;
             this.ship = Ships.ships[shipType][faction];
         }
         

@@ -24,7 +24,7 @@ namespace X_Wing_Visual_Builder.Model
         public int cost;
         public string name;
         public string description;
-        public string faq;
+        public List<string> faq = new List<string>();
         public UpgradeType upgradeType;
         public Faction faction;
         public ShipSize shipSize;
@@ -43,11 +43,17 @@ namespace X_Wing_Visual_Builder.Model
         public List<int> requiresUpgrades;
         public List<Action> addsActions;
         public int addsPilotSkill;
+        private int _numberOwned;
+        public int numberOwned
+        {
+            get { return _numberOwned; }
+            set { _numberOwned = (value < 0) ? 0 : value; Upgrades.SaveNumberOfUpgradesOwned(); }
+        }
 
-        public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, string faq, Faction faction, ShipSize shipSize,
+        public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
                        ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
-                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill)
+                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned)
         {
             this.id = id;
             this.upgradeType = upgradeType;
@@ -72,6 +78,7 @@ namespace X_Wing_Visual_Builder.Model
             this.requiresUpgrades = requiresUpgrades;
             this.addsActions = addsActions;
             this.addsPilotSkill = addsPilotSkill;
+            this.numberOwned = numberOwned;
         }
 
         public UpgradeCard GetUpgradeCard(double width, double height)
