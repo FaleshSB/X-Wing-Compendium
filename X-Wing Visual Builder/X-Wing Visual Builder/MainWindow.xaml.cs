@@ -8,11 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using X_Wing_Visual_Builder.Model;
+using X_Wing_Visual_Builder.View;
 
 namespace X_Wing_Visual_Builder
 {
@@ -21,11 +23,46 @@ namespace X_Wing_Visual_Builder
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
+        bool isUpgradeCacheFull = false;
+        bool isPilotCacheFull = false;
+
         public MainWindow()
         {
             InitializeComponent();
             ResizeMode = ResizeMode.CanResize;
             WindowState = WindowState.Maximized;
+            ComponentDispatcher.ThreadIdle += new System.EventHandler(ComponentDispatcher_ThreadIdle);
+        }
+
+        void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
+        {
+            if (isUpgradeCacheFull == false)
+            {
+                foreach (Upgrade upgrade in Upgrades.upgrades.Values.ToList())
+                {
+                    isUpgradeCacheFull = true;
+                    if (browseCardsPage.upgradeCanvasCache.ContainsKey(upgrade.id) == false)
+                    {
+                        browseCardsPage.AddUpgradeToCache(upgrade);
+                        isUpgradeCacheFull = false;
+                        break;
+                    }
+                }
+            }
+            if (isPilotCacheFull == false)
+            {
+                foreach (Pilot pilot in Pilots.pilots.Values.ToList())
+                {
+                    isPilotCacheFull = true;
+                    if (browseCardsPage.pilotCanvasCache.ContainsKey(pilot.id) == false)
+                    {
+                        browseCardsPage.AddPilotToCache(pilot);
+                        isPilotCacheFull = false;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

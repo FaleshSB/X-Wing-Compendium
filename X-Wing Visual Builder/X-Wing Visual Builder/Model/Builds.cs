@@ -10,6 +10,7 @@ namespace X_Wing_Visual_Builder.Model
     {
         public static List<Build> builds = new List<Build>();
         private static bool isLoadingBuild = false;
+        private static int buildSaveVersion = 2;
 
         static Builds()
         {
@@ -47,18 +48,19 @@ namespace X_Wing_Visual_Builder.Model
         public static void SaveBuilds()
         {
             if (isLoadingBuild) { return; }
-            string buildInfo = "";
+            string buildInfo = buildSaveVersion.ToString();
+            buildInfo += System.Environment.NewLine;
             int uniqueBuildId = 0;
             foreach (Build build in builds.OrderBy(build => build.uniqueBuildId).ToList())
             {
                 buildInfo += uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
-                foreach(KeyValuePair<int, Pilot> pilot in build.pilots)
+                foreach(Pilot pilot in build.pilots.Values.ToList())
                 {
-                    buildInfo += pilot.Value.uniquePilotId + "£" + pilot.Value.id + "£";
-                    foreach (Upgrade upgrade in pilot.Value.upgrades)
+                    buildInfo += pilot.uniquePilotId + "£" + pilot.id + "£";
+                    foreach (Upgrade upgrade in pilot.upgrades.Values.ToList())
                     {
-                        buildInfo += upgrade.id + "$";
+                        buildInfo += upgrade.uniqueUpgradeId + "~" + upgrade.id + "$";
                     }
                     buildInfo = buildInfo.TrimEnd('$');
                     buildInfo += "&";
@@ -71,12 +73,16 @@ namespace X_Wing_Visual_Builder.Model
         }
         public static void LoadBuilds()
         {
+            int saveVersion = 0;
             isLoadingBuild = true;
             string[] allBuilds = FileHandler.LoadFile("build.txt");
             if (allBuilds.Count() > 0)
             {
+                bool isVersion = true;
                 foreach (string buildString in allBuilds)
                 {
+                    if(isVersion) { saveVersion = Int32.Parse(buildString); isVersion = false; continue; }
+                    bool upgradeHasUniqueId = (saveVersion == 1) ? false : true;
                     Build build = new Build();
 
                     string[] buildInfo = buildString.Split('|');
@@ -94,26 +100,32 @@ namespace X_Wing_Visual_Builder.Model
                             int pilotId = Int32.Parse(pilotInfo[1]);
                             Pilot pilot = Pilots.GetPilotClone(pilotId);
                             pilot.uniquePilotId = uniquePilotId;
-                            build.AddPilot(uniquePilotId, pilot);
+                            build.AddPilot(pilot, true);
                             string[] upgrades = pilotInfo[2].Split('$');
                             upgrades = upgrades.Where(s => s != "").ToArray();
                             if (upgrades.Count() > 0)
                             {
-                                foreach (string upgradeIdString in upgrades)
+                                foreach (string upgradeUniqueIdAndId in upgrades)
                                 {
+                                    string[] upgradeUniqueIdAndIdSplit = upgradeUniqueIdAndId.Split('~');
                                     int upgradeId;
-                                    if (int.TryParse(upgradeIdString, out upgradeId))
+                                    int uniqueUpgradeId;
+                                    if (int.TryParse(upgradeUniqueIdAndIdSplit[0], out uniqueUpgradeId) && int.TryParse(upgradeUniqueIdAndIdSplit[1], out upgradeId))
                                     {
-                                        build.AddUpgrade(uniquePilotId, Upgrades.upgrades[upgradeId]);
+                                        Upgrade upgrade = Upgrades.GetUpgradeClone(upgradeId);
+                                        upgrade.uniqueUpgradeId = uniqueUpgradeId;
+                                        build.AddUpgrade(uniquePilotId, upgrade, upgradeHasUniqueId);
                                     }
                                 }
                             }
                         }
                     }
+                    
                     builds.Add(build);
                 }
             }
             isLoadingBuild = false;
+            if (saveVersion != buildSaveVersion) { SaveBuilds(); }
         }
     }
 }

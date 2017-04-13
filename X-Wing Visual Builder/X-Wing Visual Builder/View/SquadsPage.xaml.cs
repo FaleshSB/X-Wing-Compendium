@@ -33,6 +33,8 @@ namespace X_Wing_Visual_Builder.View
         private bool isMouseOverPilot = false;
         private int hoveredUniquePilotId;
         private int hoveredUniqueBuildId;
+        private bool isShowingNumberOwned = true;
+        private Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
 
 
         public SquadsPage()
@@ -125,8 +127,19 @@ namespace X_Wing_Visual_Builder.View
 
         protected override void DisplayContent()
         {
+            foreach(object child in contentWrapPanel.Children)
+            {
+                AlignableWrapPanel buildWrapPanelToClear = (AlignableWrapPanel)child;
+                foreach(object childChild in buildWrapPanelToClear.Children)
+                {
+                    Canvas pilotCanvasToClear = (Canvas)childChild;
+                    pilotCanvasToClear.Children.Clear();
+                }
+                buildWrapPanelToClear.Children.Clear();
+            }
             contentWrapPanel.Children.Clear();
-            foreach(Build build in Builds.builds.OrderByDescending(build => build.uniqueBuildId).ToList())
+
+            foreach (Build build in Builds.builds.OrderByDescending(build => build.uniqueBuildId).ToList())
             { 
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -255,8 +268,8 @@ namespace X_Wing_Visual_Builder.View
                     currentLeftOffset += pilotCard.Width;
 
                     int currentUpgradeNumber = 0;
-                    List<Upgrade> sortedUpgrades = pilot.upgrades;
-                    sortedUpgrades = sortedUpgrades.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ToList();
+                    List<Upgrade> sortedUpgrades = pilot.upgrades.Values.ToList();
+                    sortedUpgrades = sortedUpgrades.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ToList();
                     foreach (Upgrade upgrade in sortedUpgrades)
                     {
                         if (currentUpgradeNumber == 0) { currentLeftOffset += Opt.ApResMod(upgradeCardMargin); }
@@ -270,20 +283,49 @@ namespace X_Wing_Visual_Builder.View
                             height += currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + Opt.ApResMod(upgradeCardMargin);
                             currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
                         }
+                        
+                        if (upgradeCanvasCache.ContainsKey(Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())) == false)
+                        {
+                            Canvas upgradeCanvas = new Canvas();
+                            upgradeCanvas.Width = Opt.ApResMod(upgradeCardWidth);
+                            upgradeCanvas.Height = Opt.ApResMod(upgradeCardHeight);
 
-                        UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-                        Canvas.SetLeft(upgradeCard, left);
-                        Canvas.SetTop(upgradeCard, height);
-                        pilotCanvas.Children.Add(upgradeCard);
+                            UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
+                            Canvas.SetLeft(upgradeCard, 0);
+                            Canvas.SetTop(upgradeCard, 0);
+                            upgradeCanvas.Children.Add(upgradeCard);
 
-                        deleteButton = new DeleteButton();
-                        deleteButton.uniqueBuildId = build.uniqueBuildId;
-                        deleteButton.uniquePilotId = pilot.uniquePilotId;
-                        deleteButton.upgradeId = upgrade.id;
-                        deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
-                        Canvas.SetLeft(deleteButton, left + (Opt.ApResMod(upgradeCardWidth) - deleteButton.Width));
-                        Canvas.SetTop(deleteButton, height);
-                        pilotCanvas.Children.Add(deleteButton);
+                            OutlinedTextBlock numberOwned = new OutlinedTextBlock();
+                            numberOwned.Text = upgrade.numberOwned.ToString();
+                            numberOwned.TextAlignment = TextAlignment.Left;
+                            numberOwned.Width = 30;
+                            numberOwned.Height = 30;
+                            numberOwned.StrokeThickness = 1;
+                            numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                            numberOwned.FontWeight = FontWeights.UltraBold;
+                            numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
+                            numberOwned.FontSize = Opt.ApResMod(20);
+                            numberOwned.FontFamily = new FontFamily("Verdana");
+                            numberOwned.Visibility = (isShowingNumberOwned) ? Visibility.Visible : Visibility.Hidden;
+                            Canvas.SetLeft(numberOwned, 0);
+                            Canvas.SetTop(numberOwned, 145);
+                            upgradeCanvas.Children.Add(numberOwned);
+
+                            deleteButton = new DeleteButton();
+                            deleteButton.uniqueBuildId = build.uniqueBuildId;
+                            deleteButton.uniquePilotId = pilot.uniquePilotId;
+                            deleteButton.upgradeId = upgrade.id;
+                            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
+                            Canvas.SetLeft(deleteButton, (Opt.ApResMod(upgradeCardWidth) - deleteButton.Width));
+                            Canvas.SetTop(deleteButton, 0);
+                            upgradeCanvas.Children.Add(deleteButton);
+
+                            upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())] = upgradeCanvas;
+                        }
+
+                        Canvas.SetLeft(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())], left);
+                        Canvas.SetTop(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())], height);
+                        pilotCanvas.Children.Add(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())]);
 
                         currentUpgradeNumber++;
                     }

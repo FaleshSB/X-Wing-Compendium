@@ -26,6 +26,7 @@ namespace X_Wing_Visual_Builder.View
         RadioButton upgradesRadioButton = new RadioButton();
         RadioButton pilotsRadioButton = new RadioButton();
         CheckBox searchDescriptionCheckBox = new CheckBox();
+        CheckBox showAddRemoveButtonsCheckBox = new CheckBox();
         Button exitButton = new Button();
 
         private List<Upgrade> upgrades = new List<Upgrade>();
@@ -54,11 +55,10 @@ namespace X_Wing_Visual_Builder.View
         
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
-        
-        private Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
-        private Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
 
-        private bool isShowingNumberOwned = true;
+        public Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
+        public Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
+        
 
         public BrowseCardsPage()
         {
@@ -102,6 +102,16 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(searchDescriptionCheckBox, 40);
             manuNavigationCanvas.Children.Add(searchDescriptionCheckBox);
 
+            /*
+            showAddRemoveButtonsCheckBox.Name = "showAddRemoveButtonsCheckBox";
+            showAddRemoveButtonsCheckBox.Content = "Show Add Remove Buttons";
+            showAddRemoveButtonsCheckBox.Checked += new RoutedEventHandler(ShowAddRemoveButtonsChanged);
+            showAddRemoveButtonsCheckBox.Unchecked += new RoutedEventHandler(ShowAddRemoveButtonsChanged);
+            showAddRemoveButtonsCheckBox.IsChecked = false;
+            Canvas.SetLeft(showAddRemoveButtonsCheckBox, 700);
+            Canvas.SetTop(showAddRemoveButtonsCheckBox, 40);
+            manuNavigationCanvas.Children.Add(showAddRemoveButtonsCheckBox);
+            */
             manuNavigationCanvas.Height = 150;
 
             contentScrollViewer.Height = 1040 - manuNavigationCanvas.Height;
@@ -130,6 +140,7 @@ namespace X_Wing_Visual_Builder.View
             SetIsUpgradeChecked();
             SetIsSearchDescriptionChecked();
         }
+
 
         private void squadsClicked(object sender, RoutedEventArgs e)
         {
@@ -180,106 +191,187 @@ namespace X_Wing_Visual_Builder.View
             upgradesToDisplay = upgrades.ToList();
         }
 
+        public void AddPilotToCache(Pilot pilot)
+        {
+            pilotCanvasCache[pilot.id] = new Canvas();
+            pilotCanvasCache[pilot.id].Width = Opt.ApResMod(pilotCardWidth);
+            pilotCanvasCache[pilot.id].Height = Opt.ApResMod(pilotCardHeight);
+            pilotCanvasCache[pilot.id].Margin = new Thickness(2, 2, 2, 2);
+
+            PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
+            pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
+            Canvas.SetLeft(pilotCard, 0);
+            Canvas.SetTop(pilotCard, 0);
+            pilotCanvasCache[pilot.id].Children.Add(pilotCard);
+
+            InfoButton infoButton = new InfoButton(30, 30);
+            infoButton.uniquePilotId = pilot.id;
+            infoButton.MouseEnter += new MouseEventHandler(PilotInfoMouseHover);
+            infoButton.MouseLeave += new MouseEventHandler(PilotInfoMouseHoverLeave);
+            infoButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            Canvas.SetLeft(infoButton, 0);
+            Canvas.SetTop(infoButton, 0);
+            pilotCanvasCache[pilot.id].Children.Add(infoButton);
+
+            OutlinedTextBlock numberOwned = new OutlinedTextBlock();
+            numberOwned.Text = pilot.numberOwned.ToString();
+            numberOwned.TextAlignment = TextAlignment.Center;
+            numberOwned.Width = 50;
+            numberOwned.Height = 50;
+            numberOwned.StrokeThickness = 2;
+            numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(50, 50, 50));
+            numberOwned.FontWeight = FontWeights.ExtraBold;
+            numberOwned.Fill = new SolidColorBrush(Color.FromRgb(250, 250, 250));
+            numberOwned.FontSize = 20;
+            numberOwned.FontFamily = new FontFamily("Verdana");
+            Canvas.SetLeft(numberOwned, 110);
+            Canvas.SetTop(numberOwned, 0);
+            pilotCanvasCache[pilot.id].Children.Add(numberOwned);
+
+            AddButton addPilot = new AddButton(30, 30);
+            addPilot.pilotId = pilot.id;
+            addPilot.MouseLeftButtonDown += new MouseButtonEventHandler(AddPilotClicked);
+            addPilot.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            addPilot.Visibility = Visibility.Hidden;
+            Canvas.SetLeft(addPilot, 80);
+            Canvas.SetTop(addPilot, 0);
+            pilotCanvasCache[pilot.id].Children.Add(addPilot);
+
+            RemoveButton removePilot = new RemoveButton(30, 30);
+            removePilot.pilotId = pilot.id;
+            removePilot.MouseLeftButtonDown += new MouseButtonEventHandler(RemovePilotClicked);
+            removePilot.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            removePilot.Visibility = Visibility.Hidden;
+            Canvas.SetRight(removePilot, 80);
+            Canvas.SetTop(removePilot, 0);
+            pilotCanvasCache[pilot.id].Children.Add(removePilot);
+        }
+
+        public void AddUpgradeToCache(Upgrade upgrade)
+        {
+            upgradeCanvasCache[upgrade.id] = new Canvas();
+            upgradeCanvasCache[upgrade.id].Width = Opt.ApResMod(upgradeCardWidth);
+            upgradeCanvasCache[upgrade.id].Height = Opt.ApResMod(upgradeCardHeight);
+            upgradeCanvasCache[upgrade.id].Margin = new Thickness(2, 2, 2, 2);
+
+            UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
+            upgradeCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
+            upgradeCard.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
+            upgradeCard.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
+
+            Canvas.SetLeft(upgradeCard, 0);
+            Canvas.SetTop(upgradeCard, 0);
+            upgradeCanvasCache[upgrade.id].Children.Add(upgradeCard);
+
+            InfoButton infoButton = new InfoButton(22, 22);
+            infoButton.upgradeId = upgrade.id;
+            infoButton.Cursor = Cursors.Hand;
+            infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(UpgradeInfoClicked);
+            //infoButton.MouseEnter += new MouseEventHandler(UpgradeInfoMouseHover);
+            //infoButton.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
+            infoButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+
+            Canvas.SetLeft(infoButton, 0);
+            Canvas.SetTop(infoButton, 0);
+            upgradeCanvasCache[upgrade.id].Children.Add(infoButton);
+
+            OutlinedTextBlock numberOwned = new OutlinedTextBlock();
+            numberOwned.Text = upgrade.numberOwned.ToString();
+            numberOwned.TextAlignment = TextAlignment.Left;
+            numberOwned.Width = 30;
+            numberOwned.Height = 30;
+            numberOwned.StrokeThickness = 1;
+            numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            numberOwned.FontWeight = FontWeights.ExtraBold;
+            numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
+            numberOwned.FontSize = Opt.ApResMod(20);
+            numberOwned.FontFamily = new FontFamily("Verdana");
+            Canvas.SetLeft(numberOwned, 1);
+            Canvas.SetBottom(numberOwned, 64);
+            upgradeCanvasCache[upgrade.id].Children.Add(numberOwned);
+
+            AddButton addUpgrade = new AddButton(22, 22);
+            addUpgrade.upgradeId = upgrade.id;
+            addUpgrade.MouseLeftButtonDown += new MouseButtonEventHandler(AddUpgradeClicked);
+            addUpgrade.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            addUpgrade.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
+            addUpgrade.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
+            addUpgrade.Visibility = Visibility.Hidden;
+            Canvas.SetLeft(addUpgrade, 0);
+            Canvas.SetTop(addUpgrade, 140);
+            upgradeCanvasCache[upgrade.id].Children.Add(addUpgrade);
+
+            RemoveButton removeUpgrade = new RemoveButton(22, 22);
+            removeUpgrade.upgradeId = upgrade.id;
+            removeUpgrade.MouseLeftButtonDown += new MouseButtonEventHandler(RemoveUpgradeClicked);
+            removeUpgrade.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            removeUpgrade.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
+            removeUpgrade.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
+            removeUpgrade.Visibility = Visibility.Hidden;
+            Canvas.SetLeft(removeUpgrade, 0);
+            Canvas.SetTop(removeUpgrade, 190);
+            upgradeCanvasCache[upgrade.id].Children.Add(removeUpgrade);
+        }
+
         protected override void DisplayContent()
         {
             contentWrapPanel.Children.Clear();
 
-            upgradesToDisplay = upgradesToDisplay.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList();
+            upgradesToDisplay = upgradesToDisplay.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList();
             foreach (Upgrade upgrade in upgradesToDisplay)
             {
                 if(upgradeCanvasCache.ContainsKey(upgrade.id) == false)
                 {
-                    upgradeCanvasCache[upgrade.id] = new Canvas();
-                    upgradeCanvasCache[upgrade.id].Width = Opt.ApResMod(upgradeCardWidth);
-                    upgradeCanvasCache[upgrade.id].Height = Opt.ApResMod(upgradeCardHeight);
-                    upgradeCanvasCache[upgrade.id].Margin = new Thickness(2, 2, 2, 2);
-
-                    UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-                    upgradeCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
-
-                    Canvas.SetLeft(upgradeCard, 0);
-                    Canvas.SetTop(upgradeCard, 0);
-                    upgradeCanvasCache[upgrade.id].Children.Add(upgradeCard);
-
-                    InfoButton infoButton = new InfoButton();
-                    infoButton.upgradeId = upgrade.id;
-                    infoButton.Cursor = Cursors.Hand;
-                    infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(UpgradeInfoClicked);
-                    //infoButton.MouseEnter += new MouseEventHandler(UpgradeInfoMouseHover);
-                    //infoButton.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
-                    infoButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-
-                    Canvas.SetLeft(infoButton, 0);
-                    Canvas.SetTop(infoButton, 0);
-                    upgradeCanvasCache[upgrade.id].Children.Add(infoButton);
+                    AddUpgradeToCache(upgrade);
                 }
-                
+                else
+                {
+                    upgradeCanvasCache[upgrade.id].Children.OfType<OutlinedTextBlock>().Single().Text = Upgrades.upgrades[upgrade.id].numberOwned.ToString();
+                }
                 contentWrapPanel.Children.Add(upgradeCanvasCache[upgrade.id]);
             }
-
+            
             pilotsToDisplay = pilotsToDisplay.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
             foreach (Pilot pilot in pilotsToDisplay)
             {
                 if (pilotCanvasCache.ContainsKey(pilot.id) == false)
                 {
-                    pilotCanvasCache[pilot.id] = new Canvas();
-                    pilotCanvasCache[pilot.id].Width = Opt.ApResMod(pilotCardWidth);
-                    pilotCanvasCache[pilot.id].Height = Opt.ApResMod(pilotCardHeight);
-                    pilotCanvasCache[pilot.id].Margin = new Thickness(2, 2, 2, 2);
-
-                    PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight));
-                    pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
-                    Canvas.SetLeft(pilotCard, 0);
-                    Canvas.SetTop(pilotCard, 0);
-                    pilotCanvasCache[pilot.id].Children.Add(pilotCard);
-
-                    InfoButton infoButton = new InfoButton();
-                    infoButton.uniquePilotId = pilot.id;
-                    infoButton.MouseEnter += new MouseEventHandler(PilotMouseHover);
-                    infoButton.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
-                    infoButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                    Canvas.SetLeft(infoButton, 0);
-                    Canvas.SetTop(infoButton, 0);
-                    pilotCanvasCache[pilot.id].Children.Add(infoButton);
-
-                    if (isShowingNumberOwned)
-                    {
-                        AddButton addPilot = new AddButton();
-                        addPilot.pilotId = pilot.id;
-                        addPilot.MouseLeftButtonDown += new MouseButtonEventHandler(AddPilotClicked);
-                        addPilot.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                        Canvas.SetLeft(addPilot, 80);
-                        Canvas.SetTop(addPilot, 0);
-                        pilotCanvasCache[pilot.id].Children.Add(addPilot);
-
-                        RemoveButton removePilot = new RemoveButton();
-                        removePilot.pilotId = pilot.id;
-                        removePilot.MouseLeftButtonDown += new MouseButtonEventHandler(RemovePilotClicked);
-                        removePilot.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                        Canvas.SetRight(removePilot, 80);
-                        Canvas.SetTop(removePilot, 0);
-                        pilotCanvasCache[pilot.id].Children.Add(removePilot);
-
-                        OutlinedTextBlock numberOwned = new OutlinedTextBlock();
-                        numberOwned.Text = pilot.numberOwned.ToString();
-                        numberOwned.TextAlignment = TextAlignment.Center;
-                        numberOwned.Width = 50;
-                        numberOwned.Height = 50;
-                        numberOwned.StrokeThickness = 2;
-                        numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(50, 50, 50));
-                        numberOwned.FontWeight = FontWeights.ExtraBold;
-                        numberOwned.Fill = new SolidColorBrush(Color.FromRgb(250, 250, 250));
-                        numberOwned.FontSize = 30;
-                        numberOwned.FontFamily = new FontFamily("Verdana");
-                        Canvas.SetLeft(numberOwned, 110);
-                        Canvas.SetTop(numberOwned, 0);
-                        pilotCanvasCache[pilot.id].Children.Add(numberOwned);                        
-                    }
+                    AddPilotToCache(pilot);
+                }
+                else
+                {
+                    pilotCanvasCache[pilot.id].Children.OfType<OutlinedTextBlock>().Single().Text = Pilots.pilots[pilot.id].numberOwned.ToString();
                 }
                 contentWrapPanel.Children.Add(pilotCanvasCache[pilot.id]);
             }
         }
 
+        private void UpgradeMouseHoverLeave(object sender, MouseEventArgs e)
+        {
+            IUpgradeId ids = (IUpgradeId)sender;
+            upgradeCanvasCache[ids.upgradeId].Children.OfType<AddButton>().Single().Visibility = Visibility.Hidden;
+            upgradeCanvasCache[ids.upgradeId].Children.OfType<RemoveButton>().Single().Visibility = Visibility.Hidden;
+        }
+
+        private void UpgradeMouseHover(object sender, MouseEventArgs e)
+        {
+            IUpgradeId ids = (IUpgradeId)sender;
+            upgradeCanvasCache[ids.upgradeId].Children.OfType<AddButton>().Single().Visibility = Visibility.Visible;
+            upgradeCanvasCache[ids.upgradeId].Children.OfType<RemoveButton>().Single().Visibility = Visibility.Visible;
+        }
+
+        private void AddUpgradeClicked(object sender, MouseButtonEventArgs e)
+        {
+            AddButton addUpgrade = (AddButton)sender;
+            Upgrades.upgrades[addUpgrade.upgradeId].numberOwned++;
+            upgradeCanvasCache[addUpgrade.upgradeId].Children.OfType<OutlinedTextBlock>().Single().Text = Upgrades.upgrades[addUpgrade.upgradeId].numberOwned.ToString();
+        }
+        private void RemoveUpgradeClicked(object sender, MouseButtonEventArgs e)
+        {
+            RemoveButton removeUpgrade = (RemoveButton)sender;
+            Upgrades.upgrades[removeUpgrade.upgradeId].numberOwned--;
+            upgradeCanvasCache[removeUpgrade.upgradeId].Children.OfType<OutlinedTextBlock>().Single().Text = Upgrades.upgrades[removeUpgrade.upgradeId].numberOwned.ToString();
+        }
         private void AddPilotClicked(object sender, MouseButtonEventArgs e)
         {
             AddButton addPilot = (AddButton)sender;
@@ -292,28 +384,7 @@ namespace X_Wing_Visual_Builder.View
             Pilots.pilots[removePilot.pilotId].numberOwned--;
             pilotCanvasCache[removePilot.pilotId].Children.OfType<OutlinedTextBlock>().Single().Text = Pilots.pilots[removePilot.pilotId].numberOwned.ToString();
         }
-
-        private void UpdatePilot(int pilotId, bool displayManeuverCard)
-        {
-            int numberOfChildrenToKeep = 2;
-            numberOfChildrenToKeep += (isShowingNumberOwned) ? 3 : 0;
-            if (displayManeuverCard)
-            {
-                ManeuverCard maneuverCard = Pilots.pilots[pilotId].ship.GetManeuverCard(Math.Round(Opt.ApResMod(pilotCardWidth) / 11));
-                maneuverCard.uniquePilotId = Pilots.pilots[pilotId].id;
-                maneuverCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                Canvas.SetLeft(maneuverCard, (Opt.ApResMod(pilotCardWidth) / 2) - (maneuverCard.Width / 2));
-                Canvas.SetTop(maneuverCard, 0);
-                pilotCanvasCache[pilotId].Children.Add(maneuverCard);
-            }
-            else
-            {
-                if (pilotCanvasCache[pilotId].Children.Count > numberOfChildrenToKeep)
-                {
-                    pilotCanvasCache[pilotId].Children.RemoveRange(numberOfChildrenToKeep, pilotCanvasCache[pilotId].Children.Count - numberOfChildrenToKeep);
-                }
-            }
-        }
+        
         private void UpdateUpgradeCard(int upgradeId, bool displayInfo)
         {
             if (displayInfo)
@@ -329,6 +400,23 @@ namespace X_Wing_Visual_Builder.View
                 {
                     upgradeCanvasCache[upgradeId].Children.RemoveRange(2, upgradeCanvasCache[upgradeId].Children.Count - 2);
                 }
+            }
+        }
+
+        private void UpdatePilot(int pilotId, bool displayManeuverCard)
+        {
+            if (displayManeuverCard)
+            {
+                ManeuverCard maneuverCard = Pilots.pilots[pilotId].ship.GetManeuverCard(Math.Round(Opt.ApResMod(pilotCardWidth) / 11));
+                maneuverCard.uniquePilotId = Pilots.pilots[pilotId].id;
+                maneuverCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+                Canvas.SetLeft(maneuverCard, (Opt.ApResMod(pilotCardWidth) / 2) - (maneuverCard.Width / 2));
+                Canvas.SetTop(maneuverCard, 0);
+                pilotCanvasCache[pilotId].Children.Add(maneuverCard);
+            }
+            else
+            {
+                pilotCanvasCache[pilotId].Children.Remove(pilotCanvasCache[pilotId].Children.OfType<ManeuverCard>().Single());
             }
         }
 
@@ -534,7 +622,7 @@ namespace X_Wing_Visual_Builder.View
 
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
-            Card card = (Card)sender;
+            IGeneralId card = (IGeneralId)sender;
             //cardId.Content = card.id.ToString();
             if(isAddingUpgrade == true)
             {
@@ -608,17 +696,16 @@ namespace X_Wing_Visual_Builder.View
             UpdateUpgradeCard(hoveredUpgrade.upgradeId, true);
         }
 
-        private void PilotMouseHover(object sender, MouseEventArgs e)
+        private void PilotInfoMouseHover(object sender, MouseEventArgs e)
         {
             InfoButton hoveredPilot = (InfoButton)sender;
             UpdatePilot(hoveredPilot.uniquePilotId, true);
         }
-        private void PilotMouseHoverLeave(object sender, MouseEventArgs e)
+        private void PilotInfoMouseHoverLeave(object sender, MouseEventArgs e)
         {
             InfoButton hoveredPilot = (InfoButton)sender;
             UpdatePilot(hoveredPilot.uniquePilotId, false);
-        }
-        /*
+        }/*
         private void ManeuverMouseHover(object sender, MouseEventArgs e)
         {
             ManeuverCard hoveredManeuver = (ManeuverCard)sender;
@@ -628,8 +715,8 @@ namespace X_Wing_Visual_Builder.View
         {
             ManeuverCard hoveredManeuver = (ManeuverCard)sender;
             UpdatePilot(hoveredManeuver.uniquePilotId, false);
-        }
-        */
+        }*/
+        
         private void ContentScroll(object sender, MouseWheelEventArgs e)
         {
             contentScrollViewer.ScrollToVerticalOffset(contentScrollViewer.VerticalOffset - e.Delta);

@@ -77,12 +77,12 @@
     <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Builds.cs" />
-    <Compile Include="Model\Card.cs" />
     <Compile Include="Model\ConvertBitmapToBitmapImage.cs" />
     <Compile Include="Model\DefaultPage.cs" />
     <Compile Include="Model\DeleteButton.cs" />
     <Compile Include="Model\DiceRollResult.cs" />
     <Compile Include="Model\FileHandler.cs" />
+    <Compile Include="Model\IGeneralId.cs" />
     <Compile Include="Model\ImageResizer.cs" />
     <Compile Include="Model\ManeuverCard.cs" />
     <Compile Include="Model\NewStats.cs" />
@@ -92,6 +92,7 @@
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
     <Compile Include="Model\InfoButton.cs" />
+    <Compile Include="Model\IUpgradeId.cs" />
     <Compile Include="Model\RemoveButton.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Ships.cs" />

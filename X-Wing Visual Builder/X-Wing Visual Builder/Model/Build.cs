@@ -35,30 +35,28 @@ namespace X_Wing_Visual_Builder.Model
                 return cost;
             }
         }
-        public void AddPilot(int uniquePilotId, Pilot pilot)
-        {
-            pilots.Add(pilot.uniquePilotId, pilot);
-            Builds.SaveBuilds();
-        }
         
-        public void AddPilot(Pilot pilot)
+        public void AddPilot(Pilot pilot, bool hasUniqueId = false)
         {
-            int newPilotId = 0;
-            while (true)
+            if (hasUniqueId == false)
             {
-                int origionalNewPilotId = newPilotId;
-                foreach (KeyValuePair<int, Pilot> otherPilot in pilots)
+                int uniquePilotId = 0;
+                while (true)
                 {
-                    if (otherPilot.Value.uniquePilotId == newPilotId)
+                    int origionalNewPilotId = uniquePilotId;
+                    foreach (Pilot otherPilot in pilots.Values.ToList())
                     {
-                        newPilotId++;
+                        if (otherPilot.uniquePilotId == uniquePilotId)
+                        {
+                            uniquePilotId++;
+                            break;
+                        }
+                    }
+                    if (origionalNewPilotId == uniquePilotId)
+                    {
+                        pilot.uniquePilotId = uniquePilotId;
                         break;
                     }
-                }
-                if (origionalNewPilotId == newPilotId)
-                {
-                    pilot.uniquePilotId = newPilotId;
-                    break;
                 }
             }
             pilots.Add(pilot.uniquePilotId, pilot);
@@ -69,24 +67,54 @@ namespace X_Wing_Visual_Builder.Model
             return pilots[uniquePilotId];
         }
 
-        public void AddUpgrade(int uniquePilotId, Upgrade upgrade)
+        public void AddUpgrade(int uniquePilotId, Upgrade upgrade, bool hasUniqueId = false)
         {
-            pilots[uniquePilotId].upgrades.Add(upgrade);
+            if(hasUniqueId == false)
+            {
+                int uniqueUpgradeId = 0;
+                while (true)
+                {
+                    int origionalUniqueUpgradeId = uniqueUpgradeId;
+                    foreach (Pilot pilot in pilots.Values.ToList())
+                    {
+                        foreach (Upgrade upgradeToTest in pilot.upgrades.Values.ToList())
+                        {
+                            if (upgradeToTest.uniqueUpgradeId == uniqueUpgradeId)
+                            {
+                                uniqueUpgradeId++;
+                                break;
+                            }
+                        }
+                    }
+                    if (origionalUniqueUpgradeId == uniqueUpgradeId)
+                    {
+                        upgrade.uniqueUpgradeId = uniqueUpgradeId;
+                        break;
+                    }
+                }
+            }
+            pilots[uniquePilotId].upgrades[upgrade.uniqueUpgradeId] = upgrade;
             Builds.SaveBuilds();
         }
-        
+        /*
         public UpgradeCard GetUpgradeCard(int uniquePilotId, int upgradeKey, double width, double height)
         {
             UpgradeCard upgradeCard = pilots[uniquePilotId].upgrades.ElementAt(upgradeKey).GetUpgradeCard(width, height);
             upgradeCard.pilotKey = uniquePilotId;
-            upgradeCard.upgradeKey = upgradeKey;
+            upgradeCard.upgradeId = upgradeKey;
 
             return upgradeCard;
         }
-
+        */
         public void RemoveUpgrade(int uniquePilotId, int upgradeId)
         {
-            pilots[uniquePilotId].upgrades.Remove(Upgrades.upgrades[upgradeId]);
+            foreach(Upgrade upgrade in pilots[uniquePilotId].upgrades.Values.ToList())
+            {
+                if (upgrade.id == upgradeId)
+                {
+                    pilots[uniquePilotId].upgrades.Remove(upgrade.uniqueUpgradeId);
+                }
+            }            
             UpgradeModifiers.RemoveUpgrade(this, uniquePilotId, upgradeId);
             Upgrades.RemoveUnusableUpgrades(this, uniquePilotId);
             Builds.SaveBuilds();

@@ -26,9 +26,9 @@ namespace X_Wing_Visual_Builder.Model
             {
                 int totalCost = 0;
                 totalCost += cost;
-                foreach (Upgrade upgrade in upgrades)
+                foreach (Upgrade upgrade in upgrades.Values.ToList())
                 {
-                   totalCost += UpgradeModifiers.UpgradeCost(upgrade, upgrades);
+                   totalCost += UpgradeModifiers.UpgradeCost(upgrade, upgrades.Values.ToList());
                 }
                 return totalCost;
             }
@@ -46,7 +46,7 @@ namespace X_Wing_Visual_Builder.Model
             get
             {
                 List<Action> usableActions = new List<Action>(ship.actions);
-                foreach (Upgrade upgrade in upgrades)
+                foreach (Upgrade upgrade in upgrades.Values.ToList())
                 {
                     usableActions.AddRange(upgrade.addsActions);
                 }
@@ -60,7 +60,7 @@ namespace X_Wing_Visual_Builder.Model
             get
             {
                 int pilotSkill = _pilotSkill;
-                foreach (Upgrade upgrade in upgrades)
+                foreach (Upgrade upgrade in upgrades.Values.ToList())
                 {
                     pilotSkill += upgrade.addsPilotSkill;
                 }
@@ -77,7 +77,7 @@ namespace X_Wing_Visual_Builder.Model
             get
             {
                 Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(_possibleUpgrades);
-                foreach (Upgrade upgrade in upgrades)
+                foreach (Upgrade upgrade in upgrades.Values.ToList())
                 {
                     if (possibleUpgrades.ContainsKey(upgrade.upgradeType))
                     {
@@ -125,7 +125,7 @@ namespace X_Wing_Visual_Builder.Model
             set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); }
         }
 
-        public List<Upgrade> upgrades = new List<Upgrade>();
+        public Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
 
         public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility, int numberOwned)
         {
@@ -146,16 +146,22 @@ namespace X_Wing_Visual_Builder.Model
         public Pilot GetPilotClone()
         {
             Pilot pilotClone = (Pilot)MemberwiseClone();
-            pilotClone.upgrades = new List<Upgrade>();
+            pilotClone.upgrades = new Dictionary<int, Upgrade>();
             return pilotClone;
         }
 
         public PilotCard GetPilotCard(double width, double height, int uniqueBuildId = 0)
         {
-            BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png"));
+            //BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png"));
+            BitmapImage resizedUpgradeImage = new BitmapImage();
+            resizedUpgradeImage.BeginInit();
+            resizedUpgradeImage.CacheOption = BitmapCacheOption.OnLoad;
+            resizedUpgradeImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
+            resizedUpgradeImage.EndInit();
+
 
             PilotCard pilotCard = new PilotCard();
-            pilotCard.id = id;
+            pilotCard.pilotId = id;
             pilotCard.Source = resizedUpgradeImage;
             pilotCard.Height = height;
             pilotCard.Width = width;

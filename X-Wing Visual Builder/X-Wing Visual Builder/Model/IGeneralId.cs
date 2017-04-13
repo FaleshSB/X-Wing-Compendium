@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public class Card : Image
+    interface IGeneralId
     {
-        public int id;
+        int id
+        {
+            get;
+        }
     }
 }

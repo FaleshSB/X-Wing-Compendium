@@ -9,9 +9,11 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public class PilotCard : Card
+    public class PilotCard : Image, IGeneralId
     {
         public int uniquePilotId;
         public int uniqueBuildId;
+        public int pilotId;
+        public int id { get { return pilotId; } }
     }
 }

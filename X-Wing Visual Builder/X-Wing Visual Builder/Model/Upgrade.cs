@@ -21,6 +21,7 @@ namespace X_Wing_Visual_Builder.Model
     public class Upgrade
     {
         public int id;
+        public int uniqueUpgradeId;
         public int cost;
         public string name;
         public string description;
@@ -81,12 +82,24 @@ namespace X_Wing_Visual_Builder.Model
             this.numberOwned = numberOwned;
         }
 
+
+        public Upgrade GetUpgradeClone()
+        {
+            Upgrade upgradeClone = (Upgrade)MemberwiseClone();
+            return upgradeClone;
+        }
+
         public UpgradeCard GetUpgradeCard(double width, double height)
         {
-            BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
+            //BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\" + id.ToString() + ".png"));
+            BitmapImage resizedUpgradeImage = new BitmapImage();
+            resizedUpgradeImage.BeginInit();
+            resizedUpgradeImage.CacheOption = BitmapCacheOption.OnLoad;
+            resizedUpgradeImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + ".png");
+            resizedUpgradeImage.EndInit();
 
-            UpgradeCard upgradeCard = new UpgradeCard();
-            upgradeCard.id = id;
+             UpgradeCard upgradeCard = new UpgradeCard();
+            upgradeCard.upgradeId = id;
             upgradeCard.Source = resizedUpgradeImage;
             upgradeCard.UseLayoutRounding = true;
             upgradeCard.Height = height;

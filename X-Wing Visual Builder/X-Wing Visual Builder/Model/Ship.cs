@@ -75,7 +75,7 @@ namespace X_Wing_Visual_Builder.Model
             int finalManeuverCardHeight = Convert.ToInt32(testSize.Height * maneuvers.Count);  
                       
             Bitmap finalManeuverCard = new Bitmap(finalManeuverCardWidth, finalManeuverCardHeight);
-            Graphics g = Graphics.FromImage(finalManeuverCard);
+             Graphics g = Graphics.FromImage(finalManeuverCard);
             g.Clear(System.Drawing.SystemColors.AppWorkspace);
             int row = 1;
             foreach (KeyValuePair<int, List<int>> maneuverRow in maneuvers)

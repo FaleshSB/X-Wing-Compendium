@@ -118,7 +118,7 @@ namespace X_Wing_Visual_Builder.Model
             List<int> upgradesToRemove = new List<int>();
             foreach (KeyValuePair<int, Upgrade> upgrade in upgrades)
             {
-                if(upgrade.Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
+                //if(upgrade.Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
             }
             foreach(int upgradeToRemove in upgradesToRemove)
             {
@@ -174,12 +174,17 @@ namespace X_Wing_Visual_Builder.Model
             }
             return randomUpgrade;
         }
-        
+
+        public static Upgrade GetUpgradeClone(int upgradeId)
+        {
+            return upgrades[upgradeId].GetUpgradeClone();
+        }
+
         public static void RemoveUnusableUpgrades(Build build, int uniquePilotId)
         {
             bool hasAnUpgradeBeenRemoved = false;
 
-            foreach(Upgrade upgrade in build.pilots[uniquePilotId].upgrades)
+            foreach(Upgrade upgrade in build.pilots[uniquePilotId].upgrades.Values.ToList())
             {
                 if (IsUpgradeUsable(build.pilots[uniquePilotId], upgrade, true) == false)
                 {
@@ -242,7 +247,7 @@ namespace X_Wing_Visual_Builder.Model
             {
                 foreach (int requiredupgrade in upgrade.requiresUpgrades)
                 {
-                    if (pilot.upgrades.Exists(upgradeElement => upgradeElement.id == requiredupgrade) == false)
+                    if (pilot.upgrades.Values.ToList().Exists(upgradeElement => upgradeElement.id == requiredupgrade) == false)
                     {
                         isUpgradeUsable = false;
                         break;
