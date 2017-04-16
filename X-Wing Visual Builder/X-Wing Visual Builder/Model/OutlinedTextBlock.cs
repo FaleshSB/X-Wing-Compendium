@@ -5,10 +5,12 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Media;
+using X_Wing_Visual_Builder.Model;
 
 [ContentProperty("Text")]
-public class OutlinedTextBlock : FrameworkElement
+public class OutlinedTextBlock : FrameworkElement, IGeneralId
 {
+    public int id { get; set; }
     public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
         "Fill",
         typeof(Brush),

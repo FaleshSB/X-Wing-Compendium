@@ -84,6 +84,7 @@
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\IGeneralId.cs" />
     <Compile Include="Model\ImageResizer.cs" />
+    <Compile Include="Model\IPilotId.cs" />
     <Compile Include="Model\ManeuverCard.cs" />
     <Compile Include="Model\NewStats.cs" />
     <Compile Include="Model\Options.cs" />
@@ -107,11 +108,11 @@
     <Compile Include="View\InfoDialogBox.xaml.cs">
       <DependentUpon>InfoDialogBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuizPage.xaml.cs">
+      <DependentUpon>QuizPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SquadsPage.xaml.cs">
       <DependentUpon>SquadsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PilotQuizPage.xaml.cs">
-      <DependentUpon>PilotQuizPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -121,9 +122,6 @@
     </Compile>
     <Compile Include="View\UpgradeCardsPage.xaml.cs">
       <DependentUpon>UpgradeCardsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UpgradeQuizPage.xaml.cs">
-      <DependentUpon>UpgradeQuizPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -145,11 +143,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SquadsPage.xaml">
+    <Page Include="View\QuizPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PilotQuizPage.xaml">
+    <Page Include="View\SquadsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,10 +160,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UpgradeCardsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UpgradeQuizPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

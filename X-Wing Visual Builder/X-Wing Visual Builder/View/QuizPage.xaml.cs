@@ -17,12 +17,75 @@ using X_Wing_Visual_Builder.Model;
 namespace X_Wing_Visual_Builder.View
 {
     /// <summary>
-    /// Interaction logic for PilotQuizPage.xaml
+    /// Interaction logic for UpgradeCards.xaml
     /// </summary>
-    public partial class PilotQuizPage : DefaultPage
+    public partial class QuizPage : DefaultPage
     {
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
+        private int upgradeCardWidth = 166;
+        private int upgradeCardHeight = 255;
+        private Canvas contentCanvas = new Canvas();
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
+
+        public QuizPage()
+        {
+            contentCanvas.Name = "contentCanvas";
+            contentWrapPanel.Children.Add(contentCanvas);
+            InitializeComponent();
+        }
+
+        new private void DisplayContent()
+        {
+            contentWrapPanel.Name = "contentWrapPanel";
+            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            contentScrollViewer.Content = contentWrapPanel;
+
+            contentCanvas.Children.Clear();
+            List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
+            double currentHeightOffset = -30;
+            double currentLeftOffset = 20;
+            double spacersGap = 4;
+            int currentTypeId = 0;
+            int currentUpgradeId = 0;
+            int currentRowNumber = 0;
+            while (true)
+            {
+                if (currentTypeId >= upgradesToDisplay.Count)
+                {
+                    break;
+                }
+                else if (currentUpgradeId < upgradesToDisplay.ElementAt(currentTypeId).Count)
+                {
+                    UpgradeCard upgradeCard = upgradesToDisplay.ElementAt(currentTypeId).ElementAt(currentUpgradeId).GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
+                    Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
+                    Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
+                    contentCanvas.Children.Add(upgradeCard);
+                    currentUpgradeId++;
+                    currentLeftOffset += spacersGap + Opt.ApResMod(upgradeCardWidth);
+                    currentRowNumber++;
+                }
+                else
+                {
+                    currentTypeId++;
+                    currentUpgradeId = 0;
+                }
+
+                if (currentRowNumber > 10)
+                {
+                    currentHeightOffset += spacersGap + Opt.ApResMod(upgradeCardHeight);
+                    currentLeftOffset = 20;
+                    currentRowNumber = 0;
+                }
+            }
+            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(upgradeCardHeight) + 80;
+        }
+
+        /*
         private Pilot currentRandomPilot;
         private bool isShowingName = false;
         private Canvas contentCanvas = new Canvas();
@@ -120,6 +183,7 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetLeft(showName, 850);
             Canvas.SetTop(showName, 780);
             contentCanvas.Children.Add(showName);
-        }
+        }*/
     }
 }
+ 

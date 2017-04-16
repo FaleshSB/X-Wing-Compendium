@@ -9,12 +9,31 @@ using System.Windows.Controls;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    class AddButton : Image, IUpgradeId
+    class AddButton : Image, IUpgradeId, IGeneralId
     {
         public int uniqueBuildId { get; set; }
         public int uniquePilotId { get; set; }
         public int upgradeId { get; set; }
         public int pilotId { get; set; }
+        private int _id;
+        public int id
+        {
+            get
+            {
+                if(upgradeId == 0)
+                {
+                    return pilotId;
+                }
+                else
+                {
+                    return upgradeId;
+                }
+            }
+            set
+            {
+                _id = value;
+            }
+        }
 
         public AddButton(double width, double height)
         {

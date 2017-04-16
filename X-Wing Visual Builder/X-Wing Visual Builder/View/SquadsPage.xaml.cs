@@ -39,7 +39,7 @@ namespace X_Wing_Visual_Builder.View
 
         public SquadsPage()
         {
-            Pages.pages[PageName.SquadsPage] = this;
+            Pages.pages[PageName.Squads] = this;
             InitializeComponent();
 
             contentWrapPanel = new AlignableWrapPanel();
@@ -47,14 +47,27 @@ namespace X_Wing_Visual_Builder.View
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
 
+            Button addImperialBuildButton = new Button();
+            addImperialBuildButton.Name = "addRebelBuildButton";
+            addImperialBuildButton.Content = "Add Imperial Build";
+            addImperialBuildButton.Width = 130;
+            addImperialBuildButton.Height = 40;
+            addImperialBuildButton.FontSize = 16;
+            addImperialBuildButton.FontWeight = FontWeights.Bold;
+            addImperialBuildButton.Click += new RoutedEventHandler(AddImperialBuildClicked);
+            addImperialBuildButton.UseLayoutRounding = true;
+            Canvas.SetLeft(addImperialBuildButton, 300);
+            Canvas.SetTop(addImperialBuildButton, 10);
+            topToolsCanvas.Children.Add(addImperialBuildButton);
+
             Button addBuildButton = new Button();
-            addBuildButton.Name = "addBuildButton";
-            addBuildButton.Content = "Add Build";
+            addBuildButton.Name = "addRebelBuildButton";
+            addBuildButton.Content = "Add Rebel Build";
             addBuildButton.Width = 130;
             addBuildButton.Height = 40;
             addBuildButton.FontSize = 16;
             addBuildButton.FontWeight = FontWeights.Bold;
-            addBuildButton.Click += new RoutedEventHandler(AddBuildClicked);
+            addBuildButton.Click += new RoutedEventHandler(AddRebelBuildClicked);
             addBuildButton.UseLayoutRounding = true;
             Canvas.SetLeft(addBuildButton, 400);
             Canvas.SetTop(addBuildButton, 10);
@@ -94,9 +107,14 @@ namespace X_Wing_Visual_Builder.View
             NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
         }
 
-        private void AddBuildClicked(object sender, RoutedEventArgs e)
+        private void AddRebelBuildClicked(object sender, RoutedEventArgs e)
         {
             Builds.AddBuild(Faction.Rebel);
+            DisplayContent();
+        }
+        private void AddImperialBuildClicked(object sender, RoutedEventArgs e)
+        {
+            Builds.AddBuild(Faction.Imperial);
             DisplayContent();
         }
 
@@ -114,6 +132,7 @@ namespace X_Wing_Visual_Builder.View
         private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
+            upgradeCanvasCache.Remove(Int32.Parse(deleteButton.uniqueBuildId.ToString() + deleteButton.uniqueUpgradeId.ToString()));
             Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);            
             DisplayContent();
         }
@@ -314,6 +333,7 @@ namespace X_Wing_Visual_Builder.View
                             deleteButton = new DeleteButton();
                             deleteButton.uniqueBuildId = build.uniqueBuildId;
                             deleteButton.uniquePilotId = pilot.uniquePilotId;
+                            deleteButton.uniqueUpgradeId = upgrade.uniqueUpgradeId;
                             deleteButton.upgradeId = upgrade.id;
                             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
                             Canvas.SetLeft(deleteButton, (Opt.ApResMod(upgradeCardWidth) - deleteButton.Width));

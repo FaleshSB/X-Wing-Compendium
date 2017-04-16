@@ -9,7 +9,7 @@ namespace X_Wing_Visual_Builder.Model
     public enum Maneuver { LSloop = 1, RSloop = 2, KTurn = 3, LTurn = 4, RTurn = 5, Stop = 6, LBank = 7, RBank = 8, Streight = 9, LTalon = 10, RTalon = 11, LBack = 12, RBack = 13, Back = 14 }
     public enum ManeuverDificulty { White = 1, Green = 2, Red = 3}
     public enum DieResult { Success = 1, Failure = 2, UsedFail = 3 }
-    public enum PageName { BrowseCards = 1, UpgradeQuiz = 2, PilotQuiz = 3, SquadsPage = 4, CalculateStats = 5 }
+    public enum PageName { BrowseCards, Quiz, Squads, CalculateStats }
     public enum UpgradeType { Elite = 2, Astromech = 3, Torpedo = 4, Missile = 5, Cannon = 6, Turret = 7, Bomb = 8, Crew = 9,
                        SalvagedAstromech = 10, System = 11, Title = 12, Modification = 13, Illicit = 14, Cargo = 15, Hardpoint = 16,
                        Team = 17, Tech = 18 }

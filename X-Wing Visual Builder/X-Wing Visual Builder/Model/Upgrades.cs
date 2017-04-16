@@ -150,7 +150,7 @@ namespace X_Wing_Visual_Builder.Model
             string numberOfUpgradesOwned = "";
             foreach (Upgrade upgrade in upgrades.Values.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList())
             {
-                numberOfUpgradesOwned += upgrade.id.ToString() + "," + upgrade.name + "," + upgrade.numberOwned.ToString();
+                numberOfUpgradesOwned += upgrade.id.ToString() + "," + upgrade.name + "," + upgrade.numberOwned.ToString() + "," + upgrade.faction.ToString() + "," + upgrade.shipSize.ToString() + "," + upgrade.upgradeType.ToString();
                 numberOfUpgradesOwned += System.Environment.NewLine;
             }
             FileHandler.SaveFile("upgradesowned.txt", numberOfUpgradesOwned);
