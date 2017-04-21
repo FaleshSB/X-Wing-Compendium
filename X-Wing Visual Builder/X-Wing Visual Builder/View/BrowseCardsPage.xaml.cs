@@ -58,7 +58,8 @@ namespace X_Wing_Visual_Builder.View
 
         public Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
         public Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
-        
+        public Dictionary<int, UpgradeCanvas> newUpgradeCanvasCache = new Dictionary<int, UpgradeCanvas>();
+
 
         public BrowseCardsPage()
         {
@@ -651,7 +652,6 @@ namespace X_Wing_Visual_Builder.View
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
             IGeneralId card = (IGeneralId)sender;
-            //cardId.Content = card.id.ToString();
             if(isAddingUpgrade == true)
             {
                 upgradesToDisplay.Clear();
@@ -662,7 +662,7 @@ namespace X_Wing_Visual_Builder.View
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
-                build.AddUpgrade(uniquePilotId, Upgrades.upgrades[card.id]);
+                build.AddUpgrade(uniquePilotId, card.id);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
 
                 UpgradeModifiers.AddUpgrade(build, uniquePilotId, card.id);

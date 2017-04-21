@@ -25,88 +25,27 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardHeight = 410;
         private int upgradeCardWidth = 166;
         private int upgradeCardHeight = 255;
-        private Canvas contentCanvas = new Canvas();
-        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
-
-        public QuizPage()
-        {
-            contentCanvas.Name = "contentCanvas";
-            contentWrapPanel.Children.Add(contentCanvas);
-            InitializeComponent();
-        }
-
-        new private void DisplayContent()
-        {
-            contentWrapPanel.Name = "contentWrapPanel";
-            contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
-            contentScrollViewer.Content = contentWrapPanel;
-
-            contentCanvas.Children.Clear();
-            List<List<Upgrade>> upgradesToDisplay = new List<List<Upgrade>>();
-            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Torpedo, UpgradeSort.Cost));
-            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Missile, UpgradeSort.Cost));
-            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Elite, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
-            //upgradesToDisplay.Add(Upgrades.GetUpgrades(UpgradeType.Astromech, UpgradeSort.Cost, Faction.Rebel, ShipSize.Small));
-            double currentHeightOffset = -30;
-            double currentLeftOffset = 20;
-            double spacersGap = 4;
-            int currentTypeId = 0;
-            int currentUpgradeId = 0;
-            int currentRowNumber = 0;
-            while (true)
-            {
-                if (currentTypeId >= upgradesToDisplay.Count)
-                {
-                    break;
-                }
-                else if (currentUpgradeId < upgradesToDisplay.ElementAt(currentTypeId).Count)
-                {
-                    UpgradeCard upgradeCard = upgradesToDisplay.ElementAt(currentTypeId).ElementAt(currentUpgradeId).GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-                    Canvas.SetLeft(upgradeCard, currentLeftOffset + spacersGap);
-                    Canvas.SetTop(upgradeCard, currentHeightOffset + 40);
-                    contentCanvas.Children.Add(upgradeCard);
-                    currentUpgradeId++;
-                    currentLeftOffset += spacersGap + Opt.ApResMod(upgradeCardWidth);
-                    currentRowNumber++;
-                }
-                else
-                {
-                    currentTypeId++;
-                    currentUpgradeId = 0;
-                }
-
-                if (currentRowNumber > 10)
-                {
-                    currentHeightOffset += spacersGap + Opt.ApResMod(upgradeCardHeight);
-                    currentLeftOffset = 20;
-                    currentRowNumber = 0;
-                }
-            }
-            contentCanvas.Height = currentHeightOffset + spacersGap + Opt.ApResMod(upgradeCardHeight) + 80;
-        }
-
-        /*
         private Pilot currentRandomPilot;
         private bool isShowingName = false;
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
-        public PilotQuizPage()
+        public QuizPage()
         {
             contentWrapPanel.Name = "contentWrapPanel";
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
 
-            Pages.pages[PageName.PilotQuiz] = this;
+            Pages.pages[PageName.Quiz] = this;
 
             contentCanvas.Name = "contentCanvas";
             contentWrapPanel.Children.Add(contentCanvas);
-
             InitializeComponent();
-
+            contentCanvas.Width = 1800;
+            contentCanvas.Height = 1000;
             currentRandomPilot = Pilots.GetRandomPilot();
         }
-
+        
         private void ShowNameClicked(object sender, RoutedEventArgs e)
         {
             if (isShowingName == true)
@@ -117,38 +56,11 @@ namespace X_Wing_Visual_Builder.View
             isShowingName = !isShowingName;
             DisplayContent();
         }
-
-        private void TempButton(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            if (button.Content.ToString() == "Browse Cards")
-            {
-                //NavigationService.GoBack();
-                NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
-            }
-        }
-
+        
         protected override void DisplayContent()
         {
             contentCanvas.Children.Clear();
-
-
-            Button browseCards = new Button();
-            browseCards.Name = "browseCards";
-            browseCards.Width = 130;
-            browseCards.Height = 40;
-            browseCards.FontSize = 16;
-            browseCards.FontWeight = FontWeights.Bold;
-            browseCards.Click += new RoutedEventHandler(TempButton);
-            browseCards.UseLayoutRounding = true;
-            browseCards.Content = "Browse Cards";
-            Canvas.SetLeft(browseCards, 850);
-            Canvas.SetTop(browseCards, 180);
-            contentCanvas.Children.Add(browseCards);
-
-
-
-
+            
             PilotCard randomPilotCard = currentRandomPilot.GetPilotCard(pilotCardWidth, pilotCardHeight);
             Canvas.SetLeft(randomPilotCard, 760);
             Canvas.SetTop(randomPilotCard, 360);
@@ -183,7 +95,7 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetLeft(showName, 850);
             Canvas.SetTop(showName, 780);
             contentCanvas.Children.Add(showName);
-        }*/
+        }
     }
 }
  

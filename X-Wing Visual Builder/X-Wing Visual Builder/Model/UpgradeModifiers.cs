@@ -37,7 +37,7 @@ namespace X_Wing_Visual_Builder.Model
             if (upgradeId == 11010)
             {
                 // Add tractor beam
-                build.AddUpgrade(uniquePilotId, Upgrades.upgrades[5005]);
+                build.AddUpgrade(uniquePilotId, 5005);
             }
         }
 

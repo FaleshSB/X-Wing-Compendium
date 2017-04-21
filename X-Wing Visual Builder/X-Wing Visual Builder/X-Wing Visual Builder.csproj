@@ -99,6 +99,7 @@
     <Compile Include="Model\Ships.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Model\Upgrade.cs" />
+    <Compile Include="Model\UpgradeCanvas.cs" />
     <Compile Include="Model\UpgradeCard.cs" />
     <Compile Include="Model\UpgradeModifiers.cs" />
     <Compile Include="Model\Upgrades.cs" />

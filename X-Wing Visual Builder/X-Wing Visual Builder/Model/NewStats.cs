@@ -79,7 +79,6 @@ namespace X_Wing_Visual_Builder.Model
                     finalPercentageChangesOfSuccess[diceRollResult.numberOfSuccessfulResults] = (diceRollResult.numberOfResults / allDiceRollResults.totalNumberOfResults) * 100;
                 }
             }
-            int i = 0;
         }
 
         private int CalculateNumberOfDiceToReRoll(Dictionary<int, DieFace> failedResults)

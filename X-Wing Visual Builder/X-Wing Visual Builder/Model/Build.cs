@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using X_Wing_Visual_Builder.View;
 
 namespace X_Wing_Visual_Builder.Model
 {
@@ -67,32 +68,32 @@ namespace X_Wing_Visual_Builder.Model
             return pilots[uniquePilotId];
         }
 
-        public void AddUpgrade(int uniquePilotId, Upgrade upgrade, bool hasUniqueId = false)
+        public void AddUpgrade(int uniquePilotId, int upgradeId)
         {
-            if(hasUniqueId == false)
+            Upgrade upgrade = Upgrades.GetUpgradeClone(upgradeId);
+            
+            int uniqueUpgradeId = 0;
+            while (true)
             {
-                int uniqueUpgradeId = 0;
-                while (true)
+                int origionalUniqueUpgradeId = uniqueUpgradeId;
+                foreach (Pilot pilot in pilots.Values.ToList())
                 {
-                    int origionalUniqueUpgradeId = uniqueUpgradeId;
-                    foreach (Pilot pilot in pilots.Values.ToList())
+                    foreach (Upgrade upgradeToTest in pilot.upgrades.Values.ToList())
                     {
-                        foreach (Upgrade upgradeToTest in pilot.upgrades.Values.ToList())
+                        if (upgradeToTest.uniqueUpgradeId == uniqueUpgradeId)
                         {
-                            if (upgradeToTest.uniqueUpgradeId == uniqueUpgradeId)
-                            {
-                                uniqueUpgradeId++;
-                                break;
-                            }
+                            uniqueUpgradeId++;
+                            break;
                         }
                     }
-                    if (origionalUniqueUpgradeId == uniqueUpgradeId)
-                    {
-                        upgrade.uniqueUpgradeId = uniqueUpgradeId;
-                        break;
-                    }
+                }
+                if (origionalUniqueUpgradeId == uniqueUpgradeId)
+                {
+                    upgrade.uniqueUpgradeId = uniqueUpgradeId;
+                    break;
                 }
             }
+
             pilots[uniquePilotId].upgrades[upgrade.uniqueUpgradeId] = upgrade;
             Builds.SaveBuilds();
         }
@@ -119,11 +120,36 @@ namespace X_Wing_Visual_Builder.Model
             Upgrades.RemoveUnusableUpgrades(this, uniquePilotId);
             Builds.SaveBuilds();
         }
+        public void RemoveUpgrade(int uniqueUpgradeId)
+        {
+            Upgrade upgrade = null;
+            Pilot affectedPilot = null;
+            foreach (Pilot pilot in pilots.Values.ToList())
+            {
+                if(pilot.upgrades.ContainsKey(uniqueUpgradeId))
+                {
+                    upgrade = pilot.upgrades[uniqueUpgradeId];
+                    affectedPilot = pilot;
+                    pilot.upgrades.Remove(uniqueUpgradeId);
+                }
+            }
+            if (upgrade != null && affectedPilot != null)
+            {
+                UpgradeModifiers.RemoveUpgrade(this, affectedPilot.uniquePilotId, upgrade.id);
+                Upgrades.RemoveUnusableUpgrades(this, affectedPilot.uniquePilotId);
+            }
+
+            Builds.SaveBuilds();
+            SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
+            squadsPage.buildChanged(uniqueBuildId);
+        }
 
         public void RemovePilot(int uniquePilotId)
         {
             pilots.Remove(uniquePilotId);
             Builds.SaveBuilds();
+            SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
+            squadsPage.buildChanged(uniqueBuildId);
         }
 
         public int GetNumberOfPilots()

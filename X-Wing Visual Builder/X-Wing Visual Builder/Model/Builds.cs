@@ -112,9 +112,7 @@ namespace X_Wing_Visual_Builder.Model
                                     int uniqueUpgradeId;
                                     if (int.TryParse(upgradeUniqueIdAndIdSplit[0], out uniqueUpgradeId) && int.TryParse(upgradeUniqueIdAndIdSplit[1], out upgradeId))
                                     {
-                                        Upgrade upgrade = Upgrades.GetUpgradeClone(upgradeId);
-                                        upgrade.uniqueUpgradeId = uniqueUpgradeId;
-                                        build.AddUpgrade(uniquePilotId, upgrade, upgradeHasUniqueId);
+                                        build.AddUpgrade(uniquePilotId, upgradeId);
                                     }
                                 }
                             }

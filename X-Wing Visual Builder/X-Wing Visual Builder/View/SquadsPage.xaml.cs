@@ -34,7 +34,7 @@ namespace X_Wing_Visual_Builder.View
         private int hoveredUniquePilotId;
         private int hoveredUniqueBuildId;
         private bool isShowingNumberOwned = true;
-        private Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
+        private Dictionary<int, Dictionary<int, Canvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, Canvas>>();
 
 
         public SquadsPage()
@@ -72,20 +72,7 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetLeft(addBuildButton, 400);
             Canvas.SetTop(addBuildButton, 10);
             topToolsCanvas.Children.Add(addBuildButton);
-
-            Button addPilotButton = new Button();
-            addPilotButton.Name = "addPilotButton";
-            addPilotButton.Content = "Add Pilot";
-            addPilotButton.Width = 130;
-            addPilotButton.Height = 40;
-            addPilotButton.FontSize = 16;
-            addPilotButton.FontWeight = FontWeights.Bold;
-            addPilotButton.Click += new RoutedEventHandler(AddPilotClicked);
-            addPilotButton.UseLayoutRounding = true;
-            Canvas.SetLeft(addPilotButton, 530);
-            Canvas.SetTop(addPilotButton, 10);
-            topToolsCanvas.Children.Add(addPilotButton);
-
+            
             Button browseCards = new Button();
             browseCards.Name = "browseCards";
             browseCards.Content = "Browse Cards";
@@ -100,6 +87,11 @@ namespace X_Wing_Visual_Builder.View
             topToolsCanvas.Children.Add(browseCards);
 
             topToolsCanvas.Height = 40;
+        }
+
+        public void buildChanged(int uniqueBuildId)
+        {
+            upgradeCanvasCache.Remove(uniqueBuildId);
         }
 
         private void browseCardsClicked(object sender, RoutedEventArgs e)
@@ -132,8 +124,7 @@ namespace X_Wing_Visual_Builder.View
         private void DeleteUpgradeClicked(object sender, RoutedEventArgs e)
         {
             DeleteButton deleteButton = (DeleteButton)sender;
-            upgradeCanvasCache.Remove(Int32.Parse(deleteButton.uniqueBuildId.ToString() + deleteButton.uniqueUpgradeId.ToString()));
-            Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniquePilotId, deleteButton.upgradeId);            
+            Builds.GetBuild(deleteButton.uniqueBuildId).RemoveUpgrade(deleteButton.uniqueUpgradeId);            
             DisplayContent();
         }
 
@@ -288,7 +279,7 @@ namespace X_Wing_Visual_Builder.View
 
                     int currentUpgradeNumber = 0;
                     List<Upgrade> sortedUpgrades = pilot.upgrades.Values.ToList();
-                    sortedUpgrades = sortedUpgrades.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ToList();
+                    sortedUpgrades = sortedUpgrades.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name).ToList();
                     foreach (Upgrade upgrade in sortedUpgrades)
                     {
                         if (currentUpgradeNumber == 0) { currentLeftOffset += Opt.ApResMod(upgradeCardMargin); }
@@ -303,7 +294,7 @@ namespace X_Wing_Visual_Builder.View
                             currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
                         }
                         
-                        if (upgradeCanvasCache.ContainsKey(Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())) == false)
+                        if (upgradeCanvasCache.ContainsKey(build.uniqueBuildId) == false || upgradeCanvasCache[build.uniqueBuildId].ContainsKey(upgrade.uniqueUpgradeId) == false)
                         {
                             Canvas upgradeCanvas = new Canvas();
                             upgradeCanvas.Width = Opt.ApResMod(upgradeCardWidth);
@@ -332,7 +323,6 @@ namespace X_Wing_Visual_Builder.View
 
                             deleteButton = new DeleteButton();
                             deleteButton.uniqueBuildId = build.uniqueBuildId;
-                            deleteButton.uniquePilotId = pilot.uniquePilotId;
                             deleteButton.uniqueUpgradeId = upgrade.uniqueUpgradeId;
                             deleteButton.upgradeId = upgrade.id;
                             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
@@ -340,12 +330,16 @@ namespace X_Wing_Visual_Builder.View
                             Canvas.SetTop(deleteButton, 0);
                             upgradeCanvas.Children.Add(deleteButton);
 
-                            upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())] = upgradeCanvas;
+                            if(upgradeCanvasCache.ContainsKey(build.uniqueBuildId) == false)
+                            {
+                                upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, Canvas>();
+                            }
+                            upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId] = upgradeCanvas;
                         }
 
-                        Canvas.SetLeft(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())], left);
-                        Canvas.SetTop(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())], height);
-                        pilotCanvas.Children.Add(upgradeCanvasCache[Int32.Parse(build.uniqueBuildId.ToString() + upgrade.uniqueUpgradeId.ToString())]);
+                        Canvas.SetLeft(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId], left);
+                        Canvas.SetTop(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId], height);
+                        pilotCanvas.Children.Add(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId]);
 
                         currentUpgradeNumber++;
                     }
@@ -411,6 +405,7 @@ namespace X_Wing_Visual_Builder.View
         {
             BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
             Builds.DeleteBuild(addUpgradeButton.uniqueBuildId);
+            buildChanged(addUpgradeButton.uniqueBuildId);
             DisplayContent();
         }
 

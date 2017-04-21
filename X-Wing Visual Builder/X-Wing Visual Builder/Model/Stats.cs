@@ -161,7 +161,6 @@ namespace X_Wing_Visual_Builder.Model
                     }
                 }
             }
-            int i = 0;
         }
         private void GetAllDiePossibilities(int currentDie, int numberOfDice)
         {

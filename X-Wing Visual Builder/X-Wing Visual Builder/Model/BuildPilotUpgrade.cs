@@ -11,6 +11,5 @@ namespace X_Wing_Visual_Builder.Model
     {
         public int uniqueBuildId;
         public int uniquePilotId;
-        public int uniqueUpgradeId;
     }
 }
