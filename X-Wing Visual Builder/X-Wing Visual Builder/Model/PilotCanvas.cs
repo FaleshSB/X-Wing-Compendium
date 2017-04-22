@@ -26,9 +26,13 @@ namespace X_Wing_Visual_Builder.Model
         private IPilotClicked pilotClickedPage;
         private IDeletePilot deletePilotPage;
         private ManeuverCard maneuverCard;
+        private double width;
+        private double height;
 
         public PilotCanvas(Pilot pilot, DefaultPage currentPage, Image pilotImage, double width, double height, Thickness margin)
         {
+            this.width = width;
+            this.height = height;
             pcntDif = width / 292;
             miniButtonSize = Math.Round(21 * pcntDif);
 
@@ -95,15 +99,6 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(removeButton, Opt.ApResMod(260 * pcntDif));
             SetTop(removeButton, Opt.ApResMod(170 * pcntDif));
             Children.Add(removeButton);
-
-            maneuverCard = pilot.ship.GetManeuverCard(Math.Round(Opt.ApResMod(width) / 11));
-            maneuverCard.MouseEnter += new MouseEventHandler(MouseHover);
-            maneuverCard.MouseLeave += new MouseEventHandler(MouseHoverLeave);
-            maneuverCard.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
-            maneuverCard.Visibility = Visibility.Hidden;
-            Canvas.SetLeft(maneuverCard, (Opt.ApResMod(width) / 2) - (maneuverCard.Width / 2));
-            Canvas.SetTop(maneuverCard, 0);
-            Children.Add(maneuverCard);
         }
 
         public void AddDeleteButtonEvent(IDeletePilot deletePilotPage, int uniqueBuildId)
@@ -153,14 +148,22 @@ namespace X_Wing_Visual_Builder.Model
         {
             addButton.Visibility = Visibility.Hidden;
             removeButton.Visibility = Visibility.Hidden;
-            maneuverCard.Visibility = Visibility.Hidden;
 
+            Children.Remove(maneuverCard);
+            maneuverCard = null;
         }
         private void MouseHover(object sender, MouseEventArgs e)
         {
             addButton.Visibility = Visibility.Visible;
             removeButton.Visibility = Visibility.Visible;
-            maneuverCard.Visibility = Visibility.Visible;
+
+            maneuverCard = pilot.ship.GetManeuverCard(Math.Round(Opt.ApResMod(width) / 11));
+            maneuverCard.MouseEnter += new MouseEventHandler(MouseHover);
+            maneuverCard.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            maneuverCard.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            Canvas.SetLeft(maneuverCard, (Opt.ApResMod(width) / 2) - (maneuverCard.Width / 2));
+            Canvas.SetTop(maneuverCard, 0);
+            Children.Add(maneuverCard);
         }
     }
 }

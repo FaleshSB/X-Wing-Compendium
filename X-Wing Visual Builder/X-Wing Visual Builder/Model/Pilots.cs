@@ -15,43 +15,40 @@ namespace X_Wing_Visual_Builder.Model
 
         static Pilots()
         {
-            using (StringReader stringReader = new StringReader(Properties.Resources.PilotDatabase))
+            Dictionary<int, int> numberOfPilotsOwned = LoadPilotsOwned();
+            using (TextFieldParser parser = new TextFieldParser(new StringReader(Properties.Resources.PilotDatabase)))
             {
-                Dictionary<int, int> numberOfPilotsOwned = LoadPilotsOwned();
-                using (TextFieldParser parser = new TextFieldParser(stringReader))
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters("£");
+                parser.HasFieldsEnclosedInQuotes = false;
+                while (!parser.EndOfData)
                 {
-                    parser.TextFieldType = FieldType.Delimited;
-                    parser.SetDelimiters("£");
-                    parser.HasFieldsEnclosedInQuotes = false;
-                    while (!parser.EndOfData)
+                    string[] fields = parser.ReadFields();
+                    Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
+                    if (fields[6].Length > 0)
                     {
-                        string[] fields = parser.ReadFields();
-                        Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
-                        if (fields[6].Length > 0)
+                        string[] possibleUpgradesSplit = fields[6].Split(',');
+                        foreach (string possibleUpgrade in possibleUpgradesSplit)
                         {
-                            string[] possibleUpgradesSplit = fields[6].Split(',');
-                            foreach (string possibleUpgrade in possibleUpgradesSplit)
+                            if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
                             {
-                                if (possibleUpgrades.ContainsKey((UpgradeType)Int32.Parse(possibleUpgrade)))
-                                {
-                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
-                                }
-                                else
-                                {
-                                    possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
-                                }
+                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)]++;
+                            }
+                            else
+                            {
+                                possibleUpgrades[(UpgradeType)Int32.Parse(possibleUpgrade)] = 1;
                             }
                         }
-                        int numberOwned = 0;
-                        if(numberOfPilotsOwned.ContainsKey(Int32.Parse(fields[0])))
-                        {
-                            numberOwned = numberOfPilotsOwned[Int32.Parse(fields[0])];
-                        }
-                        possibleUpgrades.Add(UpgradeType.Title, 1);
-                        possibleUpgrades.Add(UpgradeType.Modification, 1);
-                        pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                                   Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10])), numberOwned));
                     }
+                    int numberOwned = 0;
+                    if(numberOfPilotsOwned.ContainsKey(Int32.Parse(fields[0])))
+                    {
+                        numberOwned = numberOfPilotsOwned[Int32.Parse(fields[0])];
+                    }
+                    possibleUpgrades.Add(UpgradeType.Title, 1);
+                    possibleUpgrades.Add(UpgradeType.Modification, 1);
+                    pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
+                                Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10])), numberOwned));
                 }
             }
             // Remove Huge Ship cards

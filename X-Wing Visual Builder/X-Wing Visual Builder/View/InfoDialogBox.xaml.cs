@@ -49,8 +49,6 @@ namespace X_Wing_Visual_Builder.View
             pageStructureGrid.RowDefinitions.Add(new RowDefinition());
 
             this.Content = pageStructureGrid;
-
-            
         }
 
         public void AddUpgrade(Upgrade upgrade)
