@@ -20,20 +20,21 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Build.xaml
     /// </summary>
-    public partial class SquadsPage : DefaultPage, IDeleteUpgrade
+    public partial class SquadsPage : DefaultPage, IDeleteUpgrade, IDeletePilot
     {
         private int upgradeCardWidth = 150;
         private int upgradeCardHeight = 231;
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private int upgradeCardMargin = 4;
-        private Canvas pilotCanvas;
+        private Canvas pilotAndUpgradeInfoCanvas;
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
         private bool isMouseOverPilot = false;
         private int hoveredUniquePilotId;
         private int hoveredUniqueBuildId;
         private Dictionary<int, Dictionary<int, UpgradeCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, UpgradeCanvas>>();
+        private Dictionary<int, Dictionary<int, PilotCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, PilotCanvas>>();
 
 
         public SquadsPage()
@@ -132,6 +133,11 @@ namespace X_Wing_Visual_Builder.View
             Builds.GetBuild(deleteButton.uniqueBuildId).RemovePilot(deleteButton.uniquePilotId);
             DisplayContent();
         }
+        public void DeletePilotClicked(int uniqueBuildId, int uniquePilotId)
+        {
+            Builds.GetBuild(uniqueBuildId).RemovePilot(uniquePilotId);
+            DisplayContent();
+        }
 
         protected override void DisplayContent()
         {
@@ -197,39 +203,29 @@ namespace X_Wing_Visual_Builder.View
                     double height = 0;
                     double currentLeftOffset = 0;
                     double currentHeightOffset = 0;
-                    pilotCanvas = new Canvas();
+                    pilotAndUpgradeInfoCanvas = new Canvas();
 
-                    PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight), build.uniqueBuildId);
+                    if (pilotCanvasCache.ContainsKey(build.uniqueBuildId) == false || pilotCanvasCache[build.uniqueBuildId].ContainsKey(pilot.uniquePilotId) == false)
+                    {
+                        if (pilotCanvasCache.ContainsKey(build.uniqueBuildId) == false)
+                        {
+                            pilotCanvasCache[build.uniqueBuildId] = new Dictionary<int, PilotCanvas>();
+                        }
+                        pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId] = pilot.GetPilotCanvas(this, pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2));
+                        pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId].AddDeleteButtonEvent(this, build.uniqueBuildId);
+                    }                    
+                    Canvas.SetLeft(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId], left);
+                    Canvas.SetTop(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId], height);
+                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId]);
+
+                    /*PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight), build.uniqueBuildId);
                     pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
                     pilotCard.MouseEnter += new MouseEventHandler(PilotMouseHover);
                     pilotCard.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
                     pilotCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
                     Canvas.SetLeft(pilotCard, left);
                     Canvas.SetTop(pilotCard, height);
-                    pilotCanvas.Children.Add(pilotCard);
-
-                    if (isMouseOverPilot && hoveredUniquePilotId == pilot.uniquePilotId && hoveredUniqueBuildId == build.uniqueBuildId)
-                    {
-                        /*
-                        Rectangle maneuverCardBackground = new Rectangle();
-                        maneuverCardBackground.Height = 100;
-                        maneuverCardBackground.Width = 100;
-                        maneuverCardBackground.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#aaaaaa"));
-                        Canvas.SetLeft(maneuverCardBackground, left + ((Opt.ApResMod(pilotCardWidth) / 2) - (maneuverCardBackground.Width / 2)));
-                        Canvas.SetTop(maneuverCardBackground, height);
-                        pilotCanvas.Children.Add(maneuverCardBackground);
-                        */
-
-                        ManeuverCard maneuverCard = pilot.ship.GetManeuverCard(Math.Round(Opt.ApResMod(pilotCardWidth) / 11));
-                        maneuverCard.uniqueBuildId = build.uniqueBuildId;
-                        maneuverCard.uniquePilotId = pilot.uniquePilotId;
-                        maneuverCard.MouseEnter += new MouseEventHandler(ManeuverMouseHover);
-                        maneuverCard.MouseLeave += new MouseEventHandler(ManeuverMouseHoverLeave);
-                        maneuverCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                        Canvas.SetLeft(maneuverCard, left + ((Opt.ApResMod(pilotCardWidth) / 2) - (maneuverCard.Width / 2)));
-                        Canvas.SetTop(maneuverCard, height);
-                        pilotCanvas.Children.Add(maneuverCard);
-                    }
+                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCard);
 
                     DeleteButton deleteButton;
                     deleteButton = new DeleteButton();
@@ -238,7 +234,7 @@ namespace X_Wing_Visual_Builder.View
                     deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
                     Canvas.SetLeft(deleteButton, left + (Opt.ApResMod(pilotCardWidth) - deleteButton.Width));
                     Canvas.SetTop(deleteButton, height);
-                    pilotCanvas.Children.Add(deleteButton);
+                    pilotAndUpgradeInfoCanvas.Children.Add(deleteButton);*/
 
                     BuildPilotUpgrade addUpgrade;
                     addUpgrade = new BuildPilotUpgrade();
@@ -250,7 +246,7 @@ namespace X_Wing_Visual_Builder.View
                     addUpgrade.Content = "Add Upgrade";
                     Canvas.SetLeft(addUpgrade, left);
                     Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
-                    pilotCanvas.Children.Add(addUpgrade);
+                    pilotAndUpgradeInfoCanvas.Children.Add(addUpgrade);
 
                     BuildPilotUpgrade swapPilot;
                     swapPilot = new BuildPilotUpgrade();
@@ -262,7 +258,7 @@ namespace X_Wing_Visual_Builder.View
                     swapPilot.Content = "Swap Pilot";
                     Canvas.SetLeft(swapPilot, left + 150);
                     Canvas.SetTop(swapPilot, height + Opt.ApResMod(pilotCardHeight) + 10);
-                    pilotCanvas.Children.Add(swapPilot);
+                    pilotAndUpgradeInfoCanvas.Children.Add(swapPilot);
 
                     Label pilotTotalCostLabel;
                     pilotTotalCostLabel = new Label();
@@ -271,9 +267,9 @@ namespace X_Wing_Visual_Builder.View
                     pilotTotalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                     Canvas.SetLeft(pilotTotalCostLabel, left + 240);
                     Canvas.SetTop(pilotTotalCostLabel, height + Opt.ApResMod(pilotCardHeight));
-                    pilotCanvas.Children.Add(pilotTotalCostLabel);
+                    pilotAndUpgradeInfoCanvas.Children.Add(pilotTotalCostLabel);
 
-                    currentLeftOffset += pilotCard.Width;
+                    currentLeftOffset += pilotCardWidth;
 
                     int currentUpgradeNumber = 0;
                     List<Upgrade> sortedUpgrades = pilot.upgrades.Values.ToList();
@@ -304,15 +300,15 @@ namespace X_Wing_Visual_Builder.View
 
                         Canvas.SetLeft(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId], left);
                         Canvas.SetTop(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId], height);
-                        pilotCanvas.Children.Add(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId]);
+                        pilotAndUpgradeInfoCanvas.Children.Add(upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId]);
 
                         currentUpgradeNumber++;
                     }
 
-                    pilotCanvas.Height = (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin);
-                    pilotCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)pilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)pilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardWidth);
-                    pilotCanvas.Margin = new Thickness(10, 20, 10, 0);
-                    buildWrapPanel.Children.Add(pilotCanvas);
+                    pilotAndUpgradeInfoCanvas.Height = (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin);
+                    pilotAndUpgradeInfoCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)pilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)pilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardWidth);
+                    pilotAndUpgradeInfoCanvas.Margin = new Thickness(10, 20, 10, 0);
+                    buildWrapPanel.Children.Add(pilotAndUpgradeInfoCanvas);
                 }
                 contentWrapPanel.Children.Add(buildWrapPanel);
             }

@@ -82,9 +82,11 @@
     <Compile Include="Model\DeleteButton.cs" />
     <Compile Include="Model\DiceRollResult.cs" />
     <Compile Include="Model\FileHandler.cs" />
+    <Compile Include="Model\IDeletePilot.cs" />
     <Compile Include="Model\IDeleteUpgrade.cs" />
     <Compile Include="Model\IGeneralId.cs" />
     <Compile Include="Model\ImageResizer.cs" />
+    <Compile Include="Model\IPilotClicked.cs" />
     <Compile Include="Model\IPilotId.cs" />
     <Compile Include="Model\IUpgradeClicked.cs" />
     <Compile Include="Model\ManeuverCard.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\OutlinedTextBlock.cs" />
     <Compile Include="Model\Pages.cs" />
+    <Compile Include="Model\PilotCanvas.cs" />
     <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
     <Compile Include="Model\InfoButton.cs" />

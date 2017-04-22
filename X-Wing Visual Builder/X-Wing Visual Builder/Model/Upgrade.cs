@@ -119,11 +119,8 @@ namespace X_Wing_Visual_Builder.Model
 
             System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
             upgradeImage.Source = resizedUpgradeImage;
-
-            UpgradeCanvas upgradeCanvas = new UpgradeCanvas(this, currentPage, upgradeImage, width, height, margin);
-
-
-            return upgradeCanvas;
+            
+            return new UpgradeCanvas(this, currentPage, upgradeImage, width, height, margin);
         }
     }
 }

@@ -124,6 +124,7 @@ namespace X_Wing_Visual_Builder.Model
             get { return _numberOwned; }
             set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); }
         }
+        private BitmapImage resizedPilotImage = null;
 
         public Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
 
@@ -171,6 +172,23 @@ namespace X_Wing_Visual_Builder.Model
             pilotCard.uniqueBuildId = uniqueBuildId;
 
             return pilotCard;
+        }
+
+        public PilotCanvas GetPilotCanvas(DefaultPage currentPage, double width, double height, Thickness margin)
+        {
+            if(resizedPilotImage == null)
+            {
+                resizedPilotImage = new BitmapImage();
+                resizedPilotImage.BeginInit();
+                resizedPilotImage.CacheOption = BitmapCacheOption.OnLoad;
+                resizedPilotImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
+                resizedPilotImage.EndInit();
+            }
+
+            System.Windows.Controls.Image pilotImage = new System.Windows.Controls.Image();
+            pilotImage.Source = resizedPilotImage;
+
+            return new PilotCanvas(this, currentPage, pilotImage, width, height, margin);
         }
     }
 }

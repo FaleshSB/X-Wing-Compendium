@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for BrowseCardsPage.xaml
     /// </summary>
-    public partial class BrowseCardsPage : DefaultPage, IUpgradeClicked
+    public partial class BrowseCardsPage : DefaultPage, IUpgradeClicked, IPilotClicked
     {
         private TextBox searchTextBox = new TextBox();
         RadioButton upgradesRadioButton = new RadioButton();
@@ -56,7 +56,7 @@ namespace X_Wing_Visual_Builder.View
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
-        public Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
+        public Dictionary<int, PilotCanvas> pilotCanvasCache = new Dictionary<int, PilotCanvas>();
         public Dictionary<int, UpgradeCanvas> upgradeCanvasCache = new Dictionary<int, UpgradeCanvas>();
 
 
@@ -141,14 +141,6 @@ namespace X_Wing_Visual_Builder.View
             SetIsSearchDescriptionChecked();
         }
 
-        public void AddUpgradeToCache(Upgrade upgrade)
-        {
-            if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
-            {
-                upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
-                upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
-            }
-        }
 
         private void squadsClicked(object sender, RoutedEventArgs e)
         {
@@ -199,9 +191,23 @@ namespace X_Wing_Visual_Builder.View
             upgradesToDisplay = upgrades.ToList();
         }
 
+        public void AddUpgradeToCache(Upgrade upgrade)
+        {
+            if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
+            {
+                upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+                upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
+            }
+        }
         public void AddPilotToCache(Pilot pilot)
         {
-            pilotCanvasCache[pilot.id] = new Canvas();
+            if(pilotCanvasCache.ContainsKey(pilot.id) == false)
+            {
+                pilotCanvasCache[pilot.id] = pilot.GetPilotCanvas(this, pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2));
+                pilotCanvasCache[pilot.id].AddCardClickedEvent(this);
+            }
+            
+            /*pilotCanvasCache[pilot.id] = new Canvas();
             pilotCanvasCache[pilot.id].Width = Opt.ApResMod(pilotCardWidth);
             pilotCanvasCache[pilot.id].Height = Opt.ApResMod(pilotCardHeight);
             pilotCanvasCache[pilot.id].Margin = new Thickness(2, 2, 2, 2);
@@ -264,7 +270,7 @@ namespace X_Wing_Visual_Builder.View
             removePilot.Visibility = Visibility.Hidden;
             Canvas.SetLeft(removePilot, 260);
             Canvas.SetTop(removePilot, 170);
-            pilotCanvasCache[pilot.id].Children.Add(removePilot);
+            pilotCanvasCache[pilot.id].Children.Add(removePilot);*/
         }
 
         protected override void DisplayContent()
@@ -275,11 +281,11 @@ namespace X_Wing_Visual_Builder.View
             foreach (Upgrade upgrade in upgradesToDisplay)
             {
                 if(upgrade.shipSize == ShipSize.Huge || upgrade.upgradeType == UpgradeType.Team || upgrade.upgradeType == UpgradeType.Hardpoint
-                   || upgrade.upgradeType == UpgradeType.Cargo || Ships.ships.ContainsKey(upgrade.shipType) == false || Ships.ships[upgrade.shipType].Values.First().shipSize == ShipSize.Huge) { /*continue;*/ }
+                   || upgrade.upgradeType == UpgradeType.Cargo || Ships.ships.ContainsKey(upgrade.shipType) == false
+                   || Ships.ships[upgrade.shipType].Values.First().shipSize == ShipSize.Huge) { continue; }
                 if(upgradeCanvasCache.ContainsKey(upgrade.id) == false)
                 {
-                    upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2,2,2,2));
-                    upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
+                    AddUpgradeToCache(upgrade);
                 }
                 contentWrapPanel.Children.Add(upgradeCanvasCache[upgrade.id]);
             }
@@ -586,7 +592,7 @@ namespace X_Wing_Visual_Builder.View
         {
             SetIsSearchDescriptionChecked();
         }
-        public void CardClicked(int upgradeId)
+        public void UpgradeClicked(int upgradeId)
         {
             if (isAddingUpgrade == true)
             {
@@ -603,6 +609,41 @@ namespace X_Wing_Visual_Builder.View
 
                 UpgradeModifiers.AddUpgrade(build, uniquePilotId, upgradeId);
 
+                NavigationService.Navigate(squadsPage);
+            }
+        }
+        public void PilotClicked(int pilotId)
+        {
+            if (isAddingPilot == true)
+            {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
+                isSwappingPilot = false;
+                isAddingUpgrade = false;
+                isAddingPilot = false;
+                build.AddPilot(Pilots.GetPilotClone(pilotId));
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
+                NavigationService.Navigate(squadsPage);
+            }
+            else if (isSwappingPilot == true)
+            {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
+                isSwappingPilot = false;
+                isAddingUpgrade = false;
+                isAddingPilot = false;
+                Pilot newPilot = Pilots.GetPilotClone(pilotId);
+                newPilot.upgrades = pilotToSwap.upgrades;
+                build.AddPilot(newPilot);
+                Upgrades.RemoveUnusableUpgrades(build, newPilot.uniquePilotId);
+                build.RemovePilot(pilotToSwap.uniquePilotId);
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
                 NavigationService.Navigate(squadsPage);
             }
         }

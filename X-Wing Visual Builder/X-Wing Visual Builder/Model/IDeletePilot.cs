@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public interface IUpgradeClicked
+    public interface IDeletePilot
     {
-        void UpgradeClicked(int upgradeId);
+        void DeletePilotClicked(int uniqueBuildId, int uniquePilotId);
     }
 }
