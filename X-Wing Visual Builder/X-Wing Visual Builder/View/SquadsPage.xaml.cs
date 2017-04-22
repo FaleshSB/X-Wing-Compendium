@@ -30,9 +30,6 @@ namespace X_Wing_Visual_Builder.View
         private Canvas pilotAndUpgradeInfoCanvas;
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
-        private bool isMouseOverPilot = false;
-        private int hoveredUniquePilotId;
-        private int hoveredUniqueBuildId;
         private Dictionary<int, Dictionary<int, UpgradeCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, UpgradeCanvas>>();
         private Dictionary<int, Dictionary<int, PilotCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, PilotCanvas>>();
 
@@ -115,22 +112,9 @@ namespace X_Wing_Visual_Builder.View
             DisplayContent();
         }
 
-        private void PilotClicked(object sender, RoutedEventArgs e)
-        {
-            PilotCard pilotCard = (PilotCard)sender;
-            int i = pilotCard.uniquePilotId;
-        }
-
         public void DeleteUpgradeClicked(int uniqueBuildId, int uniqueUpgradeId)
         {
             Builds.GetBuild(uniqueBuildId).RemoveUpgrade(uniqueUpgradeId);            
-            DisplayContent();
-        }
-
-        private void DeletePilotClicked(object sender, RoutedEventArgs e)
-        {
-            DeleteButton deleteButton = (DeleteButton)sender;
-            Builds.GetBuild(deleteButton.uniqueBuildId).RemovePilot(deleteButton.uniquePilotId);
             DisplayContent();
         }
         public void DeletePilotClicked(int uniqueBuildId, int uniquePilotId)
@@ -218,24 +202,6 @@ namespace X_Wing_Visual_Builder.View
                     Canvas.SetTop(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId], height);
                     pilotAndUpgradeInfoCanvas.Children.Add(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId]);
 
-                    /*PilotCard pilotCard = pilot.GetPilotCard(Opt.ApResMod(pilotCardWidth), Opt.ApResMod(pilotCardHeight), build.uniqueBuildId);
-                    pilotCard.MouseLeftButtonDown += new MouseButtonEventHandler(PilotClicked);
-                    pilotCard.MouseEnter += new MouseEventHandler(PilotMouseHover);
-                    pilotCard.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
-                    pilotCard.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-                    Canvas.SetLeft(pilotCard, left);
-                    Canvas.SetTop(pilotCard, height);
-                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCard);
-
-                    DeleteButton deleteButton;
-                    deleteButton = new DeleteButton();
-                    deleteButton.uniqueBuildId = build.uniqueBuildId;
-                    deleteButton.uniquePilotId = pilot.uniquePilotId;
-                    deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeletePilotClicked);
-                    Canvas.SetLeft(deleteButton, left + (Opt.ApResMod(pilotCardWidth) - deleteButton.Width));
-                    Canvas.SetTop(deleteButton, height);
-                    pilotAndUpgradeInfoCanvas.Children.Add(deleteButton);*/
-
                     BuildPilotUpgrade addUpgrade;
                     addUpgrade = new BuildPilotUpgrade();
                     addUpgrade.uniquePilotId = pilot.uniquePilotId;
@@ -294,7 +260,7 @@ namespace X_Wing_Visual_Builder.View
                             {
                                 upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, UpgradeCanvas>();
                             }
-                            upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+                            upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId] = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
                             upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId].AddDeleteButtonEvent(this, build.uniqueBuildId);
                         }
 
@@ -312,37 +278,6 @@ namespace X_Wing_Visual_Builder.View
                 }
                 contentWrapPanel.Children.Add(buildWrapPanel);
             }
-        }
-        private void PilotMouseHover(object sender, MouseEventArgs e)
-        {
-            PilotCard hoveredPilot = (PilotCard)sender;
-            hoveredUniquePilotId = hoveredPilot.uniquePilotId;
-            hoveredUniqueBuildId = hoveredPilot.uniqueBuildId;
-            isMouseOverPilot = true;
-            DisplayContent();
-        }
-        private void PilotMouseHoverLeave(object sender, MouseEventArgs e)
-        {
-            isMouseOverPilot = false;
-            DisplayContent();
-        }
-        private void ManeuverMouseHover(object sender, MouseEventArgs e)
-        {
-            ManeuverCard hoveredManeuver = (ManeuverCard)sender;
-            hoveredUniquePilotId = hoveredManeuver.uniquePilotId;
-            hoveredUniqueBuildId = hoveredManeuver.uniqueBuildId;
-            isMouseOverPilot = true;
-            DisplayContent();
-        }
-        private void ManeuverMouseHoverLeave(object sender, MouseEventArgs e)
-        {
-            isMouseOverPilot = false;
-            DisplayContent();
-        }
-        private void ContentScroll(object sender, MouseWheelEventArgs e)
-        {
-            contentScrollViewer.ScrollToVerticalOffset(contentScrollViewer.VerticalOffset - e.Delta);
-            e.Handled = true;
         }
 
         private void SwapPilot(object sender, RoutedEventArgs e)

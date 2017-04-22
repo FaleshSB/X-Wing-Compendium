@@ -84,29 +84,7 @@ namespace X_Wing_Visual_Builder.Model
             return upgradeClone;
         }
 
-        public UpgradeCard GetUpgradeCard(double width, double height)
-        {
-            if(resizedUpgradeImage == null)
-            {
-                resizedUpgradeImage = new BitmapImage();
-                resizedUpgradeImage.BeginInit();
-                resizedUpgradeImage.CacheOption = BitmapCacheOption.OnLoad;
-                resizedUpgradeImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + ".png");
-                resizedUpgradeImage.EndInit();
-            }
-
-            UpgradeCard upgradeCard = new UpgradeCard();
-            upgradeCard.upgradeId = id;
-            upgradeCard.Source = resizedUpgradeImage;
-            upgradeCard.UseLayoutRounding = true;
-            upgradeCard.Height = height;
-            upgradeCard.Width = width;
-            RenderOptions.SetBitmapScalingMode(upgradeCard, BitmapScalingMode.HighQuality);
-
-            return upgradeCard;
-        }
-
-        public UpgradeCanvas GetUpgradeCanvas(DefaultPage currentPage, double width, double height, Thickness margin)
+        public UpgradeCanvas GetUpgradeCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
         {                        
             if(resizedUpgradeImage == null)
             {
@@ -120,7 +98,7 @@ namespace X_Wing_Visual_Builder.Model
             System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
             upgradeImage.Source = resizedUpgradeImage;
             
-            return new UpgradeCanvas(this, currentPage, upgradeImage, width, height, margin);
+            return new UpgradeCanvas(this, upgradeImage, width, height, margin, currentPage);
         }
     }
 }

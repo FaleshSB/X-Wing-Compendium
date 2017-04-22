@@ -8,9 +8,8 @@ using System.Windows.Media;
 using X_Wing_Visual_Builder.Model;
 
 [ContentProperty("Text")]
-public class OutlinedTextBlock : FrameworkElement, IGeneralId
+public class OutlinedTextBlock : FrameworkElement
 {
-    public int id { get; set; }
     public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
         "Fill",
         typeof(Brush),

@@ -71,7 +71,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AddButton.cs" />
     <Compile Include="Model\AllDiceRollResults.cs" />
     <Compile Include="Model\BuildPilotUpgrade.cs" />
     <Compile Include="Model\AlignableWrapPanel.cs" />
@@ -79,15 +78,12 @@
     <Compile Include="Model\Builds.cs" />
     <Compile Include="Model\ConvertBitmapToBitmapImage.cs" />
     <Compile Include="Model\DefaultPage.cs" />
-    <Compile Include="Model\DeleteButton.cs" />
     <Compile Include="Model\DiceRollResult.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\IDeletePilot.cs" />
     <Compile Include="Model\IDeleteUpgrade.cs" />
-    <Compile Include="Model\IGeneralId.cs" />
     <Compile Include="Model\ImageResizer.cs" />
     <Compile Include="Model\IPilotClicked.cs" />
-    <Compile Include="Model\IPilotId.cs" />
     <Compile Include="Model\IUpgradeClicked.cs" />
     <Compile Include="Model\ManeuverCard.cs" />
     <Compile Include="Model\NewStats.cs" />
@@ -95,17 +91,12 @@
     <Compile Include="Model\OutlinedTextBlock.cs" />
     <Compile Include="Model\Pages.cs" />
     <Compile Include="Model\PilotCanvas.cs" />
-    <Compile Include="Model\PilotCard.cs" />
     <Compile Include="Model\Pilots.cs" />
-    <Compile Include="Model\InfoButton.cs" />
-    <Compile Include="Model\IUpgradeId.cs" />
-    <Compile Include="Model\RemoveButton.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Ships.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Model\Upgrade.cs" />
     <Compile Include="Model\UpgradeCanvas.cs" />
-    <Compile Include="Model\UpgradeCard.cs" />
     <Compile Include="Model\UpgradeModifiers.cs" />
     <Compile Include="Model\Upgrades.cs" />
     <Compile Include="View\BrowseCardsPage.xaml.cs">
@@ -125,9 +116,6 @@
     </Compile>
     <Compile Include="View\StatsPage.xaml.cs">
       <DependentUpon>StatsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UpgradeCardsPage.xaml.cs">
-      <DependentUpon>UpgradeCardsPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -162,10 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StatsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UpgradeCardsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

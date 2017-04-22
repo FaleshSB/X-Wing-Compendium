@@ -151,29 +151,6 @@ namespace X_Wing_Visual_Builder.Model
             return pilotClone;
         }
 
-        public PilotCard GetPilotCard(double width, double height, int uniqueBuildId = 0)
-        {
-            //BitmapImage resizedUpgradeImage = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png"));
-            BitmapImage resizedUpgradeImage = new BitmapImage();
-            resizedUpgradeImage.BeginInit();
-            resizedUpgradeImage.CacheOption = BitmapCacheOption.OnLoad;
-            resizedUpgradeImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
-            resizedUpgradeImage.EndInit();
-
-
-            PilotCard pilotCard = new PilotCard();
-            pilotCard.pilotId = id;
-            pilotCard.Source = resizedUpgradeImage;
-            pilotCard.Height = height;
-            pilotCard.Width = width;
-            pilotCard.UseLayoutRounding = true;
-            RenderOptions.SetBitmapScalingMode(pilotCard, BitmapScalingMode.HighQuality);
-            pilotCard.uniquePilotId = uniquePilotId;
-            pilotCard.uniqueBuildId = uniqueBuildId;
-
-            return pilotCard;
-        }
-
         public PilotCanvas GetPilotCanvas(DefaultPage currentPage, double width, double height, Thickness margin)
         {
             if(resizedPilotImage == null)

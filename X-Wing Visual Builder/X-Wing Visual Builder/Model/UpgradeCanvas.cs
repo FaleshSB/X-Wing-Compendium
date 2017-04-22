@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using X_Wing_Visual_Builder.View;
 
 namespace X_Wing_Visual_Builder.Model
 {
@@ -18,6 +19,7 @@ namespace X_Wing_Visual_Builder.Model
         private Image addButton = new Image();
         private Image removeButton = new Image();
         private Image deleteButton = new Image();
+        private Image infoButton = new Image();
         private OutlinedTextBlock numberOwned = new OutlinedTextBlock();
         private double miniButtonSize;
         private double pcntDif;
@@ -25,8 +27,9 @@ namespace X_Wing_Visual_Builder.Model
         private IDeleteUpgrade deleteUpgradePage;
         private int uniqueBuildId;
         private DefaultPage currentPage;
+        private bool isHidingInfoButton = false;
 
-        public UpgradeCanvas(Upgrade upgrade, DefaultPage currentPage, Image upgradeImage, double width, double height, Thickness margin)
+        public UpgradeCanvas(Upgrade upgrade, Image upgradeImage, double width, double height, Thickness margin, DefaultPage currentPage = null)
         {
             pcntDif = width / 166;
             miniButtonSize = Math.Round(21 * pcntDif);
@@ -58,7 +61,7 @@ namespace X_Wing_Visual_Builder.Model
             numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
             numberOwned.FontSize = Opt.ApResMod(22 * pcntDif);
             numberOwned.FontFamily = new FontFamily("Verdana");
-            numberOwned.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            if (currentPage != null) { numberOwned.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
             numberOwned.MouseEnter += new MouseEventHandler(MouseHover);
             numberOwned.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             SetLeft(numberOwned, Opt.ApResMod(0 * pcntDif));
@@ -70,7 +73,7 @@ namespace X_Wing_Visual_Builder.Model
             addButton.Width = Opt.ApResMod(miniButtonSize);
             addButton.UseLayoutRounding = true;
             addButton.MouseLeftButtonDown += new MouseButtonEventHandler(AddUpgradeClicked);
-            addButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            if (currentPage != null) { addButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
             addButton.MouseEnter += new MouseEventHandler(MouseHover);
             addButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             addButton.Cursor = Cursors.Hand;
@@ -85,7 +88,7 @@ namespace X_Wing_Visual_Builder.Model
             removeButton.Width = Opt.ApResMod(miniButtonSize);
             removeButton.UseLayoutRounding = true;
             removeButton.MouseLeftButtonDown += new MouseButtonEventHandler(RemoveUpgradeClicked);
-            removeButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            if (currentPage != null) { removeButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
             removeButton.MouseEnter += new MouseEventHandler(MouseHover);
             removeButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             removeButton.Cursor = Cursors.Hand;
@@ -94,6 +97,37 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(removeButton, 0);
             SetTop(removeButton, Opt.ApResMod(190 * pcntDif));
             Children.Add(removeButton);
+
+
+            infoButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\infobutton.png"));
+            infoButton.Height = Opt.ApResMod(miniButtonSize);
+            infoButton.Width = Opt.ApResMod(miniButtonSize);
+            infoButton.UseLayoutRounding = true;
+            infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(InfoClicked);
+            if (currentPage != null) { infoButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
+            infoButton.MouseEnter += new MouseEventHandler(MouseHover);
+            infoButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            infoButton.Cursor = Cursors.Hand;
+            infoButton.Visibility = Visibility.Hidden;
+            RenderOptions.SetBitmapScalingMode(infoButton, BitmapScalingMode.HighQuality);
+            SetLeft(infoButton, 0);
+            SetTop(infoButton, 0);
+            Children.Add(infoButton);
+        }
+
+        public void HideInfoButton()
+        {
+            isHidingInfoButton = true;
+            infoButton.Visibility = Visibility.Hidden;
+        }
+
+        private void InfoClicked(object sender, MouseButtonEventArgs e)
+        {
+            InfoDialogBox infoDialogBox = new InfoDialogBox();
+            infoDialogBox.Owner = Window.GetWindow(currentPage); 
+            infoDialogBox.ShowInTaskbar = false;
+            infoDialogBox.AddUpgrade(upgrade);
+            infoDialogBox.ShowDialog();
         }
 
         public void AddDeleteButtonEvent(IDeleteUpgrade deleteUpgradePage, int uniqueBuildId)
@@ -108,6 +142,7 @@ namespace X_Wing_Visual_Builder.Model
             deleteButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
             deleteButton.Cursor = Cursors.Hand;
+            deleteButton.Visibility = Visibility.Hidden;
             RenderOptions.SetBitmapScalingMode(deleteButton, BitmapScalingMode.HighQuality);
             SetRight(deleteButton, 0);
             SetTop(deleteButton, 0);
@@ -143,12 +178,15 @@ namespace X_Wing_Visual_Builder.Model
         {
             addButton.Visibility = Visibility.Hidden;
             removeButton.Visibility = Visibility.Hidden;
-
+            infoButton.Visibility = Visibility.Hidden;
+            deleteButton.Visibility = Visibility.Hidden;
         }
         private void MouseHover(object sender, MouseEventArgs e)
         {
-            addButton.Visibility = Visibility.Visible;
+            addButton.Visibility = Visibility.Visible; 
             removeButton.Visibility = Visibility.Visible;
+            if (isHidingInfoButton == false) { infoButton.Visibility = Visibility.Visible; }
+            deleteButton.Visibility = Visibility.Visible;
         }
     }
 }

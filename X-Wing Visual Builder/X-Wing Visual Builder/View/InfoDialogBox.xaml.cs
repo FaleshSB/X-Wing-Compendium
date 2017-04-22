@@ -23,6 +23,10 @@ namespace X_Wing_Visual_Builder.View
     public partial class InfoDialogBox : Window
     {
         protected Grid pageStructureGrid = new Grid();
+        private int upgradeCardWidth = 166;
+        private int upgradeCardHeight = 255;
+        private int pilotCardWidth = 292;
+        private int pilotCardHeight = 410;
 
         public InfoDialogBox()
         {
@@ -49,18 +53,16 @@ namespace X_Wing_Visual_Builder.View
             
         }
 
-        public void AddUpgradeCard(UpgradeCard upgradeCard)
+        public void AddUpgrade(Upgrade upgrade)
         {
-            this.Width += upgradeCard.Width + 20;
-            upgradeCard.Margin = new Thickness(20, 0, 20, 0);
-            Grid.SetColumn(upgradeCard, 0);
-            Grid.SetRow(upgradeCard, 0);
-            pageStructureGrid.Children.Add(upgradeCard);
+            Width += upgradeCardWidth + 20;
+            UpgradeCanvas upgradeCanvas = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+            upgradeCanvas.HideInfoButton();
+            Grid.SetColumn(upgradeCanvas, 0);
+            Grid.SetRow(upgradeCanvas, 0);
+            pageStructureGrid.Children.Add(upgradeCanvas);
             pageStructureGrid.ColumnDefinitions[0].Width = GridLength.Auto;
-        }
 
-        public void AddUpgradeInfo(Upgrade upgrade)
-        {
             TextBlock upgradeInfo = new TextBlock();
             upgradeInfo.Margin = new Thickness(0, 50, 0, 0);
             upgradeInfo.Width = 300;

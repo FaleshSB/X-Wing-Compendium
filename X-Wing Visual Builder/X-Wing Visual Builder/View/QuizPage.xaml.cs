@@ -61,7 +61,7 @@ namespace X_Wing_Visual_Builder.View
         {
             contentCanvas.Children.Clear();
             
-            PilotCard randomPilotCard = currentRandomPilot.GetPilotCard(pilotCardWidth, pilotCardHeight);
+            PilotCanvas randomPilotCard = currentRandomPilot.GetPilotCanvas(this, pilotCardWidth, pilotCardHeight, new Thickness(0,0,0,0));
             Canvas.SetLeft(randomPilotCard, 760);
             Canvas.SetTop(randomPilotCard, 360);
             contentCanvas.Children.Add(randomPilotCard);
