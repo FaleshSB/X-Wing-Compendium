@@ -17,66 +17,110 @@ namespace X_Wing_Visual_Builder.Model
         private Image upgradeImage;
         private Image addButton = new Image();
         private Image removeButton = new Image();
+        private Image deleteButton = new Image();
         private OutlinedTextBlock numberOwned = new OutlinedTextBlock();
-        private double addRemoveButtonSize = 22;
-        private int upgradeCardWidth = 166;
-        private int upgradeCardHeight = 255;
+        private double miniButtonSize;
+        private double pcntDif;
+        private IUpgradeClicked upgradeClickedPage;
+        private IDeleteUpgrade deleteUpgradePage;
+        private int uniqueBuildId;
+        private DefaultPage currentPage;
 
-        public UpgradeCanvas(Upgrade upgrade, Image upgradeImage)
+        public UpgradeCanvas(Upgrade upgrade, DefaultPage currentPage, Image upgradeImage, double width, double height, Thickness margin)
         {
+            pcntDif = width / 166;
+            miniButtonSize = Math.Round(21 * pcntDif);
+
+            Margin = margin;
+            Width = Opt.ApResMod(width);
+            Height = Opt.ApResMod(height);
+
             this.upgrade = upgrade;
+            this.currentPage = currentPage;
 
             this.upgradeImage = upgradeImage;
-            this.upgradeImage.Width = Opt.ApResMod(upgradeCardWidth);
-            this.upgradeImage.Height = Opt.ApResMod(upgradeCardHeight);
+            this.upgradeImage.Width = Opt.ApResMod(width);
+            this.upgradeImage.Height = Opt.ApResMod(height);
             this.upgradeImage.MouseEnter += new MouseEventHandler(MouseHover);
             this.upgradeImage.MouseLeave += new MouseEventHandler(MouseHoverLeave);
-            Canvas.SetLeft(this.upgradeImage, 0);
-            Canvas.SetTop(this.upgradeImage, 0);
+            RenderOptions.SetBitmapScalingMode(this.upgradeImage, BitmapScalingMode.HighQuality);
+            SetLeft(this.upgradeImage, 0);
+            SetTop(this.upgradeImage, 0);
             Children.Add(this.upgradeImage);
-
-            OutlinedTextBlock numberOwned = new OutlinedTextBlock();
+            
             numberOwned.Text = upgrade.numberOwned.ToString();
             numberOwned.TextAlignment = TextAlignment.Left;
-            numberOwned.Width = Opt.ApResMod(30);
-            numberOwned.Height = Opt.ApResMod(30);
+            numberOwned.Width = Opt.ApResMod(30 * pcntDif);
+            numberOwned.Height = Opt.ApResMod(30 * pcntDif);
             numberOwned.StrokeThickness = 1;
-            numberOwned.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
+            numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             numberOwned.FontWeight = FontWeights.ExtraBold;
-            numberOwned.Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 207, 76));
-            numberOwned.FontSize = Opt.ApResMod(20);
-            numberOwned.FontFamily = new System.Windows.Media.FontFamily("Verdana");
-            Canvas.SetLeft(numberOwned, Opt.ApResMod(1));
-            Canvas.SetBottom(numberOwned, Opt.ApResMod(64));
+            numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
+            numberOwned.FontSize = Opt.ApResMod(20 * pcntDif);
+            numberOwned.FontFamily = new FontFamily("Verdana");
+            SetLeft(numberOwned, Opt.ApResMod(1 * pcntDif));
+            SetBottom(numberOwned, Opt.ApResMod(64 * pcntDif));
             Children.Add(numberOwned);
 
-            RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
             addButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\addbutton.png"));
-            addButton.Height = Opt.ApResMod(addRemoveButtonSize);
-            addButton.Width = Opt.ApResMod(addRemoveButtonSize);
+            addButton.Height = Opt.ApResMod(miniButtonSize);
+            addButton.Width = Opt.ApResMod(miniButtonSize);
             addButton.UseLayoutRounding = true;
             addButton.MouseLeftButtonDown += new MouseButtonEventHandler(AddUpgradeClicked);
-            addButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            addButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
             addButton.MouseEnter += new MouseEventHandler(MouseHover);
             addButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             addButton.Visibility = Visibility.Hidden;
-            Canvas.SetLeft(addButton, 0);
-            Canvas.SetTop(addButton, Opt.ApResMod(140));
+            RenderOptions.SetBitmapScalingMode(addButton, BitmapScalingMode.HighQuality);
+            SetLeft(addButton, 0);
+            SetTop(addButton, Opt.ApResMod(140 * pcntDif));
             Children.Add(addButton);
             
-            RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
             removeButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\removebutton.png"));
-            removeButton.Height = Opt.ApResMod(addRemoveButtonSize);
-            removeButton.Width = Opt.ApResMod(addRemoveButtonSize);
+            removeButton.Height = Opt.ApResMod(miniButtonSize);
+            removeButton.Width = Opt.ApResMod(miniButtonSize);
             removeButton.UseLayoutRounding = true;
             removeButton.MouseLeftButtonDown += new MouseButtonEventHandler(RemoveUpgradeClicked);
-            removeButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
+            removeButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
             removeButton.MouseEnter += new MouseEventHandler(MouseHover);
             removeButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             removeButton.Visibility = Visibility.Hidden;
-            Canvas.SetLeft(removeButton, 0);
-            Canvas.SetTop(removeButton, Opt.ApResMod(190));
+            RenderOptions.SetBitmapScalingMode(removeButton, BitmapScalingMode.HighQuality);
+            SetLeft(removeButton, 0);
+            SetTop(removeButton, Opt.ApResMod(190 * pcntDif));
             Children.Add(removeButton);
+        }
+
+        public void AddDeleteButtonEvent(IDeleteUpgrade deleteUpgradePage, int uniqueBuildId)
+        {
+            this.deleteUpgradePage = deleteUpgradePage;
+            this.uniqueBuildId = uniqueBuildId;
+
+            deleteButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\deletebutton.png"));
+            deleteButton.Height = Opt.ApResMod(miniButtonSize);
+            deleteButton.Width = Opt.ApResMod(miniButtonSize);
+            deleteButton.UseLayoutRounding = true;
+            deleteButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteUpgradeClicked);
+            deleteButton.Cursor = Cursors.Hand;
+            RenderOptions.SetBitmapScalingMode(deleteButton, BitmapScalingMode.HighQuality);
+            SetRight(deleteButton, 0);
+            SetTop(deleteButton, 0);
+            Children.Add(deleteButton);
+        }
+        private void DeleteUpgradeClicked(object sender, MouseButtonEventArgs e)
+        {
+            deleteUpgradePage.DeleteUpgradeClicked(uniqueBuildId, upgrade.uniqueUpgradeId);
+        }
+
+        public void AddCardClickedEvent(IUpgradeClicked upgradeClickedPage)
+        {
+            this.upgradeClickedPage = upgradeClickedPage;
+            upgradeImage.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
+        }
+        private void CardClicked(object sender, MouseButtonEventArgs e)
+        {
+            upgradeClickedPage.CardClicked(upgrade.id);
         }
 
         private void RemoveUpgradeClicked(object sender, MouseButtonEventArgs e)
@@ -88,11 +132,6 @@ namespace X_Wing_Visual_Builder.Model
         {
             upgrade.numberOwned++;
             numberOwned.Text = upgrade.numberOwned.ToString();
-        }
-
-        private void ContentScroll(object sender, MouseWheelEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void MouseHoverLeave(object sender, MouseEventArgs e)

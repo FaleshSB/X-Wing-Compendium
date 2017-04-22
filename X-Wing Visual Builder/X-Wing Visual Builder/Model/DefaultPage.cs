@@ -106,5 +106,11 @@ namespace X_Wing_Visual_Builder.Model
         {
 
         }
+
+        public void ContentScroll(object sender, MouseWheelEventArgs e)
+        {
+            contentScrollViewer.ScrollToVerticalOffset(contentScrollViewer.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
     }
 }

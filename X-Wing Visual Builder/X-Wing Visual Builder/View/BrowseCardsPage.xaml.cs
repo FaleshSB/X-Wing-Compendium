@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for BrowseCardsPage.xaml
     /// </summary>
-    public partial class BrowseCardsPage : DefaultPage
+    public partial class BrowseCardsPage : DefaultPage, IUpgradeClicked
     {
         private TextBox searchTextBox = new TextBox();
         RadioButton upgradesRadioButton = new RadioButton();
@@ -57,8 +57,7 @@ namespace X_Wing_Visual_Builder.View
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public Dictionary<int, Canvas> pilotCanvasCache = new Dictionary<int, Canvas>();
-        public Dictionary<int, Canvas> upgradeCanvasCache = new Dictionary<int, Canvas>();
-        public Dictionary<int, UpgradeCanvas> newUpgradeCanvasCache = new Dictionary<int, UpgradeCanvas>();
+        public Dictionary<int, UpgradeCanvas> upgradeCanvasCache = new Dictionary<int, UpgradeCanvas>();
 
 
         public BrowseCardsPage()
@@ -142,6 +141,14 @@ namespace X_Wing_Visual_Builder.View
             SetIsSearchDescriptionChecked();
         }
 
+        public void AddUpgradeToCache(Upgrade upgrade)
+        {
+            if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
+            {
+                upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+                upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
+            }
+        }
 
         private void squadsClicked(object sender, RoutedEventArgs e)
         {
@@ -260,72 +267,6 @@ namespace X_Wing_Visual_Builder.View
             pilotCanvasCache[pilot.id].Children.Add(removePilot);
         }
 
-        public void AddUpgradeToCache(Upgrade upgrade)
-        {
-            upgradeCanvasCache[upgrade.id] = new Canvas();
-            upgradeCanvasCache[upgrade.id].Width = Opt.ApResMod(upgradeCardWidth);
-            upgradeCanvasCache[upgrade.id].Height = Opt.ApResMod(upgradeCardHeight);
-            upgradeCanvasCache[upgrade.id].Margin = new Thickness(2, 2, 2, 2);
-
-            UpgradeCard upgradeCard = upgrade.GetUpgradeCard(Opt.ApResMod(upgradeCardWidth), Opt.ApResMod(upgradeCardHeight));
-            upgradeCard.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
-            upgradeCard.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
-            upgradeCard.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
-
-            Canvas.SetLeft(upgradeCard, 0);
-            Canvas.SetTop(upgradeCard, 0);
-            upgradeCanvasCache[upgrade.id].Children.Add(upgradeCard);
-
-            InfoButton infoButton = new InfoButton(22, 22);
-            infoButton.upgradeId = upgrade.id;
-            infoButton.Cursor = Cursors.Hand;
-            infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(UpgradeInfoClicked);
-            //infoButton.MouseEnter += new MouseEventHandler(UpgradeInfoMouseHover);
-            //infoButton.MouseLeave += new MouseEventHandler(PilotMouseHoverLeave);
-            infoButton.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-
-            Canvas.SetLeft(infoButton, 0);
-            Canvas.SetTop(infoButton, 0);
-            upgradeCanvasCache[upgrade.id].Children.Add(infoButton);
-
-            OutlinedTextBlock numberOwned = new OutlinedTextBlock();
-            numberOwned.Text = upgrade.numberOwned.ToString();
-            numberOwned.TextAlignment = TextAlignment.Left;
-            numberOwned.Width = 30;
-            numberOwned.Height = 30;
-            numberOwned.StrokeThickness = 1;
-            numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            numberOwned.FontWeight = FontWeights.ExtraBold;
-            numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
-            numberOwned.FontSize = Opt.ApResMod(20);
-            numberOwned.FontFamily = new FontFamily("Verdana");
-            Canvas.SetLeft(numberOwned, 1);
-            Canvas.SetBottom(numberOwned, 64);
-            upgradeCanvasCache[upgrade.id].Children.Add(numberOwned);
-
-            AddButton addUpgrade = new AddButton(22, 22);
-            addUpgrade.upgradeId = upgrade.id;
-            addUpgrade.MouseLeftButtonDown += new MouseButtonEventHandler(AddUpgradeClicked);
-            addUpgrade.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-            addUpgrade.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
-            addUpgrade.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
-            addUpgrade.Visibility = Visibility.Hidden;
-            Canvas.SetLeft(addUpgrade, 0);
-            Canvas.SetTop(addUpgrade, 140);
-            upgradeCanvasCache[upgrade.id].Children.Add(addUpgrade);
-
-            RemoveButton removeUpgrade = new RemoveButton(22, 22);
-            removeUpgrade.upgradeId = upgrade.id;
-            removeUpgrade.MouseLeftButtonDown += new MouseButtonEventHandler(RemoveUpgradeClicked);
-            removeUpgrade.MouseWheel += new MouseWheelEventHandler(ContentScroll);
-            removeUpgrade.MouseEnter += new MouseEventHandler(UpgradeMouseHover);
-            removeUpgrade.MouseLeave += new MouseEventHandler(UpgradeMouseHoverLeave);
-            removeUpgrade.Visibility = Visibility.Hidden;
-            Canvas.SetLeft(removeUpgrade, 0);
-            Canvas.SetTop(removeUpgrade, 190);
-            upgradeCanvasCache[upgrade.id].Children.Add(removeUpgrade);
-        }
-
         protected override void DisplayContent()
         {
             contentWrapPanel.Children.Clear();
@@ -337,11 +278,8 @@ namespace X_Wing_Visual_Builder.View
                    || upgrade.upgradeType == UpgradeType.Cargo || Ships.ships.ContainsKey(upgrade.shipType) == false || Ships.ships[upgrade.shipType].Values.First().shipSize == ShipSize.Huge) { /*continue;*/ }
                 if(upgradeCanvasCache.ContainsKey(upgrade.id) == false)
                 {
-                    AddUpgradeToCache(upgrade);
-                }
-                else
-                {
-                    upgradeCanvasCache[upgrade.id].Children.OfType<OutlinedTextBlock>().Single().Text = Upgrades.upgrades[upgrade.id].numberOwned.ToString();
+                    upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(this, upgradeCardWidth, upgradeCardHeight, new Thickness(2,2,2,2));
+                    upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
                 }
                 contentWrapPanel.Children.Add(upgradeCanvasCache[upgrade.id]);
             }
@@ -648,7 +586,26 @@ namespace X_Wing_Visual_Builder.View
         {
             SetIsSearchDescriptionChecked();
         }
+        public void CardClicked(int upgradeId)
+        {
+            if (isAddingUpgrade == true)
+            {
+                upgradesToDisplay.Clear();
+                pilotsToDisplay.Clear();
+                previousUpgradeSearchResultIds = "";
+                previousPilotSearchResultIds = "";
+                searchTextBox.Text = "";
+                isSwappingPilot = false;
+                isAddingUpgrade = false;
+                isAddingPilot = false;
+                build.AddUpgrade(uniquePilotId, upgradeId);
+                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
 
+                UpgradeModifiers.AddUpgrade(build, uniquePilotId, upgradeId);
+
+                NavigationService.Navigate(squadsPage);
+            }
+        }
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
             IGeneralId card = (IGeneralId)sender;
@@ -734,11 +691,5 @@ namespace X_Wing_Visual_Builder.View
             ManeuverCard hoveredManeuver = (ManeuverCard)sender;
             UpdatePilot(hoveredManeuver.uniquePilotId, false);
         }*/
-        
-        private void ContentScroll(object sender, MouseWheelEventArgs e)
-        {
-            contentScrollViewer.ScrollToVerticalOffset(contentScrollViewer.VerticalOffset - e.Delta);
-            e.Handled = true;
-        }
     }
 }
