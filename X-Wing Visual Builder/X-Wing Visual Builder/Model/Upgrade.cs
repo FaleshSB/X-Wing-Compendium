@@ -22,7 +22,7 @@ namespace X_Wing_Visual_Builder.Model
         public UpgradeType upgradeType;
         public Faction faction;
         public ShipSize shipSize;
-        public ShipType shipType;
+        public List<ShipType> shipThatCanUse;
         public bool isWeapon;
         public bool isUnique;
         public bool isLimited;
@@ -47,7 +47,7 @@ namespace X_Wing_Visual_Builder.Model
         private BitmapImage resizedUpgradeImage = null;
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
-                       ShipType ship, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
+                       List<ShipType> shipThatCanUse, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
                        List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned)
         {
@@ -59,7 +59,7 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.shipSize = shipSize;
-            this.shipType = ship;
+            this.shipThatCanUse = shipThatCanUse;
             this.isWeapon = isWeapon;
             this.isUnique = isUnique;
             this.isLimited = isLimited;

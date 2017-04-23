@@ -70,6 +70,15 @@ namespace X_Wing_Visual_Builder.Model
                     {
                         requiresPilotSkill = Int32.Parse(fields[18]);
                     }
+                    List<ShipType> shipsThatCanUse = new List<ShipType>();
+                    if (fields[8].Length > 0)
+                    {
+                        string[] shipsThatCanUseSplit = fields[8].Split(',');
+                        foreach (string shipThatCanUse in shipsThatCanUseSplit)
+                        {
+                            shipsThatCanUse.Add((ShipType)Int32.Parse(shipThatCanUse));
+                        }
+                    }
                     List<Action> requiresActions = new List<Action>();
                     if (fields[19].Length > 0)
                     {
@@ -108,7 +117,7 @@ namespace X_Wing_Visual_Builder.Model
                         numberOwned = upgradeKeyOwned[Int32.Parse(fields[0])];
                     }
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], faq,
-                                             (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), (ShipType)Int32.Parse(fields[8]),
+                                             (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
                                              Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
                                              requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned));
@@ -225,7 +234,7 @@ namespace X_Wing_Visual_Builder.Model
             }
 
             bool isCorrectShipType = false;
-            if ((upgrade.shipType == ShipType.All || (upgrade.shipType == pilot.ship.shipType))
+            if ((upgrade.shipThatCanUse.Contains(ShipType.All) || (upgrade.shipThatCanUse.Contains(pilot.ship.shipType)))
                     && (upgrade.isTieOnly == false || (upgrade.isTieOnly == true && pilot.ship.isTIE))
                     && (upgrade.isXWingOnly == false || (upgrade.isXWingOnly == true && pilot.ship.isXWing))
                     ) { isCorrectShipType = true; }

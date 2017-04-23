@@ -215,9 +215,6 @@ namespace X_Wing_Visual_Builder.View
             upgradesToDisplay = upgradesToDisplay.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList();
             foreach (Upgrade upgrade in upgradesToDisplay)
             {
-                if(upgrade.shipSize == ShipSize.Huge || upgrade.upgradeType == UpgradeType.Team || upgrade.upgradeType == UpgradeType.Hardpoint
-                   || upgrade.upgradeType == UpgradeType.Cargo || Ships.ships.ContainsKey(upgrade.shipType) == false
-                   || Ships.ships[upgrade.shipType].Values.First().shipSize == ShipSize.Huge) { /*continue;*/ }
                 if (upgrade.shipSize == ShipSize.Huge || upgrade.upgradeType == UpgradeType.Team || upgrade.upgradeType == UpgradeType.Hardpoint
                    || upgrade.upgradeType == UpgradeType.Cargo) { continue; }
                 if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
