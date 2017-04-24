@@ -47,8 +47,26 @@ namespace X_Wing_Visual_Builder.Model
                     }
                     possibleUpgrades.Add(UpgradeType.Title, 1);
                     possibleUpgrades.Add(UpgradeType.Modification, 1);
+                    List<ExpansionType> inExpansion = new List<ExpansionType>();
+                    if (fields[11].Length > 0)
+                    {
+                        string[] inExpansionSplit = fields[11].Split(',');
+                        foreach (string inSingleExpansion in inExpansionSplit)
+                        {
+                            inExpansion.Add((ExpansionType)Int32.Parse(inSingleExpansion));
+                        }
+                    }
+                    List<string> faq = new List<string>();
+                    if (fields[8].Length > 0)
+                    {
+                        string[] possibleFaqSplit = fields[8].Split('|');
+                        foreach (string possibleFaq in possibleFaqSplit)
+                        {
+                            faq.Add(possibleFaq);
+                        }
+                    }
                     pilots.Add(Int32.Parse(fields[0]), new Pilot(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), Convert.ToBoolean(Int32.Parse(fields[2])), fields[3],
-                                Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), fields[8], (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10])), numberOwned));
+                                Int32.Parse(fields[4]), fields[5], possibleUpgrades, Int32.Parse(fields[7]), faq, (Faction)Int32.Parse(fields[9]), Convert.ToBoolean(Int32.Parse(fields[10])), numberOwned, inExpansion));
                 }
             }
             // Remove Huge Ship cards

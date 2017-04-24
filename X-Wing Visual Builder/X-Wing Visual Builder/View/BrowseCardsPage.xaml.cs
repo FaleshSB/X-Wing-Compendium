@@ -57,7 +57,7 @@ namespace X_Wing_Visual_Builder.View
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public Dictionary<int, PilotCanvas> pilotCanvasCache = new Dictionary<int, PilotCanvas>();
-        public Dictionary<int, UpgradeCanvas> upgradeCanvasCache = new Dictionary<int, UpgradeCanvas>();
+        public Dictionary<int, CardCanvas> upgradeCanvasCache = new Dictionary<int, CardCanvas>();
 
 
         public BrowseCardsPage()

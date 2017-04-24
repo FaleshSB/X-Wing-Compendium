@@ -76,9 +76,12 @@
     <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Builds.cs" />
+    <Compile Include="Model\CardCanvas.cs" />
     <Compile Include="Model\ConvertBitmapToBitmapImage.cs" />
     <Compile Include="Model\DefaultPage.cs" />
     <Compile Include="Model\DiceRollResult.cs" />
+    <Compile Include="Model\Expansion.cs" />
+    <Compile Include="Model\Expansions.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\IDeletePilot.cs" />
     <Compile Include="Model\IDeleteUpgrade.cs" />
@@ -207,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShipsDatabase.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Expansions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

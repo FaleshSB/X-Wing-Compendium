@@ -38,7 +38,7 @@ namespace X_Wing_Visual_Builder.Model
         public int cost;
         public string name;
         public string description;
-        public string faq;
+        public List<string> faq = new List<string>();
         public Ship ship;
         public bool isUnique;
         public List<Action> usableActions
@@ -125,10 +125,12 @@ namespace X_Wing_Visual_Builder.Model
             set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); }
         }
         private BitmapImage resizedPilotImage = null;
+        public Dictionary<ExpansionType, int> inExpansion = new Dictionary<ExpansionType, int>();
 
         public Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
 
-        public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost, string faq, Faction faction, bool hasAbility, int numberOwned)
+        public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost,
+                     List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion)
         {
             this.id = id;
             this.isUnique = isUnique;
@@ -140,8 +142,20 @@ namespace X_Wing_Visual_Builder.Model
             this.faq = faq;
             this.faction = faction;
             this.hasAbility = hasAbility;
-            this.numberOwned = numberOwned;
+            this._numberOwned = numberOwned;
             this.ship = Ships.ships[shipType][faction];
+
+            foreach (ExpansionType expansionType in inExpansion)
+            {
+                if (this.inExpansion.ContainsKey(expansionType) == false)
+                {
+                    this.inExpansion[expansionType] = 1;
+                }
+                else
+                {
+                    this.inExpansion[expansionType]++;
+                }
+            }
         }
         
         public Pilot GetPilotClone()

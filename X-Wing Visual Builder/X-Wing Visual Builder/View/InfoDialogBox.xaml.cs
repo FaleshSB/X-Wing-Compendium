@@ -54,30 +54,48 @@ namespace X_Wing_Visual_Builder.View
         public void AddUpgrade(Upgrade upgrade)
         {
             Width += upgradeCardWidth + 20;
-            UpgradeCanvas upgradeCanvas = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+            CardCanvas upgradeCanvas = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
             upgradeCanvas.HideInfoButton();
             Grid.SetColumn(upgradeCanvas, 0);
             Grid.SetRow(upgradeCanvas, 0);
             pageStructureGrid.Children.Add(upgradeCanvas);
             pageStructureGrid.ColumnDefinitions[0].Width = GridLength.Auto;
 
+            AlignableWrapPanel upgradeDetails = new AlignableWrapPanel();
+            upgradeDetails.VerticalAlignment = VerticalAlignment.Center;
+            upgradeDetails.Margin = new Thickness(50, 0, 0, 0);
+            Grid.SetColumn(upgradeDetails, 1);
+            Grid.SetRow(upgradeDetails, 0);
+            pageStructureGrid.Children.Add(upgradeDetails);
+
             TextBlock upgradeInfo = new TextBlock();
-            upgradeInfo.Margin = new Thickness(0, 50, 0, 0);
             upgradeInfo.Width = 300;
             upgradeInfo.TextWrapping = TextWrapping.Wrap;
+            upgradeInfo.VerticalAlignment = VerticalAlignment.Center;
+            foreach (KeyValuePair<ExpansionType, int> expansionType in upgrade.inExpansion)
+            {
+                if (expansionType.Value == 1)
+                {
+                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + "\r\n");
+                }
+                else
+                {
+                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + " (" + expansionType.Value.ToString() + ")\r\n");
+                }
+            }
+            upgradeInfo.Inlines.Add("\r\n");
             foreach (string faq in upgrade.faq)
             {
                 upgradeInfo.Inlines.Add(faq + "\r\n\r\n");
             }
-            Grid.SetColumn(upgradeInfo, 1);
-            Grid.SetRow(upgradeInfo, 0);
-            pageStructureGrid.Children.Add(upgradeInfo);
+            
 
             Hyperlink hyperlink = new Hyperlink(new Run("Buy here"));
             hyperlink.NavigateUri = new Uri("http://stackoverflow.com");
             hyperlink.RequestNavigate += new RequestNavigateEventHandler(ClickedLink);
 
             upgradeInfo.Inlines.Add(hyperlink);
+            upgradeDetails.Children.Add(upgradeInfo);
         }
 
         private void ClickedLink(object sender, RequestNavigateEventArgs e)

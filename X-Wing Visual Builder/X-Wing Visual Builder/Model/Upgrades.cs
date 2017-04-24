@@ -111,6 +111,15 @@ namespace X_Wing_Visual_Builder.Model
                     {
                         addsPilotSkill = Int32.Parse(fields[22]);
                     }
+                    List<ExpansionType> inExpansion = new List<ExpansionType>();
+                    if (fields[23].Length > 0)
+                    {
+                        string[] inExpansionSplit = fields[23].Split(',');
+                        foreach (string inSingleExpansion in inExpansionSplit)
+                        {
+                            inExpansion.Add((ExpansionType)Int32.Parse(inSingleExpansion));
+                        }
+                    }
                     int numberOwned = 0;
                     if(upgradeKeyOwned.ContainsKey(Int32.Parse(fields[0])))
                     {
@@ -120,7 +129,7 @@ namespace X_Wing_Visual_Builder.Model
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
                                              Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
-                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned));
+                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned, inExpansion));
                 }
             }
             // Remove Huge Ship cards

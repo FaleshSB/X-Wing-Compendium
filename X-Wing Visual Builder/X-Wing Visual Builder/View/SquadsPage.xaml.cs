@@ -30,7 +30,7 @@ namespace X_Wing_Visual_Builder.View
         private Canvas pilotAndUpgradeInfoCanvas;
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
-        private Dictionary<int, Dictionary<int, UpgradeCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, UpgradeCanvas>>();
+        private Dictionary<int, Dictionary<int, CardCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, CardCanvas>>();
         private Dictionary<int, Dictionary<int, PilotCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, PilotCanvas>>();
 
 
@@ -258,7 +258,7 @@ namespace X_Wing_Visual_Builder.View
                         {
                             if(upgradeCanvasCache.ContainsKey(build.uniqueBuildId) == false)
                             {
-                                upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, UpgradeCanvas>();
+                                upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
                             }
                             upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId] = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
                             upgradeCanvasCache[build.uniqueBuildId][upgrade.uniqueUpgradeId].AddDeleteButtonEvent(this, build.uniqueBuildId);

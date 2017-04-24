@@ -1,229 +1,235 @@
-﻿201£5£0£Dagger Squadron Pilot£4£A unique gyrostabilization surrounds the B-Wing's cockpit, ensuring that the pilot always remains stationary during combat.£11,6,4,4£24££2£0
-907£39£0£Resistance Sympathizer£3£After the destruction of the Hosnian system, some spacers willingly aided the Resistance against the malevolent First Order.£5,9,9£38££2£0
-4105£48£0£Imperial Trainee£1£After the Republic fell and as the Empire rose, the new galactic government required thousands of new pilots to replace the decommissioned clones.££17££3£0
-1003£40£0£Wild Space Fringer£2£Although a stock YT-2400 light freighter had plenty of space for cargo, that space was often annexed to support modified weapon systems and oversized engines.£6,5,9£30££2£0
-3903£35£0£Lothal Rebel£3£Another successful Corellian Engineering Corporation freighter design, the VCX-100 was larger than the ubiquitous YT-series, boasting more living space and customizability.£11,7,4,4,9,9£35££2£0
-200£5£0£Blue Squadron Pilot£2£Because of its heavy weapons array and resilient shielding, the B-wing solidified itself as the Alliance's most formidable assault fighter.£11,6,4,4£22££2£0
-4103£48£0£Black Squadron Scout£4£Black Squadron pilots who had proven themselves as highly adept pilots were occassionally issued TIE strikers when sent on atmospheric missions.£2£20££3£0
-3500£17£0£Contracted Scout£3£Built for long-distance reconnaissance and plotting new hyperspace routes, the lightly armed JumpMaster 5000 was often extensively retrofitted with custom upgrades.£2,4,4,9,10,14£25££4£0
-3403£9£0£Ruthless Freelancer£3£Byblos Drive Yards earned a reputation for producing starships of questionable quality, but their willingness to perform modifications of questionable legality kept business brisk.£9,11,14£23££4£0
-102£2£0£Green Squadron Pilot£3£Conceived by General Dodonna, the RZ-1 A-wing interceptor proved its worth by crippling Star Destroyers during the Battle of Endor.£2,5£19££2£0
-3604£22£0£Concord Dawn Veteran£3£Concord Dawn Protectors favored an aggressive approach, using their craft's pivot wing technology to achieve unmatched agility in the pursuit of their quarry.£2,4£22££4£0
-705£37£0£Red Squadron Pilot£4£Created as an elite starfighter squad, Red Squadron included some of the best pilots in the Rebel Alliance.£4,3£23££2£0
-3703£45£0£Shadowport Hunter£2£Crime syndicates augmented the lethal skills of their loyal contractors with the best weapons, ships, and tech available.£9,14,14£33££4£0
-1302£32£0£Black Eight Sq. Pilot£4£Darth Vader's hand-picked Black Eight Squadron earned its reputation for ruthlessness when its bombardment of Callos rendered the planet uninhabitable.£11,4,4,5,5,8,8£23££3£0
-403£13£0£Rebel Operative£2£Designed after a bird in flight by Corellian Engineering Corporation, the "hawk" series excels in its role as a personal transport.£7,9£16££2£0
-706£37£0£Rookie Pilot£2£Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.£4,3£21££2£0
-1800£29£0£Academy Pilot£1£Developed by Sienar Fleet Systems, the Empire used the fast and agile TIE/ln as its primary starfighter throughout most of the Galactic Civil War.££12££3£0
-104£2£0£Prototype Pilot£1£Due to its sensitive controls and high maneuverability, only the most talented pilots belong in an A-wing cockpit.£5£17££2£0
-2101£31£0£Shadow Squadron Pilot£5£Featuring a hyperdrive and shields, the TIE phantom also came equipped with five laser cannons, giving it unprecedented firepower for such a small Imperial fighter.£11,9£27££3£0
-2801£24£0£Black Sun Vigo£3£Following the success of the Virago prototype, the StarViper-class attack platform was streamlined and redesigned for mass production.£4£27££4£0
-1901£33£0£Epsilon Squadron Pilot£1£Following the tradition of the Galactic Empire, the First Order has kept the TIE fighter design in service, but has updated the craft to modern combat standards.£18£15££3£0
-1702£28£0£Delta Squadron Pilot£1£In addition to its four laser cannons and warhead launchers, the TIE defender came equipped with ion cannons in its upper wing.£6,5£30££3£0
-2901£38£0£Hired Gun£4£Just the mention of Imperial credits can bring a host of less than trust worthy individuals to your side.£7,4,4,10£20££4£0
-903£39£0£Outer Rim Smuggler£1£Known for its durability and modular design, the YT-1300 is one of the most popular, widely used freighters in the galaxy.£9,9£27££2£0
-503£18£0£Warden Squadron Pilot£2£Koensayr Manufacturing's K-Wing boasted an advanced Sublight Acceleration Motor (SLAM) and an uprecedented 18 hard points, granting it unrivaled speed and firepower.£7,4,4,5,9,8,8£23££2£0
-2007£30£0£Saber Squadron Pilot£4£Led by Baron Soontir Fel, the pilots of Saber Squadron are among the Empire's best. Their TIE Interceptors are marked with red stripes to designate pilots with at least ten confirmed kills.£2£21££3£0
-802£38£0£Gray Squadron Pilot£4£Long after the Y-wing was to be phased out, its speed, durability and weapon options helped it remain a staple in the Rebel fleet.£7,4,4,3£20££2£0
-2700£21£0£Cartel Spacer£2£MandalMotors' M3-A "Scyk" Interceptor was purchased in large quantities by the Hutt Cartel and the Car'das smugglers due to its low cost and customizability.££14££4£0
-1102£42£0£Tala Squadron Pilot£4£Manufactured by Incom Corporation, the Z-95-AF4 was the primary inspiration for the design of the T-65 X-wing.£5£13££2£0
-1403£20£0£Omicron Group Pilot£2£Noted for its tri-wing design, the Lambda-class shuttle served a critical role as a light utility craft in the Imperial Navy.£11,6,9,9£21££3£0
-2006£30£0£Royal Guard Pilot£6£Only members of the Emperor's royal guard are permitted to fly these crimson red fighters, which were often used to escort the Emperor's shuttle as well as its decoys.£2£22££3£0
-3803£34£0£Zeta Specialist£3£Only the most elite pilots of the First Order were authorized to fly this specialized two-seater TIE craft outfitted with enhanced shields, weapons, and sensor systems.£11,5,18£23££3£0
-3102£42£0£Binayre Pirate£1£Operating from the Double Worlds, Talus and Tralus, Kath Scarlet's gang of smugglers and pirates would never be described as reputable or dependable - even by other criminals.£5,14£12££4£0
-300£7£0£Blackmoon Squadron Pilot£3£Originally designed with only the R7-series of astromech in mind, the E-wing was later retrofitted to equip the standard R2- and R5-series droids.£11,4,3£29££2£0
-1201£8£0£Bounty Hunter£3£Originally intended as a prisoner transport, the Firespray patrol craft features a versatile weapons array and heavy armor plating.£6,8,9,5£33££3£0
-2802£24£0£Black Sun Enforcer£1£Prince Xizor himself collaborated with MandalMotors to design the StarViper-class attack platform, one of the most formidable starfighters in the galaxy.£4£25££4£0
-4003£47£0£Sienar Test Pilot£2£Sienar Fleet System's TIE Advanced v1 was a groundbreaking starfighter design featuring upgraded engines, a missile launcher, and folding s-foils.£5£16££3£0
-2000£30£0£Alpha Squadron Pilot£1£Sienar Fleet Systems designed the TIE Interceptor with four wing-mounted laser cannons, easily allowing it to outgun its predecessors.££18££3£0
-3802£34£0£Omega Specialist£5£Special Forces TIE fighters employed a dual heavy laser turret mounted to the bottom of the fuselage to defend against threats from the rear and augment their forward firepower.£2,11,5,18£25££3£0
-303£7£0£Knave Squadron Pilot£1£Specifically designed to combine the best features of the X-wing series with the A-wing series, the E-wing boasted superior firepower, speed, and maneuverability.£11,4,3£27££2£0
-1103£42£0£Bandit Squadron Pilot£2£The AF4 series was the latest in a long line of Headhunter designs. Cheap and durable, it became a favorite among independent outfits like the Rebellion and Black Sun.£5£12££2£0
-4002£47£0£Baron of the Empire£4£The aristocratic title of baron was presented to ace starfighter pilots for outstanding service to the Empire.£2,5£19££3£0
-3605£22£0£Zealous Recruit£1£The Concord Dawn Protectorate starfighter was armed with a hidden torpedo launcher, allowing it to launch a deadly salvo before its foes realized it was carrying ordnance.£4,3£20££4£0
-2701£21£0£Tansarii Point Veteran£5£The defeat of Black Sun ace Talonbane Cobra by Car'das smugglers turned the tide of the Battle of Tansarii Point Station. Survivor s of the clash are respected throughout the sector.£2£17££4£0
-3603£22£0£Concord Dawn Ace£5£The elite of the Concord Dawn Protectorate mastered the Concordia Face Off maneuver, leveraging their ships' narrow attack profile to execute deadly head-on charges.£2,4£23££4£0
-2001£30£0£Avenger Squadron Pilot£3£The finest mass-produced starfighter of its time, the TIE Interceptor excels at dogfighting thanks to its heightened maneuverability and speed.££20££3£0
-1906£33£0£Zeta Squadron Pilot£3£The fragility of TIE fighters during the Galactic Civil War led engineers to improve survivability, resulting in a more durable starfighter.£18£16££3£0
-501£18£0£Guardian Squadron Pilot£4£The K-wing’s surprising acceleration, heavy armor plating, and devastating ordnance made it a favorite for hit-and-run operations.£7,4,4,5,9,8,8£25££2£0
-2601£19£0£Black Sun Ace£5£The Kihraxz assault fighter was developed specifically for the Black Sun crime syndicate, whose highly paid ace pilots demanded a nimble, powerful ship to match their skills.£2,5,14£23££4£0
-3402£9£0£Gand Findsman£5£The legendary Findsmen of Gand worshipped the enshrouding mists of their home planet. Utilizing signs, augurs, and mystical rituals to track their quarry.£2,9,11,14£25££4£0
-605£25£0£Red Squadron Veteran£4£The modern incarnation of a classic design, the Incom T-70 X-wing fighter is the signature combat craft of the Resistance forces in their fight against the First Order.£4,3,18£26££2£0
-1605£27£0£Scimitar Squadron Pilot£2£The onboard targeting computer is extremely precise, allowing a TIE bomber to pinpoint its target while avoiding collateral damage to the surrounding area.£4,4,5,5,8£16££3£0
-2102£31£0£Sigma Squadron Pilot£3£The primary result of a hidden research facility on Imdaar Alpha, the TIE phantom added a small fighter with cloaking capabilities to the Imperial fleet.£11,9£25££3£0
-4303£50£0£Jakku Gunrunner£1£The Quadrijet transfer spacetug, commonly called a 'Quadjumper,' was nimble in space and atmosphere alike, making it popular among both smugglers and explorers.£9,8,18,14£15££4£0
-3000£41£0£Trandoshan Slaver£2£The spacious triple-decker design of the YV-666 made it popular among bounty hunters and slavers, who often retrofitted an entire deck for prisoner transport.£6,5,9,9,9,14£29££4£0
-602£25£0£Blue Squadron Novice£2£The T-70 model benefits from its redesigned thrusters with increased maneuverability in both space and atmospheric flight.£4,3,18£24££2£0
-1506£26£0£Storm Squadron Pilot£4£The TIE Advanced improved on the popular TIE/ln design by adding shielding, better weapons systems, curved solar panels and a hyperdrive.£5£23££3£0
-1507£26£0£Tempest Squadron Pilot£2£The TIE Advanced was produced in limited quantities, but later Sienar engineers incorporated many of its best qualities into their next TIE model: the TIE Interceptor.£5£21££3£0
-1704£28£0£Onyx Squadron Pilot£3£The TIE defender outclassed all other starfighters of its time, though its size and array of weapons greatly increased its weight and cost in credits.£6,5£32££3£0
-1802£29£0£Black Squadron Pilot£4£The TIE fighter has no shields or life support systems, forcing TIE pilots to depend solely on their skills to survive.£2£14££3£0
-1808£29£0£Obsidian Squadron Pilot£3£The TIE fighter's Twin Ion Engine system was designed for speed, making the TIE one of the most maneuverable starships ever produced.££13££3£0
-1303£32£0£Cutlass Squadron Pilot£2£The TIE Punisher built upon the success of the TIE bomber, adding shielding, a second bomb chute, and three additional ordnance pods, each equipped with a twin ion engine.£11,4,4,5,5,8,8£21££3£0
-4503£52£0£Starkiller Base Pilot£2£The Upsilon-class shuttle served as a command ship for many of the First Order's elite officers and agents as they spread terror across the galaxy.£11,9,9,18,18£30££3£0
-3101£42£0£Black Sun Soldier£3£The vast and influential Black Sun crime syndicate can always find a use for talented pilots, provided they aren't particular about how they earn their credits.£5,14£13££4£0
-801£38£0£Gold Squadron Pilot£2£The versatile and reliable BTL-A4 Y-wing was the Rebellion's primary starfighter until the arrival of the T-65 X-wing.£7,4,4,3£18££2£0
-2600£19£0£Cartel Marauder£2£The versatile Kihraxz was modeled after Incom's popular X-wing starfighter, but an array of after-market modification kits ensured a wide variety of designs.£5,14£20££4£0
-1603£27£0£Gamma Squadron Veteran£5£The white-striped TIE bombers flown by the elite Gamma Squadron possess enhanced maneuverability, allowing them to nimbly strike capital ships with fearsome ease.£2,4,4,5,5,8£18££3£0
-2903£38£0£Syndicate Thug£2£Though far from nimble, the Y-wing's heavy hull, substantial shielding, and turret-mounted cannons make them excellent patrol craft.£7,4,4,10£18££4£0
-2403£8£0£Mandalorian Mercenary£5£Though the Mandalorian Crusaders were all but destroyed by the Old Republic, a handful of enterprising mercenaries still claim the mantle, instilling terror in their foes.£2,6,8,9,5,14£35££4£0
-1904£33£0£Omega Squadron Pilot£4£To attain a coveted position in the skilled Omega squadron, pilots had to demonstate both their exceptional skill and their unwavering dedication to the First Order.£2,18£17££3£0
-2202£36£0£Patrol Leader£3£To be granted command of a VT-49 Decimator was seen as a significant promotion for a middling officer of the Imperial Navy.£4,9,9,9,8£40££3£0
-4104£48£0£Scarif Defender£3£To protect the secret jungle base, the Empire required a vigilant and swift defense force.££18££3£0
-4203£49£0£Blue Squadron Pathfinder£2£Used for deploying troops under the cover of darkness or into the heat of battle, the U-wing fulfilled the Rebel Alliance's need for a hardy transport craft.£11,4,9,9£23££2£0
-1602£27£0£Gamma Squadron Pilot£4£While not as agile or fast as other TIE variants, TIE bombers can carry enough firepower to destroy virtually any enemy target.£4,4,5,5,8£18££3£0
-2502£13£0£Spice Runner£1£With nothing more than a desire to fly and a junkyard at their disposal, crafty mechanics can make almost anything space worthy.£7,9,14£16££4£0
-800£38£1£"Dutch" Vander£6£After acquiring a target lock, choose another friendly ship at Range 1-2. The chosen ship may immediately acquire a target lock.£7,4,4,3£23££2£1
-4202£49£1£Heff Tobber£3£After an enemy ship executes a maneuver that causes it to overlap your ship, you may perform a free action.£11,4,9,9£24££2£1
-3202£3£1£Thane Kyrell£4£After an enemy ship inside your firing arc at Range 1-3 attacks another friendly ship, you may perform a free action.£4,9,3£26££2£1
-4001£47£1£Valen Rudor£6£After defending, you may perform a free action.£2,5£22££3£1
-1807£29£1£"Night Beast"£5£After executing a green maneuver, you may perform a free focus action.££15££3£1
-2200£36£1£Captain Oicunn£4£After executing a maneuver, each enemy ship you are touching suffers 1 damage.£2,4,9,9,9,8£42££3£1
-702£37£1£Garven Dreis£6£After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).£4,3£26££2£1
-2703£21£1£Laetin A'Shera£6£After you defend against an attack, if the attack did not hit, you may assign 1 evade token to your ship.££18££4£1
-902£39£1£Lando Calrissian£7£After you execute a green maneuver, choose 1 other friendly ship at Range 1. That ship may perform 1 free action shown in its action bar.£2,5,9,9£44££2£1
-3203£3£1£Braylen Stramm£3£After you execute a maneuver, you may roll an attack die. On a hit or critical result, remove 1 stress token from your ship.£4,9,3£25££2£1
-3602£22£1£Kad Solus£6£After you execute a red maneuver, assign 2 focus tokens to your ship.£2,4£25££4£1
-2302£43£1£IG-88C£6£After you perform a boost action, you may perform a free evade action.£2,11,6,6,8,14£36££4£1
-103£2£1£Jake Farrell£7£After you perform a focus action or are assigned a focus token, you may perform a free boost or barrel roll action.£2,5£24££2£1
-1705£28£1£Rexler Brath£8£After you perform an attack that deals at least 1 Damage card to the defender, you may spend a focus token to flip those cards faceup.£2,6,5£37££3£1
-2300£43£1£IG-88A£6£After you perform an attack that destroys the defender, you may recover 1 shield.£2,11,6,6,8,14£36££4£1
-2103£31£1£"Whisper"£7£After you perform an attack that hits, you may assign 1 focus token to your ship.£2,11,9£32££3£1
-4402£51£1£Captain Rex£4£After you perform an attack, assign the 'Suppressive Fire' Condition card to the defender.££14££2£1
-1100£42£1£Airen Cracken£8£After you perform an attack, you may choose another friendly ship at Range 1. That ship may perform 1 free action.£2,5£19££2£1
-2010£30£1£Turr Phennir£7£After you perform an attack, you may perform a free boost or barrel roll action.£2£25££3£1
-709£37£1£Wes Janson£8£After you perform an attack, you may remove 1 focus, evade, or blue target lock token from the defender.£2,4,3£29££2£1
-2902£38£1£Drea Renthal£5£After you spend a target lock, you may receive 1 stress token to acquire a target lock.£7,4,4,10£22££4£1
-4302£50£1£Unkar Plutt£3£At the end of the Activation phase you must assign a tractor beam token to each ship you are touching.£9,8,18,14£17££4£1
-2503£13£1£Torkil Mux£3£At the end of the Activation phase, choose 1 enemy ship at Range 1-2. Until the end of the Combat phase, treat that ship's pilot skill value as "0".£7,9,14£19££4£1
-4200£49£1£Cassian Andor£6£At the start of the Activation phase you may remove 1 stress token from 1 other friendly ship at Range 1-2.£2,11,4,9,9£27££2£1
-402£13£1£Roark Garnet£4£At the start of the Combat phase, choose 1 other friendly ship at Range 1-3. Until the end of the phase, treat that ship's pilot skill value as "12".£7,9£19££2£1
-3902£35£1£"Chopper"£4£At the start of the Combat phase, each enemy ship you are touching receives 1 stress token.£11,7,4,4,9,9£37££2£1
-2800£24£1£Guri£5£At the start of the Combat phase, if you are at Range 1 of an enemy ship, you may assign 1 focus token to your ship.£2,4£30££4£1
-1900£33£1£"Epsilon Leader"£6£At the start of the Combat phase, remove 1 stress token from each friendly ship at Range 1.£18£19££3£1
-1502£26£1£Commander Alozen£5£At the start of the Combat phase, you may acquire a target lock on an enemy ship at Range 1.£2,5£25££3£1
-401£13£1£Kyle Katarn£6£At the start of the Combat phase, you may assign 1 of your focus tokens to another friendly ship at Range 1-3.£2,7,9£21££2£1
-3502£17£1£Manaroo£4£At the start of the Combat phase, you may assign all focus, evade, and target lock tokens assigned to you to another friendly ship.£2,4,4,9,10,14£27££4£1
-1402£20£1£Colonel Jendon£6£At the start of the Combat phase, you may assign one of your blue target lock tokens to a friendly ship at Range 1 if it does not have a blue target lock token.£11,6,9,9£26££3£1
-3601£22£1£Old Teroch£7£At the start of the Combat phase, you may choose 1 enemy ship at Range 1. If you are inside its firing arc, it discards all focus and evade tokens.£2,4£26££4£1
-3701£45£1£Asajj Ventress£6£At the start of the Combat phase, you may choose a ship at Range 1-2. If it is inside your mobile firing arc, assign 1 stress token to it.£2,9,14,14£37££4£1
-3700£45£1£Ketsu Onyo£7£At the start of the Combat phase, you may choose a ship at Range 1. If it is inside your primary and mobile firing arcs, assign 1 tractor beam token to it.£2,9,14,14£38££4£1
-2501£13£1£Palob Godalhi£5£At the start of the Combat phase, you may remove 1 focus or evade token from an enemy ship at Range 1-2 and assign it to yourself.£2,7,9,14£20££4£1
-3100£42£1£Kaa'to Leeachos£5£At the start of the Combat phase, you may remove 1 focus or evade token from another friendly ship at Range 1-2 and assign it to yourself.£2,5,14£15££4£1
-4400£51£1£Ahsoka Tano£7£At the start of the Combat phase, you may spend 1 focus token to choose a friendly ship at Range 1. It may perform 1 free action.£2£17££2£1
-3401£9£1£4-LOM£6£At the start of the End phase, you may assign 1 of your stress tokens to another ship at Range 1.£2,9,11,14£27££4£1
-301£7£1£Corran Horn£8£At the start of the End phase, you may perform one attack. You cannot attack during the next round.£2,11,4,3£35££2£1
-1505£26£1£Lieutenant Colzet£3£At the start of the End phase, you may spend a target lock you have on an enemy ship to flip 1 random facedown Damage card assigned to it faceup.£5£23££3£1
-4502£52£1£Lieutenant Dormitz£3£During setup, friendly ships may be placed anywhere in the play area at Range 1-2 of you.£11,9,9,18,18£31££3£1
-1500£26£1£Darth Vader£9£During your "Perform Action" step, you may perform 2 actions.£2,5£29££3£1
-1504£26£1£Zertik Strom£6£Enemy ships at Range 1 cannot add their range combat bonus when attacking.£2,5£26££3£1
-2002£30£1£Carnor Jax£8£Enemy ships at Range 1 cannot perform focus or evade actions and cannot spend focus or evade tokens.£2£26££3£1
-1903£33£1£"Omega Leader"£8£Enemy ships that you have locked cannot modify any dice when attacking you or defending against your attacks.£2,18£21£If Omega Leader has a target lock on an enemy ship, and Emperor Palpatine is equipped to a different enemy ship, the ship with Emperor Palpatine equipped may modify one of the locked ship’s dice.|If a ship locked by Omega Leader attacks Omega Leader with a Heavy Laser Cannon, it does not change its crit results to hit results.|Adding or subtracting dice (i.e. Jan Ors) and canceling die results (i.e. Crack Shot) do not count as modifying dice. However, game effects originating from ships that Omega Leader has locked that add die results (C-3PO, Advanced Targeting Computer, Accuracy Corrector, etc.) do count as modifying dice and cannot be used.|If “Omega Leader” has an enemy ship locked, when that ship attacks or defends against “Omega Leader,” that ship cannot resolve abilities that would modify dice, even 0 dice, such as Keyan Farlander’s ability. Additionally, that ship cannot resolve abilities that cause “Omega Leader” to reroll his dice (such as R7 Astromech or Elusiveness), as these are abilities that modify dice.£3£1
-4501£52£1£Major Stridan£4£For the purpose of your actions and Upgrade cards, you may treat friendly ships at Range 2-3 as being at Range 1.£11,9,9,18,18£32££3£1
-1812£29£1£"Youngster"£6£Friendly TIE fighters at Range 1-3 may perform the action on your equipped Elite Talent Upgrade card.£2£15££3£1
-2201£36£1£Commander Kenkirk£6£If you have no shields and at least 1 Damage card assigned to you, increase your agility value by 1.£2,4,9,9,9,8£44££3£1
-4401£51£1£Sabine Wren£5£Immediately before you reveal your maneuver, you may perform a free boost or barrel roll action.£2£15££2£1
-3303£4£1£Sabine Wren£5£Immediately before you reveal your maneuver, you may perform a free boost or barrel roll action.£2,7,9£21££2£1
-3501£17£1£Dengar£9£Once per round after defending, if the attacker is inside your firing arc, you may perform an attack against that ship.£2,4,4,9,10,14£33££4£1
-502£18£1£Miranda Doni£8£Once per round when attacking, you may either spend 1 shield to roll 1 additional attack die or roll 1 fewer attack die to recover 1 shield.£7,4,4,5,9,8,8£29££2£1
-1606£27£1£Tomax Bren£8£Once per round, after you discard an Elite Upgrade card, flip that card faceup.£2,4,4,5,5,8£24££3£1
-2301£43£1£IG-88B£6£Once per round, after you perform an attack that does not hit, you may perform an attack with an equipped Cannon secondary weapon.£2,11,6,6,8,14£36££4£1
-3800£34£1£"Quickdraw"£9£Once per round, when you lose a shield token, you may perform a primary weapon attack.£2,11,5,18£29££3£1
-701£37£1£Biggs Darklighter£5£Other friendly ships at Range 1 cannot be targeted by attacks if the attacker could target you instead.£4,3£25££2£1
-4500£52£1£Kylo Ren£6£The first time you are hit by an attack each round, assign the "I'll Show You the Dark Side" Condition card to the attacker.£2,11,9,9,18,18£34££3£1
-601£25£1£"Red Ace"£6£The first time you remove a shield token from your ship each round, assign 1 evade token to your ship.£4,3,18£29££2£1
-3503£17£1£Tel Trevura£7£The first time you would be destroyed, instead cancel any remaining damage, discard all Damage cards, and deal 4 facedown Damage cards to this ship.£2,4,4,9,10,14£30££4£1
-4201£49£1£Bodhi Rook£4£When a friendly ship acquires a target lock, that ship can lock onto an enemy ship at Range 1-3 of any friendly ship.£11,4,9,9£25££2£1
-3001£41£1£Latts Razzi£5£When a friendly ship declares an attack, you may spend a target lock you have on the defender to reduce its agility by 1 for that attack.£6,5,9,9,9,14£33££4£1
-1400£20£1£Captain Kagi£8£When an enemy ship acquires a target lock, it must lock onto your ship if able.£11,6,9,9£27££3£1
-3901£35£1£Kanan Jarrus£5£When an enemy ship at Range 1-2 is attacking, you may spend a focus token. If you do, the attacker rolls 1 fewer attack die.£11,7,4,4,9,9£38££2£1
-2500£13£1£Dace Bonearm£7£When an enemy ship at Range 1-3 receives at least one ion token, if you are not stressed you may receive 1 stress token to cause that ship to suffer 1 damage.£2,7,9,14£23££4£1
-707£37£1£Tarn Mison£3£When an enemy ship declares you as the target of an attack, you may acquire a target lock on that ship.£4,3£23££2£1
-302£7£1£Etahn A'baht£5£When an enemy ship inside your firing arc at Range 1-3 is defending, the attacker may change 1 of its hit results to a critical result.£2,11,4,3£32££2£1
-1600£27£1£Captain Jonus£6£When another friendly ship at Range 1 attacks with a secondary weapon, it may reroll up to 2 attack dice.£2,4,4,5,5,8£22££3£1
-1805£29£1£"Howlrunner"£8£When another friendly ship at Range 1 is attacking with its primary weapon, it may reroll 1 attack die.£2£18££3£1
-2702£21£1£Serissu£8£When another friendly ship at Range 1 is defending, it may reroll 1 defense die.£2£20££4£1
-1803£29£1£"Chaser"£3£When another friendly ship at Range 1 spends a focus token, assign a focus token to your ship.££14££3£1
-3201£3£1£Shara Bey£6£When another friendly ship at Range 1-2 is attacking, it may treat your blue target lock tokens as its own.£2,4,9,3£28££2£1
-500£18£1£Esege Tuketu£6£When another friendly ship at Range 1-2 is attacking, it may treat your focus tokens as its own.£7,4,4,5,9,8,8£28££2£1
-1401£20£1£Captain Yorr£4£When another friendly ship at Range 1-2 would receive a stress token, if you have 2 or fewer stress tokens, you may receive that token instead.£11,6,9,9£24££3£1
-400£13£1£Jan Ors£8£When another friendly ship at Range 1-3 is attacking, if you have no stress tokens, you may receive 1 stress token to allow that ship to roll 1 additional attack die.£2,7,9£25££2£1
-906£39£1£Chewbacca£5£When another friendly ship at Range 1-3 is destroyed (but has not fled the battlefield), you may perform an attack.£2,5,9,9£42££2£1
-1809£29£1£"Scourge"£7£When attacking a defender that has 1 or more Damage cards, roll 1 additional attack die.£2£17££3£1
-2402£8£1£Kath Scarlet£7£When attacking a ship inside your auxiliary firing arc, roll 1 additional attack die.£2,6,8,9,5,14£38££4£1
-3801£34£1£"Backdraft"£7£When attacking a ship inside your auxiliary firing arc, you may add 1 critical result.£2,11,5,18£27££3£1
-2900£38£1£Kavil£7£When attacking a ship outside your firing arc, roll 1 additional attack die.£2,7,4,4,10£24££4£1
-2203£36£1£Rear Admiral Chiraneau£8£When attacking at Range 1-2, you may change one of your focus results to a critical result.£2,4,9,9,9,8£46££3£1
-1806£29£1£"Mauler Mithel"£7£When attacking at Range 1, roll 1 additional attack die.£2£17££3£1
-1811£29£1£"Winged Gundark"£5£When attacking at Range 1, you may change 1 of your hit results to a critical result.££15££3£1
-2004£30£1£Kir Kanos£6£When attacking at Range 2 or 3, you may spend 1 evade token to add 1 hit result to your roll.££24££3£1
-803£38£1£Horton Salm£8£When attacking at Range 2-3, you may reroll any of your blank results.£7,4,4,3£25££2£1
-1801£29£1£"Backstabber"£6£When attacking from outside the defender's firing arc, roll 1 additional attack die.££16££3£1
-2603£19£1£Talonbane Cobra£9£When attacking or defending, double the effect of your range combat bonuses.£2,5,14£28££4£1
-3600£22£1£Fenn Rau£9£When attacking or defending, if the enemy ship is at Range 1, you may roll 1 additional dice.£2,4£28££4£1
-905£39£1£Rey£8£When attacking or defending, if the enemy ship is inside your firing arc, you may reroll up to 2 of your blank results.£2,5,9,9£45££2£1
-202£5£1£Ibtisam£6£When attacking or defending, if you have at least one stress token, you may reroll 1 of your dice.£2,11,6,4,4£28££2£1
-2401£8£1£Boba Fett£8£When attacking or defending, you may reroll 1 of your dice for each enemy ship at Range 1.£2,6,8,9,5,14£39££4£1
-3200£3£1£Norra Wexley£7£When attacking or defending, you may spend a target lock you have on the enemy ship to add 1 Focus result to your roll.£2,4,9,3£29££2£1
-1604£27£1£Major Rhymer£7£When attacking with a secondary weapon, you may increase or decrease the weapon range by 1 to a limit of Range 1-3.£2,4,4,5,5,8£26££3£1
-1203£8£1£Krassis Trelix£5£When attacking with a secondary weapon, you may reroll 1 attack die.£6,8,9,5£36££3£1
-4000£47£1£The Inquisitor£8£When attacking with your primary weapon at Range 2-3, treat the range of the attack as Range 1.£2,5£25££3£1
-205£5£1£Ten Numb£8£When attacking, 1 of your critical results cannot be canceled by defense dice.£2,11,6,4,4£31££2£1
-1810£29£1£"Wampa"£4£When attacking, at the start of the "Compare Results" step, you may cancel all dice results. If you cancel a critical result, deal 1 facedown Damage card to the defender.££14££3£1
-1700£28£1£Colonel Vessery£6£When attacking, immediately after you roll attack dice, you may acquire a target lock on the defender if it already has a red target lock token.£2,6,5£35££3£1
-708£37£1£Wedge Antilles£9£When attacking, reduce the defender's agility value by 1 (to a minimum of "0").£2,4,3£29££2£1
-1101£42£1£Lieutenant Blount£6£When attacking, the defender is hit by your attack, even if he does not suffer any damage.£2,5£17££2£1
-1202£8£1£Kath Scarlet£7£When attacking, the defender receives 1 stress token if he cancels at least 1 critical result.£2,6,8,9,5£38££3£1
-203£5£1£Keyan Farlander£7£When attacking, you may remove 1 stress token to change all of your focus results to hit results.£2,11,6,4,4£29££2£1
-901£39£1£Han Solo£9£When attacking, you may reroll all of your dice. If you choose to do so, you must reroll as many of your dice as possible.£2,5,9,9£46££2£1
-3400£9£1£Zuckuss£7£When attacking, you may roll 1 additional attack die. If you do, then the defender rolls 1 additional defense die.£2,9,11,14£28££4£1
-1902£33£1£"Omega Ace"£7£When attacking, you may spend a focus token and a target lock you have on the defender to change all of your results to Critical Hit results.£2,18£20££3£1
-4101£48£1£"Pure Sabacc"£6£When attacking. If you have 1 or fewer Damage cards, roll 1 additional attack die.£2£22££3£1
-3702£45£1£Sabine Wren£5£When defending against an enemy ship inside your mobile firing arc at Range 1-2, you may add 1 Focus result to your roll.£9,14,14£35££4£1
-4301£50£1£Sarco Plank£5£When defending instead of using your agility value, you may roll a number of defense dice equal to the speed of the maneuver you executed this round.£2,9,8,18,14£18££4£1
-2803£24£1£Prince Xizor£7£When defending, a friendly ship at Range 1 may suffer 1 uncancelled hit or critical result instead of you.£2,4£31££4£1
-2602£19£1£Graz The Hunter£6£When defending, if the attacker is inside your firing arc, roll 1 additional defense die.£5,14£25££4£1
-4102£48£1£"Countdown"£5£When defending, if you are not stressed during the "Compare Results" step, you may suffer 1 damage to cancel all dice results. if you do, receive 1 stress token.££20££3£1
-3301£4£1£Ezra Bridger£4£When defending, if you are stressed, you may change up to 2 of your focus results to evade results.£2,7,9£20££2£1
-1804£29£1£"Dark Curse"£6£When defending, ships attacking you cannot spend focus tokens or reroll attack die.££16££3£1
-4403£51£1£Zeb Orrelios£3£When defending, you may cancel [crit] results before [hit] results.££13££2£1
-3300£4£1£"Zeb" Orrelios£3£When defending, you may cancel critical hit results before hit results.£7,9£18££2£1
-704£37£1£Luke Skywalker£8£When defending, you may change 1 of your focus results to an evade result.£2,4,3£28££2£1
-2400£8£1£Emon Azzameen£6£When dropping a bomb, you may use a Left Turn 3, Straight 3, or Right Turn 3 template instead of the Straight 1 template.£6,8,9,5,14£36££4£1
-1301£32£1£"Deathrain"£6£When dropping a bomb, you may use the front guides of your ship. After dropping a bomb, you may perform a free barrel roll action.£11,4,4,5,5,8,8£26££3£1
-2005£30£1£Lieutenant Lorrir£5£When performing a barrel roll action, you may receive 1 stress token to use the [Bank Left 1] or [Bank Right 1] template instead of the [Straight 1] to roll.££23££3£1
-1905£33£1£"Zeta Ace"£5£When performing a barrel roll, you may use the Straight 2 template (instead of the Straight 1 template).£2,18£18££3£1
-600£25£1£"Blue Ace"£5£When performing a boost action, you may use the [1 left] or [1 right] turn template.£4,3,18£27££2£1
-1002£40£1£Eaden Vrill£3£When performing a primary weapon attack against a stressed ship, roll 1 additional attack die.£6,5,9£32££2£1
-2003£30£1£"Fel's Wrath"£5£When the number of Damage cards assigned to you equals or exceeds your hull value, you are not destroyed until the end of the Combat phase.££23££3£1
-700£37£1£"Hobbie" Klivian£5£When you acquire or spend a target lock, you may remove 1 stress token from your ship.£4,3£25££2£1
-1000£40£1£"Leebo"£5£When you are dealt a faceup Damage card, draw 1 additional Damage card, choose 1 to resolve, and discard the other.£2,6,5,9£34££2£1
-900£39£1£Chewbacca£5£When you are dealt a faceup Damage card, immediately flip it facedown (without resolving its ability).£2,5,9,9£42££2£1
-904£39£1£Han Solo£9£When you are placed during setup, you can be placed anywhere in the play area beyond Range 3 of the enemy ships.£2,5,9,9£46££2£1
-2100£31£1£"Echo"£6£When you decloak, you must use the Left Bank 2 or Right Bank 2 template instead of the Straight 2 template.£2,11,9£30££3£1
-3003£41£1£Bossk£7£When you perform an attack that hits, before dealing damage, you may cancel 1 of your critical results to add 2 hit results.£2,6,5,9,9,9,14£35££4£1
-2008£30£1£Soontir Fel£9£When you receive a stress token, you may assign 1 focus token to your ship.£2£27££3£1
-703£37£1£Jek Porkins£7£When you receive a stress token, you may remove it and roll 1 attack die. On a hit result, deal 1 facedown Damage card to this ship.£2,4,3£26££2£1
-2009£30£1£Tetran Cowall£7£When you reveal a [Koiogran turn] maneuver, you may treat the speed of that maneuver as "1," "3," or "5."£2£24££3£1
-1701£28£1£Countess Ryad£5£When you reveal a [Straight] maneuver, you may treat it as a [K-Turn] maneuver.£2,6,5£34££3£1
-1200£8£1£Boba Fett£8£When you reveal a bank maneuver (Left Bank or Right Bank), you may rotate your dial to the other bank maneuver of the same speed.£2,6,8,9,5£39££3£1
-3302£4£1£Hera Syndulla£7£When you reveal a green or red maneuver, you may rotate your dial to another maneuver of the same difficulty.£2,7,9£22££2£1
-3900£35£1£Hera Syndulla£7£When you reveal a red or green maneuver, you may rotate your dial to another maneuver of the same difficulty.£11,7,4,4,9,9£40££2£1
-4300£50£1£Constable Zuvio£7£When you reveal a reverse maneuver, you may drop a bomb using your front guides (including a bomb with the "Action:" header).£2,9,8,18,14£19££4£1
-1601£27£1£"Deathfire"£3£When you reveal your maneuver dial or after you perform an action, you may perform a Bomb Upgrade card action as a free action.£4,4,5,5,8£17££3£1
-1503£26£1£Juno Eclipse£8£When you reveal your maneuver, you may increase or decrease its speed by 1 (to a minimum of 1).£2,5£28££3£1
-1501£26£1£Maarek Stele£7£When your attack deals a faceup Damage card to the defender, instead draw 3 Damage cards, choose 1 to deal and discard the others.£2,5£27££3£1
-1703£28£1£Maarek Stele£7£When your attack deals a faceup Damage card to the defender, instead draw 3 Damage cards, choose 1 to deal and discard the others.£2,6,5£35££3£1
-604£25£1£Poe Dameron£8£While attacking or defending, if you have a focus token, you may change 1 of your focus results to a hit or evade result.£2,4,3,18£31££2£1
-606£25£1£Poe Dameron£9£While attacking or defending, if you have a focus token, you may change 1 of your focus results to a hit or evade result.£2,4,3,18£33££2£1
-3103£42£1£N'dru Suhlak£7£While attacking, if there are no other friendly ships at Range 1-2, roll 1 additional attack die.£2,5,14£17££4£1
-101£2£1£Gemmer Sojan£5£While you are at Range 1 of at least 1 enemy ship, increase your agility value by 1.£5£22££2£1
-603£25£1£Ello Asty£7£While you are not stressed, you may treat your [Talon Roll Left] and [Talon Roll Right] maneuvers as white maneuvers.£2,4,3,18£30££2£1
-4100£48£1£"Duchess"£8£While you have the 'Adaptive Ailerons' Upgrade card equipped, you may choose to ignore its card ability.£2£23££3£1
-3002£41£1£Moralo Eval£6£You can perform Cannon secondary weapon attacks against ships inside your auxiliary firing arc.£6,5,9,9,9,14£34££4£1
-204£5£1£Nera Dantels£5£You can perform Torpedoes secondary weapon attacks against enemy ships outside your firing arc.£2,11,6,4,4£26££2£1
-100£2£1£Arvel Crynyd£6£You may declare an enemy ship inside your firing arc that you are touching as the target of your attack.£5£23££2£1
-2303£43£1£IG-88D£6£You may execute the [3-Left Segnor's Loop] or [3-Right Segnor's Loop] maneuver using the corresponding [3-Left Turn] or [3-Right Turn] template.£2,11,6,6,8,14£36££4£1
-1001£40£1£Dash Rendar£7£You may ignore obstacles during the Activation phase and when performing actions.£2,6,5,9£36££2£1
-1300£32£1£"Redline"£7£You may maintain 2 target locks on the same ship. When you acquire a target lock, you may acquire a second lock on that same ship.£11,4,4,5,5,8,8£27££3£1
-105£2£1£Tycho Celchu£8£You may perform actions even while you have stress tokens.£2,5£26££2£1
+﻿3801£34£1£"Backdraft"£7£When attacking a ship inside your auxiliary firing arc, you may add 1 critical result.£2,11,5,18£27££3£1£48
+1801£29£1£"Backstabber"£6£When attacking from outside the defender's firing arc, roll 1 additional attack die.££16££3£1£11
+600£25£1£"Blue Ace"£5£When performing a boost action, you may use the [1 left] or [1 right] turn template.£4,3,18£27££2£1£16
+1803£29£1£"Chaser"£3£When another friendly ship at Range 1 spends a focus token, assign a focus token to your ship.££14££3£1£31
+3902£35£1£"Chopper"£4£At the start of the Combat phase, each enemy ship you are touching receives 1 stress token.£11,7,4,4,9,9£37££2£1£30
+4102£48£1£"Countdown"£5£When defending, if you are not stressed during the "Compare Results" step, you may suffer 1 damage to cancel all dice results. if you do, receive 1 stress token.££20££3£1£45
+1804£29£1£"Dark Curse"£6£When defending, ships attacking you cannot spend focus tokens or reroll attack die.££16££3£1£1
+1601£27£1£"Deathfire"£3£When you reveal your maneuver dial or after you perform an action, you may perform a Bomb Upgrade card action as a free action.£4,4,5,5,8£17££3£1£36
+1301£32£1£"Deathrain"£6£When dropping a bomb, you may use the front guides of your ship. After dropping a bomb, you may perform a free barrel roll action.£11,4,4,5,5,8,8£26££3£1£34
+4100£48£1£"Duchess"£8£While you have the 'Adaptive Ailerons' Upgrade card equipped, you may choose to ignore its card ability.£2£23££3£1£45
+800£38£1£"Dutch" Vander£6£After acquiring a target lock, choose another friendly ship at Range 1-2. The chosen ship may immediately acquire a target lock.£7,4,4,3£23££2£1£9
+2100£31£1£"Echo"£6£When you decloak, you must use the Left Bank 2 or Right Bank 2 template instead of the Straight 2 template.£2,11,9£30££3£1£23
+1908£33£1£"Epsilon Ace"£4£While you do not have any Damage cards, treat your pilot skill value as "12".£18£17££3£1£41
+1900£33£1£"Epsilon Leader"£6£At the start of the Combat phase, remove 1 stress token from each friendly ship at Range 1.£18£19££3£1£16
+2003£30£1£"Fel's Wrath"£5£When the number of Damage cards assigned to you equals or exceeds your hull value, you are not destroyed until the end of the Combat phase.££23££3£1£6
+700£37£1£"Hobbie" Klivian£5£When you acquire or spend a target lock, you may remove 1 stress token from your ship.£4,3£25££2£1£12
+1805£29£1£"Howlrunner"£8£When another friendly ship at Range 1 is attacking with its primary weapon, it may reroll 1 attack die.£2£18££3£1£11
+1000£40£1£"Leebo"£5£When you are dealt a faceup Damage card, draw 1 additional Damage card, choose 1 to resolve, and discard the other.£2,6,5,9£34££2£1£24
+1806£29£1£"Mauler Mithel"£7£When attacking at Range 1, roll 1 additional attack die.£2£17££3£1£1
+1807£29£1£"Night Beast"£5£After executing a green maneuver, you may perform a free focus action.££15££3£1£1
+1902£33£1£"Omega Ace"£7£When attacking, you may spend a focus token and a target lock you have on the defender to change all of your results to Critical Hit results.£2,18£20££3£1£16
+1903£33£1£"Omega Leader"£8£Enemy ships that you have locked cannot modify any dice when attacking you or defending against your attacks.£2,18£21£If Omega Leader has a target lock on an enemy ship, and Emperor Palpatine is equipped to a different enemy ship, the ship with Emperor Palpatine equipped may modify one of the locked ship’s dice.|If a ship locked by Omega Leader attacks Omega Leader with a Heavy Laser Cannon, it does not change its crit results to hit results.|Adding or subtracting dice (i.e. Jan Ors) and canceling die results (i.e. Crack Shot) do not count as modifying dice. However, game effects originating from ships that Omega Leader has locked that add die results (C-3PO, Advanced Targeting Computer, Accuracy Corrector, etc.) do count as modifying dice and cannot be used.|If “Omega Leader” has an enemy ship locked, when that ship attacks or defends against “Omega Leader,” that ship cannot resolve abilities that would modify dice, even 0 dice, such as Keyan Farlander’s ability. Additionally, that ship cannot resolve abilities that cause “Omega Leader” to reroll his dice (such as R7 Astromech or Elusiveness), as these are abilities that modify dice.£3£1£41
+4101£48£1£"Pure Sabacc"£6£When attacking. If you have 1 or fewer Damage cards, roll 1 additional attack die.£2£22££3£1£45
+3800£34£1£"Quickdraw"£9£Once per round, when you lose a shield token, you may perform a primary weapon attack.£2,11,5,18£29££3£1£48
+601£25£1£"Red Ace"£6£The first time you remove a shield token from your ship each round, assign 1 evade token to your ship.£4,3,18£29££2£1£40
+1300£32£1£"Redline"£7£You may maintain 2 target locks on the same ship. When you acquire a target lock, you may acquire a second lock on that same ship.£11,4,4,5,5,8,8£27££3£1£34
+1809£29£1£"Scourge"£7£When attacking a defender that has 1 or more Damage cards, roll 1 additional attack die.£2£17££3£1£31
+608£25£1£"Snap" Wexley£6£After you execute a 2-, 3- or 4-speed maneuver, if you are not touching a ship, you may perform a free boost action£2,4,3,18£28££2£1£42
+1810£29£1£"Wampa"£4£When attacking, at the start of the "Compare Results" step, you may cancel all dice results. If you cancel a critical result, deal 1 facedown Damage card to the defender.££14££3£1£31
+2103£31£1£"Whisper"£7£After you perform an attack that hits, you may assign 1 focus token to your ship.£2,11,9£32££3£1£23
+1811£29£1£"Winged Gundark"£5£When attacking at Range 1, you may change 1 of your hit results to a critical result.££15££3£1£11
+1812£29£1£"Youngster"£6£Friendly TIE fighters at Range 1-3 may perform the action on your equipped Elite Talent Upgrade card.£2£15££3£1£31
+3300£4£1£"Zeb" Orrelios£3£When defending, you may cancel critical hit results before hit results.£7,9£18££2£1£30
+1905£33£1£"Zeta Ace"£5£When performing a barrel roll, you may use the Straight 2 template (instead of the Straight 1 template).£2,18£18££3£1£16
+1907£33£1£"Zeta Leader"£7£When attacking, if you are not stressed, you may receive 1 stress token to roll 1 additional attack die.£2,18£20££3£1£41
+3401£9£1£4-LOM£6£At the start of the End phase, you may assign 1 of your stress tokens to another ship at Range 1.£2,9,11,14£27££4£1£39
+1800£29£0£Academy Pilot£1£Developed by Sienar Fleet Systems, the Empire used the fast and agile TIE/ln as its primary starfighter throughout most of the Galactic Civil War.££12££3£0£1,1,11,31,31
+4400£51£1£Ahsoka Tano£7£At the start of the Combat phase, you may spend 1 focus token to choose a friendly ship at Range 1. It may perform 1 free action.£2£17££2£1£49
+1100£42£1£Airen Cracken£8£After you perform an attack, you may choose another friendly ship at Range 1. That ship may perform 1 free action.£2,5£19££2£1£25
+2000£30£0£Alpha Squadron Pilot£1£Sienar Fleet Systems designed the TIE Interceptor with four wing-mounted laser cannons, easily allowing it to outgun its predecessors.££18££3£0£6
+100£2£1£Arvel Crynyd£6£You may declare an enemy ship inside your firing arc that you are touching as the target of your attack.£5£23££2£1£4
+3701£45£1£Asajj Ventress£6£At the start of the Combat phase, you may choose a ship at Range 1-2. If it is inside your mobile firing arc, assign 1 stress token to it.£2,9,14,14£37££4£1£46
+2001£30£0£Avenger Squadron Pilot£3£The finest mass-produced starfighter of its time, the TIE Interceptor excels at dogfighting thanks to its heightened maneuverability and speed.££20££3£0£6
+1103£42£0£Bandit Squadron Pilot£2£The AF4 series was the latest in a long line of Headhunter designs. Cheap and durable, it became a favorite among independent outfits like the Rebellion and Black Sun.£5£12££2£0£25
+4002£47£0£Baron of the Empire£4£The aristocratic title of baron was presented to ace starfighter pilots for outstanding service to the Empire.£2,5£19££3£0£37
+701£37£1£Biggs Darklighter£5£Other friendly ships at Range 1 cannot be targeted by attacks if the attacker could target you instead.£4,3£25££2£1£1
+3102£42£0£Binayre Pirate£1£Operating from the Double Worlds, Talus and Tralus, Kath Scarlet's gang of smugglers and pirates would never be described as reputable or dependable - even by other criminals.£5,14£12££4£0£21,21
+1302£32£0£Black Eight Squadron Pilot£4£Darth Vader's hand-picked Black Eight Squadron earned its reputation for ruthlessness when its bombardment of Callos rendered the planet uninhabitable.£11,4,4,5,5,8,8£23££3£0£34
+1802£29£0£Black Squadron Pilot£4£The TIE fighter has no shields or life support systems, forcing TIE pilots to depend solely on their skills to survive.£2£14££3£0£1,1,11,31,31
+4103£48£0£Black Squadron Scout£4£Black Squadron pilots who had proven themselves as highly adept pilots were occassionally issued TIE strikers when sent on atmospheric missions.£2£20££3£0£45
+2601£19£0£Black Sun Ace£5£The Kihraxz assault fighter was developed specifically for the Black Sun crime syndicate, whose highly paid ace pilots demanded a nimble, powerful ship to match their skills.£2,5,14£23££4£0£38
+2802£24£0£Black Sun Enforcer£1£Prince Xizor himself collaborated with MandalMotors to design the StarViper-class attack platform, one of the most formidable starfighters in the galaxy.£4£25££4£0£28
+3101£42£0£Black Sun Soldier£3£The vast and influential Black Sun crime syndicate can always find a use for talented pilots, provided they aren't particular about how they earn their credits.£5,14£13££4£0£21,21
+2801£24£0£Black Sun Vigo£3£Following the success of the Virago prototype, the StarViper-class attack platform was streamlined and redesigned for mass production.£4£27££4£0£28
+300£7£0£Blackmoon Squadron Pilot£3£Originally designed with only the R7-series of astromech in mind, the E-wing was later retrofitted to equip the standard R2- and R5-series droids.£11,4,3£29££2£0£22
+602£25£0£Blue Squadron Novice£2£The T-70 model benefits from its redesigned thrusters with increased maneuverability in both space and atmospheric flight.£4,3,18£24££2£0£16,40,42
+4203£49£0£Blue Squadron Pathfinder£2£Used for deploying troops under the cover of darkness or into the heat of battle, the U-wing fulfilled the Rebel Alliance's need for a hardy transport craft.£11,4,9,9£23££2£0£43
+200£5£0£Blue Squadron Pilot£2£Because of its heavy weapons array and resilient shielding, the B-wing solidified itself as the Alliance's most formidable assault fighter.£11,6,4,4£22££2£0£13,17
+1200£8£1£Boba Fett£8£When you reveal a bank maneuver (Left Bank or Right Bank), you may rotate your dial to the other bank maneuver of the same speed.£2,6,8,9,5£39££3£1£3
+2401£8£1£Boba Fett£8£When attacking or defending, you may reroll 1 of your dice for each enemy ship at Range 1.£2,6,8,9,5,14£39££4£1£21
+4201£49£1£Bodhi Rook£4£When a friendly ship acquires a target lock, that ship can lock onto an enemy ship at Range 1-3 of any friendly ship.£11,4,9,9£25££2£1£43
+3003£41£1£Bossk£7£When you perform an attack that hits, before dealing damage, you may cancel 1 of your critical results to add 2 hit results.£2,6,5,9,9,9,14£35££4£1£32
+1201£8£0£Bounty Hunter£3£Originally intended as a prisoner transport, the Firespray patrol craft features a versatile weapons array and heavy armor plating.£6,8,9,5£33££3£0£3
+3203£3£1£Braylen Stramm£3£After you execute a maneuver, you may roll an attack die. On a hit or critical result, remove 1 stress token from your ship.£4,9,3£25££2£1£44
+1600£27£1£Captain Jonus£6£When another friendly ship at Range 1 attacks with a secondary weapon, it may reroll up to 2 attack dice.£2,4,4,5,5,8£22££3£1£20
+1400£20£1£Captain Kagi£8£When an enemy ship acquires a target lock, it must lock onto your ship if able.£11,6,9,9£27££3£1£14
+2200£36£1£Captain Oicunn£4£After executing a maneuver, each enemy ship you are touching suffers 1 damage.£2,4,9,9,9,8£42££3£1£19
+4402£51£1£Captain Rex£4£After you perform an attack, assign the 'Suppressive Fire' Condition card to the defender.££14££2£1£49
+1401£20£1£Captain Yorr£4£When another friendly ship at Range 1-2 would receive a stress token, if you have 2 or fewer stress tokens, you may receive that token instead.£11,6,9,9£24££3£1£14
+2002£30£1£Carnor Jax£8£Enemy ships at Range 1 cannot perform focus or evade actions and cannot spend focus or evade tokens.£2£26££3£1£8
+2600£19£0£Cartel Marauder£2£The versatile Kihraxz was modeled after Incom's popular X-wing starfighter, but an array of after-market modification kits ensured a wide variety of designs.£5,14£20££4£0£38
+2700£21£0£Cartel Spacer£2£MandalMotors' M3-A "Scyk" Interceptor was purchased in large quantities by the Hutt Cartel and the Car'das smugglers due to its low cost and customizability.££14££4£0£29
+4200£49£1£Cassian Andor£6£At the start of the Activation phase you may remove 1 stress token from 1 other friendly ship at Range 1-2.£2,11,4,9,9£27££2£1£43
+900£39£1£Chewbacca£5£When you are dealt a faceup Damage card, immediately flip it facedown (without resolving its ability).£2,5,9,9£42££2£1£2
+906£39£1£Chewbacca£5£When another friendly ship at Range 1-3 is destroyed (but has not fled the battlefield), you may perform an attack.£2,5,9,9£42££2£1£42
+1402£20£1£Colonel Jendon£6£At the start of the Combat phase, you may assign one of your blue target lock tokens to a friendly ship at Range 1 if it does not have a blue target lock token.£11,6,9,9£26££3£1£14
+1700£28£1£Colonel Vessery£6£When attacking, immediately after you roll attack dice, you may acquire a target lock on the defender if it already has a red target lock token.£2,6,5£35££3£1£26
+1502£26£1£Commander Alozen£5£At the start of the Combat phase, you may acquire a target lock on an enemy ship at Range 1.£2,5£25££3£1£18
+2201£36£1£Commander Kenkirk£6£If you have no shields and at least 1 Damage card assigned to you, increase your agility value by 1.£2,4,9,9,9,8£44££3£1£19
+3603£22£0£Concord Dawn Ace£5£The elite of the Concord Dawn Protectorate mastered the Concordia Face Off maneuver, leveraging their ships' narrow attack profile to execute deadly head-on charges.£2,4£23££4£0£47
+3604£22£0£Concord Dawn Veteran£3£Concord Dawn Protectors favored an aggressive approach, using their craft's pivot wing technology to achieve unmatched agility in the pursuit of their quarry.£2,4£22££4£0£47
+4300£50£1£Constable Zuvio£7£When you reveal a reverse maneuver, you may drop a bomb using your front guides (including a bomb with the "Action:" header).£2,9,8,18,14£19££4£1£51
+3500£17£0£Contracted Scout£3£Built for long-distance reconnaissance and plotting new hyperspace routes, the lightly armed JumpMaster 5000 was often extensively retrofitted with custom upgrades.£2,4,4,9,10,14£25££4£0£35
+301£7£1£Corran Horn£8£At the start of the End phase, you may perform one attack. You cannot attack during the next round.£2,11,4,3£35££2£1£22
+1701£28£1£Countess Ryad£5£When you reveal a [Straight] maneuver, you may treat it as a [K-Turn] maneuver.£2,6,5£34££3£1£36
+1303£32£0£Cutlass Squadron Pilot£2£The TIE Punisher built upon the success of the TIE bomber, adding shielding, a second bomb chute, and three additional ordnance pods, each equipped with a twin ion engine.£11,4,4,5,5,8,8£21££3£0£34
+2500£13£1£Dace Bonearm£7£When an enemy ship at Range 1-3 receives at least one ion token, if you are not stressed you may receive 1 stress token to cause that ship to suffer 1 damage.£2,7,9,14£23££4£1£21
+201£5£0£Dagger Squadron Pilot£4£A unique gyrostabilization surrounds the B-Wing's cockpit, ensuring that the pilot always remains stationary during combat.£11,6,4,4£24££2£0£13,17
+1500£26£1£Darth Vader£9£During your "Perform Action" step, you may perform 2 actions.£2,5£29££3£1£7
+1001£40£1£Dash Rendar£7£You may ignore obstacles during the Activation phase and when performing actions.£2,6,5,9£36££2£1£24
+1702£28£0£Delta Squadron Pilot£1£In addition to its four laser cannons and warhead launchers, the TIE defender came equipped with ion cannons in its upper wing.£6,5£30££3£0£26
+3501£17£1£Dengar£9£Once per round after defending, if the attacker is inside your firing arc, you may perform an attack against that ship.£2,4,4,9,10,14£33££4£1£35
+2902£38£1£Drea Renthal£5£After you spend a target lock, you may receive 1 stress token to acquire a target lock.£7,4,4,10£22££4£1£21
+1002£40£1£Eaden Vrill£3£When performing a primary weapon attack against a stressed ship, roll 1 additional attack die.£6,5,9£32££2£1£24
+603£25£1£Ello Asty£7£While you are not stressed, you may treat your [Talon Roll Left] and [Talon Roll Right] maneuvers as white maneuvers.£2,4,3,18£30££2£1£40
+2400£8£1£Emon Azzameen£6£When dropping a bomb, you may use a Left Turn 3, Straight 3, or Right Turn 3 template instead of the Straight 1 template.£6,8,9,5,14£36££4£1£21
+1901£33£0£Epsilon Squadron Pilot£1£Following the tradition of the Galactic Empire, the First Order has kept the TIE fighter design in service, but has updated the craft to modern combat standards.£18£15££3£0£16,16,41
+500£18£1£Esege Tuketu£6£When another friendly ship at Range 1-2 is attacking, it may treat your focus tokens as its own.£7,4,4,5,9,8,8£28££2£1£33
+302£7£1£Etahn A'baht£5£When an enemy ship inside your firing arc at Range 1-3 is defending, the attacker may change 1 of its hit results to a critical result.£2,11,4,3£32££2£1£22
+3301£4£1£Ezra Bridger£4£When defending, if you are stressed, you may change up to 2 of your focus results to evade results.£2,7,9£20££2£1£30
+3600£22£1£Fenn Rau£9£When attacking or defending, if the enemy ship is at Range 1, you may roll 1 additional dice.£2,4£28££4£1£47
+1602£27£0£Gamma Squadron Pilot£4£While not as agile or fast as other TIE variants, TIE bombers can carry enough firepower to destroy virtually any enemy target.£4,4,5,5,8£18££3£0£20
+1603£27£0£Gamma Squadron Veteran£5£The white-striped TIE bombers flown by the elite Gamma Squadron possess enhanced maneuverability, allowing them to nimbly strike capital ships with fearsome ease.£2,4,4,5,5,8£18££3£0£36,36
+3402£9£0£Gand Findsman£5£The legendary Findsmen of Gand worshipped the enshrouding mists of their home planet. Utilizing signs, augurs, and mystical rituals to track their quarry.£2,9,11,14£25££4£0£39
+702£37£1£Garven Dreis£6£After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).£4,3£26££2£1£10
+101£2£1£Gemmer Sojan£5£While you are at Range 1 of at least 1 enemy ship, increase your agility value by 1.£5£22££2£1£17
+1706£28£0£Glaive Squadron Pilot£6£The elite pilots of Glaive Squadron often serve as protective vanguard for high-ranking Imperial officials.£2,6,5£34££3£0£36,36
+801£38£0£Gold Squadron Pilot£2£The versatile and reliable BTL-A4 Y-wing was the Rebellion's primary starfighter until the arrival of the T-65 X-wing.£7,4,4,3£18££2£0£9
+802£38£0£Gray Squadron Pilot£4£Long after the Y-wing was to be phased out, its speed, durability and weapon options helped it remain a staple in the Rebel fleet.£7,4,4,3£20££2£0£9
+2602£19£1£Graz The Hunter£6£When defending, if the attacker is inside your firing arc, roll 1 additional defense die.£5,14£25££4£1£38
+102£2£0£Green Squadron Pilot£3£Conceived by General Dodonna, the RZ-1 A-wing interceptor proved its worth by crippling Star Destroyers during the Battle of Endor.£2,5£19££2£0£4,17
+501£18£0£Guardian Squadron Pilot£4£The K-wing’s surprising acceleration, heavy armor plating, and devastating ordnance made it a favorite for hit-and-run operations.£7,4,4,5,9,8,8£25££2£0£33
+2800£24£1£Guri£5£At the start of the Combat phase, if you are at Range 1 of an enemy ship, you may assign 1 focus token to your ship.£2,4£30££4£1£28
+901£39£1£Han Solo£9£When attacking, you may reroll all of your dice. If you choose to do so, you must reroll as many of your dice as possible.£2,5,9,9£46££2£1£2
+904£39£1£Han Solo£9£When you are placed during setup, you can be placed anywhere in the play area beyond Range 3 of the enemy ships.£2,5,9,9£46££2£1£42
+4202£49£1£Heff Tobber£3£After an enemy ship executes a maneuver that causes it to overlap your ship, you may perform a free action.£11,4,9,9£24££2£1£43
+3302£4£1£Hera Syndulla£7£When you reveal a green or red maneuver, you may rotate your dial to another maneuver of the same difficulty.£2,7,9£22££2£1£30
+3900£35£1£Hera Syndulla£7£When you reveal a red or green maneuver, you may rotate your dial to another maneuver of the same difficulty.£11,7,4,4,9,9£40££2£1£30
+2901£38£0£Hired Gun£4£Just the mention of Imperial credits can bring a host of less than trust worthy individuals to your side.£7,4,4,10£20££4£0£21,21
+803£38£1£Horton Salm£8£When attacking at Range 2-3, you may reroll any of your blank results.£7,4,4,3£25££2£1£9
+202£5£1£Ibtisam£6£When attacking or defending, if you have at least one stress token, you may reroll 1 of your dice.£2,11,6,4,4£28££2£1£13
+2300£43£1£IG-88A£6£After you perform an attack that destroys the defender, you may recover 1 shield.£2,11,6,6,8,14£36££4£1£27
+2301£43£1£IG-88B£6£Once per round, after you perform an attack that does not hit, you may perform an attack with an equipped Cannon secondary weapon.£2,11,6,6,8,14£36££4£1£27
+2302£43£1£IG-88C£6£After you perform a boost action, you may perform a free evade action.£2,11,6,6,8,14£36££4£1£27
+2303£43£1£IG-88D£6£You may execute the [3-Left Segnor's Loop] or [3-Right Segnor's Loop] maneuver using the corresponding [3-Left Turn] or [3-Right Turn] template.£2,11,6,6,8,14£36££4£1£27
+4105£48£0£Imperial Trainee£1£After the Republic fell and as the Empire rose, the new galactic government required thousands of new pilots to replace the decommissioned clones.££17££3£0£45
+103£2£1£Jake Farrell£7£After you perform a focus action or are assigned a focus token, you may perform a free boost or barrel roll action.£2,5£24££2£1£17
+4303£50£0£Jakku Gunrunner£1£The Quadrijet transfer spacetug, commonly called a 'Quadjumper,' was nimble in space and atmosphere alike, making it popular among both smugglers and explorers.£9,8,18,14£15££4£0£51
+400£13£1£Jan Ors£8£When another friendly ship at Range 1-3 is attacking, if you have no stress tokens, you may receive 1 stress token to allow that ship to roll 1 additional attack die.£2,7,9£25££2£1£15
+703£37£1£Jek Porkins£7£When you receive a stress token, you may remove it and roll 1 attack die. On a hit result, deal 1 facedown Damage card to this ship.£2,4,3£26££2£1£12
+609£25£1£Jess Pava£3£When attacking or defending, you may reroll 1 of your dice for each other friendly ship at Range 1.£4,3,18£25££2£1£42
+1503£26£1£Juno Eclipse£8£When you reveal your maneuver, you may increase or decrease its speed by 1 (to a minimum of 1).£2,5£28££3£1£18
+3100£42£1£Kaa'to Leeachos£5£At the start of the Combat phase, you may remove 1 focus or evade token from another friendly ship at Range 1-2 and assign it to yourself.£2,5,14£15££4£1£21
+3602£22£1£Kad Solus£6£After you execute a red maneuver, assign 2 focus tokens to your ship.£2,4£25££4£1£47
+3901£35£1£Kanan Jarrus£5£When an enemy ship at Range 1-2 is attacking, you may spend a focus token. If you do, the attacker rolls 1 fewer attack die.£11,7,4,4,9,9£38££2£1£30
+1202£8£1£Kath Scarlet£7£When attacking, the defender receives 1 stress token if he cancels at least 1 critical result.£2,6,8,9,5£38££3£1£3
+2402£8£1£Kath Scarlet£7£When attacking a ship inside your auxiliary firing arc, roll 1 additional attack die.£2,6,8,9,5,14£38££4£1£21
+2900£38£1£Kavil£7£When attacking a ship outside your firing arc, roll 1 additional attack die.£2,7,4,4,10£24££4£1£21
+3700£45£1£Ketsu Onyo£7£At the start of the Combat phase, you may choose a ship at Range 1. If it is inside your primary and mobile firing arcs, assign 1 tractor beam token to it.£2,9,14,14£38££4£1£46
+203£5£1£Keyan Farlander£7£When attacking, you may remove 1 stress token to change all of your focus results to hit results.£2,11,6,4,4£29££2£1£17
+2004£30£1£Kir Kanos£6£When attacking at Range 2 or 3, you may spend 1 evade token to add 1 hit result to your roll.££24££3£1£8
+303£7£0£Knave Squadron Pilot£1£Specifically designed to combine the best features of the X-wing series with the A-wing series, the E-wing boasted superior firepower, speed, and maneuverability.£11,4,3£27££2£0£22
+1203£8£1£Krassis Trelix£5£When attacking with a secondary weapon, you may reroll 1 attack die.£6,8,9,5£36££3£1£3
+401£13£1£Kyle Katarn£6£At the start of the Combat phase, you may assign 1 of your focus tokens to another friendly ship at Range 1-3.£2,7,9£21££2£1£15
+4500£52£1£Kylo Ren£6£The first time you are hit by an attack each round, assign the "I'll Show You the Dark Side" Condition card to the attacker.£2,11,9,9,18,18£34££3£1£50
+2703£21£1£Laetin A'Shera£6£After you defend against an attack, if the attack did not hit, you may assign 1 evade token to your ship.££18££4£1£29
+902£39£1£Lando Calrissian£7£After you execute a green maneuver, choose 1 other friendly ship at Range 1. That ship may perform 1 free action shown in its action bar.£2,5,9,9£44££2£1£2
+3001£41£1£Latts Razzi£5£When a friendly ship declares an attack, you may spend a target lock you have on the defender to reduce its agility by 1 for that attack.£6,5,9,9,9,14£33££4£1£32
+1101£42£1£Lieutenant Blount£6£When attacking, the defender is hit by your attack, even if he does not suffer any damage.£2,5£17££2£1£25
+1505£26£1£Lieutenant Colzet£3£At the start of the End phase, you may spend a target lock you have on an enemy ship to flip 1 random facedown Damage card assigned to it faceup.£5£23££3£1£18
+4502£52£1£Lieutenant Dormitz£3£During setup, friendly ships may be placed anywhere in the play area at Range 1-2 of you.£11,9,9,18,18£31££3£1£50
+2005£30£1£Lieutenant Lorrir£5£When performing a barrel roll action, you may receive 1 stress token to use the [Bank Left 1] or [Bank Right 1] template instead of the [Straight 1] to roll.££23££3£1£8
+3903£35£0£Lothal Rebel£3£Another successful Corellian Engineering Corporation freighter design, the VCX-100 was larger than the ubiquitous YT-series, boasting more living space and customizability.£11,7,4,4,9,9£35££2£0£30
+704£37£1£Luke Skywalker£8£When defending, you may change 1 of your focus results to an evade result.£2,4,3£28££2£1£1
+1501£26£1£Maarek Stele£7£When your attack deals a faceup Damage card to the defender, instead draw 3 Damage cards, choose 1 to deal and discard the others.£2,5£27££3£1£7
+1703£28£1£Maarek Stele£7£When your attack deals a faceup Damage card to the defender, instead draw 3 Damage cards, choose 1 to deal and discard the others.£2,6,5£35££3£1£36
+1604£27£1£Major Rhymer£7£When attacking with a secondary weapon, you may increase or decrease the weapon range by 1 to a limit of Range 1-3.£2,4,4,5,5,8£26££3£1£20
+4501£52£1£Major Stridan£4£For the purpose of your actions and Upgrade cards, you may treat friendly ships at Range 2-3 as being at Range 1.£11,9,9,18,18£32££3£1£50
+3502£17£1£Manaroo£4£At the start of the Combat phase, you may assign all focus, evade, and target lock tokens assigned to you to another friendly ship.£2,4,4,9,10,14£27££4£1£35
+2403£8£0£Mandalorian Mercenary£5£Though the Mandalorian Crusaders were all but destroyed by the Old Republic, a handful of enterprising mercenaries still claim the mantle, instilling terror in their foes.£2,6,8,9,5,14£35££4£0£21
+502£18£1£Miranda Doni£8£Once per round when attacking, you may either spend 1 shield to roll 1 additional attack die or roll 1 fewer attack die to recover 1 shield.£7,4,4,5,9,8,8£29££2£1£33
+3002£41£1£Moralo Eval£6£You can perform Cannon secondary weapon attacks against ships inside your auxiliary firing arc.£6,5,9,9,9,14£34££4£1£32
+3103£42£1£N'dru Suhlak£7£While attacking, if there are no other friendly ships at Range 1-2, roll 1 additional attack die.£2,5,14£17££4£1£21
+204£5£1£Nera Dantels£5£You can perform Torpedoes secondary weapon attacks against enemy ships outside your firing arc.£2,11,6,4,4£26££2£1£17
+607£25£1£Nien Nunb£7£When you recieve a stress token, if there is an enemy ship inside your firing arc at Range 1, you may discard that stress token.£2,4,3,18£29££2£1£42
+3200£3£1£Norra Wexley£7£When attacking or defending, you may spend a target lock you have on the enemy ship to add 1 Focus result to your roll.£2,4,9,3£29££2£1£44
+1808£29£0£Obsidian Squadron Pilot£3£The TIE fighter's Twin Ion Engine system was designed for speed, making the TIE one of the most maneuverable starships ever produced.££13££3£0£1,1,11,31,31
+3601£22£1£Old Teroch£7£At the start of the Combat phase, you may choose 1 enemy ship at Range 1. If you are inside its firing arc, it discards all focus and evade tokens.£2,4£26££4£1£47
+3802£34£0£Omega Specialist£5£Special Forces TIE fighters employed a dual heavy laser turret mounted to the bottom of the fuselage to defend against threats from the rear and augment their forward firepower.£2,11,5,18£25££3£0£48
+1904£33£0£Omega Squadron Pilot£4£To attain a coveted position in the skilled Omega squadron, pilots had to demonstate both their exceptional skill and their unwavering dedication to the First Order.£2,18£17££3£0£16,16,41
+1403£20£0£Omicron Group Pilot£2£Noted for its tri-wing design, the Lambda-class shuttle served a critical role as a light utility craft in the Imperial Navy.£11,6,9,9£21££3£0£14
+1704£28£0£Onyx Squadron Pilot£3£The TIE defender outclassed all other starfighters of its time, though its size and array of weapons greatly increased its weight and cost in credits.£6,5£32££3£0£26
+903£39£0£Outer Rim Smuggler£1£Known for its durability and modular design, the YT-1300 is one of the most popular, widely used freighters in the galaxy.£9,9£27££2£0£2
+2501£13£1£Palob Godalhi£5£At the start of the Combat phase, you may remove 1 focus or evade token from an enemy ship at Range 1-2 and assign it to yourself.£2,7,9,14£20££4£1£21
+2202£36£0£Patrol Leader£3£To be granted command of a VT-49 Decimator was seen as a significant promotion for a middling officer of the Imperial Navy.£4,9,9,9,8£40££3£0£19
+604£25£1£Poe Dameron£8£While attacking or defending, if you have a focus token, you may change 1 of your focus results to a hit or evade result.£2,4,3,18£31££2£1£16
+606£25£1£Poe Dameron£9£While attacking or defending, if you have a focus token, you may change 1 of your focus results to a hit or evade result.£2,4,3,18£33££2£1£42
+2803£24£1£Prince Xizor£7£When defending, a friendly ship at Range 1 may suffer 1 uncancelled hit or critical result instead of you.£2,4£31££4£1£28
+104£2£0£Prototype Pilot£1£Due to its sensitive controls and high maneuverability, only the most talented pilots belong in an A-wing cockpit.£5£17££2£0£4,17
+2203£36£1£Rear Admiral Chiraneau£8£When attacking at Range 1-2, you may change one of your focus results to a critical result.£2,4,9,9,9,8£46££3£1£19
+403£13£0£Rebel Operative£2£Designed after a bird in flight by Corellian Engineering Corporation, the "hawk" series excels in its role as a personal transport.£7,9£16££2£0£15
+705£37£0£Red Squadron Pilot£4£Created as an elite starfighter squad, Red Squadron included some of the best pilots in the Rebel Alliance.£4,3£23££2£0£1,10,12
+605£25£0£Red Squadron Veteran£4£The modern incarnation of a classic design, the Incom T-70 X-wing fighter is the signature combat craft of the Resistance forces in their fight against the First Order.£4,3,18£26££2£0£16,40,42
+907£39£0£Resistance Sympathizer£3£After the destruction of the Hosnian system, some spacers willingly aided the Resistance against the malevolent First Order.£5,9,9£38££2£0£42
+1705£28£1£Rexler Brath£8£After you perform an attack that deals at least 1 Damage card to the defender, you may spend a focus token to flip those cards faceup.£2,6,5£37££3£1£26
+905£39£1£Rey£8£When attacking or defending, if the enemy ship is inside your firing arc, you may reroll up to 2 of your blank results.£2,5,9,9£45££2£1£42
+402£13£1£Roark Garnet£4£At the start of the Combat phase, choose 1 other friendly ship at Range 1-3. Until the end of the phase, treat that ship's pilot skill value as "12".£7,9£19££2£1£15
+706£37£0£Rookie Pilot£2£Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.£4,3£21££2£0£1,10,12
+2006£30£0£Royal Guard Pilot£6£Only members of the Emperor's royal guard are permitted to fly these crimson red fighters, which were often used to escort the Emperor's shuttle as well as its decoys.£2£22££3£0£8,8
+3403£9£0£Ruthless Freelancer£3£Byblos Drive Yards earned a reputation for producing starships of questionable quality, but their willingness to perform modifications of questionable legality kept business brisk.£9,11,14£23££4£0£39
+2007£30£0£Saber Squadron Pilot£4£Led by Baron Soontir Fel, the pilots of Saber Squadron are among the Empire's best. Their TIE Interceptors are marked with red stripes to designate pilots with at least ten confirmed kills.£2£21££3£0£6,8,8
+3303£4£1£Sabine Wren£5£Immediately before you reveal your maneuver, you may perform a free boost or barrel roll action.£2,7,9£21££2£1£30
+3702£45£1£Sabine Wren£5£When defending against an enemy ship inside your mobile firing arc at Range 1-2, you may add 1 Focus result to your roll.£9,14,14£35££4£1£46
+4401£51£1£Sabine Wren£5£Immediately before you reveal your maneuver, you may perform a free boost or barrel roll action.£2£15££2£1£49
+4301£50£1£Sarco Plank£5£When defending instead of using your agility value, you may roll a number of defense dice equal to the speed of the maneuver you executed this round.£2,9,8,18,14£18££4£1£51
+4104£48£0£Scarif Defender£3£To protect the secret jungle base, the Empire required a vigilant and swift defense force.££18££3£0£45
+1605£27£0£Scimitar Squadron Pilot£2£The onboard targeting computer is extremely precise, allowing a TIE bomber to pinpoint its target while avoiding collateral damage to the surrounding area.£4,4,5,5,8£16££3£0£20
+2702£21£1£Serissu£8£When another friendly ship at Range 1 is defending, it may reroll 1 defense die.£2£20££4£1£29
+2101£31£0£Shadow Squadron Pilot£5£Featuring a hyperdrive and shields, the TIE phantom also came equipped with five laser cannons, giving it unprecedented firepower for such a small Imperial fighter.£11,9£27££3£0£23
+3703£45£0£Shadowport Hunter£2£Crime syndicates augmented the lethal skills of their loyal contractors with the best weapons, ships, and tech available.£9,14,14£33££4£0£46
+3201£3£1£Shara Bey£6£When another friendly ship at Range 1-2 is attacking, it may treat your blue target lock tokens as its own.£2,4,9,3£28££2£1£44
+4003£47£0£Sienar Test Pilot£2£Sienar Fleet System's TIE Advanced v1 was a groundbreaking starfighter design featuring upgraded engines, a missile launcher, and folding s-foils.£5£16££3£0£37
+2102£31£0£Sigma Squadron Pilot£3£The primary result of a hidden research facility on Imdaar Alpha, the TIE phantom added a small fighter with cloaking capabilities to the Imperial fleet.£11,9£25££3£0£23
+2008£30£1£Soontir Fel£9£When you receive a stress token, you may assign 1 focus token to your ship.£2£27££3£1£6
+2502£13£0£Spice Runner£1£With nothing more than a desire to fly and a junkyard at their disposal, crafty mechanics can make almost anything space worthy.£7,9,14£16££4£0£21
+4503£52£0£Starkiller Base Pilot£2£The Upsilon-class shuttle served as a command ship for many of the First Order's elite officers and agents as they spread terror across the galaxy.£11,9,9,18,18£30££3£0£50
+1506£26£0£Storm Squadron Pilot£4£The TIE Advanced improved on the popular TIE/ln design by adding shielding, better weapons systems, curved solar panels and a hyperdrive.£5£23££3£0£7,18
+2903£38£0£Syndicate Thug£2£Though far from nimble, the Y-wing's heavy hull, substantial shielding, and turret-mounted cannons make them excellent patrol craft.£7,4,4,10£18££4£0£21,21
+1102£42£0£Tala Squadron Pilot£4£Manufactured by Incom Corporation, the Z-95-AF4 was the primary inspiration for the design of the T-65 X-wing.£5£13££2£0£25
+2603£19£1£Talonbane Cobra£9£When attacking or defending, double the effect of your range combat bonuses.£2,5,14£28££4£1£38
+2701£21£0£Tansarii Point Veteran£5£The defeat of Black Sun ace Talonbane Cobra by Car'das smugglers turned the tide of the Battle of Tansarii Point Station. Survivor s of the clash are respected throughout the sector.£2£17££4£0£29
+707£37£1£Tarn Mison£3£When an enemy ship declares you as the target of an attack, you may acquire a target lock on that ship.£4,3£23££2£1£12
+3503£17£1£Tel Trevura£7£The first time you would be destroyed, instead cancel any remaining damage, discard all Damage cards, and deal 4 facedown Damage cards to this ship.£2,4,4,9,10,14£30££4£1£35
+1507£26£0£Tempest Squadron Pilot£2£The TIE Advanced was produced in limited quantities, but later Sienar engineers incorporated many of its best qualities into their next TIE model: the TIE Interceptor.£5£21££3£0£7,18
+205£5£1£Ten Numb£8£When attacking, 1 of your critical results cannot be canceled by defense dice.£2,11,6,4,4£31££2£1£13
+2009£30£1£Tetran Cowall£7£When you reveal a [Koiogran turn] maneuver, you may treat the speed of that maneuver as "1," "3," or "5."£2£24££3£1£8
+3202£3£1£Thane Kyrell£4£After an enemy ship inside your firing arc at Range 1-3 attacks another friendly ship, you may perform a free action.£4,9,3£26££2£1£44
+4000£47£1£The Inquisitor£8£When attacking with your primary weapon at Range 2-3, treat the range of the attack as Range 1.£2,5£25££3£1£37
+1606£27£1£Tomax Bren£8£Once per round, after you discard an Elite Upgrade card, flip that card faceup.£2,4,4,5,5,8£24££3£1£36
+2503£13£1£Torkil Mux£3£At the end of the Activation phase, choose 1 enemy ship at Range 1-2. Until the end of the Combat phase, treat that ship's pilot skill value as "0".£7,9,14£19££4£1£21
+3000£41£0£Trandoshan Slaver£2£The spacious triple-decker design of the YV-666 made it popular among bounty hunters and slavers, who often retrofitted an entire deck for prisoner transport.£6,5,9,9,9,14£29££4£0£32
+2010£30£1£Turr Phennir£7£After you perform an attack, you may perform a free boost or barrel roll action.£2£25££3£1£6
+105£2£1£Tycho Celchu£8£You may perform actions even while you have stress tokens.£2,5£26££2£1£4
+4302£50£1£Unkar Plutt£3£At the end of the Activation phase you must assign a tractor beam token to each ship you are touching.£9,8,18,14£17££4£1£51
+4001£47£1£Valen Rudor£6£After defending, you may perform a free action.£2,5£22££3£1£37
+503£18£0£Warden Squadron Pilot£2£Koensayr Manufacturing's K-Wing boasted an advanced Sublight Acceleration Motor (SLAM) and an uprecedented 18 hard points, granting it unrivaled speed and firepower.£7,4,4,5,9,8,8£23££2£0£33
+708£37£1£Wedge Antilles£9£When attacking, reduce the defender's agility value by 1 (to a minimum of "0").£2,4,3£29££2£1£10
+709£37£1£Wes Janson£8£After you perform an attack, you may remove 1 focus, evade, or blue target lock token from the defender.£2,4,3£29££2£1£12
+1003£40£0£Wild Space Fringer£2£Although a stock YT-2400 light freighter had plenty of space for cargo, that space was often annexed to support modified weapon systems and oversized engines.£6,5,9£30££2£0£24
+3605£22£0£Zealous Recruit£1£The Concord Dawn Protectorate starfighter was armed with a hidden torpedo launcher, allowing it to launch a deadly salvo before its foes realized it was carrying ordnance.£4,3£20££4£0£47
+4403£51£1£"Zeb" Orrelios£3£When defending, you may cancel [crit] results before [hit] results.££13££2£1£49
+1504£26£1£Zertik Strom£6£Enemy ships at Range 1 cannot add their range combat bonus when attacking.£2,5£26££3£1£18
+3803£34£0£Zeta Specialist£3£Only the most elite pilots of the First Order were authorized to fly this specialized two-seater TIE craft outfitted with enhanced shields, weapons, and sensor systems.£11,5,18£23££3£0£48
+1906£33£0£Zeta Squadron Pilot£3£The fragility of TIE fighters during the Galactic Civil War led engineers to improve survivability, resulting in a more durable starfighter.£18£16££3£0£16,16,41
+3400£9£1£Zuckuss£7£When attacking, you may roll 1 additional attack die. If you do, then the defender rolls 1 additional defense die.£2,9,11,14£28££4£1£39

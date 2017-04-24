@@ -61,9 +61,51 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 201£5£0£Dagger Squadron Pilot£4£A unique gyrostabilization surrounds the B-Wing&apos;s cockpit, ensuring that the pilot always remains stationary during combat.£11,6,4,4£24££2£0
-        ///907£39£0£Resistance Sympathizer£3£After the destruction of the Hosnian system, some spacers willingly aided the Resistance against the malevolent First Order.£5,9,9£38££2£0
-        ///4105£48£0£Imperial Trainee£1£After the Republic fell and as the Empire rose, the new galactic government required thousands of new pilots to replace the decommissio [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to id£name
+        ///1£Origional Core Set
+        ///2£Millennium Falcon
+        ///3£Slave I
+        ///4£A-Wing
+        ///5£Tantive IV
+        ///6£TIE Interceptor
+        ///7£TIE Advanced
+        ///8£Imperial Aces
+        ///9£Y-Wing
+        ///10£X-Wing
+        ///11£TIE Fighter
+        ///12£Rebel Transport
+        ///13£B-Wing
+        ///14£Lambda-class Shuttle
+        ///15£HWK-290
+        ///16£The Force Awakens Core Set
+        ///17£Rebel Aces
+        ///18£Imperial Raider
+        ///19£VT-49 Decimator
+        ///20£TIE Bomber
+        ///21£Most Wanted
+        ///22£E-Wing
+        ///23£TIE Phantom
+        ///24£YT-2400 Freighter
+        ///25£Z-95 Headhunter
+        ///26£TIE Defender
+        ///27£IG-2000
+        ///28£StarViper
+        ///29£M3-A Interceptor
+        ///30£Ghost
+        ///31£Imper [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Expansions {
+            get {
+                return ResourceManager.GetString("Expansions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3801£34£1£&quot;Backdraft&quot;£7£When attacking a ship inside your auxiliary firing arc, you may add 1 critical result.£2,11,5,18£27££3£1£48
+        ///1801£29£1£&quot;Backstabber&quot;£6£When attacking from outside the defender&apos;s firing arc, roll 1 additional attack die.££16££3£1£11
+        ///600£25£1£&quot;Blue Ace&quot;£5£When performing a boost action, you may use the [1 left] or [1 right] turn template.£4,3,18£27££2£1£16
+        ///1803£29£1£&quot;Chaser&quot;£3£When another friendly ship at Range 1 spends a focus token, assign a focus token to your ship.££14££3£1£31
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PilotDatabase {
             get {
@@ -72,20 +114,11 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1£2£A-Wing£2£0£0£2£3£2£2£6,12,2,5£2
-        ///2£3£ARC-170£2£0£0£2£1£6£3£6,12£2
-        ///3£4£Attack Shuttle£2£0£0£3£2£2£2£6,1,5£2
-        ///4£5£B-Wing£2£0£0£3£1£3£5£6,12,1£2
-        ///5£7£E-Wing£2£0£0£3£3£2£3£6,12,1,5£2
-        ///6£13£HWK-290£2£0£0£1£2£4£1£6,12£2
-        ///7£18£K-Wing£2£0£0£2£1£5£4£6,12,11£2
-        ///8£25£T70 X-Wing£2£0£1£3£2£3£3£6,12,2£2
-        ///9£35£VCX-100£3£0£0£4£0£10£6£6,12,5£2
-        ///10£37£X-Wing£2£0£1£3£2£3£2£6,12£2
-        ///11£38£Y-Wing£2£0£0£2£1£5£3£6,12£2
-        ///12£39£YT-1300£3£0£0£3£1£8£5£6,12£2
-        ///13£40£YT-2400£3£0£0£2£2£5£5£6,12,1£2
-        ///14£42£Z-95 Headhunter£2£0£0£2£2£2 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 1£2£A-Wing£2£0£0£2£3£2£2£6,12,2,5£2£1,14,0,0,0,15,0|2,24,27,29,28,25,0|3,14,17,29,18,15,33|4,0,0,29,0,0,0|5,0,0,29,0,0,33
+        ///43£43£Aggressor£3£0£0£3£3£4£4£6,12,2,5£4£1,0,14,27,29,28,15,0,0|2,0,14,27,29,28,15,0,0|3,31,0,27,29,28,0,32,0|4,0,0,0,0,0,0,0,33
+        ///2£3£ARC-170£2£0£0£2£1£6£3£6,12£2£1,0,27,29,28,0,0|2,14,27,29,28,15,0|3,34,17,19,18,35,0|4,0,0,39,0,0,33
+        ///3£4£Attack Shuttle£2£0£0£3£2£2£2£6,1,5£2£1,34,27,29,28,35,0|2,14,17,29,18,15,0|3,34,17,19,18,35,0|4,0,0,19,0,0,33
+        ///4£5£B-Wing£2£0£0£3£1£3£5£6,12,1£2£1,34, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShipsDatabase {
             get {
@@ -94,9 +127,9 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1035£2£4£Expertise£When attacking, if you are not stressed, you may change all of your focus results to hit results.££1£1£1£0£0£0£1£0£0£0£££££££
-        ///1008£2£4£Expose£ACTION: Until the end of the round, increase your primary weapon value by 1 and decrease your agility value by 1.££1£1£1£0£0£0£1£0£0£0£££££££
-        ///1013£2£4£Opportunist£When attacking, if the defender does not have any focus or evade tokens, you may receive 1 stress token to roll 1 additional attack die.@You cannot use this ability if you have any stres [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 8048£9£0£&quot;Chopper&quot;£You may perform actions even while you are stressed.@After you perform an action while you are stressed, suffer 1 damage.££2£1£1£0£1£0£1£0£0£0££££££££30
+        ///9002£10£0£&quot;Genius&quot;£If you are equipped with a bomb that can be dropped when you reveal your maneuver, you may drop the bomb after you execute your maneuver instead.££1£1£1£0£1£0£1£0£0£0££££££££21
+        ///8068£9£2£&quot;Gonk&quot;£ACTION: Place 1 shield token on this card.@ACTION: Remove 1 shield token from this card to recover 1 shield (up to your shield [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string UpgradeDatabase {
             get {

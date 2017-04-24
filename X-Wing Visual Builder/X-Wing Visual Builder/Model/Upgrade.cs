@@ -43,13 +43,14 @@ namespace X_Wing_Visual_Builder.Model
             get { return _numberOwned; }
             set { _numberOwned = (value < 0) ? 0 : value; Upgrades.SaveNumberOfUpgradesOwned(); }
         }
+        public Dictionary<ExpansionType, int> inExpansion = new Dictionary<ExpansionType, int>();
 
         private BitmapImage resizedUpgradeImage = null;
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
                        List<ShipType> shipThatCanUse, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
-                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned)
+                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion)
         {
             this.id = id;
             this.upgradeType = upgradeType;
@@ -74,9 +75,20 @@ namespace X_Wing_Visual_Builder.Model
             this.requiresUpgrades = requiresUpgrades;
             this.addsActions = addsActions;
             this.addsPilotSkill = addsPilotSkill;
-            this.numberOwned = numberOwned;
-        }
+            this._numberOwned = numberOwned;
 
+            foreach(ExpansionType expansionType in inExpansion)
+            {
+                if(this.inExpansion.ContainsKey(expansionType) == false)
+                {
+                    this.inExpansion[expansionType] = 1;
+                }
+                else
+                {
+                    this.inExpansion[expansionType]++;
+                }
+            }
+        }
 
         public Upgrade GetUpgradeClone()
         {
@@ -84,7 +96,7 @@ namespace X_Wing_Visual_Builder.Model
             return upgradeClone;
         }
 
-        public UpgradeCanvas GetUpgradeCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
+        public CardCanvas GetUpgradeCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
         {                        
             if(resizedUpgradeImage == null)
             {
@@ -98,7 +110,7 @@ namespace X_Wing_Visual_Builder.Model
             System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
             upgradeImage.Source = resizedUpgradeImage;
             
-            return new UpgradeCanvas(this, upgradeImage, width, height, margin, currentPage);
+            return new CardCanvas(this, upgradeImage, width, height, margin, currentPage);
         }
     }
 }
