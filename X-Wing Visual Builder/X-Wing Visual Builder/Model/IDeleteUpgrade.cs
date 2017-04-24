@@ -8,6 +8,6 @@ namespace X_Wing_Visual_Builder.Model
 {
     public interface IDeleteUpgrade
     {
-        void DeleteUpgradeClicked(int uniqueBuildId, int uniqueUpgradeId);
+        void DeleteUpgradeClicked(int uniqueBuildId, int uniquePilotId, int upgradeId);
     }
 }

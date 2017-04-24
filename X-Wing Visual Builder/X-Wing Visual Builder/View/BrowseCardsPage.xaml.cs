@@ -47,7 +47,7 @@ namespace X_Wing_Visual_Builder.View
         private bool isAddingUpgrade = false;
         private int uniquePilotId;
         private Build build;
-        private Pilot pilotToSwap;
+        private UniquePilot pilotToSwap;
         public void SetBuild(Build build)
         {
             this.build = build;
@@ -161,14 +161,14 @@ namespace X_Wing_Visual_Builder.View
             searchTextBox.Text = "";
         }
 
-        public void SwapPilot(Build build, Pilot pilotToSwap)
+        public void SwapPilot(Build build, UniquePilot pilotToSwap)
         {
             ClearState();
             this.pilotToSwap = pilotToSwap;
             pilotsRadioButton.IsChecked = true;
             isSwappingPilot = true;
             this.build = build;
-            pilots = Pilots.GetPilots(build.faction, pilotToSwap.ship);
+            pilots = Pilots.GetPilots(build.faction, pilotToSwap.pilot.ship);
             pilotsToDisplay = pilots.ToList();
         }
         public void AddPilot(Build build)
@@ -471,7 +471,7 @@ namespace X_Wing_Visual_Builder.View
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
-                build.AddPilot(Pilots.GetPilotClone(pilotId));
+                build.AddPilot(pilotId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
                 NavigationService.Navigate(squadsPage);
             }
@@ -485,11 +485,10 @@ namespace X_Wing_Visual_Builder.View
                 isSwappingPilot = false;
                 isAddingUpgrade = false;
                 isAddingPilot = false;
-                Pilot newPilot = Pilots.GetPilotClone(pilotId);
-                newPilot.upgrades = pilotToSwap.upgrades;
-                build.AddPilot(newPilot);
-                Upgrades.RemoveUnusableUpgrades(build, newPilot.uniquePilotId);
-                build.RemovePilot(pilotToSwap.uniquePilotId);
+                int uniquePilotId = build.AddPilot(pilotId);
+                build.GetPilot(uniquePilotId).upgrades = pilotToSwap.upgrades;
+                Upgrades.RemoveUnusableUpgrades(build, build.GetPilot(uniquePilotId).id);
+                build.RemovePilot(pilotToSwap.id);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
                 NavigationService.Navigate(squadsPage);
             }

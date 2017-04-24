@@ -20,20 +20,6 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Pilot
     {
-        public int totalCost
-        {
-            get
-            {
-                int totalCost = 0;
-                totalCost += cost;
-                foreach (Upgrade upgrade in upgrades.Values.ToList())
-                {
-                   totalCost += UpgradeModifiers.UpgradeCost(upgrade, upgrades.Values.ToList());
-                }
-                return totalCost;
-            }
-        }
-        public int uniquePilotId;
         public int id;
         public int cost;
         public string name;
@@ -41,81 +27,8 @@ namespace X_Wing_Visual_Builder.Model
         public List<string> faq = new List<string>();
         public Ship ship;
         public bool isUnique;
-        public List<Action> usableActions
-        {
-            get
-            {
-                List<Action> usableActions = new List<Action>(ship.actions);
-                foreach (Upgrade upgrade in upgrades.Values.ToList())
-                {
-                    usableActions.AddRange(upgrade.addsActions);
-                }
-
-                return usableActions;
-            }
-        }
-        private int _pilotSkill;
-        public int pilotSkill
-        {
-            get
-            {
-                int pilotSkill = _pilotSkill;
-                foreach (Upgrade upgrade in upgrades.Values.ToList())
-                {
-                    pilotSkill += upgrade.addsPilotSkill;
-                }
-                return pilotSkill;
-            }
-            set
-            {
-                _pilotSkill = value;
-            }
-        }
-        private Dictionary<UpgradeType, int> _possibleUpgrades = new Dictionary<UpgradeType, int>();
-        public Dictionary<UpgradeType, int> possibleUpgrades
-        {
-            get
-            {
-                Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>(_possibleUpgrades);
-                foreach (Upgrade upgrade in upgrades.Values.ToList())
-                {
-                    if (possibleUpgrades.ContainsKey(upgrade.upgradeType))
-                    {
-                        possibleUpgrades[upgrade.upgradeType] -= upgrade.numberOfUpgradeSlots;
-                    }
-
-                    foreach (KeyValuePair<UpgradeType, int> upgradeAdded in upgrade.upgradesAdded)
-                    {
-                        if (possibleUpgrades.ContainsKey(upgradeAdded.Key))
-                        {
-                            possibleUpgrades[upgradeAdded.Key] += upgradeAdded.Value;
-                        }
-                        else
-                        {
-                            possibleUpgrades[upgradeAdded.Key] = 0 + upgradeAdded.Value;
-                        }
-                    }
-                    foreach (KeyValuePair<UpgradeType, int> upgradeRemoved in upgrade.upgradesRemoved)
-                    {
-                        if (possibleUpgrades.ContainsKey(upgradeRemoved.Key))
-                        {
-                            possibleUpgrades[upgradeRemoved.Key] -= upgradeRemoved.Value;
-                        }
-                        else
-                        {
-                            possibleUpgrades[upgradeRemoved.Key] = 0 - upgradeRemoved.Value;
-                        }
-                    }
-                    
-                }
-                UpgradeModifiers.ChangePossibleUpgrades(this, possibleUpgrades);
-                return possibleUpgrades;
-            }
-            set
-            {
-                _possibleUpgrades = value;
-            }
-        }
+        public int pilotSkill;
+        public Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
         public Faction faction;
         public bool hasAbility;
         private int _numberOwned;
@@ -127,7 +40,7 @@ namespace X_Wing_Visual_Builder.Model
         private BitmapImage resizedPilotImage = null;
         public Dictionary<ExpansionType, int> inExpansion = new Dictionary<ExpansionType, int>();
 
-        public Dictionary<int, Upgrade> upgrades = new Dictionary<int, Upgrade>();
+        
 
         public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost,
                      List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion)
@@ -156,13 +69,6 @@ namespace X_Wing_Visual_Builder.Model
                     this.inExpansion[expansionType]++;
                 }
             }
-        }
-        
-        public Pilot GetPilotClone()
-        {
-            Pilot pilotClone = (Pilot)MemberwiseClone();
-            pilotClone.upgrades = new Dictionary<int, Upgrade>();
-            return pilotClone;
         }
 
         public CardCanvas GetPilotCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)

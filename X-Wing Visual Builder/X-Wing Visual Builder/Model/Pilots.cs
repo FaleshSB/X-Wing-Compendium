@@ -110,11 +110,6 @@ namespace X_Wing_Visual_Builder.Model
             FileHandler.SaveFile("pilotsowned.txt", numberOfPilotsOwned);
         }
 
-        public static Pilot GetPilotClone(int pilotId)
-        {
-            return pilots[pilotId].GetPilotClone();
-        }
-
         public static Pilot GetRandomPilot()
         {
             Random rand = new Random();

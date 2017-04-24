@@ -14,7 +14,6 @@ namespace X_Wing_Visual_Builder.Model
     public class Upgrade
     {
         public int id;
-        public int uniqueUpgradeId;
         public int cost;
         public string name;
         public string description;
@@ -88,12 +87,6 @@ namespace X_Wing_Visual_Builder.Model
                     this.inExpansion[expansionType]++;
                 }
             }
-        }
-
-        public Upgrade GetUpgradeClone()
-        {
-            Upgrade upgradeClone = (Upgrade)MemberwiseClone();
-            return upgradeClone;
         }
 
         public CardCanvas GetUpgradeCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)

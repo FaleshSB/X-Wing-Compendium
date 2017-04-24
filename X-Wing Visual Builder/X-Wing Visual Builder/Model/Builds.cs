@@ -55,12 +55,12 @@ namespace X_Wing_Visual_Builder.Model
             {
                 buildInfo += uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
-                foreach(Pilot pilot in build.pilots.Values.ToList())
+                foreach(UniquePilot uniquePilot in build.pilots.Values.ToList())
                 {
-                    buildInfo += pilot.uniquePilotId + "£" + pilot.id + "£";
-                    foreach (Upgrade upgrade in pilot.upgrades.Values.ToList())
+                    buildInfo += uniquePilot.id + "£" + uniquePilot.pilot.id + "£";
+                    foreach (KeyValuePair<int, Upgrade> upgrade in uniquePilot.upgrades)
                     {
-                        buildInfo += upgrade.uniqueUpgradeId + "~" + upgrade.id + "$";
+                        buildInfo += upgrade.Key + "~" + upgrade.Value.id + "$";
                     }
                     buildInfo = buildInfo.TrimEnd('$');
                     buildInfo += "&";
@@ -96,11 +96,9 @@ namespace X_Wing_Visual_Builder.Model
                         foreach (string pilotString in pilotBuilds)
                         {
                             string[] pilotInfo = pilotString.Split('£');
-                            int uniquePilotId = Int32.Parse(pilotInfo[0]);
+                            //int uniquePilotId = Int32.Parse(pilotInfo[0]);
                             int pilotId = Int32.Parse(pilotInfo[1]);
-                            Pilot pilot = Pilots.GetPilotClone(pilotId);
-                            pilot.uniquePilotId = uniquePilotId;
-                            build.AddPilot(pilot, true);
+                            int uniquePilotId = build.AddPilot(pilotId);
                             string[] upgrades = pilotInfo[2].Split('$');
                             upgrades = upgrades.Where(s => s != "").ToArray();
                             if (upgrades.Count() > 0)
@@ -109,8 +107,8 @@ namespace X_Wing_Visual_Builder.Model
                                 {
                                     string[] upgradeUniqueIdAndIdSplit = upgradeUniqueIdAndId.Split('~');
                                     int upgradeId;
-                                    int uniqueUpgradeId;
-                                    if (int.TryParse(upgradeUniqueIdAndIdSplit[0], out uniqueUpgradeId) && int.TryParse(upgradeUniqueIdAndIdSplit[1], out upgradeId))
+                                    //int uniqueUpgradeId;
+                                    if (/*int.TryParse(upgradeUniqueIdAndIdSplit[0], out uniqueUpgradeId) && */int.TryParse(upgradeUniqueIdAndIdSplit[1], out upgradeId))
                                     {
                                         build.AddUpgrade(uniquePilotId, upgradeId);
                                     }

@@ -193,11 +193,6 @@ namespace X_Wing_Visual_Builder.Model
             return randomUpgrade;
         }
 
-        public static Upgrade GetUpgradeClone(int upgradeId)
-        {
-            return upgrades[upgradeId].GetUpgradeClone();
-        }
-
         public static void RemoveUnusableUpgrades(Build build, int uniquePilotId)
         {
             bool hasAnUpgradeBeenRemoved = false;
@@ -218,23 +213,23 @@ namespace X_Wing_Visual_Builder.Model
             }
         }
 
-        private static bool IsUpgradeUsable(Pilot pilot, Upgrade upgrade, bool isRemovingUpgrades = false)
+        private static bool IsUpgradeUsable(UniquePilot uniquePilot, Upgrade upgrade, bool isRemovingUpgrades = false)
         {
             bool isUpgradeUsable = true;
 
-            if (pilot.pilotSkill < upgrade.requiresPilotSkill) { isUpgradeUsable = false; }
-            if (upgrade.faction != Faction.All && upgrade.faction != pilot.faction) { isUpgradeUsable = false; }
-            if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != pilot.ship.shipSize) { isUpgradeUsable = false; }
+            if (uniquePilot.pilotSkill < upgrade.requiresPilotSkill) { isUpgradeUsable = false; }
+            if (upgrade.faction != Faction.All && upgrade.faction != uniquePilot.pilot.faction) { isUpgradeUsable = false; }
+            if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != uniquePilot.pilot.ship.shipSize) { isUpgradeUsable = false; }
 
-            if(pilot.possibleUpgrades.ContainsKey(upgrade.upgradeType))
+            if(uniquePilot.possibleUpgrades.ContainsKey(upgrade.upgradeType))
             {
                 if (isRemovingUpgrades)
                 {
-                    isUpgradeUsable = (pilot.possibleUpgrades[upgrade.upgradeType] >= 0) ? isUpgradeUsable : false;
+                    isUpgradeUsable = (uniquePilot.possibleUpgrades[upgrade.upgradeType] >= 0) ? isUpgradeUsable : false;
                 }
                 else
                 {
-                    isUpgradeUsable = (upgrade.numberOfUpgradeSlots <= pilot.possibleUpgrades[upgrade.upgradeType]) ? isUpgradeUsable : false;
+                    isUpgradeUsable = (upgrade.numberOfUpgradeSlots <= uniquePilot.possibleUpgrades[upgrade.upgradeType]) ? isUpgradeUsable : false;
                 }
             }
             else
@@ -243,9 +238,9 @@ namespace X_Wing_Visual_Builder.Model
             }
 
             bool isCorrectShipType = false;
-            if ((upgrade.shipThatCanUse.Contains(ShipType.All) || (upgrade.shipThatCanUse.Contains(pilot.ship.shipType)))
-                    && (upgrade.isTieOnly == false || (upgrade.isTieOnly == true && pilot.ship.isTIE))
-                    && (upgrade.isXWingOnly == false || (upgrade.isXWingOnly == true && pilot.ship.isXWing))
+            if ((upgrade.shipThatCanUse.Contains(ShipType.All) || (upgrade.shipThatCanUse.Contains(uniquePilot.pilot.ship.shipType)))
+                    && (upgrade.isTieOnly == false || (upgrade.isTieOnly == true && uniquePilot.pilot.ship.isTIE))
+                    && (upgrade.isXWingOnly == false || (upgrade.isXWingOnly == true && uniquePilot.pilot.ship.isXWing))
                     ) { isCorrectShipType = true; }
             if (isCorrectShipType == false) { isUpgradeUsable = false; }
 
@@ -253,7 +248,7 @@ namespace X_Wing_Visual_Builder.Model
             {
                 foreach (Action requiredAction in upgrade.requiresActions)
                 {
-                    if (pilot.usableActions.Exists(action => action == requiredAction) == false)
+                    if (uniquePilot.usableActions.Exists(action => action == requiredAction) == false)
                     {
                         isUpgradeUsable = false;
                         break;
@@ -265,7 +260,7 @@ namespace X_Wing_Visual_Builder.Model
             {
                 foreach (int requiredupgrade in upgrade.requiresUpgrades)
                 {
-                    if (pilot.upgrades.Values.ToList().Exists(upgradeElement => upgradeElement.id == requiredupgrade) == false)
+                    if (uniquePilot.upgrades.Values.ToList().Exists(upgradeElement => upgradeElement.id == requiredupgrade) == false)
                     {
                         isUpgradeUsable = false;
                         break;
@@ -273,7 +268,7 @@ namespace X_Wing_Visual_Builder.Model
                 }
             }
 
-            if (UpgradeModifiers.SkipGetUpgrade(pilot, upgrade, isRemovingUpgrades) == true)
+            if (UpgradeModifiers.SkipGetUpgrade(uniquePilot, upgrade, isRemovingUpgrades) == true)
             {
                 isUpgradeUsable = false;
             }
@@ -281,12 +276,12 @@ namespace X_Wing_Visual_Builder.Model
             return isUpgradeUsable;
         }
 
-        public static List<Upgrade> GetUpgrades(Pilot pilot)
+        public static List<Upgrade> GetUpgrades(UniquePilot uniquePilot)
         {
             List<Upgrade> upgradesToReturn = new List<Upgrade>();
             foreach (Upgrade upgrade in upgrades.Values.ToList())
             {
-                if(IsUpgradeUsable(pilot, upgrade) == true)
+                if(IsUpgradeUsable(uniquePilot, upgrade) == true)
                 {
                     upgradesToReturn.Add(upgrade);
                 }

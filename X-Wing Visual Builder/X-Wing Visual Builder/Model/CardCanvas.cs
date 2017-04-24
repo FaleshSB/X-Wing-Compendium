@@ -30,6 +30,7 @@ namespace X_Wing_Visual_Builder.Model
         private IDeletePilot deletePilotPage;
         private ManeuverCard maneuverCard;
         private int uniqueBuildId;
+        private int uniquePilotId;
         private DefaultPage currentPage;
         private bool isHidingInfoButton = false;
         private bool isUpgrade;
@@ -180,9 +181,9 @@ namespace X_Wing_Visual_Builder.Model
             infoDialogBox.AddUpgrade(upgrade);
             infoDialogBox.ShowDialog();
         }
-
-        public void AddDeleteButtonEvent(IDeleteUpgrade deleteUpgradePage, int uniqueBuildId)
+        public void AddDeleteButtonEvent(IDeleteUpgrade deleteUpgradePage, int uniqueBuildId, int uniquePilotId)
         {
+            this.uniquePilotId = uniquePilotId;
             this.deleteUpgradePage = deleteUpgradePage;
             this.uniqueBuildId = uniqueBuildId;
 
@@ -192,6 +193,8 @@ namespace X_Wing_Visual_Builder.Model
             deleteButton.UseLayoutRounding = true;
             deleteButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteCardClicked);
+            deleteButton.MouseEnter += new MouseEventHandler(MouseHover);
+            deleteButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
             deleteButton.Cursor = Cursors.Hand;
             deleteButton.Visibility = Visibility.Hidden;
             RenderOptions.SetBitmapScalingMode(deleteButton, BitmapScalingMode.HighQuality);
@@ -201,8 +204,8 @@ namespace X_Wing_Visual_Builder.Model
         }
         private void DeleteCardClicked(object sender, MouseButtonEventArgs e)
         {
-            if (isUpgrade) { deleteUpgradePage.DeleteUpgradeClicked(uniqueBuildId, upgrade.uniqueUpgradeId); }
-            else { deletePilotPage.DeletePilotClicked(uniqueBuildId, pilot.uniquePilotId); }
+            if (isUpgrade) { deleteUpgradePage.DeleteUpgradeClicked(uniqueBuildId, uniquePilotId, upgrade.id); }
+            else { deletePilotPage.DeletePilotClicked(uniqueBuildId, uniquePilotId); }
         }
 
         public void AddCardClickedEvent(IUpgradeClicked upgradeClickedPage)

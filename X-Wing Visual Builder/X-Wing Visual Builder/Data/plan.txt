@@ -22,4 +22,4 @@ TODO: Test Mist Hunter adding tractor beam and removing either if the other is r
 
 Add Multiple Upgrades at the same time on the upgrades page without going back to the squad page each time
 
-Add Smuggling Compartment (1)
+Merge UpgradeModifiers.RemoveUpgrade(this, uniquePilotId, upgradeId);  &  Upgrades.RemoveUnusableUpgrades(this, uniquePilotId);
