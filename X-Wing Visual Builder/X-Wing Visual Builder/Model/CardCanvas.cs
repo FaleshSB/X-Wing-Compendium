@@ -28,6 +28,7 @@ namespace X_Wing_Visual_Builder.Model
         private IDeleteUpgrade deleteUpgradePage;
         private IPilotClicked pilotClickedPage;
         private IDeletePilot deletePilotPage;
+        private ManeuverCard maneuverCard;
         private int uniqueBuildId;
         private DefaultPage currentPage;
         private bool isHidingInfoButton = false;
@@ -248,6 +249,12 @@ namespace X_Wing_Visual_Builder.Model
             removeButton.Visibility = Visibility.Hidden;
             infoButton.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
+
+            if (isUpgrade == false)
+            {
+                Children.Remove(maneuverCard);
+                maneuverCard = null;
+            }
         }
         private void MouseHover(object sender, MouseEventArgs e)
         {
@@ -255,6 +262,17 @@ namespace X_Wing_Visual_Builder.Model
             removeButton.Visibility = Visibility.Visible;
             if (isHidingInfoButton == false) { infoButton.Visibility = Visibility.Visible; }
             deleteButton.Visibility = Visibility.Visible;
+
+            if(isUpgrade == false)
+            {
+                maneuverCard = pilot.ship.GetManeuverCard(Math.Round(cardImage.Width / 11));
+                maneuverCard.MouseEnter += new MouseEventHandler(MouseHover);
+                maneuverCard.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+                maneuverCard.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+                Canvas.SetLeft(maneuverCard, (cardImage.Width / 2) - (maneuverCard.Width / 2));
+                Canvas.SetTop(maneuverCard, 0);
+                Children.Add(maneuverCard);
+            }
         }
     }
 }

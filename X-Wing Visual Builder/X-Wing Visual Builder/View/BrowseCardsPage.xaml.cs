@@ -56,7 +56,7 @@ namespace X_Wing_Visual_Builder.View
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
-        public Dictionary<int, PilotCanvas> pilotCanvasCache = new Dictionary<int, PilotCanvas>();
+        public Dictionary<int, CardCanvas> pilotCanvasCache = new Dictionary<int, CardCanvas>();
         public Dictionary<int, CardCanvas> upgradeCanvasCache = new Dictionary<int, CardCanvas>();
 
 
@@ -203,7 +203,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if(pilotCanvasCache.ContainsKey(pilot.id) == false)
             {
-                pilotCanvasCache[pilot.id] = pilot.GetPilotCanvas(this, pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2));
+                pilotCanvasCache[pilot.id] = pilot.GetPilotCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
                 pilotCanvasCache[pilot.id].AddCardClickedEvent(this);
             }
         }

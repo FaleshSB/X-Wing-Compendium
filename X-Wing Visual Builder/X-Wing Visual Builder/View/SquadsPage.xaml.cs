@@ -31,7 +31,7 @@ namespace X_Wing_Visual_Builder.View
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
         private Dictionary<int, Dictionary<int, CardCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, CardCanvas>>();
-        private Dictionary<int, Dictionary<int, PilotCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, PilotCanvas>>();
+        private Dictionary<int, Dictionary<int, CardCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, CardCanvas>>();
 
 
         public SquadsPage()
@@ -193,9 +193,9 @@ namespace X_Wing_Visual_Builder.View
                     {
                         if (pilotCanvasCache.ContainsKey(build.uniqueBuildId) == false)
                         {
-                            pilotCanvasCache[build.uniqueBuildId] = new Dictionary<int, PilotCanvas>();
+                            pilotCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
                         }
-                        pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId] = pilot.GetPilotCanvas(this, pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2));
+                        pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId] = pilot.GetPilotCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
                         pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId].AddDeleteButtonEvent(this, build.uniqueBuildId);
                     }                    
                     Canvas.SetLeft(pilotCanvasCache[build.uniqueBuildId][pilot.uniquePilotId], left);

@@ -165,7 +165,7 @@ namespace X_Wing_Visual_Builder.Model
             return pilotClone;
         }
 
-        public PilotCanvas GetPilotCanvas(DefaultPage currentPage, double width, double height, Thickness margin)
+        public CardCanvas GetPilotCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
         {
             if(resizedPilotImage == null)
             {
@@ -179,7 +179,7 @@ namespace X_Wing_Visual_Builder.Model
             System.Windows.Controls.Image pilotImage = new System.Windows.Controls.Image();
             pilotImage.Source = resizedPilotImage;
 
-            return new PilotCanvas(this, currentPage, pilotImage, width, height, margin);
+            return new CardCanvas(this, pilotImage, width, height, margin, currentPage);
         }
     }
 }
