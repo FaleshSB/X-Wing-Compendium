@@ -23,8 +23,8 @@ namespace X_Wing_Visual_Builder.View
     {
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
-        private int upgradeCardWidth = 166;
-        private int upgradeCardHeight = 255;
+        //private int upgradeCardWidth = 166;
+        //private int upgradeCardHeight = 255;
         private Pilot currentRandomPilot;
         private bool isShowingName = false;
         private Canvas contentCanvas = new Canvas();
@@ -61,7 +61,7 @@ namespace X_Wing_Visual_Builder.View
         {
             contentCanvas.Children.Clear();
             
-            CardCanvas randomPilotCard = currentRandomPilot.GetPilotCanvas(pilotCardWidth, pilotCardHeight, new Thickness(0,0,0,0), this);
+            CardCanvas randomPilotCard = currentRandomPilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(0,0,0,0), this);
             Canvas.SetLeft(randomPilotCard, 760);
             Canvas.SetTop(randomPilotCard, 360);
             contentCanvas.Children.Add(randomPilotCard);

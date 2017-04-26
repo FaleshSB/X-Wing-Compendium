@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for BrowseCardsPage.xaml
     /// </summary>
-    public partial class BrowseCardsPage : DefaultPage, IUpgradeClicked, IPilotClicked
+    public partial class BrowseCardsPage : DefaultPage, ICardClicked
     {
         private TextBox searchTextBox = new TextBox();
         RadioButton upgradesRadioButton = new RadioButton();
@@ -195,7 +195,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
             {
-                upgradeCanvasCache[upgrade.id] = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
+                upgradeCanvasCache[upgrade.id] = upgrade.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
                 upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
             }
         }
@@ -203,7 +203,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if(pilotCanvasCache.ContainsKey(pilot.id) == false)
             {
-                pilotCanvasCache[pilot.id] = pilot.GetPilotCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
+                pilotCanvasCache[pilot.id] = pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
                 pilotCanvasCache[pilot.id].AddCardClickedEvent(this);
             }
         }

@@ -51,10 +51,22 @@ namespace X_Wing_Visual_Builder.View
             this.Content = pageStructureGrid;
         }
 
-        public void AddUpgrade(Upgrade upgrade)
+        public void AddCard(Card cardInfo, bool isUpgrade)
         {
-            Width += upgradeCardWidth + 20;
-            CardCanvas upgradeCanvas = upgrade.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2));
+            double cardWidth;
+            double cardHeight;
+            if (isUpgrade)
+            {
+                cardWidth = upgradeCardWidth;
+                cardHeight = upgradeCardHeight;
+            }
+            else
+            {
+                cardWidth = pilotCardWidth;
+                cardHeight = pilotCardHeight;
+            }
+            Width += cardWidth + 20;
+            CardCanvas upgradeCanvas = cardInfo.GetCanvas(cardWidth, cardHeight, new Thickness(2, 2, 2, 2));
             upgradeCanvas.HideInfoButton();
             Grid.SetColumn(upgradeCanvas, 0);
             Grid.SetRow(upgradeCanvas, 0);
@@ -72,7 +84,7 @@ namespace X_Wing_Visual_Builder.View
             upgradeInfo.Width = 300;
             upgradeInfo.TextWrapping = TextWrapping.Wrap;
             upgradeInfo.VerticalAlignment = VerticalAlignment.Center;
-            foreach (KeyValuePair<ExpansionType, int> expansionType in upgrade.inExpansion)
+            foreach (KeyValuePair<ExpansionType, int> expansionType in cardInfo.inExpansion)
             {
                 if (expansionType.Value == 1)
                 {
@@ -84,7 +96,7 @@ namespace X_Wing_Visual_Builder.View
                 }
             }
             upgradeInfo.Inlines.Add("\r\n");
-            foreach (string faq in upgrade.faq)
+            foreach (string faq in cardInfo.faq)
             {
                 upgradeInfo.Inlines.Add(faq + "\r\n\r\n");
             }

@@ -11,15 +11,9 @@ using System.Drawing;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public class Upgrade
+    public class Upgrade : Card
     {
-        public int id;
-        public int cost;
-        public string name;
-        public string description;
-        public List<string> faq = new List<string>();
         public UpgradeType upgradeType;
-        public Faction faction;
         public ShipSize shipSize;
         public List<ShipType> shipThatCanUse;
         public bool isWeapon;
@@ -40,17 +34,17 @@ namespace X_Wing_Visual_Builder.Model
         public int numberOwned
         {
             get { return _numberOwned; }
-            set { _numberOwned = (value < 0) ? 0 : value; Upgrades.SaveNumberOfUpgradesOwned(); }
+            set { _numberOwned = (value < 0) ? 0 : value; Upgrades.SaveNumberOfUpgradesOwned(); foreach (CardCanvas cardCanvas in cardCanvasList) { cardCanvas.UpdateNumberOwned(); } }
         }
-        public Dictionary<ExpansionType, int> inExpansion = new Dictionary<ExpansionType, int>();
 
-        private BitmapImage resizedUpgradeImage = null;
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
                        List<ShipType> shipThatCanUse, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
                        List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion)
         {
+            this.isUpgrade = true;
+            this.cardImageUri = new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + ".png");
             this.id = id;
             this.upgradeType = upgradeType;
             this.cost = cost;
@@ -87,23 +81,6 @@ namespace X_Wing_Visual_Builder.Model
                     this.inExpansion[expansionType]++;
                 }
             }
-        }
-
-        public CardCanvas GetUpgradeCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
-        {                        
-            if(resizedUpgradeImage == null)
-            {
-                resizedUpgradeImage = new BitmapImage();
-                resizedUpgradeImage.BeginInit();
-                resizedUpgradeImage.CacheOption = BitmapCacheOption.OnLoad;
-                resizedUpgradeImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Upgrade Cards\resized\" + id.ToString() + ".png");
-                resizedUpgradeImage.EndInit();
-            }
-
-            System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
-            upgradeImage.Source = resizedUpgradeImage;
-            
-            return new CardCanvas(this, upgradeImage, width, height, margin, currentPage);
         }
     }
 }

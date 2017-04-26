@@ -20,7 +20,7 @@ namespace X_Wing_Visual_Builder.View
     /// <summary>
     /// Interaction logic for Build.xaml
     /// </summary>
-    public partial class SquadsPage : DefaultPage, IDeleteUpgrade, IDeletePilot
+    public partial class SquadsPage : DefaultPage, IDeleteCard
     {
         private int upgradeCardWidth = 150;
         private int upgradeCardHeight = 231;
@@ -227,7 +227,7 @@ namespace X_Wing_Visual_Builder.View
                         {
                             pilotCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
                         }
-                        pilotCanvasCache[build.uniqueBuildId][uniquePilot.id] = uniquePilot.pilot.GetPilotCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
+                        pilotCanvasCache[build.uniqueBuildId][uniquePilot.id] = uniquePilot.pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
                         pilotCanvasCache[build.uniqueBuildId][uniquePilot.id].AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
                     }
                     Canvas.SetLeft(pilotCanvasCache[build.uniqueBuildId][uniquePilot.id], left);
@@ -290,7 +290,7 @@ namespace X_Wing_Visual_Builder.View
                             {
                                 upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
                             }
-                            upgradeCanvasCache[build.uniqueBuildId][upgrade.Key] = upgrade.Value.GetUpgradeCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
+                            upgradeCanvasCache[build.uniqueBuildId][upgrade.Key] = upgrade.Value.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
                             upgradeCanvasCache[build.uniqueBuildId][upgrade.Key].AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
                         }
 

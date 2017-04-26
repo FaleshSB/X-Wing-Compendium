@@ -24,10 +24,8 @@ namespace X_Wing_Visual_Builder.Model
         private OutlinedTextBlock numberOwned = new OutlinedTextBlock();
         private double miniButtonSize;
         private double pcntDif;
-        private IUpgradeClicked upgradeClickedPage;
-        private IDeleteUpgrade deleteUpgradePage;
-        private IPilotClicked pilotClickedPage;
-        private IDeletePilot deletePilotPage;
+        private ICardClicked cardClickedPage;
+        private IDeleteCard deleteCardPage;
         private ManeuverCard maneuverCard;
         private int uniqueBuildId;
         private int uniquePilotId;
@@ -35,17 +33,17 @@ namespace X_Wing_Visual_Builder.Model
         private bool isHidingInfoButton = false;
         private bool isUpgrade;
 
-        public CardCanvas(Upgrade upgrade, Image cardImage, double width, double height, Thickness margin, DefaultPage currentPage = null)
+        public CardCanvas(Card card, Image cardImage, double width, double height, Thickness margin, bool isUpgrade, DefaultPage currentPage = null)
         {
-            this.upgrade = upgrade;
-            isUpgrade = true;
-            Construct(cardImage, width, height, margin, currentPage);
-        }
-
-        public CardCanvas(Pilot pilot, Image cardImage, double width, double height, Thickness margin, DefaultPage currentPage = null)
-        {
-            this.pilot = pilot;
-            isUpgrade = false;
+            this.isUpgrade = isUpgrade;
+            if(this.isUpgrade)
+            {
+                upgrade = (Upgrade)card;
+            }
+            else
+            {
+                pilot = (Pilot)card;
+            }
             Construct(cardImage, width, height, margin, currentPage);
         }
 
@@ -178,13 +176,20 @@ namespace X_Wing_Visual_Builder.Model
             InfoDialogBox infoDialogBox = new InfoDialogBox();
             infoDialogBox.Owner = Window.GetWindow(currentPage);
             infoDialogBox.ShowInTaskbar = false;
-            infoDialogBox.AddUpgrade(upgrade);
+            if(isUpgrade)
+            {
+                infoDialogBox.AddCard(upgrade, isUpgrade);
+            }
+            else
+            {
+                infoDialogBox.AddCard(pilot, isUpgrade);
+            }
             infoDialogBox.ShowDialog();
         }
-        public void AddDeleteButtonEvent(IDeleteUpgrade deleteUpgradePage, int uniqueBuildId, int uniquePilotId)
+        public void AddDeleteButtonEvent(IDeleteCard deleteUpgradePage, int uniqueBuildId, int uniquePilotId)
         {
             this.uniquePilotId = uniquePilotId;
-            this.deleteUpgradePage = deleteUpgradePage;
+            this.deleteCardPage = deleteUpgradePage;
             this.uniqueBuildId = uniqueBuildId;
 
             deleteButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\deletebutton.png"));
@@ -204,19 +209,19 @@ namespace X_Wing_Visual_Builder.Model
         }
         private void DeleteCardClicked(object sender, MouseButtonEventArgs e)
         {
-            if (isUpgrade) { deleteUpgradePage.DeleteUpgradeClicked(uniqueBuildId, uniquePilotId, upgrade.id); }
-            else { deletePilotPage.DeletePilotClicked(uniqueBuildId, uniquePilotId); }
+            if (isUpgrade) { deleteCardPage.DeleteUpgradeClicked(uniqueBuildId, uniquePilotId, upgrade.id); }
+            else { deleteCardPage.DeletePilotClicked(uniqueBuildId, uniquePilotId); }
         }
 
-        public void AddCardClickedEvent(IUpgradeClicked upgradeClickedPage)
+        public void AddCardClickedEvent(ICardClicked upgradeClickedPage)
         {
-            this.upgradeClickedPage = upgradeClickedPage;
+            this.cardClickedPage = upgradeClickedPage;
             cardImage.MouseLeftButtonDown += new MouseButtonEventHandler(CardClicked);
         }
         private void CardClicked(object sender, MouseButtonEventArgs e)
         {
-            if (isUpgrade) { upgradeClickedPage.UpgradeClicked(upgrade.id); }
-            else { pilotClickedPage.PilotClicked(pilot.id); }
+            if (isUpgrade) { cardClickedPage.UpgradeClicked(upgrade.id); }
+            else { cardClickedPage.PilotClicked(pilot.id); }
         }
 
         private void RemoveOwnedClicked(object sender, MouseButtonEventArgs e)
@@ -224,12 +229,10 @@ namespace X_Wing_Visual_Builder.Model
             if (isUpgrade)
             {
                 upgrade.numberOwned--;
-                numberOwned.Text = upgrade.numberOwned.ToString();
             }
             else
             {
                 pilot.numberOwned--;
-                numberOwned.Text = pilot.numberOwned.ToString();
             }
         }
         private void AddOwnedClicked(object sender, MouseButtonEventArgs e)
@@ -237,11 +240,21 @@ namespace X_Wing_Visual_Builder.Model
             if (isUpgrade)
             {
                 upgrade.numberOwned++;
-                numberOwned.Text = upgrade.numberOwned.ToString();
             }
             else
             {
                 pilot.numberOwned++;
+            }
+        }
+
+        public void UpdateNumberOwned()
+        {
+            if (isUpgrade)
+            {
+                numberOwned.Text = upgrade.numberOwned.ToString();
+            }
+            else
+            {
                 numberOwned.Text = pilot.numberOwned.ToString();
             }
         }
@@ -271,7 +284,7 @@ namespace X_Wing_Visual_Builder.Model
                 maneuverCard = pilot.ship.GetManeuverCard(Math.Round(cardImage.Width / 11));
                 maneuverCard.MouseEnter += new MouseEventHandler(MouseHover);
                 maneuverCard.MouseLeave += new MouseEventHandler(MouseHoverLeave);
-                maneuverCard.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+                if (currentPage != null) { maneuverCard.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
                 Canvas.SetLeft(maneuverCard, (cardImage.Width / 2) - (maneuverCard.Width / 2));
                 Canvas.SetTop(maneuverCard, 0);
                 Children.Add(maneuverCard);

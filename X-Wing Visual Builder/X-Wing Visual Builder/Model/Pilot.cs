@@ -18,33 +18,25 @@ using System.IO;
 
 namespace X_Wing_Visual_Builder.Model
 {
-    public class Pilot
+    public class Pilot : Card
     {
-        public int id;
-        public int cost;
-        public string name;
-        public string description;
-        public List<string> faq = new List<string>();
         public Ship ship;
         public bool isUnique;
         public int pilotSkill;
         public Dictionary<UpgradeType, int> possibleUpgrades = new Dictionary<UpgradeType, int>();
-        public Faction faction;
         public bool hasAbility;
         private int _numberOwned;
         public int numberOwned
         {
             get { return _numberOwned; }
-            set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); }
+            set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); foreach (CardCanvas cardCanvas in cardCanvasList) { cardCanvas.UpdateNumberOwned(); } }
         }
-        private BitmapImage resizedPilotImage = null;
-        public Dictionary<ExpansionType, int> inExpansion = new Dictionary<ExpansionType, int>();
-
-        
 
         public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost,
                      List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion)
         {
+            this.isUpgrade = false;
+            this.cardImageUri = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
             this.id = id;
             this.isUnique = isUnique;
             this.name = name;
@@ -69,23 +61,6 @@ namespace X_Wing_Visual_Builder.Model
                     this.inExpansion[expansionType]++;
                 }
             }
-        }
-
-        public CardCanvas GetPilotCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
-        {
-            if(resizedPilotImage == null)
-            {
-                resizedPilotImage = new BitmapImage();
-                resizedPilotImage.BeginInit();
-                resizedPilotImage.CacheOption = BitmapCacheOption.OnLoad;
-                resizedPilotImage.UriSource = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
-                resizedPilotImage.EndInit();
-            }
-
-            System.Windows.Controls.Image pilotImage = new System.Windows.Controls.Image();
-            pilotImage.Source = resizedPilotImage;
-
-            return new CardCanvas(this, pilotImage, width, height, margin, currentPage);
         }
     }
 }
