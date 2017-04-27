@@ -69,39 +69,44 @@ namespace X_Wing_Visual_Builder.View
             contentCanvas.Name = "contentCanvas";
             contentWrapPanel.Children.Add(contentCanvas);
 
-            searchTextBox.Name = "searchTextBox";
-            searchTextBox.TextChanged += textBox_TextChanged;
-            searchTextBox.Width = 120;
-            searchTextBox.Height = 23;
-            Canvas.SetLeft(searchTextBox, 200);
-            Canvas.SetTop(searchTextBox, 20);
-            manuNavigationCanvas.Children.Add(searchTextBox);
-            
+            StackPanel upgradesOrPilots = new StackPanel();
+            upgradesOrPilots.VerticalAlignment = VerticalAlignment.Center;
+            upgradesOrPilots.Margin = new Thickness(8, 0, 8, 0);
+
             upgradesRadioButton.Name = "upgradesRadioButton";
             upgradesRadioButton.Content = "Upgrades";
+            upgradesRadioButton.FontSize = 14;
             upgradesRadioButton.Checked += IsUpgrade_Checked;
             upgradesRadioButton.IsChecked = true;
-            Canvas.SetLeft(upgradesRadioButton, 300);
-            Canvas.SetTop(upgradesRadioButton, 20);
-            manuNavigationCanvas.Children.Add(upgradesRadioButton);
+            upgradesOrPilots.Children.Add(upgradesRadioButton);
             
             pilotsRadioButton.Name = "pilotsRadioButton";
             pilotsRadioButton.Content = "Pilots";
+            pilotsRadioButton.FontSize = 14;
             pilotsRadioButton.Checked += IsUpgrade_Checked;
             pilotsRadioButton.IsChecked = false;
-            Canvas.SetLeft(pilotsRadioButton, 300);
-            Canvas.SetTop(pilotsRadioButton, 40);
-            manuNavigationCanvas.Children.Add(pilotsRadioButton);
+            upgradesOrPilots.Children.Add(pilotsRadioButton);
+
+            manuNavigationWrapPanel.Children.Add(upgradesOrPilots);
+
+            searchTextBox.Name = "searchTextBox";
+            searchTextBox.TextChanged += textBox_TextChanged;
+            searchTextBox.FontSize = 14;
+            searchTextBox.Width = 170;
+            searchTextBox.VerticalAlignment = VerticalAlignment.Center;
+            searchTextBox.Margin = new Thickness(8, 0, 8, 0);
+            manuNavigationWrapPanel.Children.Add(searchTextBox);
 
             searchDescriptionCheckBox.Name = "searchDescriptionCheckBox";
             searchDescriptionCheckBox.Content = "Search Description";
             searchDescriptionCheckBox.Checked += SearchDescription_Checked;
             searchDescriptionCheckBox.Unchecked += SearchDescription_Checked;
+            searchDescriptionCheckBox.FontSize = 14;
             searchDescriptionCheckBox.IsChecked = false;
-            Canvas.SetLeft(searchDescriptionCheckBox, 600);
-            Canvas.SetTop(searchDescriptionCheckBox, 40);
-            manuNavigationCanvas.Children.Add(searchDescriptionCheckBox);
-
+            searchDescriptionCheckBox.VerticalAlignment = VerticalAlignment.Center;
+            searchDescriptionCheckBox.Margin = new Thickness(8, 0, 8, 0);
+            manuNavigationWrapPanel.Children.Add(searchDescriptionCheckBox);
+            
             /*
             showAddRemoveButtonsCheckBox.Name = "showAddRemoveButtonsCheckBox";
             showAddRemoveButtonsCheckBox.Content = "Show Add Remove Buttons";
@@ -112,23 +117,22 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(showAddRemoveButtonsCheckBox, 40);
             manuNavigationCanvas.Children.Add(showAddRemoveButtonsCheckBox);
             */
-            manuNavigationCanvas.Height = 150;
+            manuNavigationWrapPanel.Height = 150;
 
-            contentScrollViewer.Height = 1040 - manuNavigationCanvas.Height;
+            contentScrollViewer.Height = 1040 - manuNavigationWrapPanel.Height;
 
 
             Button squads = new Button();
             squads.Name = "squads";
             squads.Content = "Squads";
-            squads.Width = 130;
-            squads.Height = 40;
             squads.FontSize = 16;
             squads.FontWeight = FontWeights.Bold;
             squads.Click += new RoutedEventHandler(squadsClicked);
             squads.UseLayoutRounding = true;
-            Canvas.SetLeft(squads, 10);
-            Canvas.SetTop(squads, 10);
-            manuNavigationCanvas.Children.Add(squads);
+            squads.VerticalAlignment = VerticalAlignment.Center;
+            squads.Margin = new Thickness(8, 0, 8, 0);
+            squads.Padding = new Thickness(5, 2, 5, 2);
+            manuNavigationWrapPanel.Children.Add(squads);
 
 
 
@@ -141,7 +145,6 @@ namespace X_Wing_Visual_Builder.View
             SetIsSearchDescriptionChecked();
         }
 
-
         private void squadsClicked(object sender, RoutedEventArgs e)
         {
             // TODO having to clear the below is probably each time you leave this page without adding a card to the squad is prone to bugs
@@ -151,6 +154,8 @@ namespace X_Wing_Visual_Builder.View
 
         private void ClearState()
         {
+            upgrades = Upgrades.upgrades.Values.ToList();
+            pilots = Pilots.pilots.Values.ToList();
             upgradesToDisplay.Clear();
             pilotsToDisplay.Clear();
             isAddingUpgrade = false;
@@ -158,7 +163,7 @@ namespace X_Wing_Visual_Builder.View
             isSwappingPilot = false;
             previousUpgradeSearchResultIds = "";
             previousPilotSearchResultIds = "";
-            searchTextBox.Text = "";
+            //searchTextBox.Text = "";
         }
 
         public void SwapPilot(Build build, UniquePilot pilotToSwap)
@@ -443,14 +448,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isAddingUpgrade == true)
             {
-                upgradesToDisplay.Clear();
-                pilotsToDisplay.Clear();
-                previousUpgradeSearchResultIds = "";
-                previousPilotSearchResultIds = "";
-                searchTextBox.Text = "";
-                isSwappingPilot = false;
-                isAddingUpgrade = false;
-                isAddingPilot = false;
+                ClearState();
                 build.AddUpgrade(uniquePilotId, upgradeId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
 
@@ -463,28 +461,14 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isAddingPilot == true)
             {
-                upgradesToDisplay.Clear();
-                pilotsToDisplay.Clear();
-                previousUpgradeSearchResultIds = "";
-                previousPilotSearchResultIds = "";
-                searchTextBox.Text = "";
-                isSwappingPilot = false;
-                isAddingUpgrade = false;
-                isAddingPilot = false;
+                ClearState();
                 build.AddPilot(pilotId);
                 SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
                 NavigationService.Navigate(squadsPage);
             }
             else if (isSwappingPilot == true)
             {
-                upgradesToDisplay.Clear();
-                pilotsToDisplay.Clear();
-                previousUpgradeSearchResultIds = "";
-                previousPilotSearchResultIds = "";
-                searchTextBox.Text = "";
-                isSwappingPilot = false;
-                isAddingUpgrade = false;
-                isAddingPilot = false;
+                ClearState();
                 int uniquePilotId = build.AddPilot(pilotId);
                 build.GetPilot(uniquePilotId).upgrades = pilotToSwap.upgrades;
                 Upgrades.RemoveUnusableUpgrades(build, build.GetPilot(uniquePilotId).id);

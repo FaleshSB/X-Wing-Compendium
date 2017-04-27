@@ -113,8 +113,6 @@ namespace X_Wing_Visual_Builder.Model
                 UpgradeModifiers.RemoveUpgrade(this, uniquePilotId, upgradeId);
                 Upgrades.RemoveUnusableUpgrades(this, uniquePilotId);
                 Builds.SaveBuilds();
-                SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
-                squadsPage.buildChanged(uniqueBuildId);
             }            
         }
 
@@ -122,8 +120,6 @@ namespace X_Wing_Visual_Builder.Model
         {
             pilots.Remove(uniquePilotId);
             Builds.SaveBuilds();
-            SquadsPage squadsPage = (SquadsPage)Pages.pages[PageName.Squads];
-            squadsPage.buildChanged(uniqueBuildId);
         }
 
         public int GetNumberOfPilots()

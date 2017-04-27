@@ -17,8 +17,8 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class DefaultPage : Page
     {
-        protected Canvas manuNavigationCanvas = new Canvas();
-        protected Canvas topToolsCanvas = new Canvas();
+        protected AlignableWrapPanel manuNavigationWrapPanel = new AlignableWrapPanel();
+        protected AlignableWrapPanel topToolsWrapPanel = new AlignableWrapPanel();
         protected Canvas bottomBarCanvas = new Canvas();
         protected Grid pageStructureGrid = new Grid();
         protected ScrollViewer contentScrollViewer = new ScrollViewer();
@@ -50,15 +50,17 @@ namespace X_Wing_Visual_Builder.Model
             pageStructureGrid.RowDefinitions.Add(pageStructureGridRowThree);
             pageStructureGrid.RowDefinitions.Add(pageStructureGridRowFour);
 
-            manuNavigationCanvas.Name = "manuNavigationCanvas";
-            Grid.SetColumn(manuNavigationCanvas, 0);
-            Grid.SetRow(manuNavigationCanvas, 0);
-            pageStructureGrid.Children.Add(manuNavigationCanvas);
+            manuNavigationWrapPanel.Name = "manuNavigationCanvas";
+            Grid.SetColumn(manuNavigationWrapPanel, 0);
+            Grid.SetRow(manuNavigationWrapPanel, 0);
+            manuNavigationWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            pageStructureGrid.Children.Add(manuNavigationWrapPanel);
 
-            topToolsCanvas.Name = "topToolsCanvas";
-            Grid.SetColumn(topToolsCanvas, 0);
-            Grid.SetRow(topToolsCanvas, 1);
-            pageStructureGrid.Children.Add(topToolsCanvas);
+            topToolsWrapPanel.Name = "topToolsCanvas";
+            Grid.SetColumn(topToolsWrapPanel, 0);
+            Grid.SetRow(topToolsWrapPanel, 1);
+            topToolsWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            pageStructureGrid.Children.Add(topToolsWrapPanel);
 
             contentScrollViewer.Name = "contentScrollViewer";
             contentScrollViewer.MaxHeight = 999;

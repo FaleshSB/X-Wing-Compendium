@@ -30,8 +30,6 @@ namespace X_Wing_Visual_Builder.View
         private Canvas pilotAndUpgradeInfoCanvas;
         private AlignableWrapPanel contentWrapPanel;
         private AlignableWrapPanel buildWrapPanel;
-        private Dictionary<int, Dictionary<int, CardCanvas>> upgradeCanvasCache = new Dictionary<int, Dictionary<int, CardCanvas>>();
-        private Dictionary<int, Dictionary<int, CardCanvas>> pilotCanvasCache = new Dictionary<int, Dictionary<int, CardCanvas>>();
 
 
         public SquadsPage()
@@ -47,48 +45,46 @@ namespace X_Wing_Visual_Builder.View
             Button addImperialBuildButton = new Button();
             addImperialBuildButton.Name = "addRebelBuildButton";
             addImperialBuildButton.Content = "Add Imperial Build";
-            addImperialBuildButton.Width = 130;
-            addImperialBuildButton.Height = 40;
             addImperialBuildButton.FontSize = 16;
             addImperialBuildButton.FontWeight = FontWeights.Bold;
             addImperialBuildButton.Click += new RoutedEventHandler(AddImperialBuildClicked);
+            addImperialBuildButton.Margin = new Thickness(4);
+            addImperialBuildButton.Padding = new Thickness(5, 2, 5, 2);
             addImperialBuildButton.UseLayoutRounding = true;
-            Canvas.SetLeft(addImperialBuildButton, 300);
-            Canvas.SetTop(addImperialBuildButton, 10);
-            topToolsCanvas.Children.Add(addImperialBuildButton);
+            topToolsWrapPanel.Children.Add(addImperialBuildButton);
 
-            Button addBuildButton = new Button();
-            addBuildButton.Name = "addRebelBuildButton";
-            addBuildButton.Content = "Add Rebel Build";
-            addBuildButton.Width = 130;
-            addBuildButton.Height = 40;
-            addBuildButton.FontSize = 16;
-            addBuildButton.FontWeight = FontWeights.Bold;
-            addBuildButton.Click += new RoutedEventHandler(AddRebelBuildClicked);
-            addBuildButton.UseLayoutRounding = true;
-            Canvas.SetLeft(addBuildButton, 400);
-            Canvas.SetTop(addBuildButton, 10);
-            topToolsCanvas.Children.Add(addBuildButton);
-            
+            Button addRebelBuildButton = new Button();
+            addRebelBuildButton.Name = "addRebelBuildButton";
+            addRebelBuildButton.Content = "Add Rebel Build";
+            addRebelBuildButton.FontSize = 16;
+            addRebelBuildButton.FontWeight = FontWeights.Bold;
+            addRebelBuildButton.Click += new RoutedEventHandler(AddRebelBuildClicked);
+            addRebelBuildButton.Margin = new Thickness(4);
+            addRebelBuildButton.Padding = new Thickness(5, 2, 5, 2);
+            addRebelBuildButton.UseLayoutRounding = true;
+            topToolsWrapPanel.Children.Add(addRebelBuildButton);
+
+            Button addScummBuildButton = new Button();
+            addScummBuildButton.Name = "addRebelBuildButton";
+            addScummBuildButton.Content = "Add Rebel Build";
+            addScummBuildButton.FontSize = 16;
+            addScummBuildButton.FontWeight = FontWeights.Bold;
+            addScummBuildButton.Click += new RoutedEventHandler(AddScumBuildClicked);
+            addScummBuildButton.Margin = new Thickness(4);
+            addScummBuildButton.Padding = new Thickness(5, 2, 5, 2);
+            addScummBuildButton.UseLayoutRounding = true;
+            topToolsWrapPanel.Children.Add(addScummBuildButton);
+
             Button browseCards = new Button();
             browseCards.Name = "browseCards";
             browseCards.Content = "Browse Cards";
-            browseCards.Width = 130;
-            browseCards.Height = 40;
             browseCards.FontSize = 16;
             browseCards.FontWeight = FontWeights.Bold;
             browseCards.Click += new RoutedEventHandler(browseCardsClicked);
+            browseCards.Margin = new Thickness(4);
+            browseCards.Padding = new Thickness(5, 2, 5, 2);
             browseCards.UseLayoutRounding = true;
-            Canvas.SetLeft(browseCards, 660);
-            Canvas.SetTop(browseCards, 10);
-            topToolsCanvas.Children.Add(browseCards);
-
-            topToolsCanvas.Height = 40;
-        }
-
-        public void buildChanged(int uniqueBuildId)
-        {
-            upgradeCanvasCache.Remove(uniqueBuildId);
+            topToolsWrapPanel.Children.Add(browseCards);
         }
 
         private void browseCardsClicked(object sender, RoutedEventArgs e)
@@ -96,6 +92,11 @@ namespace X_Wing_Visual_Builder.View
             NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
         }
 
+        private void AddScumBuildClicked(object sender, RoutedEventArgs e)
+        {
+            Builds.AddBuild(Faction.Scum);
+            DisplayContent();
+        }
         private void AddRebelBuildClicked(object sender, RoutedEventArgs e)
         {
             Builds.AddBuild(Faction.Rebel);
@@ -143,7 +144,6 @@ namespace X_Wing_Visual_Builder.View
         {
             BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
             Builds.DeleteBuild(addUpgradeButton.uniqueBuildId);
-            buildChanged(addUpgradeButton.uniqueBuildId);
             DisplayContent();
         }
 
@@ -157,16 +157,6 @@ namespace X_Wing_Visual_Builder.View
 
         protected override void DisplayContent()
         {
-            foreach (object child in contentWrapPanel.Children)
-            {
-                AlignableWrapPanel buildWrapPanelToClear = (AlignableWrapPanel)child;
-                foreach (object childChild in buildWrapPanelToClear.Children)
-                {
-                    Canvas pilotCanvasToClear = (Canvas)childChild;
-                    pilotCanvasToClear.Children.Clear();
-                }
-                buildWrapPanelToClear.Children.Clear();
-            }
             contentWrapPanel.Children.Clear();
 
             foreach (Build build in Builds.builds.OrderByDescending(build => build.uniqueBuildId).ToList())
@@ -174,17 +164,36 @@ namespace X_Wing_Visual_Builder.View
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-                Canvas spacerCanvas = new Canvas();
-                spacerCanvas.Height = 30;
-                spacerCanvas.Width = 1800;
+                AlignableWrapPanel spacerCanvas = new AlignableWrapPanel();
+                spacerCanvas.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+                Canvas topSpacer = new Canvas();
+                topSpacer.Width = 9999;
+                topSpacer.Height = 50;
+                spacerCanvas.Children.Add(topSpacer);
+
+                BuildPilotUpgrade addPilot;
+                addPilot = new BuildPilotUpgrade();
+                addPilot.uniqueBuildId = build.uniqueBuildId;
+                addPilot.FontSize = 16;
+                addPilot.FontWeight = FontWeights.Bold;
+                addPilot.Click += new RoutedEventHandler(AddPilotClicked);
+                addPilot.Content = "Add Pilot";
+                addPilot.Margin = new Thickness(0);
+                addPilot.Padding = new Thickness(4, 1, 4, 1);
+                spacerCanvas.Children.Add(addPilot);
 
                 Label totalCostLabel;
                 totalCostLabel = new Label();
                 totalCostLabel.Content = build.totalCost;
+                totalCostLabel.Height = 25;
+                totalCostLabel.Width = 50;
                 totalCostLabel.FontSize = 20;
+                totalCostLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                totalCostLabel.VerticalContentAlignment = VerticalAlignment.Center;
+                totalCostLabel.Margin = new Thickness(0);
+                totalCostLabel.Padding = new Thickness(0);
                 totalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-                Canvas.SetLeft(totalCostLabel, 900);
-                Canvas.SetTop(totalCostLabel, 0);
                 spacerCanvas.Children.Add(totalCostLabel);
 
                 BuildPilotUpgrade deleteBuild;
@@ -194,22 +203,17 @@ namespace X_Wing_Visual_Builder.View
                 deleteBuild.FontWeight = FontWeights.Bold;
                 deleteBuild.Click += new RoutedEventHandler(DeleteBuildClicked);
                 deleteBuild.Content = "Delete Build";
-                Canvas.SetLeft(deleteBuild, 805);
-                Canvas.SetTop(deleteBuild, 8);
+                deleteBuild.Margin = new Thickness(0);
+                deleteBuild.Padding = new Thickness(4, 1, 4, 1);
                 spacerCanvas.Children.Add(deleteBuild);
 
-                BuildPilotUpgrade addPilot;
-                addPilot = new BuildPilotUpgrade();
-                addPilot.uniqueBuildId = build.uniqueBuildId;
-                addPilot.FontSize = 16;
-                addPilot.FontWeight = FontWeights.Bold;
-                addPilot.Click += new RoutedEventHandler(AddPilotClicked);
-                addPilot.Content = "Add Pilot";
-                Canvas.SetLeft(addPilot, 945);
-                Canvas.SetTop(addPilot, 8);
-                spacerCanvas.Children.Add(addPilot);
+                Canvas bottomSpacer = new Canvas();
+                bottomSpacer.Width = 9999;
+                bottomSpacer.Height = 1;
+                spacerCanvas.Children.Add(bottomSpacer);
 
                 buildWrapPanel.Children.Add(spacerCanvas);
+
 
                 List<UniquePilot> pilots = build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList();
 
@@ -220,19 +224,12 @@ namespace X_Wing_Visual_Builder.View
                     double currentLeftOffset = 0;
                     double currentHeightOffset = 0;
                     pilotAndUpgradeInfoCanvas = new Canvas();
-
-                    if (pilotCanvasCache.ContainsKey(build.uniqueBuildId) == false || pilotCanvasCache[build.uniqueBuildId].ContainsKey(uniquePilot.id) == false)
-                    {
-                        if (pilotCanvasCache.ContainsKey(build.uniqueBuildId) == false)
-                        {
-                            pilotCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
-                        }
-                        pilotCanvasCache[build.uniqueBuildId][uniquePilot.id] = uniquePilot.pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
-                        pilotCanvasCache[build.uniqueBuildId][uniquePilot.id].AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
-                    }
-                    Canvas.SetLeft(pilotCanvasCache[build.uniqueBuildId][uniquePilot.id], left);
-                    Canvas.SetTop(pilotCanvasCache[build.uniqueBuildId][uniquePilot.id], height);
-                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCanvasCache[build.uniqueBuildId][uniquePilot.id]);
+                    
+                    CardCanvas pilotCanvas = uniquePilot.pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
+                    pilotCanvas.AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
+                    Canvas.SetLeft(pilotCanvas, left);
+                    Canvas.SetTop(pilotCanvas, height);
+                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCanvas);
 
                     BuildPilotUpgrade addUpgrade;
                     addUpgrade = new BuildPilotUpgrade();
@@ -283,20 +280,13 @@ namespace X_Wing_Visual_Builder.View
                             height += currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + Opt.ApResMod(upgradeCardMargin);
                             currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
                         }
+                        
+                        CardCanvas upgradeCanvas = upgrade.Value.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
+                        upgradeCanvas.AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
 
-                        if (upgradeCanvasCache.ContainsKey(build.uniqueBuildId) == false || upgradeCanvasCache[build.uniqueBuildId].ContainsKey(upgrade.Key) == false)
-                        {
-                            if (upgradeCanvasCache.ContainsKey(build.uniqueBuildId) == false)
-                            {
-                                upgradeCanvasCache[build.uniqueBuildId] = new Dictionary<int, CardCanvas>();
-                            }
-                            upgradeCanvasCache[build.uniqueBuildId][upgrade.Key] = upgrade.Value.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
-                            upgradeCanvasCache[build.uniqueBuildId][upgrade.Key].AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
-                        }
-
-                        Canvas.SetLeft(upgradeCanvasCache[build.uniqueBuildId][upgrade.Key], left);
-                        Canvas.SetTop(upgradeCanvasCache[build.uniqueBuildId][upgrade.Key], height);
-                        pilotAndUpgradeInfoCanvas.Children.Add(upgradeCanvasCache[build.uniqueBuildId][upgrade.Key]);
+                        Canvas.SetLeft(upgradeCanvas, left);
+                        Canvas.SetTop(upgradeCanvas, height);
+                        pilotAndUpgradeInfoCanvas.Children.Add(upgradeCanvas);
 
                         currentUpgradeNumber++;
                     }

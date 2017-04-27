@@ -221,6 +221,9 @@ namespace X_Wing_Visual_Builder.Model
             if (upgrade.faction != Faction.All && upgrade.faction != uniquePilot.pilot.faction) { isUpgradeUsable = false; }
             if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != uniquePilot.pilot.ship.shipSize) { isUpgradeUsable = false; }
 
+            if(uniquePilot.upgrades.ContainsValue(upgrade) && upgrade.isLimited && isRemovingUpgrades == false) { isUpgradeUsable = false; }
+
+            // Check if the pilot has a slot for the upgrade
             if(uniquePilot.possibleUpgrades.ContainsKey(upgrade.upgradeType))
             {
                 if (isRemovingUpgrades)
@@ -268,7 +271,7 @@ namespace X_Wing_Visual_Builder.Model
                 }
             }
 
-            if (UpgradeModifiers.SkipGetUpgrade(uniquePilot, upgrade, isRemovingUpgrades) == true)
+            if (UpgradeModifiers.SkipGetUpgrade(uniquePilot, upgrade, isRemovingUpgrades))
             {
                 isUpgradeUsable = false;
             }
@@ -281,7 +284,7 @@ namespace X_Wing_Visual_Builder.Model
             List<Upgrade> upgradesToReturn = new List<Upgrade>();
             foreach (Upgrade upgrade in upgrades.Values.ToList())
             {
-                if(IsUpgradeUsable(uniquePilot, upgrade) == true)
+                if(IsUpgradeUsable(uniquePilot, upgrade))
                 {
                     upgradesToReturn.Add(upgrade);
                 }

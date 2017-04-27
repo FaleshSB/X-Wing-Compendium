@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using X_Wing_Visual_Builder.View;
+using System.Windows.Data;
 
 namespace X_Wing_Visual_Builder.Model
 {
@@ -62,11 +63,11 @@ namespace X_Wing_Visual_Builder.Model
             {
                 pcntDif = width / 166;
                 numberOwnedLeft = Opt.ApResMod(0 * pcntDif);
-                numberOwnedTop = Opt.ApResMod(170 * pcntDif);
+                numberOwnedTop = Opt.ApResMod(161 * pcntDif);
                 addButtonLeft = Opt.ApResMod(0 * pcntDif);
-                addButtonTop = Opt.ApResMod(140 * pcntDif);
+                addButtonTop = Opt.ApResMod(137 * pcntDif);
                 removeButtonLeft = Opt.ApResMod(0 * pcntDif);
-                removeButtonTop = Opt.ApResMod(205 * pcntDif);
+                removeButtonTop = Opt.ApResMod(193 * pcntDif);
                 infoButtonLeft = Opt.ApResMod(0 * pcntDif);
                 infoButtonTop = Opt.ApResMod(0 * pcntDif);
             }
@@ -100,6 +101,7 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(this.cardImage, 0);
             SetTop(this.cardImage, 0);
             Children.Add(this.cardImage);
+            
 
             if (isUpgrade) { numberOwned.Text = upgrade.numberOwned.ToString(); }
             else { numberOwned.Text = pilot.numberOwned.ToString(); }
@@ -193,8 +195,8 @@ namespace X_Wing_Visual_Builder.Model
             this.uniqueBuildId = uniqueBuildId;
 
             deleteButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\deletebutton.png"));
-            deleteButton.Height = Opt.ApResMod(miniButtonSize * pcntDif);
-            deleteButton.Width = Opt.ApResMod(miniButtonSize * pcntDif);
+            deleteButton.Height = Opt.ApResMod(miniButtonSize);
+            deleteButton.Width = Opt.ApResMod(miniButtonSize);
             deleteButton.UseLayoutRounding = true;
             deleteButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
             deleteButton.MouseLeftButtonDown += new MouseButtonEventHandler(DeleteCardClicked);
