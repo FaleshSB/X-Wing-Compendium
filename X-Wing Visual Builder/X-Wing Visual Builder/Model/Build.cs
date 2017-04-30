@@ -18,6 +18,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Build
     {
+        public int displayOrder;
         public int uniqueBuildId;
         public Faction faction;
         public Dictionary<int, UniquePilot> pilots = new Dictionary<int, UniquePilot>();

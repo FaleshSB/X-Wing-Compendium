@@ -163,7 +163,7 @@ namespace X_Wing_Visual_Builder.View
             isSwappingPilot = false;
             previousUpgradeSearchResultIds = "";
             previousPilotSearchResultIds = "";
-            //searchTextBox.Text = "";
+            searchTextBox.Text = "";
         }
 
         public void SwapPilot(Build build, UniquePilot pilotToSwap)
@@ -243,6 +243,21 @@ namespace X_Wing_Visual_Builder.View
                 }
                 contentWrapPanel.Children.Add(pilotCanvasCache[pilot.id]);
             }
+
+            if(contentWrapPanel.Children.Count == 0)
+            {
+                TextBlock instructions = new TextBlock();
+                instructions.Text = "'PS8' or 'PS4-7', using any numbers, will show pilots of, or between, that Pilot Skill\r\n";
+                instructions.Text += "'8' or '4-7', using any numbers, will show cards of, or between, that cost\r\n";
+                instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
+                instructions.Text += "'rebel', 'scrum' or 'imperial' will show cards of that faction\r\n";
+                instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship";
+                instructions.FontSize = 14;
+                instructions.LineHeight = 30;
+                instructions.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250));
+                instructions.Padding = new Thickness(20);
+                contentWrapPanel.Children.Add(instructions);
+            }
         }
         
         private void UpdateContents()
@@ -256,34 +271,55 @@ namespace X_Wing_Visual_Builder.View
             string[] searchWords = filteredSearchText.Split(' ');
             searchWords = searchWords.Where(s => s != "").ToArray();
             searchWords = searchWords.Where(s => s != "  ").ToArray();
-            searchWords = searchWords.Where(s => s.Count() > 2).ToArray();
-
-            if(filteredSearchText == "" && isAddingUpgrade) { previousUpgradeSearchResultIds = "it was changed, really!"; DisplayContent(); }
-            if(filteredSearchText == "" && (isAddingPilot || isSwappingPilot)) { previousPilotSearchResultIds = "it was changed, really!"; DisplayContent(); }
-            
-            if (searchWords.Count() > 0)
+            List<string> filteredSearchWords = new List<string>();
+            foreach(string searchWord in searchWords)
             {
-                pilotsToDisplay.Clear();
-                upgradesToDisplay.Clear();
+                if (Regex.IsMatch(searchWord, @"^\d+$") && searchWord.Length < 3)
+                {
+                    filteredSearchWords.Add(searchWord);
+                }
+            }
+            searchWords = searchWords.Where(s => s.Count() > 2).ToArray();
+            filteredSearchWords.AddRange(searchWords);
+            for (int i = 0; i < filteredSearchWords.Count; i++)
+            {
+                filteredSearchWords[i] = filteredSearchWords[i].ToLower();
+            }
+
+
+            if (filteredSearchText == "" && isAddingUpgrade) { previousUpgradeSearchResultIds = "it was changed, really!"; DisplayContent(); }
+            if(filteredSearchText == "" && (isAddingPilot || isSwappingPilot)) { previousPilotSearchResultIds = "it was changed, really!"; DisplayContent(); }
+
+            pilotsToDisplay.Clear();
+            upgradesToDisplay.Clear();
+
+            if (filteredSearchWords.Count() > 0)
+            {
                 if (isUpgradeChecked)
                 {
                     string currentUpgradeSearchResultIds = "";
                     foreach (Upgrade upgrade in upgrades)
                     {
                         bool hasFoundAllWords = true;
-                        foreach(string searchWord in searchWords)
+                        foreach(string searchWord in filteredSearchWords)
                         {
                             bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInDescription = upgrade.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInType = upgrade.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundFaction = upgrade.faction.ToString().ToLower() == searchWord;
                             bool hasFoundCost = false;
+                            if(Regex.IsMatch(searchWord, @"^\d+$"))
+                            {
+                                if(Int32.Parse(searchWord) == upgrade.cost) { hasFoundCost = true; }
+                            }
                             regex = new Regex(@"([0-9]+)\-([0-9]+)$", RegexOptions.IgnoreCase);
                             Match match = regex.Match(searchWord);
                             if (match.Success)
                             {
                                 if (upgrade.cost >= Int32.Parse(match.Groups[1].Value) && upgrade.cost <= Int32.Parse(match.Groups[2].Value)) { hasFoundCost = true; }
                             }
-                            if (isSearchDescriptionChecked == false && hasFoundWordInName == false && hasFoundWordInType == false && hasFoundCost == false)
+                            if (isSearchDescriptionChecked == false && hasFoundWordInName == false && hasFoundWordInType == false && hasFoundCost == false
+                                && hasFoundFaction == false)
                             {
                                 hasFoundAllWords = false;
                                 break;
@@ -294,7 +330,7 @@ namespace X_Wing_Visual_Builder.View
                                 break;
                             }
                         }
-                        if(searchWords.Count() == 1 && searchWords[0].ToLower() == "all") { hasFoundAllWords = true; }
+                        if(filteredSearchWords.Count() == 1 && filteredSearchWords[0] == "all") { hasFoundAllWords = true; }
                         /*bool hasFoundAllWords = false;
                         foreach (string searchWord in searchWords)
                         {
@@ -323,7 +359,6 @@ namespace X_Wing_Visual_Builder.View
                     if(previousUpgradeSearchResultIds != currentUpgradeSearchResultIds)
                     {
                         previousUpgradeSearchResultIds = currentUpgradeSearchResultIds;
-                        DisplayContent();
                     }
                 }
                 else
@@ -349,14 +384,33 @@ namespace X_Wing_Visual_Builder.View
                             }
                         }*/
                         bool hasFoundAllWords = false;
-                        foreach (string searchWord in searchWords)
+                        foreach (string searchWord in filteredSearchWords)
                         {
                             bool hasFoundWordInName = pilot.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInShipName = pilot.ship.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInDescription = pilot.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
+                            bool hasFoundFaction = pilot.faction.ToString().ToLower() == searchWord;
+                            bool hasFoundShipSize = pilot.ship.shipSize.ToString().ToLower() == searchWord;
                             bool hasFoundPilotSkill = false;
-                            regex = new Regex(@"ps[0-9]+$", RegexOptions.IgnoreCase);
+                            bool hasFoundCost = false;
+                            if (Regex.IsMatch(searchWord, @"^\d+$"))
+                            {
+                                if (Int32.Parse(searchWord) == pilot.cost) { hasFoundCost = true; }
+                            }
+                            regex = new Regex(@"([0-9]+)\-([0-9]+)$", RegexOptions.IgnoreCase);
                             Match match = regex.Match(searchWord);
+                            if (match.Success)
+                            {
+                                if (pilot.cost >= Int32.Parse(match.Groups[1].Value) && pilot.cost <= Int32.Parse(match.Groups[2].Value)) { hasFoundCost = true; }
+                            }
+                            regex = new Regex(@"ps([0-9]+)\-([0-9]+)$", RegexOptions.IgnoreCase);
+                            match = regex.Match(searchWord);
+                            if (match.Success)
+                            {
+                                if (pilot.pilotSkill >= Int32.Parse(match.Groups[1].Value) && pilot.pilotSkill <= Int32.Parse(match.Groups[2].Value)) { hasFoundPilotSkill = true; }
+                            }
+                            regex = new Regex(@"ps[0-9]+$", RegexOptions.IgnoreCase);
+                            match = regex.Match(searchWord);
                             if(match.Success)
                             {
                                 string ps = Regex.Replace(searchWord, "[^0-9.]", "");
@@ -371,11 +425,10 @@ namespace X_Wing_Visual_Builder.View
                                     break;
                                 }
                             }
-                            bool hasFoundFaction = (pilot.faction.ToString().ToLower() == searchWord.ToLower()) ? true : false;
-                            bool hasFoundShipSize = (pilot.ship.shipSize.ToString().ToLower() == searchWord.ToLower()) ? true : false;
                             
                             if (isSearchDescriptionChecked == false && (hasFoundWordInName || hasFoundWordInShipName
-                                || hasFoundPilotSkill || hasFoundUpgradeType || hasFoundFaction || hasFoundShipSize))
+                                || hasFoundPilotSkill || hasFoundUpgradeType || hasFoundFaction || hasFoundShipSize
+                                || hasFoundCost))
                             {
                                 hasFoundAllWords = true;
                                 break;
@@ -386,7 +439,7 @@ namespace X_Wing_Visual_Builder.View
                                 break;
                             }
                         }
-                        if (searchWords.Count() == 1 && searchWords[0].ToLower() == "all") { hasFoundAllWords = true; }
+                        if (filteredSearchWords.Count() == 1 && filteredSearchWords[0] == "all") { hasFoundAllWords = true; }
                         if (hasFoundAllWords)
                         {
                             pilotsToDisplay.Add(pilot);
@@ -397,10 +450,11 @@ namespace X_Wing_Visual_Builder.View
                     if (previousPilotSearchResultIds != currentPilotSearchResultIds)
                     {
                         previousPilotSearchResultIds = currentPilotSearchResultIds;
-                        DisplayContent();
                     }
                 }
             }
+
+            DisplayContent();
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)

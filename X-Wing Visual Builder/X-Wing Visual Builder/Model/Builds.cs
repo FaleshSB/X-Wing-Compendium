@@ -17,6 +17,44 @@ namespace X_Wing_Visual_Builder.Model
             LoadBuilds();
         }
 
+        public static void DuplicateBuild(int uniqueBuildId)
+        {
+            Build oldBuild = GetBuild(uniqueBuildId);
+            int newBuildId = AddBuild(oldBuild.faction);
+            Build newBuild = GetBuild(newBuildId);
+
+            //foreach
+        }
+
+        private static void SortBuilds()
+        {
+            int order = 20;
+            foreach (Build build in Builds.builds.OrderBy(build => build.displayOrder).ToList())
+            {
+                build.displayOrder = order;
+                order += 10;
+            }
+            SaveBuilds();
+        }
+
+        public static void MoveBuildUp(int uniqueBuildId)
+        {
+            foreach(Build build in builds)
+            {
+                if(build.uniqueBuildId == uniqueBuildId) { build.displayOrder += 15; }
+            }
+            SortBuilds();
+        }
+
+        public static void MoveBuildDown(int uniqueBuildId)
+        {
+            foreach (Build build in builds)
+            {
+                if (build.uniqueBuildId == uniqueBuildId) { build.displayOrder -= 15; }
+            }
+            SortBuilds();
+        }
+
         public static Build GetBuild(int uniqueBuildId)
         {
             foreach(Build build in builds)
@@ -35,7 +73,7 @@ namespace X_Wing_Visual_Builder.Model
             SaveBuilds();
         }
 
-        public static void AddBuild(Faction faction)
+        public static int AddBuild(Faction faction)
         {
             Build newBuild = new Build();
             newBuild.faction = faction;
@@ -43,6 +81,7 @@ namespace X_Wing_Visual_Builder.Model
             newBuild.uniqueBuildId = newBuildId;
             builds.Add(newBuild);
             SaveBuilds();
+            return newBuildId;
         }
 
         public static void SaveBuilds()
@@ -55,7 +94,8 @@ namespace X_Wing_Visual_Builder.Model
             {
                 buildInfo += uniqueBuildId + "|";
                 buildInfo += (int)build.faction + "|";
-                foreach(UniquePilot uniquePilot in build.pilots.Values.ToList())
+                buildInfo += build.displayOrder + "|";
+                foreach (UniquePilot uniquePilot in build.pilots.Values.ToList())
                 {
                     buildInfo += uniquePilot.id + "£" + uniquePilot.pilot.id + "£";
                     foreach (KeyValuePair<int, Upgrade> upgrade in uniquePilot.upgrades)
@@ -88,8 +128,9 @@ namespace X_Wing_Visual_Builder.Model
                     string[] buildInfo = buildString.Split('|');
                     build.uniqueBuildId = Int32.Parse(buildInfo[0]);
                     build.faction = (Faction)Int32.Parse(buildInfo[1]);
+                    build.displayOrder = Int32.Parse(buildInfo[2]);
 
-                    string[] pilotBuilds = buildInfo[2].Split('&');
+                    string[] pilotBuilds = buildInfo[3].Split('&');
                     pilotBuilds = pilotBuilds.Where(s => s != "").ToArray();
                     if (pilotBuilds.Count() > 0)
                     {

@@ -85,6 +85,21 @@ namespace X_Wing_Visual_Builder.View
             browseCards.Padding = new Thickness(5, 2, 5, 2);
             browseCards.UseLayoutRounding = true;
             topToolsWrapPanel.Children.Add(browseCards);
+
+            Slider zoom = new Slider();
+            zoom.Value = 1;
+            zoom.Width = 70;
+            zoom.Minimum = 0.33;
+            zoom.Maximum = 3;
+            zoom.VerticalAlignment = VerticalAlignment.Center;
+            zoom.ValueChanged += new RoutedPropertyChangedEventHandler<double>(ZoomChanged);
+                
+            topToolsWrapPanel.Children.Add(zoom);
+        }
+
+        private void ZoomChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Opt.zoom = e.NewValue;
         }
 
         private void browseCardsClicked(object sender, RoutedEventArgs e)
@@ -154,12 +169,33 @@ namespace X_Wing_Visual_Builder.View
             browseCardsPage.AddUpgrade(addUpgradeButton.uniquePilotId, Builds.GetBuild(addUpgradeButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
         }
+        
+        private void MoveBuildUpClicked(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
+            Builds.MoveBuildUp(addUpgradeButton.uniqueBuildId);
+            DisplayContent();
+        }
 
+        private void MoveBuildDownClicked(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
+            Builds.MoveBuildDown(addUpgradeButton.uniqueBuildId);
+            DisplayContent();
+        }
+
+        private void DuplicateBuildClicked(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
+            Builds.DuplicateBuild(addUpgradeButton.uniqueBuildId);
+            DisplayContent();
+        }
+        
         protected override void DisplayContent()
         {
             contentWrapPanel.Children.Clear();
 
-            foreach (Build build in Builds.builds.OrderByDescending(build => build.uniqueBuildId).ToList())
+            foreach (Build build in Builds.builds.OrderByDescending(build => build.displayOrder).ToList())
             {
                 buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -206,6 +242,39 @@ namespace X_Wing_Visual_Builder.View
                 deleteBuild.Margin = new Thickness(0);
                 deleteBuild.Padding = new Thickness(4, 1, 4, 1);
                 spacerCanvas.Children.Add(deleteBuild);
+                
+                BuildPilotUpgrade DuplicateBuild;
+                DuplicateBuild = new BuildPilotUpgrade();
+                DuplicateBuild.uniqueBuildId = build.uniqueBuildId;
+                DuplicateBuild.FontSize = 16;
+                DuplicateBuild.FontWeight = FontWeights.Bold;
+                DuplicateBuild.Click += new RoutedEventHandler(DuplicateBuildClicked);
+                DuplicateBuild.Content = "Duplicate Build";
+                DuplicateBuild.Margin = new Thickness(0);
+                DuplicateBuild.Padding = new Thickness(4, 1, 4, 1);
+                spacerCanvas.Children.Add(DuplicateBuild);
+
+                BuildPilotUpgrade MoveBuildUp;
+                MoveBuildUp = new BuildPilotUpgrade();
+                MoveBuildUp.uniqueBuildId = build.uniqueBuildId;
+                MoveBuildUp.FontSize = 16;
+                MoveBuildUp.FontWeight = FontWeights.Bold;
+                MoveBuildUp.Click += new RoutedEventHandler(MoveBuildUpClicked);
+                MoveBuildUp.Content = "Up";
+                MoveBuildUp.Margin = new Thickness(8, 0,8,0);
+                MoveBuildUp.Padding = new Thickness(4, 1, 4, 1);
+                spacerCanvas.Children.Add(MoveBuildUp);
+
+                BuildPilotUpgrade MoveBuildDown;
+                MoveBuildDown = new BuildPilotUpgrade();
+                MoveBuildDown.uniqueBuildId = build.uniqueBuildId;
+                MoveBuildDown.FontSize = 16;
+                MoveBuildDown.FontWeight = FontWeights.Bold;
+                MoveBuildDown.Click += new RoutedEventHandler(MoveBuildDownClicked);
+                MoveBuildDown.Content = "Down";
+                MoveBuildDown.Margin = new Thickness(0);
+                MoveBuildDown.Padding = new Thickness(4, 1, 4, 1);
+                spacerCanvas.Children.Add(MoveBuildDown);
 
                 Canvas bottomSpacer = new Canvas();
                 bottomSpacer.Width = 9999;
@@ -299,5 +368,6 @@ namespace X_Wing_Visual_Builder.View
                 contentWrapPanel.Children.Add(buildWrapPanel);
             }
         }
+
     }
 }

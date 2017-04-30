@@ -10,6 +10,7 @@ namespace X_Wing_Visual_Builder.Model
     static class Opt
     {
         private static double resolutionMultiplier;
+        public static double zoom = 1;
 
         static Opt()
         {
@@ -18,7 +19,7 @@ namespace X_Wing_Visual_Builder.Model
 
         public static double ApResMod(double number)
         {
-            return Math.Round(number * resolutionMultiplier);
+            return Math.Round((number * resolutionMultiplier) * zoom);
         }
     }
 }
