@@ -27,9 +27,7 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private int upgradeCardMargin = 4;
-        private Canvas pilotAndUpgradeInfoCanvas;
         private AlignableWrapPanel contentWrapPanel;
-        private AlignableWrapPanel buildWrapPanel;
 
 
         public SquadsPage()
@@ -197,14 +195,14 @@ namespace X_Wing_Visual_Builder.View
 
             foreach (Build build in Builds.builds.OrderByDescending(build => build.displayOrder).ToList())
             {
-                buildWrapPanel = new AlignableWrapPanel();
+                AlignableWrapPanel buildWrapPanel = new AlignableWrapPanel();
                 buildWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
                 AlignableWrapPanel spacerCanvas = new AlignableWrapPanel();
                 spacerCanvas.HorizontalContentAlignment = HorizontalAlignment.Center;
 
                 Canvas topSpacer = new Canvas();
-                topSpacer.Width = 9999;
+                topSpacer.Width = 99999;
                 topSpacer.Height = 50;
                 spacerCanvas.Children.Add(topSpacer);
 
@@ -288,17 +286,20 @@ namespace X_Wing_Visual_Builder.View
 
                 foreach (UniquePilot uniquePilot in pilots)
                 {
-                    double left = 0;
-                    double height = 0;
-                    double currentLeftOffset = 0;
-                    double currentHeightOffset = 0;
-                    pilotAndUpgradeInfoCanvas = new Canvas();
-                    
+                    StackPanel pilotAndUpgradeInfoStackPanel = new StackPanel();
+                    pilotAndUpgradeInfoStackPanel.Orientation = Orientation.Horizontal;
+
+
+                    StackPanel pilotAndControlls = new StackPanel();
+                    pilotAndControlls.Orientation = Orientation.Vertical;
+                    pilotAndControlls.VerticalAlignment = VerticalAlignment.Top;
+
                     CardCanvas pilotCanvas = uniquePilot.pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
                     pilotCanvas.AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
-                    Canvas.SetLeft(pilotCanvas, left);
-                    Canvas.SetTop(pilotCanvas, height);
-                    pilotAndUpgradeInfoCanvas.Children.Add(pilotCanvas);
+                    pilotAndControlls.Children.Add(pilotCanvas);
+
+                    StackPanel controls = new StackPanel();
+                    controls.Orientation = Orientation.Horizontal;
 
                     BuildPilotUpgrade addUpgrade;
                     addUpgrade = new BuildPilotUpgrade();
@@ -307,10 +308,10 @@ namespace X_Wing_Visual_Builder.View
                     addUpgrade.FontSize = 16;
                     addUpgrade.FontWeight = FontWeights.Bold;
                     addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
+                    addUpgrade.Margin = new Thickness(0);
+                    addUpgrade.Padding = new Thickness(4, 1, 4, 1);
                     addUpgrade.Content = "Add Upgrade";
-                    Canvas.SetLeft(addUpgrade, left);
-                    Canvas.SetTop(addUpgrade, height + Opt.ApResMod(pilotCardHeight) + 10);
-                    pilotAndUpgradeInfoCanvas.Children.Add(addUpgrade);
+                    controls.Children.Add(addUpgrade);
 
                     BuildPilotUpgrade swapPilot;
                     swapPilot = new BuildPilotUpgrade();
@@ -319,55 +320,51 @@ namespace X_Wing_Visual_Builder.View
                     swapPilot.FontSize = 16;
                     swapPilot.FontWeight = FontWeights.Bold;
                     swapPilot.Click += new RoutedEventHandler(SwapPilot);
+                    swapPilot.Margin = new Thickness(8, 0, 8, 0);
+                    swapPilot.Padding = new Thickness(4, 1, 4, 1);
                     swapPilot.Content = "Swap Pilot";
-                    Canvas.SetLeft(swapPilot, left + 150);
-                    Canvas.SetTop(swapPilot, height + Opt.ApResMod(pilotCardHeight) + 10);
-                    pilotAndUpgradeInfoCanvas.Children.Add(swapPilot);
+                    controls.Children.Add(swapPilot);
 
                     Label pilotTotalCostLabel;
                     pilotTotalCostLabel = new Label();
                     pilotTotalCostLabel.Content = uniquePilot.totalCost;
-                    pilotTotalCostLabel.FontSize = 30;
+                    pilotTotalCostLabel.Margin = new Thickness(0);
+                    pilotTotalCostLabel.Padding = new Thickness(0);
+                    pilotTotalCostLabel.FontSize = 20;
                     pilotTotalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-                    Canvas.SetLeft(pilotTotalCostLabel, left + 240);
-                    Canvas.SetTop(pilotTotalCostLabel, height + Opt.ApResMod(pilotCardHeight));
-                    pilotAndUpgradeInfoCanvas.Children.Add(pilotTotalCostLabel);
+                    pilotTotalCostLabel.VerticalAlignment = VerticalAlignment.Center;
+                    controls.Children.Add(pilotTotalCostLabel);
 
-                    currentLeftOffset += pilotCardWidth;
+                    pilotAndControlls.Children.Add(controls);
+                    pilotAndUpgradeInfoStackPanel.Children.Add(pilotAndControlls);
 
                     int currentUpgradeNumber = 0;
+                    StackPanel upgradesStackPanel = new StackPanel();
+                    upgradesStackPanel.Orientation = Orientation.Vertical;
+                    upgradesStackPanel.VerticalAlignment = VerticalAlignment.Top;
                     foreach (KeyValuePair<int, Upgrade> upgrade in uniquePilot.upgrades.OrderBy(upgrade => upgrade.Value.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.Value.cost).ThenByDescending(upgrade => upgrade.Value.name))
                     {
-                        if (currentUpgradeNumber == 0) { currentLeftOffset += Opt.ApResMod(upgradeCardMargin); }
-                        left = currentLeftOffset;
-                        if (currentUpgradeNumber % 2 == 0)
-                        {
-                            height = currentHeightOffset;
-                        }
-                        else
-                        {
-                            height += currentHeightOffset + Opt.ApResMod(upgradeCardHeight) + Opt.ApResMod(upgradeCardMargin);
-                            currentLeftOffset += Opt.ApResMod(upgradeCardWidth) + Opt.ApResMod(upgradeCardMargin);
-                        }
-                        
                         CardCanvas upgradeCanvas = upgrade.Value.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
                         upgradeCanvas.AddDeleteButtonEvent(this, build.uniqueBuildId, uniquePilot.id);
+                        upgradesStackPanel.Children.Add(upgradeCanvas);
 
-                        Canvas.SetLeft(upgradeCanvas, left);
-                        Canvas.SetTop(upgradeCanvas, height);
-                        pilotAndUpgradeInfoCanvas.Children.Add(upgradeCanvas);
+                        if (currentUpgradeNumber % 2 == 1)
+                        {
+                            pilotAndUpgradeInfoStackPanel.Children.Add(upgradesStackPanel);
+                            upgradesStackPanel = new StackPanel();
+                        }
 
                         currentUpgradeNumber++;
                     }
-
-                    pilotAndUpgradeInfoCanvas.Height = (Opt.ApResMod(upgradeCardHeight) * 2) + Opt.ApResMod(upgradeCardMargin);
-                    pilotAndUpgradeInfoCanvas.Width = Opt.ApResMod(pilotCardWidth) + Math.Ceiling((double)uniquePilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardMargin) + Math.Ceiling((double)uniquePilot.upgrades.Count / 2) * Opt.ApResMod(upgradeCardWidth);
-                    pilotAndUpgradeInfoCanvas.Margin = new Thickness(10, 20, 10, 0);
-                    buildWrapPanel.Children.Add(pilotAndUpgradeInfoCanvas);
+                    if (currentUpgradeNumber % 2 == 1)
+                    {
+                        pilotAndUpgradeInfoStackPanel.Children.Add(upgradesStackPanel);
+                    }
+                    pilotAndUpgradeInfoStackPanel.Margin = new Thickness(10, 20, 10, 0);
+                    buildWrapPanel.Children.Add(pilotAndUpgradeInfoStackPanel);
                 }
                 contentWrapPanel.Children.Add(buildWrapPanel);
             }
         }
-
     }
 }
