@@ -21,6 +21,7 @@ namespace X_Wing_Visual_Builder.Model
         protected bool isUpgrade;
         protected Uri cardImageUri;
         public Dictionary<ExpansionType, int> inExpansion { get; set; } = new Dictionary<ExpansionType, int>();
+        public bool hasCardImage = false;
 
         public CardCanvas GetCanvas(double width, double height, Thickness margin, DefaultPage currentPage = null)
         {
@@ -31,6 +32,7 @@ namespace X_Wing_Visual_Builder.Model
                 resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
                 resizedCardImage.UriSource = cardImageUri;
                 resizedCardImage.EndInit();
+                hasCardImage = true;
             }
 
             System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
@@ -40,13 +42,14 @@ namespace X_Wing_Visual_Builder.Model
             return cardCanvas;
         }
 
-        public void GetCardImage()
+        public void CacheCardImage()
         {
             resizedCardImage = new BitmapImage();
             resizedCardImage.BeginInit();
             resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
             resizedCardImage.UriSource = cardImageUri;
             resizedCardImage.EndInit();
+            hasCardImage = true;
         }
     }
 }

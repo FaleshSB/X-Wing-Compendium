@@ -26,7 +26,6 @@ namespace X_Wing_Visual_Builder.View
         private int upgradeCardHeight = 231;
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
-        private int upgradeCardMargin = 4;
         private AlignableWrapPanel contentWrapPanel;
 
 

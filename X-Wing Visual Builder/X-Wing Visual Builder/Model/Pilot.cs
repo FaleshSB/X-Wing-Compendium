@@ -36,7 +36,7 @@ namespace X_Wing_Visual_Builder.Model
                      List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion)
         {
             this.isUpgrade = false;
-            this.cardImageUri = new Uri(@"D:\Documents\Game Stuff\X-Wing\Pilot Cards\" + id.ToString() + ".png");
+            this.cardImageUri = new Uri(@"Pilot Cards\" + id.ToString() + ".png", UriKind.Relative);
             this.id = id;
             this.isUnique = isUnique;
             this.name = name;

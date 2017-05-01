@@ -9,27 +9,28 @@ namespace X_Wing_Visual_Builder.Model
 {
     static class FileHandler
     {
+        private static string filteredLocation;
+
+        static FileHandler()
+        {
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\";
+        }
+
         public static void SaveFile(string fileName, string data)
         {
-            File.WriteAllText(@"D:\Documents\Game Stuff\X-Wing\" + fileName, data);
+            File.WriteAllText(filteredLocation + fileName, data);
         }
         public static string[] LoadFile(string fileName)
         {
-            if(File.Exists(@"D:\Documents\Game Stuff\X-Wing\" + fileName))
+            if (File.Exists(filteredLocation + fileName))
             {
-                return File.ReadAllLines(@"D:\Documents\Game Stuff\X-Wing\" + fileName);
+                return File.ReadAllLines(filteredLocation + fileName);
             }
             else
             {
                 return null;
             }
-            /*
-            string line;
-            using (StreamReader streamReader = new StreamReader(@"D:\Documents\Game Stuff\X-Wing\" + fileName))
-            {
-                line = streamReader.ReadLine();
-            }
-            return line;*/
         }
     }
 }
