@@ -70,7 +70,7 @@ namespace X_Wing_Visual_Builder.View
             showName.Name = "ShowNameButton";
             showName.Width = 130;
             showName.Height = 40;
-            showName.FontSize = 16;
+            showName.FontSize = Opt.ApResMod(16);
             showName.FontWeight = FontWeights.Bold;
             showName.Click += new RoutedEventHandler(ShowNameClicked);
             showName.UseLayoutRounding = true;

@@ -75,7 +75,7 @@ namespace X_Wing_Visual_Builder.View
 
             AlignableWrapPanel upgradeDetails = new AlignableWrapPanel();
             upgradeDetails.VerticalAlignment = VerticalAlignment.Center;
-            upgradeDetails.Margin = new Thickness(50, 0, 0, 0);
+            upgradeDetails.Margin = ScaledThicknessFactory.GetThickness(50, 0, 0, 0);
             Grid.SetColumn(upgradeDetails, 1);
             Grid.SetRow(upgradeDetails, 0);
             pageStructureGrid.Children.Add(upgradeDetails);
@@ -100,7 +100,12 @@ namespace X_Wing_Visual_Builder.View
             {
                 upgradeInfo.Inlines.Add(faq + "\r\n\r\n");
             }
-            
+
+            /*
+             * *Hit* *K Turn* *Left Turn*
+             * ~bold~
+             * {Title}
+            */
 
             Hyperlink hyperlink = new Hyperlink(new Run("Buy here"));
             hyperlink.NavigateUri = new Uri("http://stackoverflow.com");

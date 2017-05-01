@@ -94,6 +94,7 @@
     <Compile Include="Model\OutlinedTextBlock.cs" />
     <Compile Include="Model\Pages.cs" />
     <Compile Include="Model\Pilots.cs" />
+    <Compile Include="Model\ScaledThickness.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Ships.cs" />
     <Compile Include="Model\Stats.cs" />

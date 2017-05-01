@@ -56,10 +56,6 @@ namespace X_Wing_Visual_Builder.View
         private Canvas contentCanvas = new Canvas();
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
-        public Dictionary<int, CardCanvas> pilotCanvasCache = new Dictionary<int, CardCanvas>();
-        public Dictionary<int, CardCanvas> upgradeCanvasCache = new Dictionary<int, CardCanvas>();
-
-
         public BrowseCardsPage()
         {
             contentWrapPanel.Name = "contentWrapPanel";
@@ -71,18 +67,18 @@ namespace X_Wing_Visual_Builder.View
 
             StackPanel upgradesOrPilots = new StackPanel();
             upgradesOrPilots.VerticalAlignment = VerticalAlignment.Center;
-            upgradesOrPilots.Margin = new Thickness(8, 0, 8, 0);
+            upgradesOrPilots.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
 
             upgradesRadioButton.Name = "upgradesRadioButton";
             upgradesRadioButton.Content = "Upgrades";
-            upgradesRadioButton.FontSize = 14;
+            upgradesRadioButton.FontSize = Opt.ApResMod(14);
             upgradesRadioButton.Checked += IsUpgrade_Checked;
             upgradesRadioButton.IsChecked = true;
             upgradesOrPilots.Children.Add(upgradesRadioButton);
             
             pilotsRadioButton.Name = "pilotsRadioButton";
             pilotsRadioButton.Content = "Pilots";
-            pilotsRadioButton.FontSize = 14;
+            pilotsRadioButton.FontSize = Opt.ApResMod(14);
             pilotsRadioButton.Checked += IsUpgrade_Checked;
             pilotsRadioButton.IsChecked = false;
             upgradesOrPilots.Children.Add(pilotsRadioButton);
@@ -91,22 +87,22 @@ namespace X_Wing_Visual_Builder.View
 
             searchTextBox.Name = "searchTextBox";
             searchTextBox.TextChanged += textBox_TextChanged;
-            searchTextBox.FontSize = 14;
+            searchTextBox.FontSize = Opt.ApResMod(14);
             searchTextBox.Width = 170;
             searchTextBox.VerticalAlignment = VerticalAlignment.Center;
-            searchTextBox.Margin = new Thickness(8, 0, 8, 0);
+            searchTextBox.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
             manuNavigationWrapPanel.Children.Add(searchTextBox);
 
             searchDescriptionCheckBox.Name = "searchDescriptionCheckBox";
             searchDescriptionCheckBox.Content = "Search Description";
             searchDescriptionCheckBox.Checked += SearchDescription_Checked;
             searchDescriptionCheckBox.Unchecked += SearchDescription_Checked;
-            searchDescriptionCheckBox.FontSize = 14;
+            searchDescriptionCheckBox.FontSize = Opt.ApResMod(14);
             searchDescriptionCheckBox.IsChecked = false;
             searchDescriptionCheckBox.VerticalAlignment = VerticalAlignment.Center;
-            searchDescriptionCheckBox.Margin = new Thickness(8, 0, 8, 0);
+            searchDescriptionCheckBox.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
             manuNavigationWrapPanel.Children.Add(searchDescriptionCheckBox);
-            
+
             /*
             showAddRemoveButtonsCheckBox.Name = "showAddRemoveButtonsCheckBox";
             showAddRemoveButtonsCheckBox.Content = "Show Add Remove Buttons";
@@ -117,7 +113,7 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(showAddRemoveButtonsCheckBox, 40);
             manuNavigationCanvas.Children.Add(showAddRemoveButtonsCheckBox);
             */
-            manuNavigationWrapPanel.Height = 150;
+            manuNavigationWrapPanel.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 30);
 
             contentScrollViewer.Height = 1040 - manuNavigationWrapPanel.Height;
 
@@ -125,13 +121,13 @@ namespace X_Wing_Visual_Builder.View
             Button squads = new Button();
             squads.Name = "squads";
             squads.Content = "Squads";
-            squads.FontSize = 16;
+            squads.FontSize = Opt.ApResMod(16);
             squads.FontWeight = FontWeights.Bold;
             squads.Click += new RoutedEventHandler(squadsClicked);
             squads.UseLayoutRounding = true;
             squads.VerticalAlignment = VerticalAlignment.Center;
-            squads.Margin = new Thickness(8, 0, 8, 0);
-            squads.Padding = new Thickness(5, 2, 5, 2);
+            squads.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
+            squads.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
             manuNavigationWrapPanel.Children.Add(squads);
 
 
@@ -196,6 +192,7 @@ namespace X_Wing_Visual_Builder.View
             upgradesToDisplay = upgrades.ToList();
         }
 
+        /*
         public void AddUpgradeToCache(Upgrade upgrade)
         {
             if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
@@ -212,6 +209,7 @@ namespace X_Wing_Visual_Builder.View
                 pilotCanvasCache[pilot.id].AddCardClickedEvent(this);
             }
         }
+        */
 
         protected override void DisplayContent()
         {
@@ -252,10 +250,10 @@ namespace X_Wing_Visual_Builder.View
                 instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
                 instructions.Text += "'rebel', 'scrum' or 'imperial' will show cards of that faction\r\n";
                 instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship";
-                instructions.FontSize = 14;
+                instructions.FontSize = Opt.ApResMod(14);
                 instructions.LineHeight = 30;
                 instructions.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250));
-                instructions.Padding = new Thickness(20);
+                instructions.Padding = ScaledThicknessFactory.GetThickness(20);
                 contentWrapPanel.Children.Add(instructions);
             }
         }

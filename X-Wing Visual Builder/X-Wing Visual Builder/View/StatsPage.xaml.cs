@@ -32,7 +32,7 @@ namespace X_Wing_Visual_Builder.View
         {
             AlignableWrapPanel inputWrapPanel = new AlignableWrapPanel();
             inputWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
-            inputWrapPanel.Margin = new Thickness(0, 90, 0, 0);
+            inputWrapPanel.Margin = ScaledThicknessFactory.GetThickness(0, 90, 0, 0);
 
 
             RadioButton attackingRadioButton = new RadioButton();            

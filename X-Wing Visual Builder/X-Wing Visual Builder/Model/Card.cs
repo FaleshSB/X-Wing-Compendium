@@ -16,7 +16,7 @@ namespace X_Wing_Visual_Builder.Model
         public string description { get; set; }
         public List<string> faq { get; set; } = new List<string>();
         public Faction faction { get; set; }
-        protected List<CardCanvas> cardCanvasList = new List<CardCanvas>();
+        public List<CardCanvas> cardCanvasList = new List<CardCanvas>();
         private BitmapImage resizedCardImage = null;
         protected bool isUpgrade;
         protected Uri cardImageUri;
@@ -38,6 +38,15 @@ namespace X_Wing_Visual_Builder.Model
             CardCanvas cardCanvas = new CardCanvas(this, upgradeImage, width, height, margin, isUpgrade, currentPage);
             cardCanvasList.Add(cardCanvas);
             return cardCanvas;
+        }
+
+        public void GetCardImage()
+        {
+            resizedCardImage = new BitmapImage();
+            resizedCardImage.BeginInit();
+            resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
+            resizedCardImage.UriSource = cardImageUri;
+            resizedCardImage.EndInit();
         }
     }
 }

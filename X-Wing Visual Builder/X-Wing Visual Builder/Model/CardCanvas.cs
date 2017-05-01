@@ -33,9 +33,17 @@ namespace X_Wing_Visual_Builder.Model
         private DefaultPage currentPage;
         private bool isHidingInfoButton = false;
         private bool isUpgrade;
+        private double width;
+        private double height;
+        private Thickness margin;
 
         public CardCanvas(Card card, Image cardImage, double width, double height, Thickness margin, bool isUpgrade, DefaultPage currentPage = null)
         {
+            this.margin = margin;
+            this.cardImage = cardImage;
+            this.currentPage = currentPage;
+            this.height = height;
+            this.width = width;
             this.isUpgrade = isUpgrade;
             if(this.isUpgrade)
             {
@@ -45,11 +53,15 @@ namespace X_Wing_Visual_Builder.Model
             {
                 pilot = (Pilot)card;
             }
-            Construct(cardImage, width, height, margin, currentPage);
+            ConstructCanvas();
         }
 
-        private void Construct(Image cardImage, double width, double height, Thickness margin, DefaultPage currentPage = null)
+        public void ConstructCanvas()
         {
+            this.Children.Clear();
+
+            Thickness margin = ScaledThicknessFactory.GetThickness(this.margin.Left, this.margin.Top, this.margin.Right, this.margin.Bottom);
+
             double numberOwnedLeft;
             double numberOwnedTop;
             double addButtonLeft;
@@ -89,10 +101,7 @@ namespace X_Wing_Visual_Builder.Model
             Margin = margin;
             Width = Opt.ApResMod(width);
             Height = Opt.ApResMod(height);
-            
-            this.currentPage = currentPage;
-
-            this.cardImage = cardImage;
+                        
             this.cardImage.Width = Opt.ApResMod(width);
             this.cardImage.Height = Opt.ApResMod(height);
             this.cardImage.MouseEnter += new MouseEventHandler(MouseHover);

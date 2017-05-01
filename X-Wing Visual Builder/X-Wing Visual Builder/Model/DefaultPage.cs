@@ -79,7 +79,7 @@ namespace X_Wing_Visual_Builder.Model
             closeWindowButton.Name = "closeWindowButton";
             closeWindowButton.Width = 40;
             closeWindowButton.Height = 40;
-            closeWindowButton.FontSize = 16;
+            closeWindowButton.FontSize = Opt.ApResMod(16);
             closeWindowButton.FontWeight = FontWeights.Bold;
             closeWindowButton.Click += new RoutedEventHandler(ExitButton);
             closeWindowButton.UseLayoutRounding = true;
