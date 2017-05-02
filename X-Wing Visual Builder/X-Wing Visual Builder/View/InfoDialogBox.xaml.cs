@@ -32,7 +32,7 @@ namespace X_Wing_Visual_Builder.View
         {
             InitializeComponent();
             this.Height = 600;
-            this.Width = 360;
+            this.Width = 600;
             ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\main_background.png")));
             backgroundBrush.TileMode = TileMode.Tile;
             backgroundBrush.Stretch = Stretch.None;
@@ -65,53 +65,75 @@ namespace X_Wing_Visual_Builder.View
                 cardWidth = pilotCardWidth;
                 cardHeight = pilotCardHeight;
             }
-            Width += cardWidth + 20;
-            CardCanvas upgradeCanvas = cardInfo.GetCanvas(cardWidth, cardHeight, new Thickness(2, 2, 2, 2));
+            Width += cardWidth + 40;
+            CardCanvas upgradeCanvas = cardInfo.GetCanvas(cardWidth, cardHeight, new Thickness(20, 2, 2, 2));
             upgradeCanvas.HideInfoButton();
             Grid.SetColumn(upgradeCanvas, 0);
             Grid.SetRow(upgradeCanvas, 0);
             pageStructureGrid.Children.Add(upgradeCanvas);
             pageStructureGrid.ColumnDefinitions[0].Width = GridLength.Auto;
 
+
+            ScrollViewer upgradeInfoScrollViewer = new ScrollViewer();
+            Grid.SetColumn(upgradeInfoScrollViewer, 1);
+            Grid.SetRow(upgradeInfoScrollViewer, 0);
+            pageStructureGrid.Children.Add(upgradeInfoScrollViewer);
+
             AlignableWrapPanel upgradeDetails = new AlignableWrapPanel();
             upgradeDetails.VerticalAlignment = VerticalAlignment.Center;
-            upgradeDetails.Margin = ScaledThicknessFactory.GetThickness(50, 0, 0, 0);
-            Grid.SetColumn(upgradeDetails, 1);
-            Grid.SetRow(upgradeDetails, 0);
-            pageStructureGrid.Children.Add(upgradeDetails);
+            upgradeDetails.Margin = ScaledThicknessFactory.GetThickness(20, 0, 20, 0);
+            upgradeInfoScrollViewer.Content = upgradeDetails;
+
 
             TextBlock upgradeInfo = new TextBlock();
-            upgradeInfo.Width = 300;
+            upgradeInfo.FontSize = Opt.ApResMod(14);
+            upgradeInfo.Background = new SolidColorBrush(Color.FromRgb(230, 230, 230));
+            upgradeInfo.Padding = ScaledThicknessFactory.GetThickness(20);
             upgradeInfo.TextWrapping = TextWrapping.Wrap;
             upgradeInfo.VerticalAlignment = VerticalAlignment.Center;
+            upgradeInfo.Inlines.Add(new Run() { Text = "Availible In", FontWeight = FontWeights.Bold, FontSize = 18 });
+            upgradeInfo.Inlines.Add(new LineBreak());
             foreach (KeyValuePair<ExpansionType, int> expansionType in cardInfo.inExpansion)
             {
+                upgradeInfo.Inlines.Add(new LineBreak());
                 if (expansionType.Value == 1)
                 {
-                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + "\r\n");
+                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name);
                 }
                 else
                 {
-                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + " (" + expansionType.Value.ToString() + ")\r\n");
+                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + " (" + expansionType.Value.ToString() + ")");
                 }
             }
-            upgradeInfo.Inlines.Add("\r\n");
-            foreach (string faq in cardInfo.faq)
+            if(cardInfo.faq.Count > 0)
             {
-                upgradeInfo.Inlines.Add(faq + "\r\n\r\n");
+                upgradeInfo.Inlines.Add(new LineBreak());
+                upgradeInfo.Inlines.Add(new LineBreak());
+                upgradeInfo.Inlines.Add(new Run() { Text = "FAQ", FontWeight = FontWeights.Bold, FontSize = 18 });
+                foreach (string faq in cardInfo.faq)
+                {
+
+
+
+
+                    upgradeInfo.Inlines.Add(new LineBreak());
+                    upgradeInfo.Inlines.Add(new LineBreak());
+                    upgradeInfo.Inlines.Add(faq);
+                }
             }
+            
 
             /*
              * *Hit* *K Turn* *Left Turn*
              * ~bold~
              * {Title}
-            */
+            
 
             Hyperlink hyperlink = new Hyperlink(new Run("Buy here"));
             hyperlink.NavigateUri = new Uri("http://stackoverflow.com");
             hyperlink.RequestNavigate += new RequestNavigateEventHandler(ClickedLink);
 
-            upgradeInfo.Inlines.Add(hyperlink);
+            upgradeInfo.Inlines.Add(hyperlink);*/
             upgradeDetails.Children.Add(upgradeInfo);
         }
 
