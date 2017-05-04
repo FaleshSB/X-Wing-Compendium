@@ -112,14 +112,13 @@ namespace X_Wing_Visual_Builder.Model
 
         public static Pilot GetRandomPilot()
         {
-            Random rand = new Random();
             List<int> keyList = new List<int>(pilots.Keys);
-            Pilot randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
+            Pilot randomPilot = pilots[keyList[Rng.Next(keyList.Count)]];
             while (true)
             {
                 if (randomPilot.hasAbility == false)
                 {
-                    randomPilot = pilots[keyList[rand.Next(keyList.Count)]];
+                    randomPilot = pilots[keyList[Rng.Next(keyList.Count)]];
                 }
                 else
                 {

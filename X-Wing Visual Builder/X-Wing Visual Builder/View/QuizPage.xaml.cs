@@ -23,12 +23,14 @@ namespace X_Wing_Visual_Builder.View
     {
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
-        //private int upgradeCardWidth = 166;
-        //private int upgradeCardHeight = 255;
-        private Pilot currentRandomPilot;
+        private int upgradeCardWidth = 220;
+        private int upgradeCardHeight = 338;
+        private Card currentRandomCard;
         private bool isShowingName = false;
-        private Canvas contentCanvas = new Canvas();
-        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
+        private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
+        private CardCanvas randomCard;
+        private bool isShowingManeuverCard = false;
+        private Ship currentRandomShip;
 
         public QuizPage()
         {
@@ -37,20 +39,24 @@ namespace X_Wing_Visual_Builder.View
             contentScrollViewer.Content = contentWrapPanel;
 
             Pages.pages[PageName.Quiz] = this;
-
-            contentCanvas.Name = "contentCanvas";
-            contentWrapPanel.Children.Add(contentCanvas);
             InitializeComponent();
-            contentCanvas.Width = 1800;
-            contentCanvas.Height = 1000;
-            currentRandomPilot = Pilots.GetRandomPilot();
+
+            GetNewCard();
+        }
+
+        private void GetNewCard()
+        {
+            int randomNumber = Rng.Next(3);
+            if (randomNumber == 0) { currentRandomCard = Pilots.GetRandomPilot(); isShowingManeuverCard = false; }
+            else if (randomNumber == 1) { currentRandomShip = Ships.GetRandomShip(); isShowingManeuverCard = true; }
+            else { currentRandomCard = Upgrades.GetRandomUpgrade(); isShowingManeuverCard = false; }
         }
         
         private void ShowNameClicked(object sender, RoutedEventArgs e)
         {
             if (isShowingName == true)
             {
-                currentRandomPilot = Pilots.GetRandomPilot();
+                GetNewCard();
             }
 
             isShowingName = !isShowingName;
@@ -59,12 +65,53 @@ namespace X_Wing_Visual_Builder.View
         
         protected override void DisplayContent()
         {
-            contentCanvas.Children.Clear();
+            contentWrapPanel.Children.Clear();
+            StackPanel contentStackPanel = new StackPanel();
+            contentStackPanel.Orientation = Orientation.Vertical;
+            contentStackPanel.VerticalAlignment = VerticalAlignment.Center;
+            contentWrapPanel.Children.Add(contentStackPanel);
+            TextBlock shipName = new TextBlock();
+
+            if (isShowingManeuverCard)
+            {
+                List<string> shipNames = new List<string>();
+                foreach(Ship ship in Ships.maneuverCardIndexedShipList[currentRandomShip.uniqueManeuverId])
+                {
+                    shipNames.Add(ship.name);
+                }
+
+                foreach (string thisShipName in shipNames.Distinct())
+                {
+                    shipName.Inlines.Add(thisShipName);
+                    shipName.Inlines.Add(new LineBreak());
+                }
+                shipName.HorizontalAlignment = HorizontalAlignment.Center;
+                shipName.VerticalAlignment = VerticalAlignment.Bottom;
+                shipName.Height = 90;
+                shipName.FontSize = 20;
+                contentStackPanel.Children.Add(shipName);
+
+                ManeuverCard randomManeuverCard = currentRandomShip.GetManeuverCard(30);
+                randomManeuverCard.Margin = new Thickness(0, 0, 0, 20);
+
+                shipName.Margin = new Thickness(0, 300 + (pilotCardHeight - (randomManeuverCard.Height + shipName.Height + 20)), 0, 20);
+                contentStackPanel.Children.Add(randomManeuverCard);
+            }
+            else
+            {
+                if (currentRandomCard.GetType() == typeof(Pilot))
+                {
+                    randomCard = currentRandomCard.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(0, 0, 0, 20), this);
+                    contentStackPanel.Margin = new Thickness(0, 300, 0, 0);
+                }
+                else
+                {
+                    randomCard = currentRandomCard.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(0, 0, 0, 20), this);
+                    contentStackPanel.Margin = new Thickness(0, 300 + (pilotCardHeight - upgradeCardHeight), 0, 0);
+                }
+                contentStackPanel.Children.Add(randomCard);
+            }
             
-            CardCanvas randomPilotCard = currentRandomPilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(0,0,0,0), this);
-            Canvas.SetLeft(randomPilotCard, 760);
-            Canvas.SetTop(randomPilotCard, 360);
-            contentCanvas.Children.Add(randomPilotCard);
 
             Button showName = new Button();
             showName.Name = "ShowNameButton";
@@ -78,23 +125,16 @@ namespace X_Wing_Visual_Builder.View
             if (isShowingName == false)
             {
                 showName.Content = "Show Name";
-
-                Rectangle blueRectangle = new Rectangle();
-                blueRectangle.Height = pilotCardHeight * 0.46;
-                blueRectangle.Width = pilotCardWidth;
-                blueRectangle.Fill = new SolidColorBrush(Color.FromRgb(50, 50, 50));
-                blueRectangle.UseLayoutRounding = true;
-                Canvas.SetLeft(blueRectangle, 760);
-                Canvas.SetTop(blueRectangle, 360);
-                contentCanvas.Children.Add(blueRectangle);
+                if(isShowingManeuverCard) { shipName.Visibility = Visibility.Hidden; }
+                else { randomCard.HideCardIdentifiers(); }            
             }
             else
             {
-                showName.Content = "Next Pilot";
+                showName.Content = "Next Card";
+                if (isShowingManeuverCard) { shipName.Visibility = Visibility.Visible; }
+                else { randomCard.ShowCardIdentifiers(); }
             }
-            Canvas.SetLeft(showName, 850);
-            Canvas.SetTop(showName, 780);
-            contentCanvas.Children.Add(showName);
+            contentStackPanel.Children.Add(showName);
         }
     }
 }

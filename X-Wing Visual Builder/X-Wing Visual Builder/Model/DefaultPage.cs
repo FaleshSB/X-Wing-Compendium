@@ -93,7 +93,7 @@ namespace X_Wing_Visual_Builder.Model
 
             this.Loaded += PageLoaded;
         }
-
+        
         protected void ExitButton(object sender, RoutedEventArgs e)
         {
             SystemCommands.CloseWindow(Window.GetWindow(this));

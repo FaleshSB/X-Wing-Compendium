@@ -32,10 +32,11 @@ namespace X_Wing_Visual_Builder.Model
         public int shields;
         public List<Action> actions = new List<Action>();
         public Faction faction;
-        Dictionary<int, List<int>> maneuvers;
+        public Dictionary<int, List<int>> maneuvers;
+        public string uniqueManeuverId;
 
         public Ship(int id, ShipType shipType, string name, ShipSize shipSize, bool isTIE, bool isXWing, int attack, int agility, int hull, int shields,
-                    List<Action> actions, Faction faction, Dictionary<int, List<int>> maneuvers)
+                    List<Action> actions, Faction faction, Dictionary<int, List<int>> maneuvers, string uniqueManeuverId)
         {
             this.id = id;
             this.shipType = shipType;
@@ -50,6 +51,7 @@ namespace X_Wing_Visual_Builder.Model
             this.actions = actions;
             this.faction = faction;
             this.maneuvers = maneuvers;
+            this.uniqueManeuverId = uniqueManeuverId;
         }
 
         public ManeuverCard GetManeuverCard(double size)
@@ -68,7 +70,9 @@ namespace X_Wing_Visual_Builder.Model
 
         private BitmapImage CombineImages()
         {
-            System.Drawing.Image testSize = System.Drawing.Image.FromFile(@"D:\\Documents\\Game Stuff\\X-Wing\\Maneuvers\\0.png");
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            string filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\Misc\\";
+            System.Drawing.Image testSize = System.Drawing.Image.FromFile(filteredLocation + "0.png");
             
             int maneuverHeight = Convert.ToInt32(testSize.Height);
             int finalManeuverCardWidth = Convert.ToInt32(testSize.Width * maneuvers[2].Count);
@@ -85,7 +89,7 @@ namespace X_Wing_Visual_Builder.Model
                 int currentWidth = 0;
                 foreach (int maneuverName in maneuverRow.Value)
                 {
-                    System.Drawing.Image img = System.Drawing.Image.FromFile(@"D:\\Documents\\Game Stuff\\X-Wing\\Maneuvers\\" + maneuverName.ToString() + ".png");
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(filteredLocation + maneuverName.ToString() + ".png");
                     if (nIndex == 0)
                     {
                         g.DrawImage(img, new System.Drawing.Point(0, currentHeight));

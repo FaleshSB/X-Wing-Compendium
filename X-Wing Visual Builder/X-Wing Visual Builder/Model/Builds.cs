@@ -77,9 +77,15 @@ namespace X_Wing_Visual_Builder.Model
         {
             Build newBuild = new Build();
             newBuild.faction = faction;
-            int newBuildId = builds.OrderByDescending(build => build.uniqueBuildId).ToArray()[0].uniqueBuildId + 1;
+            int newBuildId = 1;
+            int displayOrder = 20;
+            if (builds.Count > 0)
+            {
+                newBuildId = builds.OrderByDescending(build => build.uniqueBuildId).ToArray()[0].uniqueBuildId + 1;
+                displayOrder = builds.OrderByDescending(build => build.displayOrder).ToList()[0].displayOrder + 10;
+            }
             newBuild.uniqueBuildId = newBuildId;
-            newBuild.displayOrder = builds.OrderByDescending(build => build.displayOrder).ToList()[0].displayOrder + 10;
+            newBuild.displayOrder = displayOrder;
             builds.Add(newBuild);
             SaveBuilds();
             return newBuildId;

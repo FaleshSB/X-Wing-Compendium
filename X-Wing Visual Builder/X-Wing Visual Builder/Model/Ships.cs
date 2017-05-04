@@ -12,6 +12,7 @@ namespace X_Wing_Visual_Builder.Model
     static class Ships
     {
         public static Dictionary<ShipType, Dictionary<Faction, Ship>> ships = new Dictionary<ShipType, Dictionary<Faction, Ship>>();
+        public static Dictionary<string, List<Ship>> maneuverCardIndexedShipList = new Dictionary<string, List<Ship>>();
 
         static Ships()
         {
@@ -34,6 +35,7 @@ namespace X_Wing_Visual_Builder.Model
                     }
 
                     string[] maneuverDistanceSplit = fields[12].Split('|');
+                    string uniqueManeuverId = "";
                     Dictionary<int, List<int>> maneuvers = new Dictionary<int, List<int>>();
                     foreach (string maneuverDistance in maneuverDistanceSplit)
                     {
@@ -43,16 +45,36 @@ namespace X_Wing_Visual_Builder.Model
                         foreach (string maneuver in maneuverSplit)
                         {
                             if(isDistanceKey) { isDistanceKey = false; maneuvers[maneuverDistanceKey] = new List<int>(); continue; }
+
                             maneuvers[maneuverDistanceKey].Add(Int32.Parse(maneuver));
+                            uniqueManeuverId += maneuver;
                         }
                     }
 
                     if (ships.ContainsKey((ShipType)Int32.Parse(fields[1])) == false) { ships[(ShipType)Int32.Parse(fields[1])] = new Dictionary<Faction, Ship>(); }
-                    ships[(ShipType)Int32.Parse(fields[1])][(Faction)Int32.Parse(fields[11])] = new Ship(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]),
-                        fields[2], (ShipSize)Int32.Parse(fields[3]), Convert.ToBoolean(Int32.Parse(fields[4])), Convert.ToBoolean(Int32.Parse(fields[5])),
-                        Int32.Parse(fields[6]), Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]), maneuvers);
+
+                    Ship currentShip = new Ship(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), fields[2], (ShipSize)Int32.Parse(fields[3]), 
+                                                Convert.ToBoolean(Int32.Parse(fields[4])), Convert.ToBoolean(Int32.Parse(fields[5])), Int32.Parse(fields[6]),
+                                                Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]), maneuvers, uniqueManeuverId);
+
+                    ships[(ShipType)Int32.Parse(fields[1])][(Faction)Int32.Parse(fields[11])] = currentShip;
+
+                    if(maneuverCardIndexedShipList.ContainsKey(uniqueManeuverId) == false) { maneuverCardIndexedShipList[uniqueManeuverId] = new List<Ship>(); }
+
+                    maneuverCardIndexedShipList[uniqueManeuverId].Add(currentShip);
                 }
             }
+        }
+
+        public static Ship GetRandomShip()
+        {
+            Array values = Enum.GetValues(typeof(ShipType));
+            ShipType randomShipType = (ShipType)values.GetValue(Rng.Next(values.Length));
+            while(ships.ContainsKey(randomShipType) == false)
+            {
+                randomShipType = (ShipType)values.GetValue(Rng.Next(values.Length));
+            }
+            return ships[randomShipType].First().Value;
         }
     }
 }

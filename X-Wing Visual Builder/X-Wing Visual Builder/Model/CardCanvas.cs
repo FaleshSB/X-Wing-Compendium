@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using X_Wing_Visual_Builder.View;
 using System.Windows.Data;
+using System.Windows.Shapes;
 
 namespace X_Wing_Visual_Builder.Model
 {
@@ -36,9 +37,13 @@ namespace X_Wing_Visual_Builder.Model
         private double width;
         private double height;
         private Thickness margin;
+        private string filteredLocation;
+        private Rectangle identifierHider = new Rectangle();
 
         public CardCanvas(Card card, Image cardImage, double width, double height, Thickness margin, bool isUpgrade, DefaultPage currentPage = null)
         {
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\Misc\\";
             this.margin = margin;
             this.cardImage = cardImage;
             this.currentPage = currentPage;
@@ -53,6 +58,7 @@ namespace X_Wing_Visual_Builder.Model
             {
                 pilot = (Pilot)card;
             }
+            
             ConstructCanvas();
         }
 
@@ -95,13 +101,13 @@ namespace X_Wing_Visual_Builder.Model
                 infoButtonLeft = Opt.ApResMod(0 * pcntDif);
                 infoButtonTop = Opt.ApResMod(0 * pcntDif);
             }
-            miniButtonSize = Math.Round(21 * pcntDif);
+            miniButtonSize = Opt.ApResMod(21);
             
 
             Margin = margin;
             Width = Opt.ApResMod(width);
             Height = Opt.ApResMod(height);
-                        
+
             this.cardImage.Width = Opt.ApResMod(width);
             this.cardImage.Height = Opt.ApResMod(height);
             this.cardImage.MouseEnter += new MouseEventHandler(MouseHover);
@@ -121,7 +127,7 @@ namespace X_Wing_Visual_Builder.Model
             numberOwned.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             numberOwned.FontWeight = FontWeights.ExtraBold;
             numberOwned.Fill = new SolidColorBrush(Color.FromRgb(255, 207, 76));
-            numberOwned.FontSize = Opt.ApResMod(22 * pcntDif);
+            numberOwned.FontSize = Opt.ApResMod(22);
             numberOwned.FontFamily = new FontFamily("Verdana");
             if (currentPage != null) { numberOwned.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
             numberOwned.MouseEnter += new MouseEventHandler(MouseHover);
@@ -130,7 +136,7 @@ namespace X_Wing_Visual_Builder.Model
             SetTop(numberOwned, numberOwnedTop);
             Children.Add(numberOwned);
 
-            addButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\addbutton.png"));
+            addButton.Source = new BitmapImage(new Uri(filteredLocation + "addbutton.png"));
             addButton.Height = Opt.ApResMod(miniButtonSize);
             addButton.Width = Opt.ApResMod(miniButtonSize);
             addButton.UseLayoutRounding = true;
@@ -145,7 +151,7 @@ namespace X_Wing_Visual_Builder.Model
             SetTop(addButton, addButtonTop);
             Children.Add(addButton);
 
-            removeButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\removebutton.png"));
+            removeButton.Source = new BitmapImage(new Uri(filteredLocation + "removebutton.png"));
             removeButton.Height = Opt.ApResMod(miniButtonSize);
             removeButton.Width = Opt.ApResMod(miniButtonSize);
             removeButton.UseLayoutRounding = true;
@@ -160,7 +166,8 @@ namespace X_Wing_Visual_Builder.Model
             SetTop(removeButton, removeButtonTop);
             Children.Add(removeButton);
 
-            infoButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\infobutton.png"));
+            infoButton.Source = new BitmapImage(new Uri(filteredLocation + "infobutton.png"));
+            //infoButton.Source = new BitmapImage(new Uri(@"C:\Users\Falesh\Source\Repos\X-Wing\X-Wing Visual Builder\X-Wing Visual Builder\bin\Debug\Misc\infobutton.png"));
             infoButton.Height = Opt.ApResMod(miniButtonSize);
             infoButton.Width = Opt.ApResMod(miniButtonSize);
             infoButton.UseLayoutRounding = true;
@@ -174,6 +181,25 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(infoButton, infoButtonLeft);
             SetTop(infoButton, infoButtonTop);
             Children.Add(infoButton);
+
+            if(isUpgrade) { identifierHider.Height = Opt.ApResMod(height) * 0.4142259414; }
+            else { identifierHider.Height = Opt.ApResMod(height) * 0.4634146341; }
+            identifierHider.Width = Opt.ApResMod(width);
+            identifierHider.Fill = new SolidColorBrush(Color.FromRgb(50, 50, 50));
+            identifierHider.UseLayoutRounding = true;
+            identifierHider.Visibility = Visibility.Hidden;
+            SetLeft(this.identifierHider, 0);
+            SetTop(this.identifierHider, 0);
+            Children.Add(this.identifierHider);
+        }
+
+        public void HideCardIdentifiers()
+        {
+            identifierHider.Visibility = Visibility.Visible;
+        }
+        public void ShowCardIdentifiers()
+        {
+            identifierHider.Visibility = Visibility.Hidden;
         }
 
         public void HideInfoButton()
@@ -203,7 +229,7 @@ namespace X_Wing_Visual_Builder.Model
             this.deleteCardPage = deleteUpgradePage;
             this.uniqueBuildId = uniqueBuildId;
 
-            deleteButton.Source = new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\deletebutton.png"));
+            deleteButton.Source = new BitmapImage(new Uri(filteredLocation + "deletebutton.png"));
             deleteButton.Height = Opt.ApResMod(miniButtonSize);
             deleteButton.Width = Opt.ApResMod(miniButtonSize);
             deleteButton.UseLayoutRounding = true;

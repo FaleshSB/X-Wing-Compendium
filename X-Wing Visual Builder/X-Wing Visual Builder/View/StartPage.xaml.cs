@@ -30,11 +30,15 @@ namespace X_Wing_Visual_Builder.View
         private string calculateStatsButtonName = "calculate_stats";
         private string quizButtonName = "quiz";
         private Canvas contentCanvas = new Canvas();
+        private string filteredLocation;
 
         private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public StartPage()
         {
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\Misc\\";
+
             contentWrapPanel.Name = "contentWrapPanel";
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
@@ -57,7 +61,7 @@ namespace X_Wing_Visual_Builder.View
         {
             Image button = new Image();
             button.Name = buttonName;
-            button.Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\buttons\" + buttonName + ".png"), buttonSize);
+            button.Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + buttonName + ".png"), buttonSize);
             button.Width = buttonSize.Width;
             button.Height = buttonSize.Height;
             button.UseLayoutRounding = true;
@@ -72,17 +76,17 @@ namespace X_Wing_Visual_Builder.View
         private void ButtonHover(object sender, MouseEventArgs e)
         {
             Image button = (Image)sender;
-            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\buttons\" + button.Name + "_hover.png"), buttonSize);
+            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + "_hover.png"), buttonSize);
         }
         private void ButtonStopHover(object sender, MouseEventArgs e)
         {
             Image button = (Image)sender;
-            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\buttons\" + button.Name + ".png"), buttonSize);
+            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + ".png"), buttonSize);
         }
         private async void ButtonClicked(object sender, MouseButtonEventArgs e)
         {
             Image button = (Image)sender;
-            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(@"D:\Documents\Game Stuff\X-Wing\buttons\" + button.Name + "_pressed.png"), buttonSize);
+            buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + "_pressed.png"), buttonSize);
             await Task.Delay(120);
 
             if(button.Name == quizButtonName)

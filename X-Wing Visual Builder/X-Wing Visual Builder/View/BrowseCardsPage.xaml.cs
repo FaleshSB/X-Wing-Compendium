@@ -55,8 +55,7 @@ namespace X_Wing_Visual_Builder.View
         {
             this.build = build;
         }
-        
-        private Canvas contentCanvas = new Canvas();
+
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public BrowseCardsPage()
@@ -64,9 +63,7 @@ namespace X_Wing_Visual_Builder.View
             contentWrapPanel.Name = "contentWrapPanel";
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
-
-            contentCanvas.Name = "contentCanvas";
-            contentWrapPanel.Children.Add(contentCanvas);
+            
 
             StackPanel upgradesOrPilots = new StackPanel();
             upgradesOrPilots.VerticalAlignment = VerticalAlignment.Center;
@@ -261,7 +258,9 @@ namespace X_Wing_Visual_Builder.View
             if(contentWrapPanel.Children.Count == 0)
             {
                 TextBlock instructions = new TextBlock();
-                instructions.Text = "'PS8' or 'PS4-7', using any numbers, will show pilots of, or between, that Pilot Skill\r\n";
+                instructions.Text = "Enter any word in the search box above to find Upgraes/Pilots with that name\r\n";
+                instructions.Text += "'all' will show all the Upgrades or Pilots depending on which is selected\r\n";
+                instructions.Text += "'PS8' or 'PS4-7', using any numbers, will show pilots of, or between, that Pilot Skill\r\n";
                 instructions.Text += "'8' or '4-7', using any numbers, will show cards of, or between, that cost\r\n";
                 instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
                 instructions.Text += "'rebel', 'scrum' or 'imperial' will show cards of that faction\r\n";
@@ -298,8 +297,8 @@ namespace X_Wing_Visual_Builder.View
             for (int i = 0; i < filteredSearchWords.Count; i++)
             {
                 filteredSearchWords[i] = filteredSearchWords[i].ToLower();
+                if (filteredSearchWords[i] == "ept") { filteredSearchWords[i] = "elite"; }
             }
-
 
             if (filteredSearchText == "" && isAddingUpgrade) { previousUpgradeSearchResultIds = "it was changed, really!"; DisplayContent(); }
             if(filteredSearchText == "" && (isAddingPilot || isSwappingPilot)) { previousPilotSearchResultIds = "it was changed, really!"; DisplayContent(); }

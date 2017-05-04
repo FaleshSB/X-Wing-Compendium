@@ -112,13 +112,82 @@ namespace X_Wing_Visual_Builder.View
                 upgradeInfo.Inlines.Add(new Run() { Text = "FAQ", FontWeight = FontWeights.Bold, FontSize = 18 });
                 foreach (string faq in cardInfo.faq)
                 {
-
-
-
-
                     upgradeInfo.Inlines.Add(new LineBreak());
                     upgradeInfo.Inlines.Add(new LineBreak());
-                    upgradeInfo.Inlines.Add(faq);
+                    string[] boldSplit = faq.Split('~');
+                    int i = 0;
+                    foreach (string boldSplitElement in boldSplit)
+                    {
+                        if(i % 2 != 0)
+                        {
+                            upgradeInfo.Inlines.Add(new Run() { Text = boldSplitElement, FontWeight = FontWeights.Bold });
+                        }
+                        else
+                        {
+                            string[] headingSplit = boldSplitElement.Split('{');
+                            int y = 0;
+                            foreach (string headingSplitElement in headingSplit)
+                            {
+                                if (y % 2 != 0)
+                                {
+                                    upgradeInfo.Inlines.Add(new Run() { Text = headingSplitElement, FontWeight = FontWeights.Bold, FontSize = 18 });
+                                }
+                                else
+                                {
+                                    string[] manouverSplit = headingSplitElement.Split('*');
+                                    int z = 0;
+                                    foreach (string manouverSplitElement in manouverSplit)
+                                    {
+                                        if (z % 2 != 0)
+                                        {
+                                            string manouver = "";
+                                            switch (manouverSplitElement.ToLower())
+                                            {
+                                                case "straight":
+                                                    manouver = "8";
+                                                    break;
+                                                case "left turn":
+                                                    manouver = "4";
+                                                    break;
+                                                case "right turn":
+                                                    manouver = "6";
+                                                    break;
+                                                case "k turn":
+                                                    manouver = "2";
+                                                    break;
+                                                case "hit":
+                                                    manouver = "d";
+                                                    break;
+                                                case "crit":
+                                                    manouver = "c";
+                                                    break;
+                                                case "evade":
+                                                    manouver = "e";
+                                                    break;
+                                                case "focus":
+                                                    manouver = "f";
+                                                    break;
+                                                case "turret":
+                                                    manouver = "U";
+                                                    break;
+                                                case "elite":
+                                                    manouver = "E";
+                                                    break;
+                                            }
+                                            upgradeInfo.Inlines.Add(new Run() { Text = manouver, FontFamily = new FontFamily("x-wing-symbols") });
+                                        }
+                                        else
+                                        {
+                                            upgradeInfo.Inlines.Add(manouverSplitElement);
+                                        }
+                                        z++;
+                                    }
+                                }
+                                y++;
+                            }
+                        }
+                        i++;
+                    }
                 }
             }
             
