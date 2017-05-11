@@ -61,8 +61,7 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to id£name
-        ///1£Origional Core Set
+        ///   Looks up a localized string similar to 1£Origional Core Set
         ///2£Millennium Falcon
         ///3£Slave I
         ///4£A-Wing
@@ -92,7 +91,7 @@ namespace X_Wing_Visual_Builder.Properties {
         ///28£StarViper
         ///29£M3-A Interceptor
         ///30£Ghost
-        ///31£Imper [rest of string was truncated]&quot;;.
+        ///31£Imperial Assau [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Expansions {
             get {
@@ -102,10 +101,7 @@ namespace X_Wing_Visual_Builder.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 3801£34£1£&quot;Backdraft&quot;£7£When attacking a ship inside your auxiliary firing arc, you may add 1 critical result.£2,11,5,18£27££3£1£48
-        ///1801£29£1£&quot;Backstabber&quot;£6£When attacking from outside the defender&apos;s firing arc, roll 1 additional attack die.££16££3£1£11
-        ///600£25£1£&quot;Blue Ace&quot;£5£When performing a boost action, you may use the [1 left] or [1 right] turn template.£4,3,18£27££2£1£16
-        ///1803£29£1£&quot;Chaser&quot;£3£When another friendly ship at Range 1 spends a focus token, assign a focus token to your ship.££14££3£1£31
-        /// [rest of string was truncated]&quot;;.
+        ///1801£29£1£&quot;Backstabber&quot;£6£When attacking from outside the defender&apos;s firing arc, roll 1 additional attack die.££16£&quot;Backstabber&quot; only rolls the additional attack die granted by his ability if no portion of his base is inside any of the defender&apos;s firing arcs.|A ship with a turret primary or a *Turret* secondary weapon is still affected by &quot;Backstabber&quot; if no portion of his bas [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PilotDatabase {
             get {

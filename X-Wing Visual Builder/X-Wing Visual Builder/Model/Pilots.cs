@@ -128,26 +128,39 @@ namespace X_Wing_Visual_Builder.Model
             return randomPilot;
         }
 
-        public static List<Pilot> GetPilots(Faction faction)
+        public static List<Pilot> GetPilots(Build build)
         {
             List<Pilot> pilotsToReturn = new List<Pilot>();
-            foreach (KeyValuePair<int, Pilot> entry in pilots)
+            List<Pilot> uniquePilotsInBuild = new List<Pilot>();
+            foreach(UniquePilot uniquePilot in build.pilots.Values)
             {
-                if (entry.Value.faction == faction)
+                if(uniquePilot.pilot.isUnique) { uniquePilotsInBuild.Add(uniquePilot.pilot); }
+            }
+
+            foreach (Pilot pilot in pilots.Values)
+            {
+                
+                if (pilot.faction == build.faction && uniquePilotsInBuild.Contains(pilot) == false)
                 {
-                    pilotsToReturn.Add(entry.Value);
+                    pilotsToReturn.Add(pilot);
                 }
             }
             return pilotsToReturn;
         }
-        public static List<Pilot> GetPilots(Faction faction, Ship ship)
+        public static List<Pilot> GetPilots(Build build, UniquePilot uniquePilot)
         {
             List<Pilot> pilotsToReturn = new List<Pilot>();
-            foreach (KeyValuePair<int, Pilot> entry in pilots)
+            List<Pilot> uniquePilotsInBuild = new List<Pilot>();
+            foreach (UniquePilot uniquePilotToTest in build.pilots.Values)
             {
-                if (entry.Value.faction == faction && entry.Value.ship.shipType == ship.shipType)
+                if (uniquePilotToTest.pilot.isUnique && uniquePilotToTest.pilot != uniquePilot.pilot) { uniquePilotsInBuild.Add(uniquePilotToTest.pilot); }
+            }
+            
+            foreach (Pilot pilot in pilots.Values)
+            {
+                if (pilot.faction == build.faction && pilot.ship.shipType == uniquePilot.pilot.ship.shipType && uniquePilotsInBuild.Contains(pilot) == false)
                 {
-                    pilotsToReturn.Add(entry.Value);
+                    pilotsToReturn.Add(pilot);
                 }
             }
             return pilotsToReturn;

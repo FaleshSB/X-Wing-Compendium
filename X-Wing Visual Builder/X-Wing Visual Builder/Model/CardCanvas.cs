@@ -191,6 +191,25 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(this.identifierHider, 0);
             SetTop(this.identifierHider, 0);
             Children.Add(this.identifierHider);
+
+            /*
+            Label cost = new Label();
+            if (this.isUpgrade)
+            {
+                cost.Content = upgrade.cost;
+            }
+            else
+            {
+                cost.Content = pilot.cost;
+            }
+            cost.FontWeight = FontWeights.Bold;
+            cost.Foreground = new SolidColorBrush(Colors.White);
+            cost.Background = new SolidColorBrush(Colors.Black);
+            cost.FontSize = 17;
+            SetRight(cost,50);
+            SetBottom(cost, 0);
+            Children.Add(cost);
+            */
         }
 
         public void HideCardIdentifiers()

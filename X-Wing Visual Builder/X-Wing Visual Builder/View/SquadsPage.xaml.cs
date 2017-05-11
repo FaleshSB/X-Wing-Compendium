@@ -203,7 +203,27 @@ namespace X_Wing_Visual_Builder.View
             Builds.DuplicateBuild(addUpgradeButton.uniqueBuildId);
             DisplayContent();
         }
-        
+
+        private void CopyBuildAsTextClicked(object sender, RoutedEventArgs e)
+        {
+            BuildPilotUpgrade CopyBuildAsText = (BuildPilotUpgrade)sender;
+            Build build = Builds.GetBuild(CopyBuildAsText.uniqueBuildId);
+            string buildText = "";
+            foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
+            {
+                buildText += uniquePilot.pilot.name + " (" + uniquePilot.pilot.cost.ToString() + ")" + Environment.NewLine;
+                foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
+                {
+                    buildText += "\t" + upgrade.name + " (" + upgrade.cost.ToString() + ")" + Environment.NewLine;
+                }
+                buildText += "\tTotal Cost: " + uniquePilot.totalCost.ToString();
+                buildText += Environment.NewLine;
+                buildText += Environment.NewLine;
+            }
+            buildText = buildText.Trim();
+            Clipboard.SetText(buildText);
+        }
+
         protected override void DisplayContent()
         {
             contentWrapPanel.Children.Clear();
@@ -282,7 +302,7 @@ namespace X_Wing_Visual_Builder.View
                 MoveBuildUp.FontWeight = FontWeights.Bold;
                 MoveBuildUp.Click += new RoutedEventHandler(MoveBuildUpClicked);
                 MoveBuildUp.Content = "Up";
-                MoveBuildUp.Margin = ScaledThicknessFactory.GetThickness(8, 0,8,0);
+                MoveBuildUp.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
                 MoveBuildUp.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
                 spacerWrapPanel.Children.Add(MoveBuildUp);
 
@@ -297,6 +317,17 @@ namespace X_Wing_Visual_Builder.View
                 MoveBuildDown.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
                 spacerWrapPanel.Children.Add(MoveBuildDown);
 
+                BuildPilotUpgrade CopyBuildAsText;
+                CopyBuildAsText = new BuildPilotUpgrade();
+                CopyBuildAsText.uniqueBuildId = build.uniqueBuildId;
+                CopyBuildAsText.FontSize = Opt.ApResMod(16);
+                CopyBuildAsText.FontWeight = FontWeights.Bold;
+                CopyBuildAsText.Click += new RoutedEventHandler(CopyBuildAsTextClicked);
+                CopyBuildAsText.Content = "Copy Build As Text";
+                CopyBuildAsText.Margin = ScaledThicknessFactory.GetThickness(8, 0, 0, 0);
+                CopyBuildAsText.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
+                spacerWrapPanel.Children.Add(CopyBuildAsText);
+
                 Canvas bottomSpacer = new Canvas();
                 bottomSpacer.Width = 9999;
                 bottomSpacer.Height = 1;
@@ -305,9 +336,7 @@ namespace X_Wing_Visual_Builder.View
                 buildWrapPanel.Children.Add(spacerWrapPanel);
 
 
-                List<UniquePilot> pilots = build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList();
-
-                foreach (UniquePilot uniquePilot in pilots)
+                foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
                 {
                     StackPanel pilotAndUpgradeInfoStackPanel = new StackPanel();
                     pilotAndUpgradeInfoStackPanel.Orientation = Orientation.Horizontal;

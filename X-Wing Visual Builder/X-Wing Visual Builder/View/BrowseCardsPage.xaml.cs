@@ -42,8 +42,6 @@ namespace X_Wing_Visual_Builder.View
         private bool isAnyWordsChecked = false;
         private bool isUpgradeChecked = false;
         private bool isSearchDescriptionChecked = false;
-        private string previousUpgradeSearchResultIds = "";
-        private string previousPilotSearchResultIds = "";
 
         private bool isSwappingPilot = false;
         private bool isAddingPilot = false;
@@ -178,8 +176,6 @@ namespace X_Wing_Visual_Builder.View
             isAddingUpgrade = false;
             isAddingPilot = false;
             isSwappingPilot = false;
-            previousUpgradeSearchResultIds = "";
-            previousPilotSearchResultIds = "";
             searchTextBox.Text = "";
         }
 
@@ -190,7 +186,7 @@ namespace X_Wing_Visual_Builder.View
             pilotsRadioButton.IsChecked = true;
             isSwappingPilot = true;
             this.build = build;
-            pilots = Pilots.GetPilots(build.faction, pilotToSwap.pilot.ship);
+            pilots = Pilots.GetPilots(build, pilotToSwap);
             pilotsToDisplay = pilots.ToList();
         }
         public void AddPilot(Build build)
@@ -199,7 +195,7 @@ namespace X_Wing_Visual_Builder.View
             pilotsRadioButton.IsChecked = true;
             isAddingPilot = true;
             this.build = build;
-            pilots = Pilots.GetPilots(build.faction);
+            pilots = Pilots.GetPilots(build);
             pilotsToDisplay = pilots.ToList();
         }
         public void AddUpgrade(int uniquePilotId, Build build)
@@ -265,12 +261,14 @@ namespace X_Wing_Visual_Builder.View
                 instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
                 instructions.Text += "'rebel', 'scrum' or 'imperial' will show cards of that faction\r\n";
                 instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship";
+                instructions.Text += "'small' or 'large' will show pilots whoes ships are of that size";
                 instructions.FontSize = Opt.ApResMod(14);
                 instructions.LineHeight = 30;
                 instructions.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250));
                 instructions.Padding = ScaledThicknessFactory.GetThickness(20);
                 contentWrapPanel.Children.Add(instructions);
             }
+            contentWrapPanel.Margin = new Thickness(0, 0, 0, 40);
         }
         
         private void UpdateContents()
@@ -300,8 +298,8 @@ namespace X_Wing_Visual_Builder.View
                 if (filteredSearchWords[i] == "ept") { filteredSearchWords[i] = "elite"; }
             }
 
-            if (filteredSearchText == "" && isAddingUpgrade) { previousUpgradeSearchResultIds = "it was changed, really!"; DisplayContent(); }
-            if(filteredSearchText == "" && (isAddingPilot || isSwappingPilot)) { previousPilotSearchResultIds = "it was changed, really!"; DisplayContent(); }
+            if (filteredSearchWords.Count() == 0 && isAddingUpgrade) { upgradesToDisplay = upgrades; pilotsToDisplay.Clear(); DisplayContent(); return; }
+            if (filteredSearchWords.Count() == 0 && (isAddingPilot || isSwappingPilot)) { pilotsToDisplay = pilots; upgradesToDisplay.Clear(); DisplayContent(); return; }
 
             pilotsToDisplay.Clear();
             upgradesToDisplay.Clear();
@@ -367,11 +365,6 @@ namespace X_Wing_Visual_Builder.View
                             upgradesToDisplay.Add(upgrade);
                             currentUpgradeSearchResultIds += upgrade.id.ToString();
                         }
-                    }
-
-                    if(previousUpgradeSearchResultIds != currentUpgradeSearchResultIds)
-                    {
-                        previousUpgradeSearchResultIds = currentUpgradeSearchResultIds;
                     }
                 }
                 else
@@ -456,11 +449,6 @@ namespace X_Wing_Visual_Builder.View
                             pilotsToDisplay.Add(pilot);
                             currentPilotSearchResultIds += pilot.id.ToString();
                         }
-                    }
-
-                    if (previousPilotSearchResultIds != currentPilotSearchResultIds)
-                    {
-                        previousPilotSearchResultIds = currentPilotSearchResultIds;
                     }
                 }
             }

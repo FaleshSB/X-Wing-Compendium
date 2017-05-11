@@ -85,7 +85,9 @@ namespace X_Wing_Visual_Builder.Model
             else if (isRemovingUpgrades == false && uniquePilot.upgrades.Values.Contains(Upgrades.upgrades[11034]) && upgrade.upgradeType == UpgradeType.Modification && uniquePilot.upgrades.Values.Contains(upgrade)) { return true; }
             // Lightweight Frame
             else if (upgrade.id == 12026 && uniquePilot.pilot.ship.agility > 2) { return true; }
-
+            // R2-D6
+            else if (upgrade.id == 2006 && (uniquePilot.pilot.possibleUpgrades.ContainsKey(UpgradeType.Elite) && uniquePilot.pilot.possibleUpgrades[UpgradeType.Elite] > 0)) { return true; }
+            
             return false;
         }
     }

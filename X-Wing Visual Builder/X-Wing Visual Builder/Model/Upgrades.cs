@@ -132,17 +132,26 @@ namespace X_Wing_Visual_Builder.Model
                                              requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned, inExpansion));
                 }
             }
+            SaveNumberOfUpgradesOwned();
+
             // Remove Huge Ship cards
+            
             List<int> upgradesToRemove = new List<int>();
             foreach (KeyValuePair<int, Upgrade> upgrade in upgrades)
             {
-                //if(upgrade.Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
+                if (upgrade.Value.shipThatCanUse.Count > 1 || upgrade.Value.shipThatCanUse[0] != ShipType.All)
+                {
+                    foreach (ShipType shipType in upgrade.Value.shipThatCanUse)
+                    {
+                        if (Ships.ships.ContainsKey(shipType) == false || Ships.ships[shipType].First().Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
+                    }
+                }
+                if(upgrade.Value.shipSize == ShipSize.Huge) { upgradesToRemove.Add(upgrade.Key); }
             }
             foreach(int upgradeToRemove in upgradesToRemove)
             {
                 upgrades.Remove(upgradeToRemove);
             }
-            SaveNumberOfUpgradesOwned();
         }
 
         private static Dictionary<int, int> LoadUpgradesOwned()
