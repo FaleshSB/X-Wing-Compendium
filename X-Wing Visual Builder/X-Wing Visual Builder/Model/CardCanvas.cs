@@ -11,6 +11,7 @@ using System.Windows.Input;
 using X_Wing_Visual_Builder.View;
 using System.Windows.Data;
 using System.Windows.Shapes;
+using System.Windows.Media.Effects;
 
 namespace X_Wing_Visual_Builder.Model
 {
@@ -50,7 +51,13 @@ namespace X_Wing_Visual_Builder.Model
             this.height = height;
             this.width = width;
             this.isUpgrade = isUpgrade;
-            if(this.isUpgrade)
+            DropShadowEffect dropShadow = new DropShadowEffect();
+            dropShadow.BlurRadius = Opt.ApResMod(2);
+            dropShadow.ShadowDepth = Opt.ApResMod(1);
+
+            Effect = dropShadow;
+
+            if (this.isUpgrade)
             {
                 upgrade = (Upgrade)card;
             }

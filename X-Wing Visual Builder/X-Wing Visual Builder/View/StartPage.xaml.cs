@@ -87,7 +87,7 @@ namespace X_Wing_Visual_Builder.View
         {
             Image button = (Image)sender;
             buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + "_pressed.png"), buttonSize);
-            await Task.Delay(120);
+            await Task.Delay(100);
 
             if(button.Name == quizButtonName)
             {

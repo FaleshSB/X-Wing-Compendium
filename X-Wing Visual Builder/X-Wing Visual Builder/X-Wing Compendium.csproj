@@ -87,6 +87,7 @@
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\ICardInfo.cs" />
     <Compile Include="Model\IDeleteCard.cs" />
+    <Compile Include="Model\ImageButton.cs" />
     <Compile Include="Model\ImageResizer.cs" />
     <Compile Include="Model\ICardClicked.cs" />
     <Compile Include="Model\ManeuverCard.cs" />

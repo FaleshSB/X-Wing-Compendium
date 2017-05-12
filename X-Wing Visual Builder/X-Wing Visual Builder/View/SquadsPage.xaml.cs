@@ -179,11 +179,20 @@ namespace X_Wing_Visual_Builder.View
             NavigationService.Navigate(browseCardsPage);
         }
 
-        private void AddPilotClicked(object sender, RoutedEventArgs e)
+        private void _AddPilotClicked(object sender, RoutedEventArgs e)
         {
             BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
             browseCardsPage.AddPilot(Builds.GetBuild(addUpgradeButton.uniqueBuildId));
+            NavigationService.Navigate(browseCardsPage);
+        }
+
+        private async void AddPilotClicked(object sender, MouseButtonEventArgs e)
+        {
+            await Task.Delay(100);
+            ImageButton imageButton = (ImageButton)sender;
+            BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
+            browseCardsPage.AddPilot(Builds.GetBuild(imageButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
         }
 
@@ -268,16 +277,21 @@ namespace X_Wing_Visual_Builder.View
                 topSpacer.Height = 50;
                 spacerWrapPanel.Children.Add(topSpacer);
 
+                ImageButton addPilotButton = new ImageButton("add_pilot", 0.5);
+                addPilotButton.uniqueBuildId = build.uniqueBuildId;
+                addPilotButton.MouseDown += new MouseButtonEventHandler(AddPilotClicked);
+                spacerWrapPanel.Children.Add(addPilotButton);
+
                 BuildPilotUpgrade addPilot;
                 addPilot = new BuildPilotUpgrade();
                 addPilot.uniqueBuildId = build.uniqueBuildId;
                 addPilot.FontSize = Opt.ApResMod(16);
                 addPilot.FontWeight = FontWeights.Bold;
-                addPilot.Click += new RoutedEventHandler(AddPilotClicked);
+                addPilot.Click += new RoutedEventHandler(_AddPilotClicked);
                 addPilot.Content = "Add Pilot";
                 addPilot.Margin = ScaledThicknessFactory.GetThickness(0);
                 addPilot.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerWrapPanel.Children.Add(addPilot);
+                //spacerWrapPanel.Children.Add(addPilot);
 
                 Label totalCostLabel;
                 totalCostLabel = new Label();
