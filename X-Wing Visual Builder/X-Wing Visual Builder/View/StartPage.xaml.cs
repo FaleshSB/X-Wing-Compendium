@@ -45,7 +45,7 @@ namespace X_Wing_Visual_Builder.View
 
             contentCanvas.Name = "contentCanvas";
             contentCanvas.Height = 900;
-            contentCanvas.Background = new SolidColorBrush(Colors.Black);
+            //contentCanvas.Background = new SolidColorBrush(Colors.Black);
             contentWrapPanel.Children.Add(contentCanvas);
             InitializeComponent();
             buttons.Add(manageSquadsButtonName, CreateButton(manageSquadsButtonName));
@@ -119,12 +119,12 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(buttons[browseCardsButtonName], 450);
             contentCanvas.Children.Add(buttons[browseCardsButtonName]);
 
-            Canvas.SetLeft(buttons[calculateStatsButtonName], 0);
-            Canvas.SetTop(buttons[calculateStatsButtonName], 500);
-            contentCanvas.Children.Add(buttons[calculateStatsButtonName]);
+            //Canvas.SetLeft(buttons[calculateStatsButtonName], 0);
+            //Canvas.SetTop(buttons[calculateStatsButtonName], 500);
+            //contentCanvas.Children.Add(buttons[calculateStatsButtonName]);
 
             Canvas.SetLeft(buttons[quizButtonName], 0);
-            Canvas.SetTop(buttons[quizButtonName], 550);
+            Canvas.SetTop(buttons[quizButtonName], 500);
             contentCanvas.Children.Add(buttons[quizButtonName]);
         }
     }

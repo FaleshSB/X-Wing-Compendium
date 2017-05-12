@@ -133,7 +133,7 @@ namespace X_Wing_Visual_Builder.View
             */
             manuNavigationWrapPanel.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 30);
 
-            contentScrollViewer.Height = 1040 - manuNavigationWrapPanel.Height;
+            //contentScrollViewer.Height = System.Windows.SystemParameters.PrimaryScreenHeight - (manuNavigationWrapPanel.Height + 40);
 
 
             Button squads = new Button();
@@ -149,6 +149,17 @@ namespace X_Wing_Visual_Builder.View
             manuNavigationWrapPanel.Children.Add(squads);
 
 
+            Button quiz = new Button();
+            quiz.Name = "quiz";
+            quiz.Content = "Quiz";
+            quiz.FontSize = Opt.ApResMod(16);
+            quiz.FontWeight = FontWeights.Bold;
+            quiz.Click += new RoutedEventHandler(quizClicked);
+            quiz.UseLayoutRounding = true;
+            quiz.VerticalAlignment = VerticalAlignment.Center;
+            quiz.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            manuNavigationWrapPanel.Children.Add(quiz);
+
 
             Pages.pages[PageName.BrowseCards] = this;
             InitializeComponent();
@@ -159,10 +170,14 @@ namespace X_Wing_Visual_Builder.View
             //SetIsSearchDescriptionChecked();
         }
 
+        private void quizClicked(object sender, RoutedEventArgs e)
+        {
+            ClearState();
+            NavigationService.Navigate((QuizPage)Pages.pages[PageName.Quiz]);
+        }
 
         private void squadsClicked(object sender, RoutedEventArgs e)
         {
-            // TODO having to clear the below is probably each time you leave this page without adding a card to the squad is prone to bugs
             ClearState();
             NavigationService.Navigate((SquadsPage)Pages.pages[PageName.Squads]);
         }

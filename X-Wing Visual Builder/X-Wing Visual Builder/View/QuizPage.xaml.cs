@@ -82,9 +82,42 @@ namespace X_Wing_Visual_Builder.View
             maneuversCheckBox.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
             selectCategoryStackPanel.Children.Add(maneuversCheckBox);
 
+            Button squads = new Button();
+            squads.Name = "squads";
+            squads.Content = "Squads";
+            squads.FontSize = Opt.ApResMod(16);
+            squads.FontWeight = FontWeights.Bold;
+            squads.Click += new RoutedEventHandler(squadsClicked);
+            squads.UseLayoutRounding = true;
+            squads.VerticalAlignment = VerticalAlignment.Center;
+            squads.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
+            squads.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            manuNavigationWrapPanel.Children.Add(squads);
 
+
+            Button browseCards = new Button();
+            browseCards.Name = "browseCards";
+            browseCards.Content = "Browse Cards";
+            browseCards.FontSize = Opt.ApResMod(16);
+            browseCards.FontWeight = FontWeights.Bold;
+            browseCards.Click += new RoutedEventHandler(browseCardsClicked);
+            browseCards.Margin = ScaledThicknessFactory.GetThickness(4);
+            browseCards.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            browseCards.UseLayoutRounding = true;
+            manuNavigationWrapPanel.Children.Add(browseCards);
 
             GetNewCard();
+        }
+
+
+        private void browseCardsClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
+        }
+
+        private void squadsClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate((SquadsPage)Pages.pages[PageName.Squads]);
         }
 
         private void GetNewCard()
@@ -155,7 +188,7 @@ namespace X_Wing_Visual_Builder.View
 
                 ManeuverCard randomManeuverCard = currentRandomShip.GetManeuverCard(30);
                 randomManeuverCard.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 20);
-                selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 300, 0, 20 + (pilotCardHeight - (randomManeuverCard.Height + shipName.Height + 20)));
+                selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 280, 0, 20 + (pilotCardHeight - (randomManeuverCard.Height + shipName.Height + 20)));
                 shipName.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 20);
                 contentStackPanel.Children.Add(randomManeuverCard);
             }
@@ -164,12 +197,12 @@ namespace X_Wing_Visual_Builder.View
                 if (currentRandomCard.GetType() == typeof(Pilot))
                 {
                     randomCard = currentRandomCard.GetCanvas(pilotCardWidth, pilotCardHeight, ScaledThicknessFactory.GetThickness(0, 0, 0, 20), this);
-                    selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 300, 0, 20);
+                    selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 280, 0, 20);
                 }
                 else
                 {
                     randomCard = currentRandomCard.GetCanvas(upgradeCardWidth, upgradeCardHeight, ScaledThicknessFactory.GetThickness(0, 0, 0, 20), this);
-                    selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 300, 0, 20 + (pilotCardHeight - upgradeCardHeight));
+                    selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 280, 0, 20 + (pilotCardHeight - upgradeCardHeight));
                 }
                 contentStackPanel.Children.Add(randomCard);
             }

@@ -83,6 +83,20 @@ namespace X_Wing_Visual_Builder.View
             browseCards.UseLayoutRounding = true;
             topToolsWrapPanel.Children.Add(browseCards);
 
+            Button quiz = new Button();
+            quiz.Name = "quiz";
+            quiz.Content = "Quiz";
+            quiz.FontSize = Opt.ApResMod(16);
+            quiz.FontWeight = FontWeights.Bold;
+            quiz.Click += new RoutedEventHandler(quizClicked);
+            quiz.UseLayoutRounding = true;
+            quiz.VerticalAlignment = VerticalAlignment.Center;
+            quiz.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            topToolsWrapPanel.Children.Add(quiz);
+
+            //manuNavigationWrapPanel.Width = 
+
+            /*
             Slider zoom = new Slider();
             zoom.Value = 1;
             zoom.Width = 70;
@@ -90,8 +104,13 @@ namespace X_Wing_Visual_Builder.View
             zoom.Maximum = 3;
             zoom.VerticalAlignment = VerticalAlignment.Center;
             zoom.ValueChanged += new RoutedPropertyChangedEventHandler<double>(ZoomChanged);
-                
             topToolsWrapPanel.Children.Add(zoom);
+            */
+        }
+
+        private void quizClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate((QuizPage)Pages.pages[PageName.Quiz]);
         }
 
         private void ZoomChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
