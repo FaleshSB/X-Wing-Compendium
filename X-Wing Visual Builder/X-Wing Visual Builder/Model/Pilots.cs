@@ -41,7 +41,7 @@ namespace X_Wing_Visual_Builder.Model
                         }
                     }
                     int numberOwned = 0;
-                    if(numberOfPilotsOwned.ContainsKey(Int32.Parse(fields[0])))
+                    if(numberOfPilotsOwned != null && numberOfPilotsOwned.ContainsKey(Int32.Parse(fields[0])))
                     {
                         numberOwned = numberOfPilotsOwned[Int32.Parse(fields[0])];
                     }
@@ -84,6 +84,7 @@ namespace X_Wing_Visual_Builder.Model
 
         private static Dictionary<int, int> LoadPilotsOwned()
         {
+            if (File.Exists("pilotsowned.txt") == false) { return null; }
             Dictionary<int, int> pilotKeyOwned = new Dictionary<int, int>();
             string[] allPilotsOwned = FileHandler.LoadFile("pilotsowned.txt");
             if (allPilotsOwned != null)

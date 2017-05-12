@@ -121,10 +121,11 @@ namespace X_Wing_Visual_Builder.Model
                         }
                     }
                     int numberOwned = 0;
-                    if(upgradeKeyOwned.ContainsKey(Int32.Parse(fields[0])))
+                    if(upgradeKeyOwned != null && upgradeKeyOwned.ContainsKey(Int32.Parse(fields[0])))
                     {
                         numberOwned = upgradeKeyOwned[Int32.Parse(fields[0])];
                     }
+                    
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], faq,
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
@@ -156,6 +157,7 @@ namespace X_Wing_Visual_Builder.Model
 
         private static Dictionary<int, int> LoadUpgradesOwned()
         {
+            if(File.Exists("upgradesowned.txt") == false) { return null; }
             Dictionary<int, int> upgradeKeyOwned = new Dictionary<int, int>();
             string[] allUpgradesOwned = FileHandler.LoadFile("upgradesowned.txt");
             if (allUpgradesOwned != null)

@@ -44,7 +44,7 @@ namespace X_Wing_Visual_Builder.Model
                        List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion)
         {
             this.isUpgrade = true;
-            this.cardImageUri = new Uri(@"Upgrade Cards\" + id.ToString() + ".png", UriKind.Relative);
+            this.imageFilePath = @"Upgrade Cards\" + id.ToString();
             this.id = id;
             this.upgradeType = upgradeType;
             this.cost = cost;

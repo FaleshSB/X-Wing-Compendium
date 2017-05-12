@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -120,6 +121,7 @@ namespace X_Wing_Visual_Builder.Model
         }
         public static void LoadBuilds()
         {
+            if (File.Exists("build.txt") == false) { return; }
             int saveVersion = 0;
             isLoadingBuild = true;
             string[] allBuilds = FileHandler.LoadFile("build.txt");

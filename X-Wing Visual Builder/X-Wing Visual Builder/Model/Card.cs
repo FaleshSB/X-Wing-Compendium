@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace X_Wing_Visual_Builder.Model
         public List<CardCanvas> cardCanvasList = new List<CardCanvas>();
         private BitmapImage resizedCardImage = null;
         protected bool isUpgrade;
-        protected Uri cardImageUri;
+        protected string imageFilePath;
         public Dictionary<ExpansionType, int> inExpansion { get; set; } = new Dictionary<ExpansionType, int>();
         public bool hasCardImage = false;
 
@@ -30,8 +31,9 @@ namespace X_Wing_Visual_Builder.Model
                 resizedCardImage = new BitmapImage();
                 resizedCardImage.BeginInit();
                 resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
-                resizedCardImage.UriSource = cardImageUri;
+                resizedCardImage.StreamSource = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
                 resizedCardImage.EndInit();
+                resizedCardImage.Freeze();
                 hasCardImage = true;
             }
 
@@ -47,8 +49,9 @@ namespace X_Wing_Visual_Builder.Model
             resizedCardImage = new BitmapImage();
             resizedCardImage.BeginInit();
             resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
-            resizedCardImage.UriSource = cardImageUri;
+            resizedCardImage.StreamSource = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
             resizedCardImage.EndInit();
+            resizedCardImage.Freeze();
             hasCardImage = true;
         }
     }
