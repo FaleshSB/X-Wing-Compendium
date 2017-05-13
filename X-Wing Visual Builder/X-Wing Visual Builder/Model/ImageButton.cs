@@ -43,6 +43,30 @@ namespace X_Wing_Visual_Builder.Model
                 case "swap_pilot":
                     buttonSize = new System.Drawing.Size((int)Math.Round(190 * scale), (int)Math.Round(60 * scale));
                     break;
+                case "add_imperial_squad":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(319 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "add_rebel_squad":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(274 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "add_scum_squad":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(274 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "browse_cards":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(236 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "quiz":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(100 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "manage_squads":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(262 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "show_name":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(203 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "next":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(203 * scale), (int)Math.Round(60 * scale));
+                    break;
                 default:
                     break;
             }
@@ -65,7 +89,7 @@ namespace X_Wing_Visual_Builder.Model
         private async void ButtonClicked(object sender, MouseButtonEventArgs e)
         {
             Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + imageName + "_pressed.png"), buttonSize);
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + imageName + ".png"), buttonSize);
         }
 

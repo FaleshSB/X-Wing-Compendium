@@ -11,6 +11,7 @@ namespace X_Wing_Visual_Builder.Model
     {
         private static double resolutionMultiplier;
         public static double zoom = 1;
+        public static int buttonDelay = 100;
 
         static Opt()
         {

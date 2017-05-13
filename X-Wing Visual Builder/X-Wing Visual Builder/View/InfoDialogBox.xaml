@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:X_Wing_Visual_Builder.View"
         mc:Ignorable="d"
-        Title="InfoDialogBox" 
+        Title="Info" 
         WindowStartupLocation="CenterScreen">
 </Window>

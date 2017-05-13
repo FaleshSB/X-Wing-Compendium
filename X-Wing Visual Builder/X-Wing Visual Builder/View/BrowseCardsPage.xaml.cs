@@ -51,12 +51,15 @@ namespace X_Wing_Visual_Builder.View
         private int uniquePilotId;
         private Build build;
         private UniquePilot pilotToSwap;
+
+        private bool isButtonBeingPressed = false;
+
+        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
+
         public void SetBuild(Build build)
         {
             this.build = build;
         }
-
-        protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
         public BrowseCardsPage()
         {
@@ -138,29 +141,18 @@ namespace X_Wing_Visual_Builder.View
             //contentScrollViewer.Height = System.Windows.SystemParameters.PrimaryScreenHeight - (manuNavigationWrapPanel.Height + 40);
 
 
-            Button squads = new Button();
-            squads.Name = "squads";
-            squads.Content = "Squads";
-            squads.FontSize = Opt.ApResMod(16);
-            squads.FontWeight = FontWeights.Bold;
-            squads.Click += new RoutedEventHandler(squadsClicked);
-            squads.UseLayoutRounding = true;
-            squads.VerticalAlignment = VerticalAlignment.Center;
-            squads.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
-            squads.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            manuNavigationWrapPanel.Children.Add(squads);
-
-
-            Button quiz = new Button();
-            quiz.Name = "quiz";
-            quiz.Content = "Quiz";
-            quiz.FontSize = Opt.ApResMod(16);
-            quiz.FontWeight = FontWeights.Bold;
-            quiz.Click += new RoutedEventHandler(quizClicked);
-            quiz.UseLayoutRounding = true;
-            quiz.VerticalAlignment = VerticalAlignment.Center;
-            quiz.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            ImageButton quiz = new ImageButton("quiz", 0.5);
+            quiz.MouseDown += new MouseButtonEventHandler(QuizClicked);
+            quiz.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
             manuNavigationWrapPanel.Children.Add(quiz);
+
+
+            ImageButton manageSquads = new ImageButton("manage_squads", 0.5);
+            manageSquads.MouseDown += new MouseButtonEventHandler(ManageSquadsClicked);
+            manageSquads.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+            manuNavigationWrapPanel.Children.Add(manageSquads);
+
+
 
 
             Pages.pages[PageName.BrowseCards] = this;
@@ -172,14 +164,22 @@ namespace X_Wing_Visual_Builder.View
             //SetIsSearchDescriptionChecked();
         }
 
-        private void quizClicked(object sender, RoutedEventArgs e)
+        private async void QuizClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             ClearState();
             NavigationService.Navigate((QuizPage)Pages.pages[PageName.Quiz]);
         }
 
-        private void squadsClicked(object sender, RoutedEventArgs e)
+        private async void ManageSquadsClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             ClearState();
             NavigationService.Navigate((SquadsPage)Pages.pages[PageName.Squads]);
         }

@@ -25,10 +25,10 @@ namespace X_Wing_Visual_Builder.View
         private System.Drawing.Size buttonSize = new System.Drawing.Size(168, 36);
 
         private Dictionary<string, Image> buttons = new Dictionary<string, Image>();
-        private string manageSquadsButtonName = "manage_squads";
-        private string browseCardsButtonName = "browse_cards";
-        private string calculateStatsButtonName = "calculate_stats";
-        private string quizButtonName = "quiz";
+        private string manageSquadsButtonName = "manage_squads_start";
+        private string browseCardsButtonName = "browse_cards_start";
+        private string calculateStatsButtonName = "calculate_stats_start";
+        private string quizButtonName = "quiz_start";
         private Canvas contentCanvas = new Canvas();
         private string filteredLocation;
         private bool isButtonBeingPressed = false;
@@ -90,7 +90,7 @@ namespace X_Wing_Visual_Builder.View
             isButtonBeingPressed = true;
             Image button = (Image)sender;
             buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + "_pressed.png"), buttonSize);
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
 
             if (button.Name == quizButtonName)

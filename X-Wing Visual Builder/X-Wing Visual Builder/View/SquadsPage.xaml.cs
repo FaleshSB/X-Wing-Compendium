@@ -40,59 +40,32 @@ namespace X_Wing_Visual_Builder.View
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
 
-            Button addImperialBuildButton = new Button();
-            addImperialBuildButton.Name = "addRebelBuildButton";
-            addImperialBuildButton.Content = "Add Imperial Build";
-            addImperialBuildButton.FontSize = Opt.ApResMod(16);
-            addImperialBuildButton.FontWeight = FontWeights.Bold;
-            addImperialBuildButton.Click += new RoutedEventHandler(AddImperialBuildClicked);
-            addImperialBuildButton.Margin = ScaledThicknessFactory.GetThickness(4);
-            addImperialBuildButton.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            addImperialBuildButton.UseLayoutRounding = true;
-            topToolsWrapPanel.Children.Add(addImperialBuildButton);
 
-            Button addRebelBuildButton = new Button();
-            addRebelBuildButton.Name = "addRebelBuildButton";
-            addRebelBuildButton.Content = "Add Rebel Build";
-            addRebelBuildButton.FontSize = Opt.ApResMod(16);
-            addRebelBuildButton.FontWeight = FontWeights.Bold;
-            addRebelBuildButton.Click += new RoutedEventHandler(AddRebelBuildClicked);
-            addRebelBuildButton.Margin = ScaledThicknessFactory.GetThickness(4);
-            addRebelBuildButton.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            addRebelBuildButton.UseLayoutRounding = true;
-            topToolsWrapPanel.Children.Add(addRebelBuildButton);
 
-            Button addScummBuildButton = new Button();
-            addScummBuildButton.Name = "addRebelBuildButton";
-            addScummBuildButton.Content = "Add Rebel Build";
-            addScummBuildButton.FontSize = Opt.ApResMod(16);
-            addScummBuildButton.FontWeight = FontWeights.Bold;
-            addScummBuildButton.Click += new RoutedEventHandler(AddScumBuildClicked);
-            addScummBuildButton.Margin = ScaledThicknessFactory.GetThickness(4);
-            addScummBuildButton.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            addScummBuildButton.UseLayoutRounding = true;
-            topToolsWrapPanel.Children.Add(addScummBuildButton);
 
-            Button browseCards = new Button();
-            browseCards.Name = "browseCards";
-            browseCards.Content = "Browse Cards";
-            browseCards.FontSize = Opt.ApResMod(16);
-            browseCards.FontWeight = FontWeights.Bold;
-            browseCards.Click += new RoutedEventHandler(browseCardsClicked);
-            browseCards.Margin = ScaledThicknessFactory.GetThickness(4);
-            browseCards.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            browseCards.UseLayoutRounding = true;
+            ImageButton addImperialBuild = new ImageButton("add_imperial_squad", 0.5);
+            addImperialBuild.MouseDown += new MouseButtonEventHandler(AddImperialBuildClicked);
+            addImperialBuild.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+            topToolsWrapPanel.Children.Add(addImperialBuild);
+
+            ImageButton addRebelBuild = new ImageButton("add_rebel_squad", 0.5);
+            addRebelBuild.MouseDown += new MouseButtonEventHandler(AddRebelBuildClicked);
+            addRebelBuild.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+            topToolsWrapPanel.Children.Add(addRebelBuild);
+
+            ImageButton addScumBuild = new ImageButton("add_scum_squad", 0.5);
+            addScumBuild.MouseDown += new MouseButtonEventHandler(AddScumBuildClicked);
+            addScumBuild.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+            topToolsWrapPanel.Children.Add(addScumBuild);
+
+            ImageButton browseCards = new ImageButton("browse_cards", 0.5);
+            browseCards.MouseDown += new MouseButtonEventHandler(BrowseCardsClicked);
+            browseCards.Margin = ScaledThicknessFactory.GetThickness(60, 5, 2, 2);
             topToolsWrapPanel.Children.Add(browseCards);
 
-            Button quiz = new Button();
-            quiz.Name = "quiz";
-            quiz.Content = "Quiz";
-            quiz.FontSize = Opt.ApResMod(16);
-            quiz.FontWeight = FontWeights.Bold;
-            quiz.Click += new RoutedEventHandler(quizClicked);
-            quiz.UseLayoutRounding = true;
-            quiz.VerticalAlignment = VerticalAlignment.Center;
-            quiz.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
+            ImageButton quiz = new ImageButton("quiz", 0.5);
+            quiz.MouseDown += new MouseButtonEventHandler(QuizClicked);
+            quiz.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
             topToolsWrapPanel.Children.Add(quiz);
 
             //manuNavigationWrapPanel.Width = 
@@ -109,8 +82,12 @@ namespace X_Wing_Visual_Builder.View
             */
         }
 
-        private void quizClicked(object sender, RoutedEventArgs e)
+        private async void QuizClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             NavigationService.Navigate((QuizPage)Pages.pages[PageName.Quiz]);
         }
 
@@ -135,23 +112,48 @@ namespace X_Wing_Visual_Builder.View
             DisplayContent();
         }
 
-        private void browseCardsClicked(object sender, RoutedEventArgs e)
+        private async void BrowseCardsClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
         }
 
-        private void AddScumBuildClicked(object sender, RoutedEventArgs e)
+        private async void AddScumBuildClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
+
+            contentScrollViewer.ScrollToTop();
+
             Builds.AddBuild(Faction.Scum);
             DisplayContent();
         }
-        private void AddRebelBuildClicked(object sender, RoutedEventArgs e)
+        private async void AddRebelBuildClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
+
+            contentScrollViewer.ScrollToTop();
+
             Builds.AddBuild(Faction.Rebel);
             DisplayContent();
         }
-        private void AddImperialBuildClicked(object sender, RoutedEventArgs e)
+        private async void AddImperialBuildClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
+
+            contentScrollViewer.ScrollToTop();
+
             Builds.AddBuild(Faction.Imperial);
             DisplayContent();
         }
@@ -176,7 +178,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
@@ -188,7 +190,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
@@ -200,7 +202,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             Builds.DeleteBuild(imageButton.uniqueBuildId);
@@ -211,7 +213,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
@@ -223,7 +225,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             Builds.MoveBuildUp(imageButton.uniqueBuildId);
@@ -234,7 +236,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             Builds.MoveBuildDown(imageButton.uniqueBuildId);
@@ -245,7 +247,7 @@ namespace X_Wing_Visual_Builder.View
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
-            await Task.Delay(100);
+            await Task.Delay(Opt.buttonDelay);
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             Build build = Builds.GetBuild(imageButton.uniqueBuildId);

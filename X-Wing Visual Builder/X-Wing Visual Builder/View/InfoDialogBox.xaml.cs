@@ -96,14 +96,7 @@ namespace X_Wing_Visual_Builder.View
             foreach (KeyValuePair<ExpansionType, int> expansionType in cardInfo.inExpansion)
             {
                 upgradeInfo.Inlines.Add(new LineBreak());
-                if (expansionType.Value == 1)
-                {
-                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name);
-                }
-                else
-                {
-                    upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + " (" + expansionType.Value.ToString() + ")");
-                }
+                upgradeInfo.Inlines.Add(Expansions.expansions[expansionType.Key].name + " (" + expansionType.Value.ToString() + ")");
             }
             if(cardInfo.faq.Count > 0)
             {

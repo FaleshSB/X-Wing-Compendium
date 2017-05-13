@@ -23,8 +23,8 @@ namespace X_Wing_Visual_Builder.View
     {
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
-        private int upgradeCardWidth = 220;
-        private int upgradeCardHeight = 338;
+        private int upgradeCardWidth = 200;
+        private int upgradeCardHeight = 308;
         private Card currentRandomCard;
         private bool isShowingName = false;
         private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
@@ -36,6 +36,7 @@ namespace X_Wing_Visual_Builder.View
         private bool isInclusingManeuvers = true;
         private StackPanel selectCategoryStackPanel;
         private StackPanel contentStackPanel;
+        private bool isButtonBeingPressed = false;
 
         public QuizPage()
         {
@@ -82,41 +83,38 @@ namespace X_Wing_Visual_Builder.View
             maneuversCheckBox.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
             selectCategoryStackPanel.Children.Add(maneuversCheckBox);
 
-            Button squads = new Button();
-            squads.Name = "squads";
-            squads.Content = "Squads";
-            squads.FontSize = Opt.ApResMod(16);
-            squads.FontWeight = FontWeights.Bold;
-            squads.Click += new RoutedEventHandler(squadsClicked);
-            squads.UseLayoutRounding = true;
-            squads.VerticalAlignment = VerticalAlignment.Center;
-            squads.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
-            squads.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            manuNavigationWrapPanel.Children.Add(squads);
-
-
-            Button browseCards = new Button();
-            browseCards.Name = "browseCards";
-            browseCards.Content = "Browse Cards";
-            browseCards.FontSize = Opt.ApResMod(16);
-            browseCards.FontWeight = FontWeights.Bold;
-            browseCards.Click += new RoutedEventHandler(browseCardsClicked);
-            browseCards.Margin = ScaledThicknessFactory.GetThickness(4);
-            browseCards.Padding = ScaledThicknessFactory.GetThickness(5, 2, 5, 2);
-            browseCards.UseLayoutRounding = true;
+            ImageButton browseCards = new ImageButton("browse_cards", 0.5);
+            browseCards.MouseDown += new MouseButtonEventHandler(BrowseCardsClicked);
+            browseCards.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
             manuNavigationWrapPanel.Children.Add(browseCards);
+
+            ImageButton manageSquads = new ImageButton("manage_squads", 0.5);
+            manageSquads.MouseDown += new MouseButtonEventHandler(ManageSquadsClicked);
+            manageSquads.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+            manuNavigationWrapPanel.Children.Add(manageSquads);
+
+
+
 
             GetNewCard();
         }
 
 
-        private void browseCardsClicked(object sender, RoutedEventArgs e)
+        private async void BrowseCardsClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             NavigationService.Navigate((BrowseCardsPage)Pages.pages[PageName.BrowseCards]);
         }
 
-        private void squadsClicked(object sender, RoutedEventArgs e)
+        private async void ManageSquadsClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             NavigationService.Navigate((SquadsPage)Pages.pages[PageName.Squads]);
         }
 
@@ -143,8 +141,12 @@ namespace X_Wing_Visual_Builder.View
             }
         }
         
-        private void ShowNameClicked(object sender, RoutedEventArgs e)
+        private async void ShowNameClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(Opt.buttonDelay);
+            isButtonBeingPressed = false;
             if (isShowingName == true)
             {
                 GetNewCard();
@@ -206,26 +208,23 @@ namespace X_Wing_Visual_Builder.View
                 }
                 contentStackPanel.Children.Add(randomCard);
             }
-            
 
-            Button showName = new Button();
-            showName.Name = "ShowNameButton";
-            showName.Width = 130;
-            showName.Height = 40;
-            showName.FontSize = Opt.ApResMod(16);
-            showName.FontWeight = FontWeights.Bold;
-            showName.Click += new RoutedEventHandler(ShowNameClicked);
-            showName.UseLayoutRounding = true;
-
+            ImageButton showName;
             if (isShowingName == false)
             {
-                showName.Content = "Show Name";
-                if(isShowingManeuverCard) { shipName.Visibility = Visibility.Hidden; }
+                showName = new ImageButton("show_name", 0.5);
+                showName.MouseDown += new MouseButtonEventHandler(ShowNameClicked);
+                showName.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+                
+                if (isShowingManeuverCard) { shipName.Visibility = Visibility.Hidden; }
                 else { randomCard.HideCardIdentifiers(); }            
             }
             else
             {
-                showName.Content = "Next Card";
+                showName = new ImageButton("next", 0.5);
+                showName.MouseDown += new MouseButtonEventHandler(ShowNameClicked);
+                showName.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);
+
                 if (isShowingManeuverCard) { shipName.Visibility = Visibility.Visible; }
                 else { randomCard.ShowCardIdentifiers(); }
             }
