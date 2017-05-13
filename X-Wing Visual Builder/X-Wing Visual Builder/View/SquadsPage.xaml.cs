@@ -27,6 +27,7 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private AlignableWrapPanel contentWrapPanel;
+        private bool isButtonBeingPressed = false;
 
 
         public SquadsPage()
@@ -171,80 +172,92 @@ namespace X_Wing_Visual_Builder.View
             DisplayContent();
         }        
 
-        private void SwapPilot(object sender, RoutedEventArgs e)
+        private async void SwapPilotClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade SwapPilotButton = (BuildPilotUpgrade)sender;
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.SwapPilot(Builds.GetBuild(SwapPilotButton.uniqueBuildId), Builds.GetBuild(SwapPilotButton.uniqueBuildId).GetPilot(SwapPilotButton.uniquePilotId));
-            NavigationService.Navigate(browseCardsPage);
-        }
-
-        private void _AddPilotClicked(object sender, RoutedEventArgs e)
-        {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
-            BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddPilot(Builds.GetBuild(addUpgradeButton.uniqueBuildId));
+            browseCardsPage.SwapPilot(Builds.GetBuild(imageButton.uniqueBuildId), Builds.GetBuild(imageButton.uniqueBuildId).GetPilot(imageButton.uniquePilotId));
             NavigationService.Navigate(browseCardsPage);
         }
 
         private async void AddPilotClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
             await Task.Delay(100);
+            isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
             browseCardsPage.AddPilot(Builds.GetBuild(imageButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
         }
 
-        private void DeleteBuildClicked(object sender, RoutedEventArgs e)
+        private async void DeleteBuildClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
-            Builds.DeleteBuild(addUpgradeButton.uniqueBuildId);
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
+            Builds.DeleteBuild(imageButton.uniqueBuildId);
             DisplayContent();
         }
 
-        private void AddUpgrade(object sender, RoutedEventArgs e)
+        private async void AddUpgradeClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
             BrowseCardsPage browseCardsPage = (BrowseCardsPage)Pages.pages[PageName.BrowseCards];
-            browseCardsPage.AddUpgrade(addUpgradeButton.uniquePilotId, Builds.GetBuild(addUpgradeButton.uniqueBuildId));
+            browseCardsPage.AddUpgrade(imageButton.uniquePilotId, Builds.GetBuild(imageButton.uniqueBuildId));
             NavigationService.Navigate(browseCardsPage);
         }
         
-        private void MoveBuildUpClicked(object sender, RoutedEventArgs e)
+        private async void UpClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
-            Builds.MoveBuildUp(addUpgradeButton.uniqueBuildId);
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
+            Builds.MoveBuildUp(imageButton.uniqueBuildId);
             DisplayContent();
         }
 
-        private void MoveBuildDownClicked(object sender, RoutedEventArgs e)
+        private async void DownClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
-            Builds.MoveBuildDown(addUpgradeButton.uniqueBuildId);
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
+            Builds.MoveBuildDown(imageButton.uniqueBuildId);
             DisplayContent();
         }
 
-        private void DuplicateBuildClicked(object sender, RoutedEventArgs e)
+        private async void CopyForWebClicked(object sender, MouseButtonEventArgs e)
         {
-            BuildPilotUpgrade addUpgradeButton = (BuildPilotUpgrade)sender;
-            Builds.DuplicateBuild(addUpgradeButton.uniqueBuildId);
-            DisplayContent();
-        }
-
-        private void CopyBuildAsTextClicked(object sender, RoutedEventArgs e)
-        {
-            BuildPilotUpgrade CopyBuildAsText = (BuildPilotUpgrade)sender;
-            Build build = Builds.GetBuild(CopyBuildAsText.uniqueBuildId);
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
+            await Task.Delay(100);
+            isButtonBeingPressed = false;
+            ImageButton imageButton = (ImageButton)sender;
+            Build build = Builds.GetBuild(imageButton.uniqueBuildId);
             string buildText = "";
             foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
             {
-                buildText += uniquePilot.pilot.name + " (" + uniquePilot.pilot.cost.ToString() + ")" + Environment.NewLine;
+                buildText += uniquePilot.pilot.name + ": " + uniquePilot.pilot.cost.ToString() + Environment.NewLine;
                 foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
                 {
-                    buildText += "\t" + upgrade.name + " (" + upgrade.cost.ToString() + ")" + Environment.NewLine;
+                    buildText += "\t" + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
                 }
-                buildText += "\tTotal Cost: " + uniquePilot.totalCost.ToString();
+                buildText += "\tTotal: " + uniquePilot.totalCost.ToString();
                 buildText += Environment.NewLine;
                 buildText += Environment.NewLine;
             }
@@ -280,18 +293,32 @@ namespace X_Wing_Visual_Builder.View
                 ImageButton addPilotButton = new ImageButton("add_pilot", 0.5);
                 addPilotButton.uniqueBuildId = build.uniqueBuildId;
                 addPilotButton.MouseDown += new MouseButtonEventHandler(AddPilotClicked);
+                addPilotButton.Margin = ScaledThicknessFactory.GetThickness(2,0,2,0);
                 spacerWrapPanel.Children.Add(addPilotButton);
 
-                BuildPilotUpgrade addPilot;
-                addPilot = new BuildPilotUpgrade();
-                addPilot.uniqueBuildId = build.uniqueBuildId;
-                addPilot.FontSize = Opt.ApResMod(16);
-                addPilot.FontWeight = FontWeights.Bold;
-                addPilot.Click += new RoutedEventHandler(_AddPilotClicked);
-                addPilot.Content = "Add Pilot";
-                addPilot.Margin = ScaledThicknessFactory.GetThickness(0);
-                addPilot.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                //spacerWrapPanel.Children.Add(addPilot);
+                ImageButton upButton = new ImageButton("up", 0.5);
+                upButton.uniqueBuildId = build.uniqueBuildId;
+                upButton.MouseDown += new MouseButtonEventHandler(UpClicked);
+                upButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
+                spacerWrapPanel.Children.Add(upButton);
+                
+                ImageButton downButton = new ImageButton("down", 0.5);
+                downButton.uniqueBuildId = build.uniqueBuildId;
+                downButton.MouseDown += new MouseButtonEventHandler(DownClicked);
+                downButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
+                spacerWrapPanel.Children.Add(downButton);
+
+                ImageButton copyForWebButton = new ImageButton("copy_for_web", 0.5);
+                copyForWebButton.uniqueBuildId = build.uniqueBuildId;
+                copyForWebButton.MouseDown += new MouseButtonEventHandler(CopyForWebClicked);
+                copyForWebButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
+                spacerWrapPanel.Children.Add(copyForWebButton);
+
+                ImageButton deleteBuildButton = new ImageButton("delete_squad", 0.5);
+                deleteBuildButton.uniqueBuildId = build.uniqueBuildId;
+                deleteBuildButton.MouseDown += new MouseButtonEventHandler(DeleteBuildClicked);
+                deleteBuildButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
+                spacerWrapPanel.Children.Add(deleteBuildButton);
 
                 Label totalCostLabel;
                 totalCostLabel = new Label();
@@ -305,61 +332,6 @@ namespace X_Wing_Visual_Builder.View
                 totalCostLabel.Padding = ScaledThicknessFactory.GetThickness(0);
                 totalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 spacerWrapPanel.Children.Add(totalCostLabel);
-
-                BuildPilotUpgrade deleteBuild;
-                deleteBuild = new BuildPilotUpgrade();
-                deleteBuild.uniqueBuildId = build.uniqueBuildId;
-                deleteBuild.FontSize = Opt.ApResMod(16);
-                deleteBuild.FontWeight = FontWeights.Bold;
-                deleteBuild.Click += new RoutedEventHandler(DeleteBuildClicked);
-                deleteBuild.Content = "Delete Build";
-                deleteBuild.Margin = ScaledThicknessFactory.GetThickness(0);
-                deleteBuild.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerWrapPanel.Children.Add(deleteBuild);
-                /*
-                BuildPilotUpgrade DuplicateBuild;
-                DuplicateBuild = new BuildPilotUpgrade();
-                DuplicateBuild.uniqueBuildId = build.uniqueBuildId;
-                DuplicateBuild.FontSize = Opt.ApResMod(16);
-                DuplicateBuild.FontWeight = FontWeights.Bold;
-                DuplicateBuild.Click += new RoutedEventHandler(DuplicateBuildClicked);
-                DuplicateBuild.Content = "Duplicate Build";
-                DuplicateBuild.Margin = ScaledThicknessFactory.GetThickness(0);
-                DuplicateBuild.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerCanvas.Children.Add(DuplicateBuild);
-                */
-                BuildPilotUpgrade MoveBuildUp;
-                MoveBuildUp = new BuildPilotUpgrade();
-                MoveBuildUp.uniqueBuildId = build.uniqueBuildId;
-                MoveBuildUp.FontSize = Opt.ApResMod(16);
-                MoveBuildUp.FontWeight = FontWeights.Bold;
-                MoveBuildUp.Click += new RoutedEventHandler(MoveBuildUpClicked);
-                MoveBuildUp.Content = "Up";
-                MoveBuildUp.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
-                MoveBuildUp.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerWrapPanel.Children.Add(MoveBuildUp);
-
-                BuildPilotUpgrade MoveBuildDown;
-                MoveBuildDown = new BuildPilotUpgrade();
-                MoveBuildDown.uniqueBuildId = build.uniqueBuildId;
-                MoveBuildDown.FontSize = Opt.ApResMod(16);
-                MoveBuildDown.FontWeight = FontWeights.Bold;
-                MoveBuildDown.Click += new RoutedEventHandler(MoveBuildDownClicked);
-                MoveBuildDown.Content = "Down";
-                MoveBuildDown.Margin = ScaledThicknessFactory.GetThickness(0);
-                MoveBuildDown.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerWrapPanel.Children.Add(MoveBuildDown);
-
-                BuildPilotUpgrade CopyBuildAsText;
-                CopyBuildAsText = new BuildPilotUpgrade();
-                CopyBuildAsText.uniqueBuildId = build.uniqueBuildId;
-                CopyBuildAsText.FontSize = Opt.ApResMod(16);
-                CopyBuildAsText.FontWeight = FontWeights.Bold;
-                CopyBuildAsText.Click += new RoutedEventHandler(CopyBuildAsTextClicked);
-                CopyBuildAsText.Content = "Copy Build As Text";
-                CopyBuildAsText.Margin = ScaledThicknessFactory.GetThickness(8, 0, 0, 0);
-                CopyBuildAsText.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                spacerWrapPanel.Children.Add(CopyBuildAsText);
 
                 Canvas bottomSpacer = new Canvas();
                 bottomSpacer.Width = 9999;
@@ -386,29 +358,19 @@ namespace X_Wing_Visual_Builder.View
                     StackPanel controls = new StackPanel();
                     controls.Orientation = Orientation.Horizontal;
 
-                    BuildPilotUpgrade addUpgrade;
-                    addUpgrade = new BuildPilotUpgrade();
-                    addUpgrade.uniquePilotId = uniquePilot.id;
-                    addUpgrade.uniqueBuildId = build.uniqueBuildId;
-                    addUpgrade.FontSize = Opt.ApResMod(16);
-                    addUpgrade.FontWeight = FontWeights.Bold;
-                    addUpgrade.Click += new RoutedEventHandler(AddUpgrade);
-                    addUpgrade.Margin = ScaledThicknessFactory.GetThickness(0);
-                    addUpgrade.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                    addUpgrade.Content = "Add Upgrade";
-                    controls.Children.Add(addUpgrade);
+                    ImageButton addUpgradeButton = new ImageButton("add_upgrade", 0.5);
+                    addUpgradeButton.uniquePilotId = uniquePilot.id;
+                    addUpgradeButton.uniqueBuildId = build.uniqueBuildId;
+                    addUpgradeButton.MouseDown += new MouseButtonEventHandler(AddUpgradeClicked);
+                    addUpgradeButton.Margin = ScaledThicknessFactory.GetThickness(2, 10, 2, 0);
+                    controls.Children.Add(addUpgradeButton);
 
-                    BuildPilotUpgrade swapPilot;
-                    swapPilot = new BuildPilotUpgrade();
-                    swapPilot.uniquePilotId = uniquePilot.id;
-                    swapPilot.uniqueBuildId = build.uniqueBuildId;
-                    swapPilot.FontSize = Opt.ApResMod(16);
-                    swapPilot.FontWeight = FontWeights.Bold;
-                    swapPilot.Click += new RoutedEventHandler(SwapPilot);
-                    swapPilot.Margin = ScaledThicknessFactory.GetThickness(8, 0, 8, 0);
-                    swapPilot.Padding = ScaledThicknessFactory.GetThickness(4, 1, 4, 1);
-                    swapPilot.Content = "Swap Pilot";
-                    controls.Children.Add(swapPilot);
+                    ImageButton swapPilotButton = new ImageButton("swap_pilot", 0.5);
+                    swapPilotButton.uniquePilotId = uniquePilot.id;
+                    swapPilotButton.uniqueBuildId = build.uniqueBuildId;
+                    swapPilotButton.MouseDown += new MouseButtonEventHandler(SwapPilotClicked);
+                    swapPilotButton.Margin = ScaledThicknessFactory.GetThickness(2, 10, 2, 0);
+                    controls.Children.Add(swapPilotButton);
 
                     Label pilotTotalCostLabel;
                     pilotTotalCostLabel = new Label();

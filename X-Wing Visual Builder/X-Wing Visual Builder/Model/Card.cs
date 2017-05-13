@@ -37,9 +37,9 @@ namespace X_Wing_Visual_Builder.Model
                 hasCardImage = true;
             }
 
-            System.Windows.Controls.Image upgradeImage = new System.Windows.Controls.Image();
-            upgradeImage.Source = resizedCardImage;
-            CardCanvas cardCanvas = new CardCanvas(this, upgradeImage, width, height, margin, isUpgrade, currentPage);
+            System.Windows.Controls.Image cardImage = new System.Windows.Controls.Image();
+            cardImage.Source = resizedCardImage;
+            CardCanvas cardCanvas = new CardCanvas(this, cardImage, width, height, margin, isUpgrade, currentPage);
             cardCanvasList.Add(cardCanvas);
             return cardCanvas;
         }
@@ -51,7 +51,7 @@ namespace X_Wing_Visual_Builder.Model
             resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
             resizedCardImage.StreamSource = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
             resizedCardImage.EndInit();
-            resizedCardImage.Freeze();
+            resizedCardImage.Freeze(); 
             hasCardImage = true;
         }
     }

@@ -31,6 +31,7 @@ namespace X_Wing_Visual_Builder.View
         private string quizButtonName = "quiz";
         private Canvas contentCanvas = new Canvas();
         private string filteredLocation;
+        private bool isButtonBeingPressed = false;
 
         private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
@@ -85,11 +86,14 @@ namespace X_Wing_Visual_Builder.View
         }
         private async void ButtonClicked(object sender, MouseButtonEventArgs e)
         {
+            if (isButtonBeingPressed) return;
+            isButtonBeingPressed = true;
             Image button = (Image)sender;
             buttons[button.Name].Source = ImageResizer.ResizeImage(System.Drawing.Image.FromFile(filteredLocation + button.Name + "_pressed.png"), buttonSize);
             await Task.Delay(100);
+            isButtonBeingPressed = false;
 
-            if(button.Name == quizButtonName)
+            if (button.Name == quizButtonName)
             {
                 NavigationService.Navigate((QuizPage)Pages.pages[PageName.Quiz]);
             }

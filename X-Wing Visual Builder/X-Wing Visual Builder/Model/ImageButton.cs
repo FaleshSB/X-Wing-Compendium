@@ -23,7 +23,25 @@ namespace X_Wing_Visual_Builder.Model
             switch (imageName)
             {
                 case "add_pilot":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(171 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Math.Round(173 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "delete_squad":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(224 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "up":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(40 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "down":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(40 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "copy_for_web":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(227 * scale), (int)Math.Round(60 * scale));
+                    break; 
+                case "add_upgrade":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(225 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "swap_pilot":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(190 * scale), (int)Math.Round(60 * scale));
                     break;
                 default:
                     break;

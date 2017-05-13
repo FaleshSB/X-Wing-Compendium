@@ -35,8 +35,10 @@ namespace X_Wing_Visual_Builder.View
         private List<Upgrade> upgradesToDisplay = new List<Upgrade>();
         private List<Pilot> pilots = new List<Pilot>();
         private List<Pilot> pilotsToDisplay = new List<Pilot>();
-        private int upgradeCardWidth = 166;
-        private int upgradeCardHeight = 255;
+        private int upgradeCardWidth = 150;
+        private int upgradeCardHeight = 231;
+        //private int upgradeCardWidth = 166;
+        //private int upgradeCardHeight = 255;
         private int pilotCardWidth = 292;
         private int pilotCardHeight = 410;
         private bool isAnyWordsChecked = false;

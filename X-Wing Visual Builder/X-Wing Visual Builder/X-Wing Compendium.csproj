@@ -73,7 +73,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AllDiceRollResults.cs" />
-    <Compile Include="Model\BuildPilotUpgrade.cs" />
     <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Builds.cs" />

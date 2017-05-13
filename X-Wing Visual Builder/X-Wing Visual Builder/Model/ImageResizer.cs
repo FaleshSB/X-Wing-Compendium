@@ -40,7 +40,8 @@ namespace X_Wing_Visual_Builder.Model
             finalBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
             finalBitmapImage.StreamSource = memoryStream;
             finalBitmapImage.EndInit();
-            
+            finalBitmapImage.Freeze();
+
 
             image.Dispose();
             memoryStream.Dispose();
