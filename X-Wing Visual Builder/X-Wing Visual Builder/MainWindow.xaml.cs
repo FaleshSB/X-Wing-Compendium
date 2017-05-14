@@ -46,9 +46,9 @@ namespace X_Wing_Visual_Builder
                 foreach (Upgrade upgrade in Upgrades.upgrades.Values.ToList())
                 {
                     isUpgradeCacheFull = true;
-                    if (upgrade.hasCardImage == false)
+                    if (browseCardsPage.upgradeCache.ContainsKey(upgrade.id) == false)
                     {
-                        upgrade.CacheCardImage();
+                        browseCardsPage.AddUpgradeToCache(upgrade);
                         isUpgradeCacheFull = false;
                         break;
                     }
@@ -59,9 +59,9 @@ namespace X_Wing_Visual_Builder
                 foreach (Pilot pilot in Pilots.pilots.Values.ToList())
                 {
                     isPilotCacheFull = true;
-                    if (pilot.hasCardImage == false)
+                    if (browseCardsPage.pilotCache.ContainsKey(pilot.id) == false)
                     {
-                        pilot.CacheCardImage();
+                        browseCardsPage.AddPilotToCache(pilot);
                         isPilotCacheFull = false;
                         break;
                     }

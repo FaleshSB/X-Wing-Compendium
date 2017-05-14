@@ -9,7 +9,6 @@ namespace X_Wing_Visual_Builder.Model
     public class UniquePilot
     {
         public Pilot pilot;
-        public int uniqueId;
         public int totalCost
         {
             get

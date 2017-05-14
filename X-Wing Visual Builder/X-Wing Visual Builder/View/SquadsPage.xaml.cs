@@ -40,9 +40,6 @@ namespace X_Wing_Visual_Builder.View
             contentWrapPanel.HorizontalContentAlignment = HorizontalAlignment.Center;
             contentScrollViewer.Content = contentWrapPanel;
 
-
-
-
             ImageButton addImperialBuild = new ImageButton("add_imperial_squad", 0.5);
             addImperialBuild.MouseDown += new MouseButtonEventHandler(AddImperialBuildClicked);
             addImperialBuild.Margin = ScaledThicknessFactory.GetThickness(2, 5, 2, 2);

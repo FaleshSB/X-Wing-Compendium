@@ -46,13 +46,16 @@ namespace X_Wing_Visual_Builder.Model
 
         public void CacheCardImage()
         {
-            resizedCardImage = new BitmapImage();
-            resizedCardImage.BeginInit();
-            resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
-            resizedCardImage.StreamSource = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
-            resizedCardImage.EndInit();
-            resizedCardImage.Freeze(); 
-            hasCardImage = true;
+            if (resizedCardImage == null)
+            {
+                resizedCardImage = new BitmapImage();
+                resizedCardImage.BeginInit();
+                resizedCardImage.CacheOption = BitmapCacheOption.OnLoad;
+                resizedCardImage.StreamSource = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
+                resizedCardImage.EndInit();
+                resizedCardImage.Freeze();
+                hasCardImage = true;
+            }
         }
     }
 }

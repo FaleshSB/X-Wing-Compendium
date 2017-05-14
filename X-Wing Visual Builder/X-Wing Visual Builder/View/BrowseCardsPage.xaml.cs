@@ -56,6 +56,9 @@ namespace X_Wing_Visual_Builder.View
 
         protected AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
 
+        public Dictionary<int, CardCanvas> upgradeCache = new Dictionary<int, CardCanvas>();
+        public Dictionary<int, CardCanvas> pilotCache = new Dictionary<int, CardCanvas>();
+
         public void SetBuild(Build build)
         {
             this.build = build;
@@ -226,24 +229,25 @@ namespace X_Wing_Visual_Builder.View
             upgradesToDisplay = upgrades.ToList();
         }
 
-        /*
+        
         public void AddUpgradeToCache(Upgrade upgrade)
         {
-            if (upgradeCanvasCache.ContainsKey(upgrade.id) == false)
+            if (upgradeCache.ContainsKey(upgrade.id) == false)
             {
-                upgradeCanvasCache[upgrade.id] = upgrade.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
-                upgradeCanvasCache[upgrade.id].AddCardClickedEvent(this);
+                CardCanvas upgradeCanvas = upgrade.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
+                upgradeCanvas.AddCardClickedEvent(this);
+                upgradeCache[upgrade.id] = upgradeCanvas;
             }
         }
         public void AddPilotToCache(Pilot pilot)
         {
-            if(pilotCanvasCache.ContainsKey(pilot.id) == false)
+            if (pilotCache.ContainsKey(pilot.id) == false)
             {
-                pilotCanvasCache[pilot.id] = pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
-                pilotCanvasCache[pilot.id].AddCardClickedEvent(this);
+                CardCanvas pilotCanvas = pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
+                pilotCanvas.AddCardClickedEvent(this);
+                pilotCache[pilot.id] = pilotCanvas;
             }
         }
-        */
 
         protected override void DisplayContent()
         {
@@ -254,18 +258,30 @@ namespace X_Wing_Visual_Builder.View
             {
                 if (upgrade.shipSize == ShipSize.Huge || upgrade.upgradeType == UpgradeType.Team || upgrade.upgradeType == UpgradeType.Hardpoint
                    || upgrade.upgradeType == UpgradeType.Cargo) { continue; }
-                CardCanvas upgradeCanvas = upgrade.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
-                upgradeCanvas.AddCardClickedEvent(this);
-                contentWrapPanel.Children.Add(upgradeCanvas);
+
+                if (upgradeCache.ContainsKey(upgrade.id) == false)
+                {
+                    CardCanvas upgradeCanvas = upgrade.GetCanvas(upgradeCardWidth, upgradeCardHeight, new Thickness(2, 2, 2, 2), this);
+                    upgradeCanvas.AddCardClickedEvent(this);
+                    upgradeCache[upgrade.id] = upgradeCanvas;
+                }
+                upgradeCache[upgrade.id].UpdateNumberOwned();
+                contentWrapPanel.Children.Add(upgradeCache[upgrade.id]);
             }
             
             pilotsToDisplay = pilotsToDisplay.ToList().OrderBy(pilot => pilot.faction).ThenBy(pilot => pilot.ship.name).ThenByDescending(pilot => pilot.pilotSkill).ThenByDescending(pilot => pilot.cost).ThenBy(pilot => pilot.name).ToList();
             foreach (Pilot pilot in pilotsToDisplay)
             {
                 if (pilot.ship.shipSize == ShipSize.Huge) { continue; }
-                CardCanvas pilotCanvas = pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
-                pilotCanvas.AddCardClickedEvent(this);
-                contentWrapPanel.Children.Add(pilotCanvas);
+
+                if (pilotCache.ContainsKey(pilot.id) == false)
+                {
+                    CardCanvas pilotCanvas = pilot.GetCanvas(pilotCardWidth, pilotCardHeight, new Thickness(2, 2, 2, 2), this);
+                    pilotCanvas.AddCardClickedEvent(this);
+                    pilotCache[pilot.id] = pilotCanvas;
+                }
+                pilotCache[pilot.id].UpdateNumberOwned();
+                contentWrapPanel.Children.Add(pilotCache[pilot.id]);
             }
 
             if(contentWrapPanel.Children.Count == 0)
