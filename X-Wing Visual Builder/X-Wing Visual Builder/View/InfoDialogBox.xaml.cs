@@ -30,6 +30,11 @@ namespace X_Wing_Visual_Builder.View
 
         public InfoDialogBox()
         {
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            string filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\Misc\\";
+            Uri iconUri = new Uri(filteredLocation + "RebelIcon.ico");
+            Icon = BitmapFrame.Create(iconUri);
+
             InitializeComponent();
             this.Height = 600;
             this.Width = 600;

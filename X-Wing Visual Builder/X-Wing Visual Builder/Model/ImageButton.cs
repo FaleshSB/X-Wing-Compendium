@@ -67,6 +67,18 @@ namespace X_Wing_Visual_Builder.Model
                 case "next":
                     buttonSize = new System.Drawing.Size((int)Math.Round(203 * scale), (int)Math.Round(60 * scale));
                     break;
+                case "info":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    break;
+                case "close":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    break;
+                case "add":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    break;
+                case "remove":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    break;
                 default:
                     break;
             }

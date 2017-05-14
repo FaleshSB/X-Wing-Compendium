@@ -322,18 +322,27 @@ namespace X_Wing_Visual_Builder.View
                 deleteBuildButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
                 spacerWrapPanel.Children.Add(deleteBuildButton);
 
-                Label totalCostLabel;
-                totalCostLabel = new Label();
-                totalCostLabel.Content = build.totalCost;
-                totalCostLabel.Height = 25;
-                totalCostLabel.Width = 50;
-                totalCostLabel.FontSize = Opt.ApResMod(20);
-                totalCostLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                totalCostLabel.VerticalContentAlignment = VerticalAlignment.Center;
-                totalCostLabel.Margin = ScaledThicknessFactory.GetThickness(0);
-                totalCostLabel.Padding = ScaledThicknessFactory.GetThickness(0);
-                totalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-                spacerWrapPanel.Children.Add(totalCostLabel);
+                OutlinedTextBlock totalCost = new OutlinedTextBlock();
+                totalCost.Text = "TOTAL COST";
+                totalCost.StrokeThickness = Opt.ApResMod(0.5);
+                totalCost.Stroke = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+                totalCost.FontWeight = FontWeights.Bold;
+                totalCost.Fill = new SolidColorBrush(Color.FromRgb(80, 80, 80));
+                totalCost.FontSize = Opt.ApResMod(15);
+                totalCost.FontFamily = new FontFamily("Segoe UI");
+                totalCost.Margin = ScaledThicknessFactory.GetThickness(2, 3, 0, 0);
+                spacerWrapPanel.Children.Add(totalCost);
+
+                OutlinedTextBlock totalCost2 = new OutlinedTextBlock();
+                totalCost2.Text = ": " + build.totalCost.ToString();
+                totalCost2.StrokeThickness = Opt.ApResMod(0.5);
+                totalCost2.Stroke = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+                totalCost2.FontWeight = FontWeights.Bold;
+                totalCost2.Fill = new SolidColorBrush(Color.FromRgb(80, 80, 80));
+                totalCost2.FontSize = Opt.ApResMod(18);
+                totalCost2.FontFamily = new FontFamily("Segoe UI");
+                totalCost2.Margin = ScaledThicknessFactory.GetThickness(2, 0, 0, 0);
+                spacerWrapPanel.Children.Add(totalCost2);
 
                 Canvas bottomSpacer = new Canvas();
                 bottomSpacer.Width = 9999;
@@ -374,15 +383,27 @@ namespace X_Wing_Visual_Builder.View
                     swapPilotButton.Margin = ScaledThicknessFactory.GetThickness(2, 10, 2, 0);
                     controls.Children.Add(swapPilotButton);
 
-                    Label pilotTotalCostLabel;
-                    pilotTotalCostLabel = new Label();
-                    pilotTotalCostLabel.Content = uniquePilot.totalCost;
-                    pilotTotalCostLabel.Margin = ScaledThicknessFactory.GetThickness(0);
-                    pilotTotalCostLabel.Padding = ScaledThicknessFactory.GetThickness(0);
-                    pilotTotalCostLabel.FontSize = Opt.ApResMod(20);
-                    pilotTotalCostLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-                    pilotTotalCostLabel.VerticalAlignment = VerticalAlignment.Center;
-                    controls.Children.Add(pilotTotalCostLabel);
+                    OutlinedTextBlock pilotAndUpgradesCost = new OutlinedTextBlock();
+                    pilotAndUpgradesCost.Text = "COST";
+                    pilotAndUpgradesCost.StrokeThickness = Opt.ApResMod(0.5);
+                    pilotAndUpgradesCost.Stroke = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+                    pilotAndUpgradesCost.FontWeight = FontWeights.Bold;
+                    pilotAndUpgradesCost.Fill = new SolidColorBrush(Color.FromRgb(80, 80, 80));
+                    pilotAndUpgradesCost.FontSize = Opt.ApResMod(15);
+                    pilotAndUpgradesCost.FontFamily = new FontFamily("Segoe UI");
+                    pilotAndUpgradesCost.Margin = ScaledThicknessFactory.GetThickness(2, 13, 0, 0);
+                    controls.Children.Add(pilotAndUpgradesCost);
+
+                    OutlinedTextBlock pilotAndUpgradesCost2 = new OutlinedTextBlock();
+                    pilotAndUpgradesCost2.Text = ": " + uniquePilot.totalCost.ToString();
+                    pilotAndUpgradesCost2.StrokeThickness = Opt.ApResMod(0.5);
+                    pilotAndUpgradesCost2.Stroke = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+                    pilotAndUpgradesCost2.FontWeight = FontWeights.Bold;
+                    pilotAndUpgradesCost2.Fill = new SolidColorBrush(Color.FromRgb(80, 80, 80));
+                    pilotAndUpgradesCost2.FontSize = Opt.ApResMod(18);
+                    pilotAndUpgradesCost2.FontFamily = new FontFamily("Segoe UI");
+                    pilotAndUpgradesCost2.Margin = ScaledThicknessFactory.GetThickness(2, 10, 0, 0);
+                    controls.Children.Add(pilotAndUpgradesCost2);
 
                     pilotAndControlls.Children.Add(controls);
                     pilotAndUpgradeInfoStackPanel.Children.Add(pilotAndControlls);

@@ -110,6 +110,16 @@ namespace X_Wing_Visual_Builder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon RebelIcon {
+            get {
+                object obj = ResourceManager.GetObject("RebelIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1£2£A-Wing£2£0£0£2£3£2£2£6,12,2,5£2£1,14,0,0,0,15,0|2,24,27,29,28,25,0|3,14,17,29,18,15,33|4,0,0,29,0,0,0|5,0,0,29,0,0,33
         ///43£43£Aggressor£3£0£0£3£3£4£4£6,12,2,5£4£1,0,14,27,29,28,15,0,0|2,0,14,27,29,28,15,0,0|3,31,0,27,29,28,0,32,0|4,0,0,0,0,0,0,0,33
         ///2£3£ARC-170£2£0£0£2£1£6£3£6,12£2£1,0,27,29,28,0,0|2,14,27,29,28,15,0|3,34,17,19,18,35,0|4,0,0,39,0,0,33

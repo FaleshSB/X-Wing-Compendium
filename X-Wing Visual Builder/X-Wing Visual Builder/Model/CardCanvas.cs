@@ -20,10 +20,10 @@ namespace X_Wing_Visual_Builder.Model
         private Upgrade upgrade;
         private Pilot pilot;
         private Image cardImage;
-        private Image addButton = new Image();
-        private Image removeButton = new Image();
-        private Image deleteButton = new Image();
-        private Image infoButton = new Image();
+        private ImageButton addButton;
+        private ImageButton removeButton;
+        private ImageButton deleteButton;
+        private ImageButton infoButton;
         private OutlinedTextBlock numberOwned = new OutlinedTextBlock();
         private double miniButtonSize;
         private double pcntDif;
@@ -59,10 +59,18 @@ namespace X_Wing_Visual_Builder.Model
 
             if (this.isUpgrade)
             {
+                addButton = new ImageButton("add", 0.9);
+                removeButton = new ImageButton("remove", 0.9);
+                deleteButton = new ImageButton("close", 0.9);
+                infoButton = new ImageButton("info", 0.9);
                 upgrade = (Upgrade)card;
             }
             else
             {
+                addButton = new ImageButton("add", 1);
+                removeButton = new ImageButton("remove", 1);
+                deleteButton = new ImageButton("close", 1);
+                infoButton = new ImageButton("info", 1);
                 pilot = (Pilot)card;
             }
             
@@ -142,7 +150,17 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(numberOwned, numberOwnedLeft);
             SetTop(numberOwned, numberOwnedTop);
             Children.Add(numberOwned);
+            
+            addButton.MouseDown += new MouseButtonEventHandler(AddButtonClicked);
+            addButton.MouseEnter += new MouseEventHandler(MouseHover);
+            addButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            if (currentPage != null) { addButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
+            addButton.Visibility = Visibility.Hidden;
+            SetLeft(addButton, addButtonLeft);
+            SetTop(addButton, addButtonTop);
+            Children.Add(addButton);
 
+            /*
             addButton.Source = new BitmapImage(new Uri(filteredLocation + "addbutton.png"));
             addButton.Height = Opt.ApResMod(miniButtonSize);
             addButton.Width = Opt.ApResMod(miniButtonSize);
@@ -156,8 +174,18 @@ namespace X_Wing_Visual_Builder.Model
             RenderOptions.SetBitmapScalingMode(addButton, BitmapScalingMode.HighQuality);
             SetLeft(addButton, addButtonLeft);
             SetTop(addButton, addButtonTop);
-            Children.Add(addButton);
+            Children.Add(addButton);*/
+            
+            removeButton.MouseDown += new MouseButtonEventHandler(RemoveButtonClicked);
+            removeButton.MouseEnter += new MouseEventHandler(MouseHover);
+            removeButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            if (currentPage != null) { removeButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
+            removeButton.Visibility = Visibility.Hidden;
+            SetLeft(removeButton, removeButtonLeft);
+            SetTop(removeButton, removeButtonTop);
+            Children.Add(removeButton);
 
+            /*
             removeButton.Source = new BitmapImage(new Uri(filteredLocation + "removebutton.png"));
             removeButton.Height = Opt.ApResMod(miniButtonSize);
             removeButton.Width = Opt.ApResMod(miniButtonSize);
@@ -171,23 +199,34 @@ namespace X_Wing_Visual_Builder.Model
             RenderOptions.SetBitmapScalingMode(removeButton, BitmapScalingMode.HighQuality);
             SetLeft(removeButton, removeButtonLeft);
             SetTop(removeButton, removeButtonTop);
-            Children.Add(removeButton);
+            Children.Add(removeButton);*/
 
-            infoButton.Source = new BitmapImage(new Uri(filteredLocation + "infobutton.png"));
-            //infoButton.Source = new BitmapImage(new Uri(@"C:\Users\Falesh\Source\Repos\X-Wing\X-Wing Visual Builder\X-Wing Visual Builder\bin\Debug\Misc\infobutton.png"));
-            infoButton.Height = Opt.ApResMod(miniButtonSize);
-            infoButton.Width = Opt.ApResMod(miniButtonSize);
-            infoButton.UseLayoutRounding = true;
-            infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(InfoClicked);
-            if (currentPage != null) { infoButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
+            
+            infoButton.MouseDown += new MouseButtonEventHandler(InfoButtonClicked);
             infoButton.MouseEnter += new MouseEventHandler(MouseHover);
             infoButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
-            infoButton.Cursor = Cursors.Hand;
+            if (currentPage != null) { infoButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
             infoButton.Visibility = Visibility.Hidden;
-            RenderOptions.SetBitmapScalingMode(infoButton, BitmapScalingMode.HighQuality);
             SetLeft(infoButton, infoButtonLeft);
             SetTop(infoButton, infoButtonTop);
             Children.Add(infoButton);
+
+            /*
+            this.infoButton.Source = new BitmapImage(new Uri(filteredLocation + "infobutton.png"));
+            //infoButton.Source = new BitmapImage(new Uri(@"C:\Users\Falesh\Source\Repos\X-Wing\X-Wing Visual Builder\X-Wing Visual Builder\bin\Debug\Misc\infobutton.png"));
+            this.infoButton.Height = Opt.ApResMod(miniButtonSize);
+            this.infoButton.Width = Opt.ApResMod(miniButtonSize);
+            this.infoButton.UseLayoutRounding = true;
+            this.infoButton.MouseLeftButtonDown += new MouseButtonEventHandler(InfoClicked);
+            if (currentPage != null) { this.infoButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll); }
+            this.infoButton.MouseEnter += new MouseEventHandler(MouseHover);
+            this.infoButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            this.infoButton.Cursor = Cursors.Hand;
+            this.infoButton.Visibility = Visibility.Hidden;
+            RenderOptions.SetBitmapScalingMode(this.infoButton, BitmapScalingMode.HighQuality);
+            SetLeft(this.infoButton, infoButtonLeft);
+            SetTop(this.infoButton, infoButtonTop);
+            Children.Add(this.infoButton);*/
 
             if(isUpgrade) { identifierHider.Height = Opt.ApResMod(height) * 0.4142259414; }
             else { identifierHider.Height = Opt.ApResMod(height) * 0.4634146341; }
@@ -234,7 +273,7 @@ namespace X_Wing_Visual_Builder.Model
             infoButton.Visibility = Visibility.Hidden;
         }
 
-        private void InfoClicked(object sender, MouseButtonEventArgs e)
+        private void InfoButtonClicked(object sender, MouseButtonEventArgs e)
         {
             InfoDialogBox infoDialogBox = new InfoDialogBox();
             infoDialogBox.Owner = Window.GetWindow(currentPage);
@@ -254,7 +293,17 @@ namespace X_Wing_Visual_Builder.Model
             this.uniquePilotId = uniquePilotId;
             this.deleteCardPage = deleteUpgradePage;
             this.uniqueBuildId = uniqueBuildId;
+            
+            deleteButton.MouseDown += new MouseButtonEventHandler(DeleteButtonClicked);
+            deleteButton.MouseEnter += new MouseEventHandler(MouseHover);
+            deleteButton.MouseLeave += new MouseEventHandler(MouseHoverLeave);
+            deleteButton.MouseWheel += new MouseWheelEventHandler(currentPage.ContentScroll);
+            deleteButton.Visibility = Visibility.Hidden;
+            SetRight(deleteButton, 0);
+            SetTop(deleteButton, 0);
+            Children.Add(deleteButton);
 
+            /*
             deleteButton.Source = new BitmapImage(new Uri(filteredLocation + "deletebutton.png"));
             deleteButton.Height = Opt.ApResMod(miniButtonSize);
             deleteButton.Width = Opt.ApResMod(miniButtonSize);
@@ -269,8 +318,9 @@ namespace X_Wing_Visual_Builder.Model
             SetRight(deleteButton, 0);
             SetTop(deleteButton, 0);
             Children.Add(deleteButton);
+            */
         }
-        private void DeleteCardClicked(object sender, MouseButtonEventArgs e)
+        private void DeleteButtonClicked(object sender, MouseButtonEventArgs e)
         {
             if (isUpgrade) { deleteCardPage.DeleteUpgradeClicked(uniqueBuildId, uniquePilotId, upgrade.id); }
             else { deleteCardPage.DeletePilotClicked(uniqueBuildId, uniquePilotId); }
@@ -287,7 +337,7 @@ namespace X_Wing_Visual_Builder.Model
             else { cardClickedPage.PilotClicked(pilot.id); }
         }
 
-        private void RemoveOwnedClicked(object sender, MouseButtonEventArgs e)
+        private void RemoveButtonClicked(object sender, MouseButtonEventArgs e)
         {
             if (isUpgrade)
             {
@@ -298,7 +348,7 @@ namespace X_Wing_Visual_Builder.Model
                 pilot.numberOwned--;
             }
         }
-        private void AddOwnedClicked(object sender, MouseButtonEventArgs e)
+        private void AddButtonClicked(object sender, MouseButtonEventArgs e)
         {
             if (isUpgrade)
             {
