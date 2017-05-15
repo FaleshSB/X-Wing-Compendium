@@ -192,7 +192,7 @@ namespace X_Wing_Visual_Builder.View
 
             /*
              * *Hit* *K Turn* *Left Turn*
-             * ~bold~
+             * ~bold~ 
              * {Title}
             
 
