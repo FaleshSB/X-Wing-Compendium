@@ -50,6 +50,7 @@ namespace X_Wing_Visual_Builder.Model
         private double infoButtonTop;
         private bool haveButtonsBeenInitialized = false;
         private bool hasDeleteButton = false;
+        private bool isHidingIdentifiers = false;
 
         public CardCanvas(Card card, Image cardImage, double width, double height, Thickness margin, bool isUpgrade, DefaultPage currentPage = null)
         {
@@ -158,15 +159,18 @@ namespace X_Wing_Visual_Builder.Model
             SetLeft(this.identifierHider, 0);
             SetTop(this.identifierHider, 0);
             Children.Add(this.identifierHider);
+            isHidingIdentifiers = true;
         }
         public void ShowCardIdentifiers()
         {
             identifierHider.Visibility = Visibility.Hidden;
+            isHidingIdentifiers = false;
         }
 
         public void HideInfoButton()
         {
             isHidingInfoButton = true;
+            if (infoButton == null) return;
             infoButton.Visibility = Visibility.Hidden;
         }
 
@@ -246,6 +250,7 @@ namespace X_Wing_Visual_Builder.Model
 
         private void MouseHoverLeave(object sender, MouseEventArgs e)
         {
+            if (isHidingIdentifiers) return;
             addButton.Visibility = Visibility.Hidden;
             removeButton.Visibility = Visibility.Hidden;
             infoButton.Visibility = Visibility.Hidden;
@@ -259,7 +264,8 @@ namespace X_Wing_Visual_Builder.Model
         }
         private void MouseHover(object sender, MouseEventArgs e)
         {
-            if(haveButtonsBeenInitialized == false)
+            if (isHidingIdentifiers) return;
+            if (haveButtonsBeenInitialized == false)
             {
                 if (isUpgrade)
                 {

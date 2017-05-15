@@ -139,7 +139,7 @@ namespace X_Wing_Visual_Builder.View
             Canvas.SetTop(showAddRemoveButtonsCheckBox, 40);
             manuNavigationCanvas.Children.Add(showAddRemoveButtonsCheckBox);
             */
-            manuNavigationWrapPanel.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 30);
+            //manuNavigationWrapPanel.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 30);
 
             //contentScrollViewer.Height = System.Windows.SystemParameters.PrimaryScreenHeight - (manuNavigationWrapPanel.Height + 40);
 
@@ -292,8 +292,8 @@ namespace X_Wing_Visual_Builder.View
                 instructions.Text += "'PS8' or 'PS4-7', using any numbers, will show pilots of, or between, that Pilot Skill\r\n";
                 instructions.Text += "'8' or '4-7', using any numbers, will show cards of, or between, that cost\r\n";
                 instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
-                instructions.Text += "'rebel', 'scrum' or 'imperial' will show cards of that faction\r\n";
-                instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship";
+                instructions.Text += "'rebel', 'scum' or 'imperial' will show cards of that faction\r\n";
+                instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship\r\n";
                 instructions.Text += "'small' or 'large' will show pilots whoes ships are of that size";
                 instructions.FontSize = Opt.ApResMod(14);
                 instructions.LineHeight = 30;
