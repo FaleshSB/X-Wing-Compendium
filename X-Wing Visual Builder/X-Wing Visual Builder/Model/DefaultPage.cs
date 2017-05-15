@@ -25,7 +25,9 @@ namespace X_Wing_Visual_Builder.Model
 
         public DefaultPage()
         {
-            ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\main_background.png")));
+            string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            string filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\Misc\\";
+            ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(filteredLocation + "main_background.png")));
             backgroundBrush.TileMode = TileMode.Tile;
             backgroundBrush.Stretch = Stretch.None;
             backgroundBrush.ViewportUnits = BrushMappingMode.Absolute;

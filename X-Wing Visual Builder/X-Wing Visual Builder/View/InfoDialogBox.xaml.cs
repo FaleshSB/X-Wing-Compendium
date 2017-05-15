@@ -38,7 +38,7 @@ namespace X_Wing_Visual_Builder.View
             InitializeComponent();
             this.Height = 600;
             this.Width = 600;
-            ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(@"D:\Documents\Game Stuff\X-Wing\main_background.png")));
+            ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(filteredLocation + "main_background.png")));
             backgroundBrush.TileMode = TileMode.Tile;
             backgroundBrush.Stretch = Stretch.None;
             backgroundBrush.ViewportUnits = BrushMappingMode.Absolute;
