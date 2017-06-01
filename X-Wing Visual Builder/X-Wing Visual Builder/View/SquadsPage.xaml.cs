@@ -28,6 +28,7 @@ namespace X_Wing_Visual_Builder.View
         private int pilotCardHeight = 410;
         private AlignableWrapPanel contentWrapPanel;
         private bool isButtonBeingPressed = false;
+        private Dictionary<int, ComboBox> comboBoxes = new Dictionary<int, ComboBox>();
 
 
         public SquadsPage()
@@ -240,7 +241,7 @@ namespace X_Wing_Visual_Builder.View
             DisplayContent();
         }
 
-        private async void CopyForWebClicked(object sender, MouseButtonEventArgs e)
+        private async void CopyClicked(object sender, MouseButtonEventArgs e)
         {
             if (isButtonBeingPressed) return;
             isButtonBeingPressed = true;
@@ -248,18 +249,127 @@ namespace X_Wing_Visual_Builder.View
             isButtonBeingPressed = false;
             ImageButton imageButton = (ImageButton)sender;
             Build build = Builds.GetBuild(imageButton.uniqueBuildId);
+
+            if(comboBoxes[build.uniqueBuildId].Text == "Vassal 7.0.3+") CopyForVassalClicked(build);
+            else if (comboBoxes[build.uniqueBuildId].Text == "Facebook") CopyForFacebookClicked(build);
+            else if (comboBoxes[build.uniqueBuildId].Text == "Reddit") CopyForRedditClicked(build);
+            else if (comboBoxes[build.uniqueBuildId].Text == "BBCode") CopyForBBCodeClicked(build);
+            else if (comboBoxes[build.uniqueBuildId].Text == "Text") CopyForTextClicked(build);
+        }
+        private void CopyForTextClicked(Build build)
+        {
             string buildText = "";
             foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
             {
                 buildText += uniquePilot.pilot.name + ": " + uniquePilot.pilot.cost.ToString() + Environment.NewLine;
                 foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
                 {
-                    buildText += "\t" + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
+                    buildText += "  " + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
                 }
-                buildText += "\tTotal: " + uniquePilot.totalCost.ToString();
+                buildText += "  Total: " + uniquePilot.totalCost.ToString() + Environment.NewLine;
+                buildText += Environment.NewLine;
+            }
+            buildText += "Grand Total: " + build.totalCost.ToString();
+            Clipboard.SetText(buildText);
+        }
+        private void CopyForBBCodeClicked(Build build)
+        {
+            string buildText = "";
+            foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
+            {
+                buildText += uniquePilot.pilot.name + ": " + uniquePilot.pilot.cost.ToString() + Environment.NewLine;
+                buildText += "[list]" + Environment.NewLine;
+                foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
+                {
+                    buildText += "[*]" + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
+                }
+                buildText += "[*]Total: " + uniquePilot.totalCost.ToString() + Environment.NewLine;
+                buildText += "[/list]";
+                buildText += Environment.NewLine;
+            }
+            buildText += "Grand Total: " + build.totalCost.ToString();
+            Clipboard.SetText(buildText);
+        }
+        private void CopyForRedditClicked(Build build)
+        {
+            string buildText = "";
+            foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
+            {
+                buildText += "    " + uniquePilot.pilot.name + ": " + uniquePilot.pilot.cost.ToString() + Environment.NewLine;
+                foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
+                {
+                    buildText += "        " + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
+                }
+                buildText += "        Total: " + uniquePilot.totalCost.ToString();
                 buildText += Environment.NewLine;
                 buildText += Environment.NewLine;
             }
+            buildText += "    " + "Grand Total: " + build.totalCost.ToString();
+            Clipboard.SetText(buildText);
+        }
+        private void CopyForFacebookClicked(Build build)
+        {
+            string buildText = "";
+            foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
+            {
+                buildText += uniquePilot.pilot.name + ": " + uniquePilot.pilot.cost.ToString() + Environment.NewLine;
+                foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
+                {
+                    buildText += "　　" + upgrade.name + ": " + upgrade.cost.ToString() + Environment.NewLine;
+                }
+                buildText += "　　Total: " + uniquePilot.totalCost.ToString();
+                buildText += Environment.NewLine;
+                buildText += Environment.NewLine;
+            }
+            buildText += "Grand Total: " + build.totalCost.ToString();
+            Clipboard.SetText(buildText);
+        }
+        private void CopyForVassalClicked(Build build)
+        {
+            string buildText = "{";
+            buildText += Environment.NewLine + "\"faction\": \"" + build.faction.ToString().ToLower() + "\",";
+            buildText += Environment.NewLine + "\"points\": " + build.totalCost.ToString().ToLower() + ",";
+            buildText += Environment.NewLine + "\"version\": \"1.0.0\",";
+            buildText += Environment.NewLine + "\"pilots\": [";
+
+            foreach (UniquePilot uniquePilot in build.pilots.Values.OrderByDescending(uniquePilot => uniquePilot.pilot.pilotSkill).ThenByDescending(uniquePilot => uniquePilot.pilot.cost).ToList())
+            {
+                buildText += Environment.NewLine + "{";
+                buildText += Environment.NewLine + "\"name\": \"" + uniquePilot.pilot.canonicalName + "\",";
+                buildText += Environment.NewLine + "\"ship\": \"" + uniquePilot.pilot.ship.canonicalName + "\",";
+                
+                if (uniquePilot.upgrades.Count > 0)
+                {
+                    Dictionary<UpgradeType, List<string>> upgradesInCategory = new Dictionary<UpgradeType, List<string>>();
+                    foreach (Upgrade upgrade in uniquePilot.upgrades.Values.OrderBy(upgrade => upgrade.upgradeType.ToString()).ThenByDescending(upgrade => upgrade.cost).ThenByDescending(upgrade => upgrade.name))
+                    {
+                        if (upgradesInCategory.ContainsKey(upgrade.upgradeType) == false) upgradesInCategory[upgrade.upgradeType] = new List<string>();
+                        upgradesInCategory[upgrade.upgradeType].Add(upgrade.canonicalName);
+                    }
+
+
+                    buildText += Environment.NewLine + "\"upgrades\": {";
+                    foreach (KeyValuePair<UpgradeType, List<string>> upgradesInCategories in upgradesInCategory)
+                    {
+                        buildText += Environment.NewLine + "\"" + CanonicalUpgradeNames.canonicalUpgradeNames[upgradesInCategories.Key] + "\": [";
+                        foreach (string canonicalUpgradeName in upgradesInCategories.Value)
+                        {
+                            buildText += Environment.NewLine + "\"" + canonicalUpgradeName + "\",";
+                        }
+                        buildText = buildText.TrimEnd(',');
+                        buildText += Environment.NewLine + "],";
+                    }
+                    buildText = buildText.TrimEnd(',');
+                    buildText += Environment.NewLine + "},";
+                }
+                
+                buildText = buildText.TrimEnd(',');
+                buildText += Environment.NewLine + "},";
+            }
+            buildText = buildText.TrimEnd(',');
+            buildText += Environment.NewLine + "]";
+            buildText += Environment.NewLine + "}";
+
             buildText = buildText.Trim();
             Clipboard.SetText(buildText);
         }
@@ -306,18 +416,50 @@ namespace X_Wing_Visual_Builder.View
                 downButton.MouseDown += new MouseButtonEventHandler(DownClicked);
                 downButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
                 spacerWrapPanel.Children.Add(downButton);
+                
+                OutlinedTextBlock copyFor = new OutlinedTextBlock();
+                copyFor.Text = "COPY FOR";
+                copyFor.StrokeThickness = Opt.ApResMod(0.5);
+                copyFor.Stroke = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+                copyFor.FontWeight = FontWeights.Bold;
+                copyFor.Fill = new SolidColorBrush(Color.FromRgb(80, 80, 80));
+                copyFor.FontSize = Opt.ApResMod(15);
+                copyFor.FontFamily = new FontFamily("Segoe UI");
+                copyFor.Margin = ScaledThicknessFactory.GetThickness(2, 3, 2, 0);
+                spacerWrapPanel.Children.Add(copyFor);
 
-                ImageButton copyForWebButton = new ImageButton("copy_for_web", 0.5);
-                copyForWebButton.uniqueBuildId = build.uniqueBuildId;
-                copyForWebButton.MouseDown += new MouseButtonEventHandler(CopyForWebClicked);
-                copyForWebButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
-                spacerWrapPanel.Children.Add(copyForWebButton);
+                ComboBox copyForOption = new ComboBox();
+                copyForOption.Items.Add("Vassal 7.0.3+");
+                copyForOption.Items.Add("Facebook");
+                copyForOption.Items.Add("BBCode");
+                copyForOption.Items.Add("Reddit");
+                copyForOption.Items.Add("Text");
+                copyForOption.HorizontalContentAlignment = HorizontalAlignment.Left;
+                copyForOption.VerticalContentAlignment = VerticalAlignment.Center;
+                copyForOption.SelectedIndex = 0;
+                copyForOption.FontSize = Opt.ApResMod(13);
+                copyForOption.FontFamily = new FontFamily("Segoe UI");
+                copyForOption.Margin = ScaledThicknessFactory.GetThickness(2, 3, 2, 3);
+                copyForOption.Padding = ScaledThicknessFactory.GetThickness(3, 0, 3, 0);
+                spacerWrapPanel.Children.Add(copyForOption);
+                comboBoxes[build.uniqueBuildId] = copyForOption;
+
+                ImageButton copy = new ImageButton("copy", 0.5);
+                copy.uniqueBuildId = build.uniqueBuildId;
+                copy.MouseDown += new MouseButtonEventHandler(CopyClicked);
+                copy.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
+                spacerWrapPanel.Children.Add(copy);
 
                 ImageButton deleteBuildButton = new ImageButton("delete_squad", 0.5);
                 deleteBuildButton.uniqueBuildId = build.uniqueBuildId;
                 deleteBuildButton.MouseDown += new MouseButtonEventHandler(DeleteBuildClicked);
                 deleteBuildButton.Margin = ScaledThicknessFactory.GetThickness(2, 0, 2, 0);
                 spacerWrapPanel.Children.Add(deleteBuildButton);
+
+                Canvas bottomSpacer = new Canvas();
+                bottomSpacer.Width = 9999;
+                bottomSpacer.Height = 1;
+                spacerWrapPanel.Children.Add(bottomSpacer);
 
                 OutlinedTextBlock totalCost = new OutlinedTextBlock();
                 totalCost.Text = "TOTAL COST";
@@ -340,11 +482,6 @@ namespace X_Wing_Visual_Builder.View
                 totalCost2.FontFamily = new FontFamily("Segoe UI");
                 totalCost2.Margin = ScaledThicknessFactory.GetThickness(2, 0, 0, 0);
                 spacerWrapPanel.Children.Add(totalCost2);
-
-                Canvas bottomSpacer = new Canvas();
-                bottomSpacer.Width = 9999;
-                bottomSpacer.Height = 1;
-                spacerWrapPanel.Children.Add(bottomSpacer);
 
                 buildWrapPanel.Children.Add(spacerWrapPanel);
 

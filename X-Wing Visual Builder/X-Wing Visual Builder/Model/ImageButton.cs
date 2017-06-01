@@ -79,6 +79,12 @@ namespace X_Wing_Visual_Builder.Model
                 case "remove":
                     buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
                     break;
+                case "copy_for_vassal":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(266 * scale), (int)Math.Round(60 * scale));
+                    break;
+                case "copy":
+                    buttonSize = new System.Drawing.Size((int)Math.Round(106 * scale), (int)Math.Round(60 * scale));
+                    break;
                 default:
                     break;
             }

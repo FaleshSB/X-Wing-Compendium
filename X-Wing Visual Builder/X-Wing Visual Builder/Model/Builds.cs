@@ -121,10 +121,12 @@ namespace X_Wing_Visual_Builder.Model
         }
         public static void LoadBuilds()
         {
-            if (File.Exists("build.txt") == false) { return; }
+            string[] allBuilds = FileHandler.LoadFile("build.txt");
+
+            if (allBuilds == null) { return; }
             int saveVersion = 0;
             isLoadingBuild = true;
-            string[] allBuilds = FileHandler.LoadFile("build.txt");
+            
             if (allBuilds.Count() > 0)
             {
                 bool isVersion = true;

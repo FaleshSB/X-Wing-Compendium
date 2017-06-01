@@ -14,18 +14,19 @@ namespace X_Wing_Visual_Builder.Model
         static FileHandler()
         {
             string baseLocation = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            filteredLocation = System.IO.Path.GetDirectoryName(baseLocation).Replace("file:\\", "") + "\\";
+            filteredLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\X-Wing Compendium";
+            if(!Directory.Exists(filteredLocation)) Directory.CreateDirectory(filteredLocation);
         }
 
         public static void SaveFile(string fileName, string data)
         {
-            File.WriteAllText(filteredLocation + fileName, data);
+            File.WriteAllText(Path.Combine(filteredLocation, fileName), data);
         }
         public static string[] LoadFile(string fileName)
         {
-            if (File.Exists(filteredLocation + fileName))
+            if (File.Exists(Path.Combine(filteredLocation, fileName)))
             {
-                return File.ReadAllLines(filteredLocation + fileName);
+                return File.ReadAllLines(Path.Combine(filteredLocation, fileName));
             }
             else
             {

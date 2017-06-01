@@ -55,7 +55,7 @@ namespace X_Wing_Visual_Builder.Model
 
                     Ship currentShip = new Ship(Int32.Parse(fields[0]), (ShipType)Int32.Parse(fields[1]), fields[2], (ShipSize)Int32.Parse(fields[3]), 
                                                 Convert.ToBoolean(Int32.Parse(fields[4])), Convert.ToBoolean(Int32.Parse(fields[5])), Int32.Parse(fields[6]),
-                                                Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]), maneuvers, uniqueManeuverId);
+                                                Int32.Parse(fields[7]), Int32.Parse(fields[8]), Int32.Parse(fields[9]), actions, (Faction)Int32.Parse(fields[11]), maneuvers, uniqueManeuverId, fields[13]);
 
                     ships[(ShipType)Int32.Parse(fields[1])][(Faction)Int32.Parse(fields[11])] = currentShip;
 

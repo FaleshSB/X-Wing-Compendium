@@ -130,7 +130,7 @@ namespace X_Wing_Visual_Builder.Model
                                              (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
                                              Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
-                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned, inExpansion));
+                                             requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned, inExpansion, fields[24]));
                 }
             }
             SaveNumberOfUpgradesOwned();
@@ -157,9 +157,10 @@ namespace X_Wing_Visual_Builder.Model
 
         private static Dictionary<int, int> LoadUpgradesOwned()
         {
-            if(File.Exists("upgradesowned.txt") == false) { return null; }
-            Dictionary<int, int> upgradeKeyOwned = new Dictionary<int, int>();
             string[] allUpgradesOwned = FileHandler.LoadFile("upgradesowned.txt");
+            if (allUpgradesOwned == null) { return null; }
+
+            Dictionary<int, int> upgradeKeyOwned = new Dictionary<int, int>();
             if (allUpgradesOwned != null)
             {
                 if (allUpgradesOwned.Count() > 0)

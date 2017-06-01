@@ -31,9 +31,10 @@ namespace X_Wing_Visual_Builder.Model
             get { return _numberOwned; }
             set { _numberOwned = (value < 0) ? 0 : value; Pilots.SaveNumberOfPilotsOwned(); foreach (CardCanvas cardCanvas in cardCanvasList) { cardCanvas.UpdateNumberOwned(); } }
         }
+        public string canonicalName;
 
         public Pilot(int id, ShipType shipType, bool isUnique, string name, int pilotSkill, string description, Dictionary<UpgradeType, int> possibleUpgrades, int cost,
-                     List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion)
+                     List<string> faq, Faction faction, bool hasAbility, int numberOwned, List<ExpansionType> inExpansion, string canonicalName)
         {
             this.isUpgrade = false;
             this.imageFilePath = @"Pilot Cards\" + id.ToString();
@@ -49,6 +50,7 @@ namespace X_Wing_Visual_Builder.Model
             this.hasAbility = hasAbility;
             this._numberOwned = numberOwned;
             this.ship = Ships.ships[shipType][faction];
+            this.canonicalName = canonicalName;
 
             foreach (ExpansionType expansionType in inExpansion)
             {

@@ -79,6 +79,7 @@
     <Compile Include="Model\AlignableWrapPanel.cs" />
     <Compile Include="Model\Build.cs" />
     <Compile Include="Model\Builds.cs" />
+    <Compile Include="Model\CanonicalUpgradeNames.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\CardCanvas.cs" />
     <Compile Include="Model\ConvertBitmapToBitmapImage.cs" />

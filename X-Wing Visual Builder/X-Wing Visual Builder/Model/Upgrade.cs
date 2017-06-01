@@ -36,12 +36,13 @@ namespace X_Wing_Visual_Builder.Model
             get { return _numberOwned; }
             set { _numberOwned = (value < 0) ? 0 : value; Upgrades.SaveNumberOfUpgradesOwned(); foreach (CardCanvas cardCanvas in cardCanvasList) { cardCanvas.UpdateNumberOwned(); } }
         }
+        public string canonicalName;
 
 
         public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
                        List<ShipType> shipThatCanUse, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
-                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion)
+                       List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion, string canonicalName)
         {
             this.isUpgrade = true;
             this.imageFilePath = @"Upgrade Cards\" + id.ToString();
@@ -69,8 +70,9 @@ namespace X_Wing_Visual_Builder.Model
             this.addsActions = addsActions;
             this.addsPilotSkill = addsPilotSkill;
             this._numberOwned = numberOwned;
+            this.canonicalName = canonicalName;
 
-            foreach(ExpansionType expansionType in inExpansion)
+            foreach (ExpansionType expansionType in inExpansion)
             {
                 if(this.inExpansion.ContainsKey(expansionType) == false)
                 {

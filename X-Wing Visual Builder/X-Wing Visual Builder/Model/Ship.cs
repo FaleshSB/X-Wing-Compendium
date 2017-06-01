@@ -34,9 +34,10 @@ namespace X_Wing_Visual_Builder.Model
         public Faction faction;
         public Dictionary<int, List<int>> maneuvers;
         public string uniqueManeuverId;
+        public string canonicalName;
 
         public Ship(int id, ShipType shipType, string name, ShipSize shipSize, bool isTIE, bool isXWing, int attack, int agility, int hull, int shields,
-                    List<Action> actions, Faction faction, Dictionary<int, List<int>> maneuvers, string uniqueManeuverId)
+                    List<Action> actions, Faction faction, Dictionary<int, List<int>> maneuvers, string uniqueManeuverId, string canonicalName)
         {
             this.id = id;
             this.shipType = shipType;
@@ -52,6 +53,7 @@ namespace X_Wing_Visual_Builder.Model
             this.faction = faction;
             this.maneuvers = maneuvers;
             this.uniqueManeuverId = uniqueManeuverId;
+            this.canonicalName = canonicalName;
         }
 
         public ManeuverCard GetManeuverCard(double size)
