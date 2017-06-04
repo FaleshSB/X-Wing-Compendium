@@ -42,3 +42,9 @@ To use a squad you have built in Vassal, 7.0.3 or higher, select Vassal 7.0.3+ f
 ![image](http://i.imgur.com/399auUU.jpg)
 
 In this image you can see the three different quiz questions cut and pasted next to each other. Try to work out what the name of the card is, or which ship can do the maneuver and then click Show Name to see if you were correct.
+
+# Extra Info
+
+![image](http://i.imgur.com/Cco34Hx.jpg)
+
+If you click the ? button on any card a popup appears which shows which expansions contain the card and any extra info from the official FAQ.
