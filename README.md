@@ -8,6 +8,8 @@ It is not perfectly bug free, or amazingly designed (I hate working on the UI), 
 
 ![image](http://i.imgur.com/fxzGVId.jpg)
 
+To add a pilot press the Add Pilot button. To add an upgrade to that pilot press Add Upgrade under the pilot card. To remove a card hover over it with your mouse and press the X button at the top right of the card. You can also swap the pilot while keeping all the upgrades that are compatible with that new pilot by pressing the Swap Pilot button.
+
 # Card Browser
 
 ![image](http://i.imgur.com/haaMZbR.jpg)
