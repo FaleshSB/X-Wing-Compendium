@@ -36,15 +36,15 @@ namespace X_Wing_Visual_Builder.View
             Icon = BitmapFrame.Create(iconUri);
 
             InitializeComponent();
-            this.Height = 600;
-            this.Width = 600;
+            this.Height = Opt.ApResMod(600);
+            this.Width = Opt.ApResMod(600);
             ImageBrush backgroundBrush = new ImageBrush(new BitmapImage(new Uri(filteredLocation + "main_background.png")));
             backgroundBrush.TileMode = TileMode.Tile;
             backgroundBrush.Stretch = Stretch.None;
             backgroundBrush.ViewportUnits = BrushMappingMode.Absolute;
             backgroundBrush.AlignmentX = AlignmentX.Left;
             backgroundBrush.AlignmentY = AlignmentY.Top;
-            backgroundBrush.Viewport = new Rect(0, 0, 512, 699);
+            backgroundBrush.Viewport = new Rect(0, 0, Opt.ApResMod(512), Opt.ApResMod(699));
             Background = backgroundBrush;
 
             pageStructureGrid.ColumnDefinitions.Add(new ColumnDefinition());

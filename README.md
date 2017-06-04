@@ -1,5 +1,7 @@
 # X-Wing-Compendium
 
+Download from the [releases page](https://github.com/FaleshSB/X-Wing-Compendium/releases)
+
 The X-Wing Compendium is a collection of tools including a squad builder, collection manager, research tool, quiz and squad spawner for Vassal. I plan to keep it up to date with the latest FAQ and also add more stuff down the line. There is one caviat on this, I have M.E. (chronic fatigue) so I can only work when I have some spare energy. If I ever have to drop this project I will hand it over to someone else who wishes to continue it.
 
 It is not perfectly bug free, or amazingly designed (I hate working on the UI), but I thought I might as well release it now as I use it all the time and so thought others might too.
