@@ -30,7 +30,7 @@ namespace X_Wing_Visual_Builder.View
         private string calculateStatsButtonName = "calculate_stats_start";
         private string quizButtonName = "quiz_start";
         private Canvas contentCanvas = new Canvas();
-        private string filteredLocation;
+        private string filteredLocation; 
         private bool isButtonBeingPressed = false;
 
         private AlignableWrapPanel contentWrapPanel = new AlignableWrapPanel();
