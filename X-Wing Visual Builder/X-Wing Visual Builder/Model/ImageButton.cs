@@ -23,67 +23,67 @@ namespace X_Wing_Visual_Builder.Model
             switch (imageName)
             {
                 case "add_pilot":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(173 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(173 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "delete_squad":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(224 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(224 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "up":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(40 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(40 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "down":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(40 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(40 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "copy_for_web":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(227 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(227 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break; 
                 case "add_upgrade":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(225 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(225 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "swap_pilot":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(190 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(190 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "add_imperial_squad":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(319 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(319 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "add_rebel_squad":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(274 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(274 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "add_scum_squad":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(274 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(274 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "browse_cards":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(236 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(236 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "quiz":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(100 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(100 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "manage_squads":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(262 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(262 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "show_name":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(203 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(203 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "next":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(203 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(203 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "info":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(22 * scale)), (int)Opt.ApResMod(Math.Round(22 * scale)));
                     break;
                 case "close":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(22 * scale)), (int)Opt.ApResMod(Math.Round(22 * scale)));
                     break;
                 case "add":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(22 * scale)), (int)Opt.ApResMod(Math.Round(22 * scale)));
                     break;
                 case "remove":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(22 * scale), (int)Math.Round(22 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(22 * scale)), (int)Opt.ApResMod(Math.Round(22 * scale)));
                     break;
                 case "copy_for_vassal":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(266 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(266 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 case "copy":
-                    buttonSize = new System.Drawing.Size((int)Math.Round(106 * scale), (int)Math.Round(60 * scale));
+                    buttonSize = new System.Drawing.Size((int)Opt.ApResMod(Math.Round(106 * scale)), (int)Opt.ApResMod(Math.Round(60 * scale)));
                     break;
                 default:
                     break;

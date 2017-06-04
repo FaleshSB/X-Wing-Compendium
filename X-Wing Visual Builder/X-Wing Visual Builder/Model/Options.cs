@@ -20,6 +20,7 @@ namespace X_Wing_Visual_Builder.Model
 
         public static double ApResMod(double number)
         {
+            //return number;
             return Math.Round((number * resolutionMultiplier) * zoom);
         }
     }

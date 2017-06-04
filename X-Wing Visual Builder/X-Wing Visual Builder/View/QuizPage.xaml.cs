@@ -184,11 +184,11 @@ namespace X_Wing_Visual_Builder.View
                 }
                 shipName.HorizontalAlignment = HorizontalAlignment.Center;
                 shipName.VerticalAlignment = VerticalAlignment.Bottom;
-                shipName.Height = 90;
-                shipName.FontSize = 20;
+                shipName.Height = Opt.ApResMod(90);
+                shipName.FontSize = Opt.ApResMod(20);
                 contentStackPanel.Children.Add(shipName);
 
-                ManeuverCard randomManeuverCard = currentRandomShip.GetManeuverCard(30);
+                ManeuverCard randomManeuverCard = currentRandomShip.GetManeuverCard(Opt.ApResMod(30));
                 randomManeuverCard.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 20);
                 selectCategoryStackPanel.Margin = ScaledThicknessFactory.GetThickness(0, 280, 0, 20 + (pilotCardHeight - (randomManeuverCard.Height + shipName.Height + 20)));
                 shipName.Margin = ScaledThicknessFactory.GetThickness(0, 0, 0, 20);

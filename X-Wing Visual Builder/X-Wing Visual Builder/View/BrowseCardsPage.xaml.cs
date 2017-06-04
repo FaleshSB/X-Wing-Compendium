@@ -294,7 +294,7 @@ namespace X_Wing_Visual_Builder.View
                 instructions.Text += "'torpedo' or 'tech', using any upgrade, will show cards of that are, or can use, that upgrade\r\n";
                 instructions.Text += "'rebel', 'scum' or 'imperial' will show cards of that faction\r\n";
                 instructions.Text += "'Y-Wing' or 'TIE/fo', using any ship name, will show pilots who use that ship\r\n";
-                instructions.Text += "'small' or 'large' will show pilots whoes ships are of that size";
+                instructions.Text += "'small' or 'large' will show pilots whose ships are of that size";
                 instructions.FontSize = Opt.ApResMod(14);
                 instructions.LineHeight = 30;
                 instructions.Background = new SolidColorBrush(Color.FromRgb(250, 250, 250));

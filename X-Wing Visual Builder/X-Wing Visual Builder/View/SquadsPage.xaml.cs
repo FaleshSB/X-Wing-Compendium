@@ -396,7 +396,7 @@ namespace X_Wing_Visual_Builder.View
 
                 Canvas topSpacer = new Canvas();
                 topSpacer.Width = 99999;
-                topSpacer.Height = 50;
+                topSpacer.Height = Opt.ApResMod(50);
                 spacerWrapPanel.Children.Add(topSpacer);
 
                 ImageButton addPilotButton = new ImageButton("add_pilot", 0.5);
@@ -457,7 +457,7 @@ namespace X_Wing_Visual_Builder.View
                 spacerWrapPanel.Children.Add(deleteBuildButton);
 
                 Canvas bottomSpacer = new Canvas();
-                bottomSpacer.Width = 9999;
+                bottomSpacer.Width = 99999;
                 bottomSpacer.Height = 1;
                 spacerWrapPanel.Children.Add(bottomSpacer);
 

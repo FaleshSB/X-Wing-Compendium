@@ -22,7 +22,7 @@ namespace X_Wing_Visual_Builder.View
     /// </summary>
     public partial class StartPage : DefaultPage
     {
-        private System.Drawing.Size buttonSize = new System.Drawing.Size(168, 36);
+        private System.Drawing.Size buttonSize = new System.Drawing.Size((int)Math.Round(Opt.ApResMod(168)), (int)Math.Round(Opt.ApResMod(36)));
 
         private Dictionary<string, Image> buttons = new Dictionary<string, Image>();
         private string manageSquadsButtonName = "manage_squads_start";
@@ -116,11 +116,11 @@ namespace X_Wing_Visual_Builder.View
             contentCanvas.Children.Clear();
             
             Canvas.SetLeft(buttons[manageSquadsButtonName], 0);
-            Canvas.SetTop(buttons[manageSquadsButtonName], 400);
+            Canvas.SetTop(buttons[manageSquadsButtonName], Opt.ApResMod(400));
             contentCanvas.Children.Add(buttons[manageSquadsButtonName]);
 
             Canvas.SetLeft(buttons[browseCardsButtonName], 0);
-            Canvas.SetTop(buttons[browseCardsButtonName], 450);
+            Canvas.SetTop(buttons[browseCardsButtonName], Opt.ApResMod(450));
             contentCanvas.Children.Add(buttons[browseCardsButtonName]);
 
             //Canvas.SetLeft(buttons[calculateStatsButtonName], 0);
@@ -128,7 +128,7 @@ namespace X_Wing_Visual_Builder.View
             //contentCanvas.Children.Add(buttons[calculateStatsButtonName]);
 
             Canvas.SetLeft(buttons[quizButtonName], 0);
-            Canvas.SetTop(buttons[quizButtonName], 500);
+            Canvas.SetTop(buttons[quizButtonName], Opt.ApResMod(500));
             contentCanvas.Children.Add(buttons[quizButtonName]);
         }
     }
