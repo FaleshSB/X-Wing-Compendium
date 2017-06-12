@@ -20,6 +20,7 @@ namespace X_Wing_Visual_Builder.Model
 {
     public class Pilot : Card
     {
+        public Faction faction { get; set; }
         public Ship ship;
         public bool isUnique;
         public int pilotSkill;

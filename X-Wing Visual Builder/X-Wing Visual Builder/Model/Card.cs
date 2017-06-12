@@ -16,7 +16,6 @@ namespace X_Wing_Visual_Builder.Model
         public string name { get; set; }
         public string description { get; set; }
         public List<string> faq { get; set; } = new List<string>();
-        public Faction faction { get; set; }
         public List<CardCanvas> cardCanvasList = new List<CardCanvas>();
         private BitmapImage resizedCardImage = null;
         protected bool isUpgrade;

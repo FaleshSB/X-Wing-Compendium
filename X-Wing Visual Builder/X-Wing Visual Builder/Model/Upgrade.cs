@@ -25,6 +25,7 @@ namespace X_Wing_Visual_Builder.Model
         public bool isXWingOnly;
         public Dictionary<UpgradeType, int> upgradesAdded;
         public Dictionary<UpgradeType, int> upgradesRemoved;
+        public List<Faction> factions { get; set; }
         public int requiresPilotSkill;
         public List<Action> requiresActions;
         public List<int> requiresUpgrades;
@@ -39,7 +40,7 @@ namespace X_Wing_Visual_Builder.Model
         public string canonicalName;
 
 
-        public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, Faction faction, ShipSize shipSize,
+        public Upgrade(int id, UpgradeType upgradeType, int cost, string name, string description, List<string> faq, List<Faction> factions, ShipSize shipSize,
                        List<ShipType> shipThatCanUse, bool isWeapon, bool isUnique, bool isLimited, int numberOfUpgradeSlots, bool isDualCard, bool isTieOnly, bool isXWingOnly,
                        Dictionary<UpgradeType, int> upgradesAdded, Dictionary<UpgradeType, int> upgradesRemoved, int requiresPilotSkill, List<Action> requiresActions,
                        List<int> requiresUpgrades, List<Action> addsActions, int addsPilotSkill, int numberOwned, List<ExpansionType> inExpansion, string canonicalName)
@@ -52,7 +53,7 @@ namespace X_Wing_Visual_Builder.Model
             this.name = name;
             this.description = description;
             this.faq = faq;
-            this.faction = faction;
+            this.factions = factions;
             this.shipSize = shipSize;
             this.shipThatCanUse = shipThatCanUse;
             this.isWeapon = isWeapon;

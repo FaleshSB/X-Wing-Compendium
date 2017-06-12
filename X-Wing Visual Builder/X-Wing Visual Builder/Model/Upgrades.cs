@@ -33,6 +33,15 @@ namespace X_Wing_Visual_Builder.Model
                             faq.Add(possibleFaq);
                         }
                     }
+                    List<Faction> factions = new List<Faction>();
+                    if (fields[6].Length > 0)
+                    {
+                        string[] split = fields[6].Split(',');
+                        foreach (string element in split)
+                        {
+                            factions.Add((Faction)Int32.Parse(element));
+                        }
+                    }
                     Dictionary<UpgradeType, int> upgradesAdded = new Dictionary<UpgradeType, int>();
                     if (fields[16].Length > 0)
                     {
@@ -127,7 +136,7 @@ namespace X_Wing_Visual_Builder.Model
                     }
                     
                     upgrades.Add(Int32.Parse(fields[0]), new Upgrade(Int32.Parse(fields[0]), (UpgradeType)Int32.Parse(fields[1]), Int32.Parse(fields[2]), fields[3], fields[4], faq,
-                                             (Faction)Int32.Parse(fields[6]), (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
+                                             factions, (ShipSize)Int32.Parse(fields[7]), shipsThatCanUse,
                                              Convert.ToBoolean(Int32.Parse(fields[9])), Convert.ToBoolean(Int32.Parse(fields[10])), Convert.ToBoolean(Int32.Parse(fields[11])),
                                              Int32.Parse(fields[12]), Convert.ToBoolean(Int32.Parse(fields[13])), Convert.ToBoolean(Int32.Parse(fields[14])), Convert.ToBoolean(Int32.Parse(fields[15])), upgradesAdded, upgradesRemoved,
                                              requiresPilotSkill, requiresActions, requiresUpgrades, addsActions, addsPilotSkill, numberOwned, inExpansion, fields[24]));
@@ -180,7 +189,7 @@ namespace X_Wing_Visual_Builder.Model
             string numberOfUpgradesOwned = "";
             foreach (Upgrade upgrade in upgrades.Values.OrderBy(upgrade => upgrade.upgradeType).ThenByDescending(upgrade => upgrade.cost).ThenBy(upgrade => upgrade.name).ToList())
             {
-                numberOfUpgradesOwned += upgrade.id.ToString() + "," + upgrade.name + "," + upgrade.numberOwned.ToString() + "," + upgrade.faction.ToString() + "," + upgrade.shipSize.ToString() + "," + upgrade.upgradeType.ToString();
+                numberOfUpgradesOwned += upgrade.id.ToString() + "," + upgrade.name + "," + upgrade.numberOwned.ToString();
                 numberOfUpgradesOwned += System.Environment.NewLine;
             }
             FileHandler.SaveFile("upgradesowned.txt", numberOfUpgradesOwned);
@@ -229,7 +238,7 @@ namespace X_Wing_Visual_Builder.Model
             bool isUpgradeUsable = true;
 
             if (uniquePilot.pilotSkill < upgrade.requiresPilotSkill) { isUpgradeUsable = false; }
-            if (upgrade.faction != Faction.All && upgrade.faction != uniquePilot.pilot.faction) { isUpgradeUsable = false; }
+            if (upgrade.factions.Contains(Faction.All) == false && upgrade.factions.Contains(uniquePilot.pilot.faction) == false) { isUpgradeUsable = false; }
             if (upgrade.shipSize != ShipSize.All && upgrade.shipSize != uniquePilot.pilot.ship.shipSize) { isUpgradeUsable = false; }
 
             if(uniquePilot.upgrades.ContainsValue(upgrade) && upgrade.isLimited && isRemovingUpgrades == false) { isUpgradeUsable = false; }

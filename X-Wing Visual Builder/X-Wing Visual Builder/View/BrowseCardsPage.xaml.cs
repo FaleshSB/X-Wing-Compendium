@@ -351,7 +351,15 @@ namespace X_Wing_Visual_Builder.View
                             bool hasFoundWordInName = upgrade.name.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInDescription = upgrade.description.IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
                             bool hasFoundWordInType = upgrade.upgradeType.ToString().IndexOf(searchWord, StringComparison.OrdinalIgnoreCase) >= 0;
-                            bool hasFoundFaction = upgrade.faction.ToString().ToLower() == searchWord;
+                            bool hasFoundFaction = false;
+                            foreach (Faction faction in upgrade.factions)
+                            {
+                                if (faction.ToString().ToLower() == searchWord)
+                                {
+                                    hasFoundFaction = true;
+                                    break;
+                                }
+                            }
                             bool hasFoundCost = false;
                             if(Regex.IsMatch(searchWord, @"^\d+$"))
                             {
